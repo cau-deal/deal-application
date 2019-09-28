@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:deal/generated/i18n.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:deal/src/custom/widgets/white_round_button.dart';
+import 'package:deal/src/screens/login_select/login_select.dart';
 
 
 class IntroStep3 extends StatelessWidget {
@@ -21,7 +23,13 @@ class IntroStep3 extends StatelessWidget {
           child: Align(
             child: WhiteRoundButton(
                 text: S.of(ctx).intro_get_started,
-                onPressed: () => print("test")
+
+                onPressed: () async {
+                  SharedPreferences sp = await SharedPreferences.getInstance();
+                  sp.setBool("isSecondRun", true);
+                  Navigator.pushReplacement(ctx, MaterialPageRoute(builder:(ctx) => LoginSelectPage()));
+                }
+
             ),
             alignment: AlignmentDirectional.bottomCenter,
           )

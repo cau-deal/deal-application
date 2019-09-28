@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'screens/intro/intro.dart';
-import 'screens/login/login.dart';
+import 'screens/login_select/login_select.dart';
 
 class App extends StatelessWidget {
   @override
@@ -54,8 +54,9 @@ class App extends StatelessWidget {
       home: ConditionalBuilder(
           conditional: !isSecondRun,
           truthyBuilder: () => IntroPage(),
-          falsyBuilder: () => LoginPage()
+          falsyBuilder: () => LoginSelectPage()
       )
+
     );
 
   }
