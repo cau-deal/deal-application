@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'screens/intro/intro.dart';
-import 'screens/login/login.dart';
+import 'screens/login_select/login_select.dart';
 
 class App extends StatelessWidget {
   @override
@@ -29,7 +29,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
           // Define the default brightness and colors.
           brightness: Brightness.dark,
-          primaryColor: Colors.lightBlue[800],
+          primaryColor: Color(0xFF5f75ac),
           accentColor: Colors.cyan[600],
 
           // Define the default font family.
@@ -43,12 +43,20 @@ class App extends StatelessWidget {
             body1: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
           ),
 
+          buttonTheme: ButtonThemeData(
+              buttonColor: Color(0xFF5f75ac),
+              highlightColor: Color(0xFF5f75ac),
+              splashColor: Color(0xFF5f75ac),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2.0))
+          ),
+
       ),
       home: ConditionalBuilder(
           conditional: !isSecondRun,
           truthyBuilder: () => IntroPage(),
-          falsyBuilder: () => LoginPage()
+          falsyBuilder: () => LoginSelectPage()
       )
+
     );
 
   }

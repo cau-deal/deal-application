@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 
-import 'package:deal/generated/i18n.dart';
+import 'widgets/intro_step1.dart';
+import 'widgets/intro_step2.dart';
+import 'widgets/intro_step3.dart';
 
 class IntroPage extends StatelessWidget {
 
@@ -9,33 +11,12 @@ class IntroPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext ctx) {
-    return new MaterialApp(
-        home: new Scaffold(
-          body: new Container(
+    return new Container(
             child: new Stack(
               children: <Widget>[
                 PageView(
                   controller: controller,
-                  children: <Widget>[
-                    Container(
-                      color: Colors.pink,
-                    ),
-                    Container(
-                      color: Colors.cyan,
-                    ),
-                    Container(
-                      color: Colors.deepOrangeAccent,
-                      child: Align(
-                        child: FlatButton(
-                          child: Text(S.of(ctx).intro_get_started, style: TextStyle(fontSize: 24)),
-                          onPressed: () => print("test"),
-                          color: Colors.green,
-                          textColor: Colors.white,
-                        ),
-                        alignment: AlignmentDirectional.bottomCenter,
-                      )
-                    ),
-                  ],
+                  children: <Widget>[ IntroStep1(), IntroStep2(), IntroStep3() ],
                 ),
                 Positioned(
                   child: new PageIndicator(
@@ -44,14 +25,14 @@ class IntroPage extends StatelessWidget {
                     controller: controller,
                     space: 6.0,
                     count: 3,
+                    activeColor: Colors.black,
+                    color: Colors.white
                   ),
                   top: 100.0,
                   left: 40.0,
                 ),
               ],
             )
-          )
-        )
-    );
+          );
   }
 }
