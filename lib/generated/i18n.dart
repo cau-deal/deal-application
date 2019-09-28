@@ -34,7 +34,7 @@ class $ko extends S {
   @override
   String get intro_get_started => "시작하기";
   @override
-  String get appName => "딜";
+  String get appName => "DEAL";
 }
 
 class $en extends S {

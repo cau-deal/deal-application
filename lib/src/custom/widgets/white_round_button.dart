@@ -17,7 +17,7 @@ class WhiteRoundButton extends StatelessWidget {
   @override
   Widget build(BuildContext ctx) {
     return ButtonTheme(
-        height: 50,
+        height: 46,
         minWidth: double.infinity,
         child: RaisedButton(
             color: buttonColor,
