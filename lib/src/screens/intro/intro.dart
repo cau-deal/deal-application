@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 
+import 'widgets/intro_step1.dart';
+import 'widgets/intro_step2.dart';
 import 'widgets/intro_step3.dart';
 
 class IntroPage extends StatelessWidget {
@@ -14,15 +16,7 @@ class IntroPage extends StatelessWidget {
               children: <Widget>[
                 PageView(
                   controller: controller,
-                  children: <Widget>[
-                    Container(
-                      color: Colors.pink,
-                    ),
-                    Container(
-                      color: Colors.cyan,
-                    ),
-                    IntroStep3()
-                  ],
+                  children: <Widget>[ IntroStep1(), IntroStep2(), IntroStep3() ],
                 ),
                 Positioned(
                   child: new PageIndicator(
@@ -31,6 +25,8 @@ class IntroPage extends StatelessWidget {
                     controller: controller,
                     space: 6.0,
                     count: 3,
+                    activeColor: Colors.black,
+                    color: Colors.white
                   ),
                   top: 100.0,
                   left: 40.0,

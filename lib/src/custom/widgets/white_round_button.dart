@@ -22,6 +22,7 @@ class WhiteRoundButton extends StatelessWidget {
         child: RaisedButton(
             color: buttonColor,
             elevation: 0,
+            highlightElevation: 2,
             onPressed: onPressed,
             child: Text(text, style: TextStyle(color: textColor))
         )
