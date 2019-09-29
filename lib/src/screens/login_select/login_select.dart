@@ -1,6 +1,10 @@
+import 'package:deal/src/screens/login_select/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 
 class LoginSelectPage extends StatelessWidget {
+
+  final bloc = new Bloc();
+
   @override
   Widget build(BuildContext ctx) {
     return Container(
