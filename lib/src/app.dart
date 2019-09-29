@@ -29,7 +29,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
           // Define the default brightness and colors.
           brightness: Brightness.dark,
-          primaryColor: Colors.lightBlue[800],
+          primaryColor: Color(0xFF5f75ac),
           accentColor: Colors.cyan[600],
 
           // Define the default font family.
@@ -41,6 +41,13 @@ class App extends StatelessWidget {
             headline: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
             title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
             body1: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+          ),
+
+          buttonTheme: ButtonThemeData(
+              buttonColor: Color(0xFF5f75ac),
+              highlightColor: Color(0xFF5f75ac),
+              splashColor: Color(0xFF5f75ac),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2.0))
           ),
 
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 
-import 'package:deal/generated/i18n.dart';
+import 'widgets/intro_step3.dart';
 
 class IntroPage extends StatelessWidget {
 
@@ -9,9 +9,7 @@ class IntroPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext ctx) {
-    return new MaterialApp(
-        home: new Scaffold(
-          body: new Container(
+    return new Container(
             child: new Stack(
               children: <Widget>[
                 PageView(
@@ -23,18 +21,7 @@ class IntroPage extends StatelessWidget {
                     Container(
                       color: Colors.cyan,
                     ),
-                    Container(
-                      color: Colors.deepOrangeAccent,
-                      child: Align(
-                        child: FlatButton(
-                          child: Text(S.of(ctx).intro_get_started, style: TextStyle(fontSize: 24)),
-                          onPressed: () => print("test"),
-                          color: Colors.green,
-                          textColor: Colors.white,
-                        ),
-                        alignment: AlignmentDirectional.bottomCenter,
-                      )
-                    ),
+                    IntroStep3()
                   ],
                 ),
                 Positioned(
@@ -50,8 +37,6 @@ class IntroPage extends StatelessWidget {
                 ),
               ],
             )
-          )
-        )
-    );
+          );
   }
 }

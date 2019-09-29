@@ -14,5 +14,5 @@ class ConditionalBuilder extends StatelessWidget {
         assert(falsyBuilder != null);
 
   @override
-  Widget build(BuildContext context) => conditional ? truthyBuilder() : falsyBuilder();
+  Widget build(BuildContext ctx) => conditional ? truthyBuilder() : falsyBuilder();
 }
