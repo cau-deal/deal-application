@@ -1,4 +1,5 @@
-import 'package:deal/src/screens/login_select/bloc_pattern.dart';
+import 'package:deal/src/login/bloc_pattern.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LoginSelectPage extends StatelessWidget {
@@ -7,20 +8,17 @@ class LoginSelectPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext ctx) {
-    return Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage( "res/images/select_bg.png" ),
-              fit: BoxFit.cover,
-            ),
-            color: Colors.black26
-        ),
-        child: Padding(
-            padding: const EdgeInsets.all(30),
-            child: Align(
-              alignment: AlignmentDirectional.bottomCenter,
-            ),
-        )
+
+    return Scaffold(
+      body: new Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          emailField(bloc),
+          passwordField(bloc),
+          Container(margin: EdgeInsets.all(30.0)),
+          submitButton(bloc),
+        ],
+      )
     );
   }
 
