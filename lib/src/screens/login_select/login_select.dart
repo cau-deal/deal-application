@@ -16,7 +16,7 @@ class LoginSelectPage extends StatelessWidget {
             color: Colors.black26
         ),
         child: Padding(
-            padding: const EdgeInsets.all(30);
+            padding: const EdgeInsets.all(30),
             child: Align(
               alignment: AlignmentDirectional.bottomCenter,
             ),
