@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 
+import 'package:deal/generated/i18n.dart';
+
 class IntroPage extends StatelessWidget {
 
   final PageController controller = PageController();
@@ -25,7 +27,7 @@ class IntroPage extends StatelessWidget {
                       color: Colors.deepOrangeAccent,
                       child: Align(
                         child: FlatButton(
-                          child: Text('FlatButton', style: TextStyle(fontSize: 24)),
+                          child: Text(S.of(ctx).intro_get_started, style: TextStyle(fontSize: 24)),
                           onPressed: () => print("test"),
                           color: Colors.green,
                           textColor: Colors.white,
