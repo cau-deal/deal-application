@@ -2,6 +2,17 @@
   "appName": "DEAL",
   "intro_get_started": "OK, I got it!",
   "login_with_email": "Sign in with email",
+  "title_login_with_email": "Sign in with email",
   "login_with_google": "Sign in with google",
-  "register": "Sign up"
+  "register": "Sign up",
+  "login_email_hint": "email address",
+  "login_password_hint": "password",
+  "login_password_retry_hint": "password again",
+  "prompt_login": "Sign in",
+  "prompt_forgot_password": "Forget your password?",
+  "title_register_with_email": "sign-up with email address",
+  "agreement_register":"회원가입 시 이용약관, 개인정보 처리방침, 위치기반서비스 이용약관에 동의합니다.",
+  "title_forgot_password": "reset password",
+  "send_email": "send email",
+  "prompt2_forgot_password": "비밀번호를 재설정하려는 계정을 입력해주세요.\n입력하신 이메일로 비밀번호를 재설정 할 수 있는 링크를 보내드립니다."
 }

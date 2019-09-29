@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:deal/generated/i18n.dart';
-import 'package:deal/src/custom/widgets/white_round_button.dart';
 
+import 'package:deal/src/screens/login_email/login_email.dart';
+import 'package:deal/src/screens/register_with_email//register_with_email.dart';
+
+import 'package:deal/src/custom/widgets/white_round_button.dart';
 
 class LoginSelectPage extends StatelessWidget {
   @override
@@ -19,7 +22,7 @@ class LoginSelectPage extends StatelessWidget {
             Expanded(
               child: Container(
                 child: Container(
-                    child: Image.asset("res/images/splash-logo@2x.png")
+                    child: Image.asset("res/images/splash-logo-acent@2x.png")
                 )
               ),
               flex: 2,
@@ -33,7 +36,9 @@ class LoginSelectPage extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.only(bottom: 7.0),
                         child: WhiteRoundButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(ctx, MaterialPageRoute(builder:(ctx) => LoginEmailPage()));
+                          },
                           buttonColor: Color(0xFF5f75ac),
                           textColor: Colors.white,
                           text: S.of(ctx).login_with_email,
@@ -49,13 +54,19 @@ class LoginSelectPage extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.only(top: 24.0),
-                        child: new RichText(
-                            text: TextSpan(
-                              text:  S.of(ctx).register,
-                              style: new TextStyle(color: Color(0xFF5f75ac), fontWeight: FontWeight.w600),
-                            )
-                        )
+                        margin: const EdgeInsets.only(top: 8.0),
+                        child: new FlatButton(
+                          child: new RichText(
+                              text: TextSpan(
+                                text:  S.of(ctx).register,
+                                style: new TextStyle(
+                                  color: Color(0xFF5f75ac),
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              )
+                          ),
+                          onPressed: ()=> Navigator.push(ctx, MaterialPageRoute(builder:(ctx) => RegisterWithEmailPage()))
+                        ),
                       ),
                     ],
                   ),

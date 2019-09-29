@@ -35,6 +35,8 @@ class App extends StatelessWidget {
           // Define the default font family.
           fontFamily: 'NanumSquare',
 
+          cursorColor: Colors.black,
+
           // Define the default TextTheme. Use this to specify the default
           // text styling for headlines, titles, bodies of text, and more.
           textTheme: TextTheme(
@@ -49,6 +51,17 @@ class App extends StatelessWidget {
               splashColor: Color(0xFF5f75ac),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2.0))
           ),
+
+          appBarTheme: AppBarTheme(
+            elevation: 0,
+            color: Colors.white,
+            iconTheme: IconThemeData(
+              color: Colors.black,
+            ),
+            textTheme: TextTheme(
+              title: TextStyle(color: Colors.black)
+            )
+          )
 
       ),
       home: ConditionalBuilder(

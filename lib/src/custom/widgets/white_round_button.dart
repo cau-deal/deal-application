@@ -35,7 +35,7 @@ class WhiteRoundButton extends StatelessWidget {
                         margin: const EdgeInsets.only(right: 5.0),
                         child: Image.asset(this.assetImage, width: 28, height: 28)
                     ),
-                    Text(text, style: TextStyle(color: textColor, fontWeight:FontWeight.w700))
+                    Text(text, style: TextStyle(color: textColor, fontSize: 14, fontWeight:FontWeight.w600))
                   ],
                 )
         )
