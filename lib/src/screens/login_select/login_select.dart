@@ -3,14 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:deal/generated/i18n.dart';
 import 'package:deal/src/custom/widgets/white_round_button.dart';
+import 'package:deal/src/login/provider.dart';
 
 class LoginSelectPage extends StatelessWidget {
 
   // Make new BLoC for bloc pattern login
-  final bloc = new Bloc();
 
   @override
   Widget build(BuildContext ctx) {
+    final bloc = new Bloc();
     return Container(
         decoration: BoxDecoration(
             image: DecorationImage(
@@ -74,6 +75,57 @@ class LoginSelectPage extends StatelessWidget {
           ],
         ),
 
+    );
+  }
+
+  Widget emailField(bloc){
+    return StreamBuilder(
+        stream: bloc.email,
+        builder: (context, snapshot){
+          return TextField(
+            onChanged: bloc.changeEmail,
+            keyboardType: TextInputType.emailAddress,
+            decoration: InputDecoration(
+              hintText: "deal@deal.com",
+              labelText: "Email Address",
+              errorText: snapshot.error,
+            ),
+            obscureText: true,
+          );
+        }
+    );
+  }
+
+  Widget passwordField(bloc) {
+    return StreamBuilder(
+      stream: bloc.password,
+      builder: (context, snapshot) {
+        return TextField(
+          onChanged: bloc.changePassword,
+          decoration: InputDecoration(
+              hintText: 'Must contain 8 characters',
+              labelText: 'Password',
+              errorText: snapshot.error
+          ),
+          obscureText: true,
+        );
+      },
+    );
+  }
+
+  Widget submitButton(bloc) {
+    return StreamBuilder(
+      stream: bloc.submitValid,
+      builder: (context, snapshot) {
+        return RaisedButton(
+          child: Text('Login'),
+          color: Colors.blue[700],
+          textColor: Colors.white,
+          onPressed: snapshot.hasData
+              ? bloc.submit
+              : null,
+        );
+      },
     );
   }
 }
