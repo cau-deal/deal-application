@@ -1,4 +1,7 @@
 {
   "appName": "DEAL",
-  "intro_get_started": "OK, I got it!"
+  "intro_get_started": "OK, I got it!",
+  "login_with_email": "Sign in with email",
+  "login_with_google": "Sign in with google",
+  "register": "Sign up"
 }

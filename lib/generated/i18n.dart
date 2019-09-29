@@ -23,6 +23,9 @@ class S implements WidgetsLocalizations {
 
   String get appName => "DEAL";
   String get intro_get_started => "OK, I got it!";
+  String get login_with_email => "Sign in with email";
+  String get login_with_google => "Sign in with google";
+  String get register => "Sign up";
 }
 
 class $ko extends S {
@@ -32,9 +35,15 @@ class $ko extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
+  String get login_with_google => "구글계정으로 시작하기";
+  @override
   String get intro_get_started => "시작하기";
   @override
   String get appName => "DEAL";
+  @override
+  String get login_with_email => "이메일로 로그인하기";
+  @override
+  String get register => "회원가입";
 }
 
 class $en extends S {
