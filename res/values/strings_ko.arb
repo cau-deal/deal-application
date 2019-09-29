@@ -1,4 +1,7 @@
 {
   "appName": "DEAL",
-  "intro_get_started": "시작하기"
+  "intro_get_started": "시작하기",
+  "login_with_email": "이메일로 로그인하기",
+  "login_with_google": "구글계정으로 시작하기",
+  "register": "회원가입"
 }
