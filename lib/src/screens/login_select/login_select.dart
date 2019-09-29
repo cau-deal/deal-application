@@ -1,14 +1,12 @@
-import 'package:deal/src/login/bloc_pattern.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:deal/generated/i18n.dart';
+
+import 'package:deal/src/screens/login_email/login_email.dart';
+import 'package:deal/src/screens/register_with_email//register_with_email.dart';
+
 import 'package:deal/src/custom/widgets/white_round_button.dart';
 
 class LoginSelectPage extends StatelessWidget {
-
-  // Make new BLoC for bloc pattern login
-  final bloc = new Bloc();
-
   @override
   Widget build(BuildContext ctx) {
     return Container(
@@ -24,7 +22,7 @@ class LoginSelectPage extends StatelessWidget {
             Expanded(
               child: Container(
                 child: Container(
-                    child: Image.asset("res/images/splash-logo@2x.png")
+                    child: Image.asset("res/images/splash-logo-acent@2x.png")
                 )
               ),
               flex: 2,
@@ -39,8 +37,7 @@ class LoginSelectPage extends StatelessWidget {
                         margin: const EdgeInsets.only(bottom: 7.0),
                         child: WhiteRoundButton(
                           onPressed: () {
-                            //Make ID/PW boxes
-                            //
+                            Navigator.push(ctx, MaterialPageRoute(builder:(ctx) => LoginEmailPage()));
                           },
                           buttonColor: Color(0xFF5f75ac),
                           textColor: Colors.white,
@@ -57,13 +54,19 @@ class LoginSelectPage extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.only(top: 24.0),
-                        child: new RichText(
-                            text: TextSpan(
-                              text:  S.of(ctx).register,
-                              style: new TextStyle(color: Color(0xFF5f75ac), fontWeight: FontWeight.w600),
-                            )
-                        )
+                        margin: const EdgeInsets.only(top: 8.0),
+                        child: new FlatButton(
+                          child: new RichText(
+                              text: TextSpan(
+                                text:  S.of(ctx).register,
+                                style: new TextStyle(
+                                  color: Color(0xFF5f75ac),
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              )
+                          ),
+                          onPressed: ()=> Navigator.push(ctx, MaterialPageRoute(builder:(ctx) => RegisterWithEmailPage()))
+                        ),
                       ),
                     ],
                   ),
@@ -73,61 +76,6 @@ class LoginSelectPage extends StatelessWidget {
             ),
           ],
         ),
-
     );
   }
 }
-
-/*
-// The widget what I want to add
-Widget emailField(bloc){
-    return StreamBuilder(
-      stream: bloc.email,
-      builder: (context, snapshot){
-        return TextField(
-          onChanged: bloc.changeEmail,
-          keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
-            hintText: "deal@deal.com",
-            labelText: "Email Address",
-            errorText: snapshot.error,
-          ),
-          obscureText: true,
-        );
-      }
-    );
-  }
-
-  Widget passwordField(bloc) {
-    return StreamBuilder(
-      stream: bloc.password,
-      builder: (context, snapshot) {
-        return TextField(
-          onChanged: bloc.changePassword,
-          decoration: InputDecoration(
-              hintText: 'Must contain 8 characters',
-              labelText: 'Password',
-              errorText: snapshot.error
-          ),
-          obscureText: true,
-        );
-      },
-    );
-  }
-
-  Widget submitButton(bloc) {
-    return StreamBuilder(
-      stream: bloc.submitValid,
-      builder: (context, snapshot) {
-        return RaisedButton(
-          child: Text('Login'),
-          color: Colors.blue[700],
-          textColor: Colors.white,
-          onPressed: snapshot.hasData
-              ? bloc.submit
-              : null,
-        );
-      },
-    );
-  }
- */
