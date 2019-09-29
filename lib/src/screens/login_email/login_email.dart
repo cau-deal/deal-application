@@ -7,6 +7,8 @@ import 'package:deal/src/custom/widgets/tall_height_app_bar_container.dart';
 
 import 'package:deal/src/screens/forgot_password/forgot_password.dart';
 
+import 'package:deal/src/blocprovs/provider.dart';
+import 'package:deal/src/blocs/bloc_pattern.dart';
 
 class LoginEmailPage extends StatelessWidget {
   @override
@@ -35,13 +37,13 @@ class LoginEmailPage extends StatelessWidget {
                 margin: EdgeInsets.only(top: 12)
               ),
 
+              //Login Button
               Container(
                 child: WhiteRoundButton (
                     buttonColor: Color(0xFF5f75ac),
                     textColor: Colors.white,
                     text: S.of(ctx).prompt_login,
-                    onPressed: () {
-
+                    onPressed: () async {
                     }
                 ),
                 margin: EdgeInsets.only(top: 50)

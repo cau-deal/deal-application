@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'bloc_pattern.dart';
+import '../blocs/bloc_pattern.dart';
 
 class Provider extends InheritedWidget {
 

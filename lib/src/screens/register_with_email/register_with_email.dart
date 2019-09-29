@@ -5,6 +5,9 @@ import 'package:deal/src/custom/widgets/white_round_button.dart';
 import 'package:deal/src/custom/widgets/styled_textform_field.dart';
 import 'package:deal/src/custom/widgets/tall_height_app_bar_container.dart';
 
+import 'package:deal/src/blocs/bloc_pattern.dart';
+
+
 
 class RegisterWithEmailPage extends StatelessWidget {
   @override

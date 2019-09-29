@@ -47,7 +47,10 @@ class LoginSelectPage extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.only(top: 7.0),
                         child: WhiteRoundButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            //Navigator.push(ctx, MaterialPageRoute(builder:(ctx) => LoginEmailPage()));
+                            //Google Login
+                          },
                           buttonColor: Color(0xffffffff),
                           assetImage: 'res/images/google-logo.png',
                           text: S.of(ctx).login_with_google,

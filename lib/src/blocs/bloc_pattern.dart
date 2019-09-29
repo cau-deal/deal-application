@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'validator.dart';
+import '../models/validator.dart';
 import 'package:rxdart/rxdart.dart';
 
 class Bloc with Validators{
