@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
+
 import 'package:deal/generated/i18n.dart';
 
 import 'package:deal/src/screens/login_email/login_email.dart';
+import 'package:deal/src/screens/login_google/login_google.dart';
 import 'package:deal/src/screens/register_with_email//register_with_email.dart';
 
 import 'package:deal/src/custom/widgets/white_round_button.dart';
@@ -47,25 +50,28 @@ class LoginSelectPage extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.only(top: 7.0),
                         child: WhiteRoundButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(ctx, MaterialPageRoute(builder:(ctx) => LoginGooglePage()));
+                          },
                           buttonColor: Color(0xffffffff),
                           assetImage: 'res/images/google-logo.png',
                           text: S.of(ctx).login_with_google,
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.only(top: 8.0),
-                        child: new FlatButton(
-                          child: new RichText(
-                              text: TextSpan(
-                                text:  S.of(ctx).register,
-                                style: new TextStyle(
-                                  color: Color(0xFF5f75ac),
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              )
-                          ),
-                          onPressed: ()=> Navigator.push(ctx, MaterialPageRoute(builder:(ctx) => RegisterWithEmailPage()))
+                        margin: const EdgeInsets.only(top: 20.0),
+                        child:  RichText(
+                            text: TextSpan(
+                              text:  S.of(ctx).register,
+                              recognizer: new TapGestureRecognizer()..onTap = () {
+                                 Navigator.push(ctx, MaterialPageRoute(builder:(ctx) => RegisterWithEmailPage()));
+                              },
+                              style: TextStyle(
+                                color: Color(0xFF5f75ac),
+                                fontWeight: FontWeight.w600,
+                                fontFamily: "NanumSquare"
+                              ),
+                            )
                         ),
                       ),
                     ],

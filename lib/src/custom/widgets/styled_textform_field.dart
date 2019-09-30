@@ -20,6 +20,7 @@ class StyledTextFormField extends StatelessWidget {
       decoration: new InputDecoration(
         labelText: this.placeholder,
         fillColor: Colors.white,
+        hasFloatingPlaceholder: false,
         labelStyle: TextStyle(fontSize: 14.0, color: Color(0xffAEAEAE)),
         hintStyle: TextStyle(fontSize: 14.0, color: Colors.redAccent),
         contentPadding: const EdgeInsets.only(left:10, top:10, right:10, bottom: 10),

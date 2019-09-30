@@ -5,6 +5,8 @@ import 'package:deal/src/builders/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'package:deal/src/custom/widgets/message_handler.dart';
+
 import 'screens/intro/intro.dart';
 import 'screens/login_select/login_select.dart';
 
@@ -30,7 +32,7 @@ class App extends StatelessWidget {
           // Define the default brightness and colors.
           brightness: Brightness.dark,
           primaryColor: Color(0xFF5f75ac),
-          accentColor: Colors.cyan[600],
+          accentColor: Color(0xFF5f75ac),
 
           // Define the default font family.
           fontFamily: 'NanumSquare',
@@ -64,10 +66,12 @@ class App extends StatelessWidget {
           )
 
       ),
-      home: ConditionalBuilder(
-          conditional: !isSecondRun,
-          truthyBuilder: () => IntroPage(),
-          falsyBuilder: () => LoginSelectPage()
+      home: MessageHandler(
+          child: ConditionalBuilder(
+              conditional: !isSecondRun,
+              truthyBuilder: () => IntroPage(),
+              falsyBuilder: () => LoginSelectPage()
+          )
       )
 
     );
