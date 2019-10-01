@@ -62,7 +62,7 @@ class LoginEmailPage extends StatelessWidget {
                           ),
                         )
                     ),
-                    onTap: () => Navigator.pushReplacement(ctx, MaterialPageRoute(builder: (ctx) => ForgotPasswordPage())),
+                    onTap: () => Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => ForgotPasswordPage())),
                   ),
               ),
             ],
