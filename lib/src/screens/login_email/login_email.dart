@@ -36,13 +36,14 @@ class LoginEmailPage extends StatelessWidget {
               ),
 
               Container(
-                child: WhiteRoundButton (
-                    buttonColor: Color(0xFF5f75ac),
-                    textColor: Colors.white,
-                    text: S.of(ctx).prompt_login,
-                    onPressed: () {
-
-                    }
+                child: Hero(
+                  tag: 'parallax_button',
+                  child: WhiteRoundButton (
+                      buttonColor: Color(0xFF5f75ac),
+                      textColor: Colors.white,
+                      text: S.of(ctx).prompt_login,
+                      onPressed: () {}
+                  ),
                 ),
                 margin: EdgeInsets.only(top: 50)
               ),

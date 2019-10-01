@@ -33,13 +33,16 @@ class ForgotPasswordPage extends StatelessWidget {
               ),
 
               Container(
-                child: WhiteRoundButton (
-                    buttonColor: Color(0xFF5f75ac),
-                    textColor: Colors.white,
-                    text: S.of(ctx).send_email,
-                    onPressed: () {
+                child: Hero(
+                  tag: 'parallax_button',
+                  child: WhiteRoundButton (
+                      buttonColor: Color(0xFF5f75ac),
+                      textColor: Colors.white,
+                      text: S.of(ctx).send_email,
+                      onPressed: () {
 
-                    }
+                      }
+                  )
                 ),
                 margin: EdgeInsets.only(top: 50)
               )
@@ -47,7 +50,7 @@ class ForgotPasswordPage extends StatelessWidget {
             ],
           )
         )
-        )
+      )
     );
   }
 }

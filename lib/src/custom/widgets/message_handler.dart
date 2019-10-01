@@ -12,7 +12,7 @@ class MessageHandler extends StatefulWidget {
   MessageHandler({ @required this.child });
 
   @override
-  _MessageHandlerState createState() => _MessageHandlerState(this.child);
+  _MessageHandlerState createState() => _MessageHandlerState();
 }
 
 class _MessageHandlerState extends State<MessageHandler> {
@@ -21,9 +21,6 @@ class _MessageHandlerState extends State<MessageHandler> {
   bool _newNotification = false;
 
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-  final Widget child;
-
-  _MessageHandlerState(this.child);
 
   @override
   void initState() {
@@ -81,7 +78,7 @@ class _MessageHandlerState extends State<MessageHandler> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: this.child
+        body: widget.child
     );
   }
 

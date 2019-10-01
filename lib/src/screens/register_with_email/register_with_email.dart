@@ -51,16 +51,19 @@ class RegisterWithEmailPage extends StatelessWidget {
               ),
 
               Container(
-                child: WhiteRoundButton (
-                    buttonColor: Color(0xFF5f75ac),
-                    textColor: Colors.white,
-                    text: S.of(ctx).register,
-                    onPressed: () async {
-                      await FlutterCrashlytics().logException(
-                          "TEST Exception!", 
-                          StackTrace.fromString("Stack Trace")
-                      );
-                    }
+                child: Hero(
+                  tag: 'parallax_button',
+                  child: WhiteRoundButton (
+                      buttonColor: Color(0xFF5f75ac),
+                      textColor: Colors.white,
+                      text: S.of(ctx).register,
+                      onPressed: () async {
+                        await FlutterCrashlytics().logException(
+                            "TEST Exception!",
+                            StackTrace.fromString("Stack Trace")
+                        );
+                      }
+                  )
                 ),
                 margin: EdgeInsets.only(top: 50)
               )
