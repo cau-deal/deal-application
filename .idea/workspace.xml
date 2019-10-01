@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9b0456e3-a278-4087-9e86-604345bbfd9e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/src/builders/fade_router.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/app.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/app.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/custom/widgets/message_handler.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/custom/widgets/message_handler.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/screens/forgot_password/forgot_password.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/screens/forgot_password/forgot_password.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/screens/login_email/login_email.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/screens/login_email/login_email.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/screens/login_select/login_select.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/screens/login_select/login_select.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/screens/register_with_email/register_with_email.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/screens/register_with_email/register_with_email.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/custom/widgets/styled_textform_field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/custom/widgets/styled_textform_field.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,15 +21,6 @@
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/src/custom/widgets/tall_height_app_bar_container.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-228">
-              <caret line="27" column="38" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -91,13 +72,25 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/src/screens/login_email/login_email.dart">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="351">
               <caret line="40" column="43" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="43" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/src/custom/widgets/styled_textform_field.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="15" column="15" lean-forward="true" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
+              <folding>
+                <element signature="e#498#1410#0" />
               </folding>
             </state>
           </provider>
@@ -168,7 +161,6 @@
         <option value="$PROJECT_DIR$/lib/src/custom/widgets/white_round_button.dart" />
         <option value="$PROJECT_DIR$/lib/src/screens/loginSelect/login_select.dart" />
         <option value="$PROJECT_DIR$/lib/src/screens/intro/widgets/intro_step3.dart" />
-        <option value="$PROJECT_DIR$/lib/src/custom/widgets/styled_textform_field.dart" />
         <option value="$PROJECT_DIR$/lib/src/custom/widgets/styled_checkbox.dart" />
         <option value="$PROJECT_DIR$/lib/src/custom/widgets/styled_checkbox_for_register.dart" />
         <option value="$PROJECT_DIR$/lib/src/custom/widgets/tall_height_app_bar_container.dart" />
@@ -191,11 +183,12 @@
         <option value="$PROJECT_DIR$/lib/src/screens/login_select/login_select.dart" />
         <option value="$PROJECT_DIR$/lib/src/builders/fade_router.dart" />
         <option value="$PROJECT_DIR$/lib/src/screens/forgot_password/forgot_password.dart" />
+        <option value="$PROJECT_DIR$/lib/src/custom/widgets/styled_textform_field.dart" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
+    <option name="x" value="652" />
     <option name="width" value="1599" />
     <option name="height" value="1047" />
   </component>
@@ -371,10 +364,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1599" height="1047" extended-state="0" />
+    <frame x="652" y="0" width="1599" height="1047" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.20532814" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.20532814" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
@@ -385,7 +379,7 @@
       <window_info anchor="bottom" id="TODO" order="1" />
       <window_info anchor="bottom" id="Terminal" order="2" weight="0.32968238" />
       <window_info anchor="bottom" id="Event Log" order="3" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Run" order="4" sideWeight="0.4995169" visible="true" weight="0.32858709" />
+      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.4995169" visible="true" weight="0.32858709" />
       <window_info anchor="bottom" id="Debug" order="5" weight="0.3789704" />
       <window_info anchor="bottom" id="Flutter Performance" order="6" sideWeight="0.5004831" side_tool="true" weight="0.32858709" />
       <window_info anchor="bottom" id="Dart Analysis" order="7" weight="0.3290993" />
@@ -656,13 +650,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/custom/widgets/styled_textform_field.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-0.14.0+5/lib/src/firebase_auth.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -771,6 +758,16 @@
           <caret line="40" column="43" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="43" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/src/custom/widgets/styled_textform_field.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" column="15" lean-forward="true" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
+          <folding>
+            <element signature="e#498#1410#0" />
           </folding>
         </state>
       </provider>
