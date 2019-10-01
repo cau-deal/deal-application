@@ -39,12 +39,14 @@ class LoginEmailPage extends StatelessWidget {
 
               //Login Button
               Container(
-                child: WhiteRoundButton (
-                    buttonColor: Color(0xFF5f75ac),
-                    textColor: Colors.white,
-                    text: S.of(ctx).prompt_login,
-                    onPressed: () async {
-                    }
+                child: Hero(
+                  tag: 'parallax_button',
+                  child: WhiteRoundButton (
+                      buttonColor: Color(0xFF5f75ac),
+                      textColor: Colors.white,
+                      text: S.of(ctx).prompt_login,
+                      onPressed: () {}
+                  ),
                 ),
                 margin: EdgeInsets.only(top: 50)
               ),
@@ -63,7 +65,7 @@ class LoginEmailPage extends StatelessWidget {
                           ),
                         )
                     ),
-                    onTap: () => Navigator.pushReplacement(ctx, MaterialPageRoute(builder: (ctx) => ForgotPasswordPage())),
+                    onTap: () => Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => ForgotPasswordPage())),
                   ),
               ),
             ],

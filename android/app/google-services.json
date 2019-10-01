@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "844732770884",
+    "firebase_url": "https://cau-deal.firebaseio.com",
+    "project_id": "cau-deal",
+    "storage_bucket": "cau-deal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:844732770884:android:3a71b027343a6cd30f2a11",
+        "android_client_info": {
+          "package_name": "kr.ac.cau.capstone.deal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "844732770884-o2pmpnq1cuuoo6818orpijkj6m2qo6e2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqFDtAarLrqheRCLwZKJTcbF-ntH1HYDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "844732770884-o2pmpnq1cuuoo6818orpijkj6m2qo6e2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
