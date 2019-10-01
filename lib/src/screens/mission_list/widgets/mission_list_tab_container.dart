@@ -5,15 +5,11 @@ import './mission_list_tab_bar.dart';
 
 class MissionListTabContainer extends StatelessWidget {
 
-  final Widget child;
-  final String text;
-
-  final List<String> items = ["test", "test", "test"];
+  final List<Widget> children;
 
   MissionListTabContainer({
-    @required this.child,
-    @required this.text,
-  }) : assert(child != null), assert(text != null);
+    @required this.children,
+  }) : assert(children != null);
 
   @override
   Widget build(BuildContext context) {
@@ -89,11 +85,7 @@ class MissionListTabContainer extends StatelessWidget {
           },
 
           body: TabBarView(
-            children: <Widget>[
-              Center(child: Container(color: Colors.white)),
-              Center(child: Container(color: Colors.pinkAccent)),
-              Center(child: Container(color: Colors.amber)),
-            ],
+            children: this.children,
           ),
         )
     );
