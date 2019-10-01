@@ -60,7 +60,7 @@ class $ko extends S {
   @override
   String get appName => "DEAL";
   @override
-  String get title_login_with_google => "구글계정으로 로그인";
+  String get title_login_with_google => "구글 계정으로 로그인";
   @override
   String get login_with_email => "이메일로 로그인하기";
   @override

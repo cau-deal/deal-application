@@ -5,6 +5,7 @@ import 'package:deal/src/custom/widgets/white_round_button.dart';
 import 'package:deal/src/custom/widgets/styled_textform_field.dart';
 import 'package:deal/src/custom/widgets/tall_height_app_bar_container.dart';
 
+import 'package:deal/src/screens/mission_list/mission_list.dart';
 import 'package:deal/src/screens/forgot_password/forgot_password.dart';
 
 
@@ -42,7 +43,13 @@ class LoginEmailPage extends StatelessWidget {
                       buttonColor: Color(0xFF5f75ac),
                       textColor: Colors.white,
                       text: S.of(ctx).prompt_login,
-                      onPressed: () {}
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                            ctx,
+                            MaterialPageRoute(builder: (ctx) => MissionListPage()),
+                            (Route<dynamic> route) => false
+                        );
+                      }
                   ),
                 ),
                 margin: EdgeInsets.only(top: 50)
