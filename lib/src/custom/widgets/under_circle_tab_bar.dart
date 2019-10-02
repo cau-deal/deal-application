@@ -1,35 +1,36 @@
 import 'package:flutter/material.dart';
 
 
-class MissionListTabBar extends StatelessWidget {
+class UnderCircleTabBar extends StatelessWidget {
 
   final List<String> items;
 
-  MissionListTabBar({
+  UnderCircleTabBar({
     @required this.items,
   }) : assert(items != null);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+        decoration: BoxDecoration(
             border: Border(
                 bottom: BorderSide(
                   color: Color(0xffE3E3E3),
                   width: 1.0,
                   style: BorderStyle.solid,
                 )
-            )
+            ),
+          color: Colors.white
         ),
-      padding: EdgeInsets.only(left: 15, right: 15),
-      height: 40,
-      child: TabBar(
-        unselectedLabelStyle: TextStyle(fontFamily: "NanumSquare", fontSize: 12.0, fontWeight: FontWeight.w600),
-          labelStyle: TextStyle(fontFamily: "NanumSquare", fontSize: 12.0, fontWeight: FontWeight.w600),
-          indicator: CustomTabIndicator(),
-          labelColor: Color(0xff5F75AC),
-          unselectedLabelColor: Color(0xff333333),
-          tabs: this.items.map((title) => Tab(text: title)).toList()
+        padding: EdgeInsets.only(left: 15, right: 15),
+        height: 40,
+        child: TabBar(
+            unselectedLabelStyle: TextStyle(fontFamily: "NanumSquare", fontSize: 12.0, fontWeight: FontWeight.w600),
+            labelStyle: TextStyle(fontFamily: "NanumSquare", fontSize: 12.0, fontWeight: FontWeight.w600),
+            indicator: CustomTabIndicator(),
+            labelColor: Color(0xff5F75AC),
+            unselectedLabelColor: Color(0xff333333),
+            tabs: this.items.map((title) => Tab(text: title)).toList()
         )
     );
   }
