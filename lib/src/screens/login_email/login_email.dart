@@ -30,7 +30,6 @@ class LoginEmailPage extends StatelessWidget {
               Container(
                 child: StyledTextFormField(
                   placeholder: S.of(ctx).login_password_hint,
-                  textInputType: TextInputType.visiblePassword,
                   obscure: true,
                 ),
                 margin: EdgeInsets.only(top: 12)
