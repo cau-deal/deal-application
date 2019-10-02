@@ -23,7 +23,7 @@ class MyPage extends StatelessWidget {
                       Expanded(
                         child: Container(
                           color: Colors.white,
-                          padding: EdgeInsets.only(left: 15, top:5),
+                          padding: EdgeInsets.only(left: 30, top:5),
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
@@ -77,7 +77,8 @@ class MyPage extends StatelessWidget {
                                   ],
                                 ),
                                 alignment: Alignment.centerLeft,
-                              )
+                              ),
+                              padding: EdgeInsets.all(15)
                             ),
                             flex: 1,
                           ),
@@ -125,11 +126,19 @@ class MyPage extends StatelessWidget {
       children: <Widget>[
         Center(
             child: Container(
-              color: Colors.amber
+              color: Colors.white
             )
         ),
-        Container(),
-        Container()
+        Center(
+            child: Container(
+                color: Colors.amberAccent
+            )
+        ),
+        Center(
+            child: Container(
+                color: Colors.white
+            )
+        ),
       ],
     );
   }
