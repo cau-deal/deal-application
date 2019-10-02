@@ -33,7 +33,6 @@ class RegisterWithEmailPage extends StatelessWidget {
               Container(
                 child: StyledTextFormField(
                   placeholder: S.of(ctx).login_password_hint,
-                  textInputType: TextInputType.visiblePassword,
                   obscure: true,
                 ),
                 margin: EdgeInsets.only(top: 12)
@@ -41,8 +40,7 @@ class RegisterWithEmailPage extends StatelessWidget {
 
               Container(
                   child: StyledTextFormField(
-                    placeholder: S.of(ctx).login_password_hint,
-                    textInputType: TextInputType.visiblePassword,
+                    placeholder: S.of(ctx).login_password_retry_hint,
                     obscure: true,
                   ),
                   margin: EdgeInsets.only(top: 12)
