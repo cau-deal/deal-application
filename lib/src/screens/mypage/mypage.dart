@@ -1,3 +1,4 @@
+import 'package:deal/src/screens/mypage/widgets/number_button.dart';
 import 'package:flutter/material.dart';
 import 'package:deal/generated/i18n.dart';
 
@@ -31,6 +32,7 @@ class MyPage extends StatelessWidget {
                                   child: Text("회원님 환영합니다.", style:TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black)),
                                   alignment: Alignment.centerLeft,
                                 ),
+                                SizedBox(height: 5),
                                 Align(
                                   child:Text("deal@cau.ac.kr", style:TextStyle(fontSize: 12, color: Colors.black54)),
                                   alignment: Alignment.centerLeft,
@@ -40,8 +42,20 @@ class MyPage extends StatelessWidget {
                         )
                       ),
                       Container(
-                        color: Colors.white,
-                        width: 80,
+                        height: 70,
+                        width: 70,
+                        margin: EdgeInsets.only(right: 10),
+                        child: CircleAvatar(
+                            radius: 40.0,
+                            backgroundColor: Colors.amberAccent,
+                            child: ClipOval(
+                              child: Image.network('https://picsum.photos/536/354',
+                                width: 80,
+                                height: 80,
+                                fit: BoxFit.cover
+                            )
+                        ),
+                        )
                       )
                     ],
                   )
@@ -68,28 +82,20 @@ class MyPage extends StatelessWidget {
                                   )
                                 )
                               ),
-                              child: Align(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text("포인트", style: TextStyle(fontSize: 12)),
-                                    Text("0"),
-                                  ],
-                                ),
-                                alignment: Alignment.centerLeft,
+                              child: LabelNumberButton(
+                                title: "포인트",
+                                number: 0,
+                                onPressed: (){ },
                               ),
-                              padding: EdgeInsets.all(15)
                             ),
                             flex: 1,
                           ),
                           Expanded(
                             child: Container(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text("의뢰", style: TextStyle(fontSize: 12)),
-                                    Text("0"),
-                                  ],
+                                child: LabelNumberButton(
+                                  title: "의뢰",
+                                  number: 0,
+                                  onPressed: (){ },
                                 )
                             ),
                             flex: 1,
@@ -104,12 +110,10 @@ class MyPage extends StatelessWidget {
                                       )
                                   )
                               ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text("메세지", style: TextStyle(fontSize: 12)),
-                                    Text("0"),
-                                  ],
+                                child: LabelNumberButton(
+                                  title: "메세지",
+                                  number: 0,
+                                  onPressed: (){ },
                                 )
                             ),
                             flex: 1,
