@@ -9,7 +9,16 @@ import 'package:deal/src/screens/mission_list/mission_list.dart';
 import 'package:deal/src/screens/forgot_password/forgot_password.dart';
 
 
-class LoginEmailPage extends StatelessWidget {
+class LoginEmailPage extends StatefulWidget {
+  @override
+  LoginEmailState createState() => LoginEmailState();
+}
+
+class LoginEmailState extends State<LoginEmailPage> {
+
+  String email = "";
+  String password = "";
+
   @override
   Widget build(BuildContext ctx) {
     return new TallHeightAppBarContainer(
