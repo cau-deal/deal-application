@@ -90,10 +90,6 @@ flutter:
          - asset: res/fonts/NanumSquare_acR.ttf
          - asset: res/fonts/NanumSquare_acB.ttf
 
-     - family: IconFont
-       fonts:
-         - asset: res/fonts/iconFont.ttf
-
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
