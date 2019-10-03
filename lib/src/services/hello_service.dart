@@ -5,7 +5,7 @@ import 'package:deal/src/model/helloworld.pbgrpc.dart';
 class HelloService {
 
   static Future<HelloReply> sayHello(String name) async {
-    var client = GreeterClient(GrpcClientSingleton().client);
+    var client = GreeterClient(await GrpcClientSingleton.instance.client);
 
     var req = new HelloRequest();
     req.name = name;

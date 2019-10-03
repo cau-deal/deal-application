@@ -2,16 +2,29 @@ import 'package:deal/main.dart';
 import 'package:deal/generated/i18n.dart';
 import 'package:deal/src/custom/builder/conditional_builder.dart';
 import 'package:deal/src/custom/widgets/message_handler.dart';
+import 'package:deal/src/repositories/user_repository.dart';
+import 'package:deal/src/screens/mission_list/mission_list.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'blocs/auth/bloc.dart';
 import 'custom/widgets/double_back_to_close_app.dart';
 
 import 'screens/intro/intro.dart';
 import 'screens/login_select/login_select.dart';
 
+
 class App extends StatelessWidget {
+
+  final UserRepository _userRepository;
+
+  App({Key key, @required UserRepository userRepository})
+      : assert(userRepository != null),
+        _userRepository = userRepository,
+        super(key: key);
+
   @override
   Widget build(BuildContext context) {
 
@@ -68,14 +81,24 @@ class App extends StatelessWidget {
           )
 
       ),
-      home: MessageHandler(
-          child: DoubleBackToCloseApp(
-              child: ConditionalBuilder(
-                  conditional: !isSecondRun,
-                  truthyBuilder: () => IntroPage(),
-                  falsyBuilder: () => LoginSelectPage()
+
+      home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+        builder: (ctx, state){
+          return MessageHandler(
+              child: DoubleBackToCloseApp(
+                  child: ConditionalBuilder(
+                      conditional: !isSecondRun,
+                      truthyBuilder: () => IntroPage(),
+                      falsyBuilder: (){
+                        if( state is Authenticated ) return MissionListPage();
+                        else return LoginSelectPage(
+                          userRepository: _userRepository,
+                        );
+                      }
+                  )
               )
-          )
+          );
+        },
       )
 
     );
