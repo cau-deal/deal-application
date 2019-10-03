@@ -16,7 +16,8 @@ class TallHeightAppBarContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return new Scaffold (
+      resizeToAvoidBottomPadding: false,
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(64.0),
           child: AppBar(

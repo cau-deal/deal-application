@@ -14,6 +14,7 @@ import 'screens/login_select/login_select.dart';
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     final bool isSecondRun = sharedPreferences.getBool("isSecondRun") ?? false;
 
     return MaterialApp(
