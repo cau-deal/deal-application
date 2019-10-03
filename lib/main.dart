@@ -11,7 +11,6 @@ SharedPreferences sharedPreferences;
 void main() async {
 
   bool isInDebugMode = false;
-
   sharedPreferences = await SharedPreferences.getInstance();
 
   FlutterError.onError = (FlutterErrorDetails details) {
