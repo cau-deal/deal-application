@@ -34,6 +34,7 @@ class S implements WidgetsLocalizations {
   String get login_with_google => "Sign in with google";
   String get personal_information_agreements => "개인정보 처리방침";
   String get prompt2_forgot_password => "비밀번호를 재설정하려는 계정을 입력해주세요.\n입력하신 이메일로 비밀번호를 재설정 할 수 있는 링크를 보내드립니다.";
+  String get prompt_double_tab => "'뒤로' 버튼을 한번 더 누르시면 종료됩니다.";
   String get prompt_forgot_password => "Forget your password?";
   String get prompt_login => "Sign in";
   String get register => "Sign up";
@@ -54,19 +55,35 @@ class $ko extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get title_login_with_email => "이메일로 로그인";
-  @override
-  String get title_agreements => "약관 확인";
-  @override
   String get intro_get_started => "시작하기";
-  @override
-  String get appName => "DEAL";
   @override
   String get title_login_with_google => "구글 계정으로 로그인";
   @override
   String get login_with_email => "이메일로 로그인하기";
   @override
   String get personal_information_agreements => "개인정보 처리방침";
+  @override
+  String get title_forgot_password => "비밀번호 재설정";
+  @override
+  String get login_email_hint => "이메일 아이디를 입력해주세요";
+  @override
+  String get prompt_forgot_password => "비밀번호를 잊어버리셨나요?";
+  @override
+  String get title_register_with_email => "이메일로 회원가입";
+  @override
+  String get title_preferences => "설정";
+  @override
+  String get location_information_agreements => "위치기반서비스 이용약관";
+  @override
+  String get prompt_double_tab => "'뒤로' 버튼을 한번 더 누르시면 종료됩니다.";
+  @override
+  String get login_password_hint => "비밀번호를 입력해주세요";
+  @override
+  String get title_login_with_email => "이메일로 로그인";
+  @override
+  String get title_agreements => "약관 확인";
+  @override
+  String get appName => "DEAL";
   @override
   String get title_auth_with_self_phone => "본인인증";
   @override
@@ -76,25 +93,11 @@ class $ko extends S {
   @override
   String get prompt_login => "로그인";
   @override
-  String get title_forgot_password => "비밀번호 재설정";
-  @override
-  String get login_email_hint => "이메일 아이디를 입력해주세요";
-  @override
-  String get prompt_forgot_password => "비밀번호를 잊어버리셨나요?";
-  @override
   String get prompt2_forgot_password => "비밀번호를 재설정하려는 계정을 입력해주세요.\n입력하신 이메일로 비밀번호를 재설정 할 수 있는 링크를 보내드립니다.";
-  @override
-  String get title_register_with_email => "이메일로 회원가입";
-  @override
-  String get title_preferences => "설정";
-  @override
-  String get location_information_agreements => "위치기반서비스 이용약관";
   @override
   String get login_with_google => "구글계정으로 시작하기";
   @override
   String get login_password_retry_hint => "비밀번호를 다시 입력해주세요";
-  @override
-  String get login_password_hint => "비밀번호를 입력해주세요";
   @override
   String get agreement_register1 => "회원가입 시 ";
   @override

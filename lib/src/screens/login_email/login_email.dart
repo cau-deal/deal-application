@@ -84,7 +84,7 @@ class LoginEmailState extends State<LoginEmailPage> {
             ],
           )
         )
-        )
+      )
     );
   }
 }
