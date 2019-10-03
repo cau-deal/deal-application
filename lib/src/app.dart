@@ -1,11 +1,12 @@
 import 'package:deal/main.dart';
 import 'package:deal/generated/i18n.dart';
-import 'package:deal/src/builders/conditional_builder.dart';
+import 'package:deal/src/custom/builder/conditional_builder.dart';
 import 'package:deal/src/custom/widgets/message_handler.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:double_back_to_close_app/double_back_to_close_app.dart';
+
+import 'custom/widgets/double_back_to_close_app.dart';
 
 import 'screens/intro/intro.dart';
 import 'screens/login_select/login_select.dart';
@@ -68,9 +69,6 @@ class App extends StatelessWidget {
       ),
       home: MessageHandler(
           child: DoubleBackToCloseApp(
-              snackBar: const SnackBar(
-                content: Text('Tap back again to leave'),
-              ),
               child: ConditionalBuilder(
                   conditional: !isSecondRun,
                   truthyBuilder: () => IntroPage(),

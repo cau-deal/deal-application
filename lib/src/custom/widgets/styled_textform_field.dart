@@ -4,16 +4,22 @@ class StyledTextFormField extends StatelessWidget {
 
   final String placeholder;
   final TextInputType textInputType;
-  final Function validator;
   final bool obscure;
   final Stream stream;
+
+  final Function validator;
+  final Function onChanged;
+  final Function onEditingComplete;
+
 
   StyledTextFormField({
     this.placeholder,
     this.textInputType = TextInputType.text,
     this.validator,
     this.obscure = false,
-    this.stream
+    this.stream,
+    this.onChanged,
+    this.onEditingComplete
   });
 
   @override
@@ -37,6 +43,8 @@ class StyledTextFormField extends StatelessWidget {
             ),
             //fillColor: Colors.green
           ),
+          onEditingComplete: this.onEditingComplete,
+          onChanged: this.onChanged,
           validator: this.validator,
           keyboardType: this.textInputType,
           obscureText: this.obscure,

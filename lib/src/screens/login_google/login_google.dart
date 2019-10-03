@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:deal/generated/i18n.dart';
 
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_lottie/flutter_lottie.dart';
 import 'package:deal/src/custom/widgets/tall_height_app_bar_container.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 
@@ -65,32 +65,17 @@ class LoginGooglePageState extends State<LoginGooglePage> {
   void initState() {
     super.initState();
     new Future.delayed(Duration.zero, (){
+
       _testSignInWithGoogle().then((email){
-
-
         Fluttertoast.showToast(
             msg: "${email} 아이디 받아옴",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIos: 1,
-            textColor: Colors.black,
-            fontSize: 16.0
         );
-
       }).whenComplete((){
         Navigator.of(context).pop();
-
       }).catchError((error){
-        Fluttertoast.showToast(
-            msg: "[DEAL] Login Failed",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIos: 1,
-            textColor: Colors.black,
-            fontSize: 16.0
-        );
-
+        Fluttertoast.showToast( msg: "[DEAL] Login Failed" );
       });
+
     });
   }
 

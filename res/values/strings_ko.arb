@@ -8,8 +8,12 @@
   "title_register_with_email": "이메일로 회원가입",
   "title_forgot_password": "비밀번호 재설정",
   "title_agreements": "약관 확인",
+  "title_auth_with_self_phone": "본인인증",
+  "title_preferences": "설정",
 
   "prompt2_forgot_password": "비밀번호를 재설정하려는 계정을 입력해주세요.\n입력하신 이메일로 비밀번호를 재설정 할 수 있는 링크를 보내드립니다.",
+  "prompt_forgot_password": "비밀번호를 잊어버리셨나요?",
+  "prompt_double_tab": "'뒤로' 버튼을 한번 더 누르시면 종료됩니다.",
 
   "agreement_register1":"회원가입 시 ",
   "agreement_register2":"에 동의합니다.",
@@ -22,7 +26,6 @@
   "login_email_hint": "이메일 아이디를 입력해주세요",
   "login_password_hint": "비밀번호를 입력해주세요",
   "login_password_retry_hint": "비밀번호를 다시 입력해주세요",
-  "prompt_forgot_password": "비밀번호를 잊어버리셨나요?",
   "send_email": "이메일 발송",
   "prompt_login": "로그인",
   "register": "회원가입"

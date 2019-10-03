@@ -1,10 +1,20 @@
+import 'package:deal/src/screens/auth_with_self_phone/auth_with_self_phone.dart';
 import 'package:deal/src/screens/mypage/widgets/number_button.dart';
+import 'package:deal/src/screens/preferences/preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:deal/generated/i18n.dart';
 
 import 'widgets/mypage_tab_container.dart';
 
 class MyPage extends StatelessWidget {
+
+  void _onSettingButtonClick(BuildContext ctx){
+    Navigator.push(
+        ctx,
+        MaterialPageRoute( builder: (ctx) => PreferencesPage() )
+    );
+  }
+
 
   @override
   Widget build(BuildContext ctx) {
@@ -18,12 +28,10 @@ class MyPage extends StatelessWidget {
               children: <Widget>[
                 Container(
                   height: 70,
-                  color: Colors.white,
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                        child: Container(
-                          color: Colors.white,
+                        child: Container (
                           padding: EdgeInsets.only(left: 30, top:5),
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -33,9 +41,22 @@ class MyPage extends StatelessWidget {
                                   alignment: Alignment.centerLeft,
                                 ),
                                 SizedBox(height: 5),
-                                Align(
-                                  child:Text("deal@cau.ac.kr", style:TextStyle(fontSize: 12, color: Colors.black54)),
-                                  alignment: Alignment.centerLeft,
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text("deal@cau.ac.kr", style:TextStyle(fontSize: 12, color: Colors.black54)),
+                                    SizedBox(width:8),
+                                    SizedBox(
+                                      width: 18,
+                                      height: 18,
+                                      child: IconButton(
+                                        icon: Icon(Icons.settings, color: Color(0xff5F75AC)),
+                                        iconSize: 18,
+                                        padding: EdgeInsets.zero,
+                                        onPressed: (){ this._onSettingButtonClick(ctx); },
+                                      )
+                                    )
+                                  ],
                                 )
                               ],
                             ),
@@ -130,7 +151,21 @@ class MyPage extends StatelessWidget {
       children: <Widget>[
         Center(
             child: Container(
-              color: Colors.white
+              color: Colors.white,
+              width: double.infinity,
+              height: double.infinity,
+              child: RaisedButton(
+                child: Container(child: Text("본인인증")),
+                onPressed: (){
+                  Navigator.push(
+                      ctx,
+                      MaterialPageRoute(
+                          builder: (ctx) => AuthWithSelfPhonePage(),
+                          fullscreenDialog: true
+                      )
+                  );
+                }
+              )
             )
         ),
         Center(

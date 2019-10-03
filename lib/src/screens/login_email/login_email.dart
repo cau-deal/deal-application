@@ -1,3 +1,4 @@
+import 'package:deal/src/custom/widgets/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:deal/generated/i18n.dart';
 
@@ -11,7 +12,16 @@ import 'package:deal/src/screens/forgot_password/forgot_password.dart';
 import 'package:deal/src/blocprovs/provider.dart';
 import 'package:deal/src/blocs/bloc_pattern.dart';
 
-class LoginEmailPage extends StatelessWidget {
+class LoginEmailPage extends StatefulWidget {
+  @override
+  LoginEmailState createState() => LoginEmailState();
+}
+
+class LoginEmailState extends State<LoginEmailPage> {
+
+  String email = "";
+  String password = "";
+
   @override
   Widget build(BuildContext ctx) {
     return new TallHeightAppBarContainer(
@@ -65,6 +75,7 @@ class LoginEmailPage extends StatelessWidget {
                         text: TextSpan(
                           text:  S.of(ctx).prompt_forgot_password,
                           style: new TextStyle(
+                              fontFamily: "NanumSquare",
                               color: Color(0xFF5f75ac),
                               fontWeight: FontWeight.w500,
                               decoration: TextDecoration.underline
@@ -77,7 +88,7 @@ class LoginEmailPage extends StatelessWidget {
             ],
           )
         )
-        )
+      )
     );
   }
 }
