@@ -43,26 +43,42 @@ class MissionListTabContainer extends StatelessWidget {
                           items: ["전체 의뢰", "수집하기", "가공하기"]
                       )
                   ),
-                  leading: IconButton(
-                    icon: Image.asset("res/images/app-logo-black.png"),
-                    iconSize: 24,
-                    padding: const EdgeInsets.only(left:15.0, top: 10.0),
-                    onPressed: () { },
+                  leading: SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: IconButton(
+                      icon: Image.asset("res/images/app-logo-black.png"),
+                      iconSize: 24,
+                      padding: const EdgeInsets.only(left:15.0, top: 10.0),
+                      onPressed: () { },
+                    )
                   ),
                   actions: <Widget>[
-                    IconButton(
+                    SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: IconButton(
                         icon: Image.asset("res/images/icon_tune.png"),
-                        iconSize: 24
-                    ),
-                    IconButton(
-                        icon: Image.asset("res/images/icon_mypage.png"),
                         iconSize: 24,
-                        onPressed:(){
-                          Navigator.push(context, MaterialPageRoute(builder: (_) {
-                            return MyPage();
-                          }));
-                        }
-                    )
+                        padding: EdgeInsets.all(0),
+                      )
+                    ),
+                    SizedBox( width:5 ),
+                    SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: IconButton(
+                          icon: Image.asset("res/images/icon_mypage.png"),
+                          iconSize: 24,
+                          padding: EdgeInsets.zero,
+                          onPressed:(){
+                            Navigator.push(context, MaterialPageRoute(builder: (_) {
+                              return MyPage();
+                            }));
+                          }
+                      )
+                    ),
+                    SizedBox( width:15 )
                   ],
                 )
               ];

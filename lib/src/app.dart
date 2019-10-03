@@ -1,6 +1,6 @@
 import 'package:deal/main.dart';
 import 'package:deal/generated/i18n.dart';
-import 'package:deal/src/builders/conditional_builder.dart';
+import 'package:deal/src/custom/builder/conditional_builder.dart';
 import 'package:deal/src/custom/widgets/message_handler.dart';
 
 import 'package:flutter/material.dart';

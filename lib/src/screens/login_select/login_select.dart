@@ -3,7 +3,7 @@ import 'package:flutter/gestures.dart';
 
 import 'package:deal/generated/i18n.dart';
 
-import 'package:deal/src/builders/fade_router.dart';
+import 'package:deal/src/custom/router/fade_router.dart';
 
 import 'package:deal/src/screens/login_email/login_email.dart';
 import 'package:deal/src/screens/login_google/login_google.dart';

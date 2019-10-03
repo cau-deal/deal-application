@@ -1,12 +1,35 @@
+import 'package:deal/src/services/hello_service.dart';
 import 'package:flutter/material.dart';
 import 'package:deal/generated/i18n.dart';
 
 import 'package:deal/src/custom/widgets/white_round_button.dart';
 import 'package:deal/src/custom/widgets/styled_textform_field.dart';
 import 'package:deal/src/custom/widgets/tall_height_app_bar_container.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 
-class ForgotPasswordPage extends StatelessWidget {
+class ForgotPasswordPage extends StatefulWidget {
+  @override
+  ForgotPasswordState createState() => ForgotPasswordState();
+}
+
+class ForgotPasswordState extends State<ForgotPasswordPage> {
+
+  String email = "";
+
+  Future<void> onSendEmailClick() async {
+    var hello = await HelloService.sayHello("Seung-Hyun");
+
+    Fluttertoast.showToast(
+        msg: hello.message ?? "????",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIos: 1,
+        textColor: Colors.black,
+        fontSize: 16.0
+    );
+  }
+
   @override
   Widget build(BuildContext ctx) {
     return new TallHeightAppBarContainer(
@@ -39,9 +62,7 @@ class ForgotPasswordPage extends StatelessWidget {
                       buttonColor: Color(0xFF5f75ac),
                       textColor: Colors.white,
                       text: S.of(ctx).send_email,
-                      onPressed: () {
-
-                      }
+                      onPressed: () async => onSendEmailClick()
                   )
                 ),
                 margin: EdgeInsets.only(top: 50)
@@ -53,4 +74,5 @@ class ForgotPasswordPage extends StatelessWidget {
       )
     );
   }
+
 }

@@ -39,9 +39,11 @@ class S implements WidgetsLocalizations {
   String get register => "Sign up";
   String get send_email => "send email";
   String get title_agreements => "약관 확인";
+  String get title_auth_with_self_phone => "본인인증";
   String get title_forgot_password => "reset password";
   String get title_login_with_email => "Sign in with email";
   String get title_login_with_google => "Sign in with google account";
+  String get title_preferences => "Settings";
   String get title_register_with_email => "sign-up with email address";
 }
 
@@ -66,6 +68,8 @@ class $ko extends S {
   @override
   String get personal_information_agreements => "개인정보 처리방침";
   @override
+  String get title_auth_with_self_phone => "본인인증";
+  @override
   String get agreements => "이용약관";
   @override
   String get send_email => "이메일 발송";
@@ -81,6 +85,8 @@ class $ko extends S {
   String get prompt2_forgot_password => "비밀번호를 재설정하려는 계정을 입력해주세요.\n입력하신 이메일로 비밀번호를 재설정 할 수 있는 링크를 보내드립니다.";
   @override
   String get title_register_with_email => "이메일로 회원가입";
+  @override
+  String get title_preferences => "설정";
   @override
   String get location_information_agreements => "위치기반서비스 이용약관";
   @override

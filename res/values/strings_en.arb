@@ -8,6 +8,9 @@
   "title_register_with_email": "sign-up with email address",
   "title_forgot_password": "reset password",
   "title_agreements": "약관 확인",
+  "title_auth_with_self_phone": "본인인증",
+  "title_preferences": "Settings",
+
 
   "login_with_google": "Sign in with google",
   "register": "Sign up",

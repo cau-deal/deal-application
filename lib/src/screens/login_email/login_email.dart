@@ -62,6 +62,7 @@ class LoginEmailPage extends StatelessWidget {
                         text: TextSpan(
                           text:  S.of(ctx).prompt_forgot_password,
                           style: new TextStyle(
+                              fontFamily: "NanumSquare",
                               color: Color(0xFF5f75ac),
                               fontWeight: FontWeight.w500,
                               decoration: TextDecoration.underline
