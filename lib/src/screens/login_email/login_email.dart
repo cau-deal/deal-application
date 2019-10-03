@@ -1,3 +1,4 @@
+import 'package:deal/src/custom/widgets/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:deal/generated/i18n.dart';
 

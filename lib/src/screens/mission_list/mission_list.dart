@@ -9,15 +9,14 @@ class MissionListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext ctx) {
-
     return DoubleBackToCloseApp(
-        child: new MissionListTabContainer(
-            children: <Widget>[
-              Page1(),
-              Page1(),
-              Page1(),
-            ],
-        )
+        child:new MissionListTabContainer(
+        children: <Widget>[
+          Page1(),
+          Page1(),
+          Page1(),
+        ],
+      )
     );
   }
 

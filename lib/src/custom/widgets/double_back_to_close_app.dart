@@ -13,10 +13,9 @@ class DoubleBackToCloseApp extends StatefulWidget {
     Key key,
     @required this.child,
     this.text,
-    this.duration = const Duration(microseconds: 500),
+    this.duration = const Duration(seconds: 4000),
   }) : assert(child != null),
         super(key: key);
-
   @override
   DoubleBackToCloseAppState createState() => DoubleBackToCloseAppState();
 }
@@ -27,14 +26,13 @@ class DoubleBackToCloseAppState extends State<DoubleBackToCloseApp> {
   DateTime lastTimeBackButtonWasTapped;
 
   bool get isAndroid => Theme.of(context).platform == TargetPlatform.android;
-
   bool get isVisible =>
       (lastTimeBackButtonWasTapped == null) ||
           (DateTime.now().difference(lastTimeBackButtonWasTapped) > widget.duration);
 
   @override
   Widget build(BuildContext context) {
-    ensureThatContextContainsScaffold(context);
+    //ensureThatContextContainsScaffold(context);
 
     if (isAndroid) {
       return WillPopScope(
