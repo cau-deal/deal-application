@@ -1,5 +1,6 @@
 import 'package:deal/src/blocs/login/bloc.dart';
 import 'package:deal/src/repositories/user_repository.dart';
+import 'package:deal/src/screens/login_select/widgets/intro_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
@@ -14,34 +15,57 @@ import 'package:deal/src/screens/register_with_email//register_with_email.dart';
 import 'package:deal/src/custom/widgets/white_round_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginSelectPage extends StatelessWidget {
+class LoginSelectPage extends StatefulWidget {
 
-  final UserRepository _userRepository;
+  final UserRepository userRepository;
 
   LoginSelectPage({ Key key, @required UserRepository userRepository })
-    : assert(userRepository != null),
-      _userRepository = userRepository,
-      super(key: key);
+      : assert(userRepository != null),
+        userRepository = userRepository,
+        super(key: key);
+
+  @override
+  LoginSelectState createState() => LoginSelectState();
+
+
+}
+
+class LoginSelectState extends State<LoginSelectPage>{
+
+  double opacity = 0.0;
+
+  void onLastScroll( double opacity ){
+    this.setState((){ this.opacity = opacity; });
+  }
 
   @override
   Widget build(BuildContext ctx) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage( "res/images/select_bg.png" ),
-              fit: BoxFit.cover,
-            ),
-            color: Colors.black26
-        ),
+        color: Color(0xfff2f3f4),
         child: Column(
           children: <Widget>[
             Expanded(
               child: Container(
-                  child: Container(
-                      child: Image.asset("res/images/splash-logo-acent@2x.png")
-                  )
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.bottomLeft,
+                      padding: EdgeInsets.only(left: 10),
+                      height: 70,
+                      child: Opacity(
+                          opacity: this.opacity,
+                          child:Image.asset("res/images/splash-logo-black-full.png", height: 44)
+                      ),
+                    ),
+                    Expanded(
+                      child: IntroWidget(
+                        onScrollLast: this.onLastScroll,
+                      )
+                    )
+                  ],
+                )
               ),
               flex: 2,
             ),
@@ -59,8 +83,8 @@ class LoginSelectPage extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.push(ctx, FadeRoute(
                                       page: BlocProvider(
-                                        builder: (ctx)=> LoginBloc(userRepository: _userRepository),
-                                        child: LoginEmailPage(userRepository: this._userRepository)
+                                        builder: (ctx)=> LoginBloc(userRepository: widget.userRepository),
+                                        child: LoginEmailPage(userRepository: widget.userRepository)
                                       )
                                   ));
                                 },
