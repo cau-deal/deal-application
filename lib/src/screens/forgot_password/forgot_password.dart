@@ -18,8 +18,12 @@ class ForgotPasswordState extends State<ForgotPasswordPage> {
   String email = "";
 
   Future<void> onSendEmailClick(BuildContext ctx) async {
-    var hello = await HelloService.sayHello("Seung-Hyun");
-    Fluttertoast.showToast(msg: hello.message ?? "");
+    try {
+      var hello = await HelloService.sayHello("Seung-Hyun");
+      Fluttertoast.showToast(msg: hello.message != null ? hello.message : "....");
+    } catch(e){
+      print(e);
+    }
   }
 
   @override

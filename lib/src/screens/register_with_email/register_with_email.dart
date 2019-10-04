@@ -8,6 +8,9 @@ import 'package:flutter_crashlytics/flutter_crashlytics.dart';
 
 import './widgets/styled_checkbox_for_register.dart';
 
+import 'package:deal/src/blocs/bloc_pattern.dart';
+
+
 
 class RegisterWithEmailPage extends StatelessWidget {
   @override

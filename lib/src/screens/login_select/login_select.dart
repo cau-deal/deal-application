@@ -1,3 +1,5 @@
+import 'package:deal/src/blocs/login/bloc.dart';
+import 'package:deal/src/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
@@ -10,8 +12,17 @@ import 'package:deal/src/screens/login_google/login_google.dart';
 import 'package:deal/src/screens/register_with_email//register_with_email.dart';
 
 import 'package:deal/src/custom/widgets/white_round_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginSelectPage extends StatelessWidget {
+
+  final UserRepository _userRepository;
+
+  LoginSelectPage({ Key key, @required UserRepository userRepository })
+    : assert(userRepository != null),
+      _userRepository = userRepository,
+      super(key: key);
+
   @override
   Widget build(BuildContext ctx) {
     return Scaffold(
@@ -46,7 +57,12 @@ class LoginSelectPage extends StatelessWidget {
                               tag: 'parallax_button',
                               child: WhiteRoundButton(
                                 onPressed: () {
-                                  Navigator.push(ctx, FadeRoute(page:LoginEmailPage()));
+                                  Navigator.push(ctx, FadeRoute(
+                                      page: BlocProvider(
+                                        builder: (ctx)=> LoginBloc(userRepository: _userRepository),
+                                        child: LoginEmailPage(userRepository: this._userRepository)
+                                      )
+                                  ));
                                 },
                                 buttonColor: Color(0xFF5f75ac),
                                 textColor: Colors.white,
