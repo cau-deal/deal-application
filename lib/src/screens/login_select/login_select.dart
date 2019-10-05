@@ -1,4 +1,5 @@
 import 'package:deal/src/blocs/login/bloc.dart';
+import 'package:deal/src/blocs/register/bloc.dart';
 import 'package:deal/src/repositories/user_repository.dart';
 import 'package:deal/src/screens/login_select/widgets/intro_widget.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class LoginSelectPage extends StatefulWidget {
 
 class LoginSelectState extends State<LoginSelectPage>{
 
-  double opacity = 0.0;
+  double opacity = 1.0;
 
   void onLastScroll( double opacity ){
     this.setState((){ this.opacity = opacity; });
@@ -61,7 +62,7 @@ class LoginSelectState extends State<LoginSelectPage>{
                     ),
                     Expanded(
                       child: IntroWidget(
-                        onScrollLast: this.onLastScroll,
+                        onScrollLast: onLastScroll,
                       )
                     )
                   ],
@@ -116,7 +117,12 @@ class LoginSelectState extends State<LoginSelectPage>{
                               text: TextSpan(
                                 text:  S.of(ctx).register,
                                 recognizer: new TapGestureRecognizer()..onTap = () {
-                                  Navigator.push(ctx, MaterialPageRoute(builder:(ctx) => RegisterWithEmailPage()));
+                                  Navigator.push(ctx, MaterialPageRoute(
+                                      builder:(ctx) => BlocProvider<RegisterBloc>(
+                                          builder: (context) => RegisterBloc(userRepository: widget.userRepository),
+                                          child: RegisterWithEmailPage(userRepository: widget.userRepository)
+                                      )
+                                  ));
                                 },
                                 style: TextStyle(
                                     color: Color(0xFF5f75ac),

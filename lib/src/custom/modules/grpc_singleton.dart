@@ -9,26 +9,26 @@ class GrpcClientSingleton {
   GrpcClientSingleton._internal();
   static GrpcClientSingleton get instance => _singleton;
 
-  static ClientChannel _client;
+  static ClientChannel _channel;
 
-  Future<ClientChannel> get client async {
-    if( _client != null ) return _client;
+  Future<ClientChannel> get channel async {
+    if( _channel != null ) return _channel;
 
     final file = await rootBundle.load('res/grpc/public.crt');
     final trustedRoot = file.buffer.asUint8List(file.offsetInBytes, file.lengthInBytes);
     final channelCredentials = ChannelCredentials.secure(certificates: trustedRoot);
 
-    _client = ClientChannel(
+    _channel = ClientChannel(
 //        "13.209.87.117",
         "grpc.snhyun.me",
         port: 9090,
         options: ChannelOptions(
-          //TODO: Change to secure with server certificates
           credentials: channelCredentials,
           idleTimeout: Duration(minutes: 1),
-        ));
+        )
+    );
 
-    return _client;
+    return _channel;
   }
 
 }

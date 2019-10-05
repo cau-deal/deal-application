@@ -1,12 +1,16 @@
+import 'package:deal/src/protos/AuthService/AuthService.pbenum.dart';
+import 'package:deal/src/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class UserRepository {
 
   final GoogleSignIn _googleSignIn;
+  final AuthService _authService;
 
-  UserRepository({GoogleSignIn googleSignin})
-      : _googleSignIn = googleSignin ?? GoogleSignIn();
+  UserRepository({GoogleSignIn googleSignIn, AuthService authService})
+      : _googleSignIn = googleSignIn ?? GoogleSignIn(),
+        _authService = authService ?? AuthService.init();
 
 
   Future<AuthCredential> signInWithGoogle() async {
@@ -22,8 +26,13 @@ class UserRepository {
     // TODO gRPC Service 연동 필요
   }
 
-  Future<void> signUp({String email, String password}) async {
-    // TODO gRPC Service 연동 필요
+  Future<void> signUpWithEmail({String email, String password, bool agreeWithTerms}) async {
+    return await _authService.signUp(
+      email: email,
+      password: password,
+      agreeWithTerms: agreeWithTerms,
+      accountType: AccountType.EMAIL
+    );
   }
 
   Future<void> signOut() async {

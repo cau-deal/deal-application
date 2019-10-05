@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:deal/src/services/auth_service.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_crashlytics/flutter_crashlytics.dart';
@@ -26,10 +28,13 @@ void main() async {
   };
 
   await FlutterCrashlytics().initialize();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   runZoned<Future<Null>>(() async {
 
-    final UserRepository userRepository = UserRepository();
+    final UserRepository userRepository = UserRepository(
+      authService: await AuthService.init()
+    );
 
     runApp(
       BlocProvider(

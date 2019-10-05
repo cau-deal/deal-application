@@ -26,6 +26,8 @@ class WhiteRoundButton extends StatelessWidget {
             elevation: 0,
             highlightElevation: 2,
             onPressed: onPressed,
+            disabledColor: Color(0xffeeeeee),
+            disabledTextColor: Colors.black,
             child: this.assetImage == null ?
                 Text(text, style: TextStyle(color: textColor, fontWeight:FontWeight.w700)) :
                 Row(
