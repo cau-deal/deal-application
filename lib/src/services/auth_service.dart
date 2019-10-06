@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:deal/src/custom/modules/grpc_singleton.dart';
 import 'package:deal/src/protos/AuthService/AuthService.pbgrpc.dart';
+import 'package:deal/src/protos/AuthService/PlatformType.pbenum.dart';
 import 'package:grpc/grpc.dart';
 import 'package:meta/meta.dart';
 
@@ -34,11 +35,11 @@ class AuthService {
       req.password = password;
       req.agreeWithTerms = agreeWithTerms ?? false;
       req.type = accountType;
-      req.platform =
-      Platform.isAndroid ? PlatformType.ANDROID : PlatformType.IOS;
+      req.platform = Platform.isAndroid ? PlatformType.ANDROID : PlatformType.IOS;
       return await client.signUp(req);
 
     } catch(e) {
+      print(e.toString());
       throw Exception(e.toString());
     }
   }

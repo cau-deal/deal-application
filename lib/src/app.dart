@@ -39,8 +39,13 @@ class App extends StatelessWidget {
         ],
         supportedLocales: S.delegate.supportedLocales,
         // i18n
-        localeResolutionCallback: S.delegate.resolution(
-            fallback: new Locale("ko", ""), withCountry: false),
+        localeResolutionCallback: S.delegate.resolution(fallback: new Locale("ko", ""), withCountry: false),
+
+        /*initialRoute: '/',
+        routes: {
+          '/': (context) => (),
+          '/second': (context) => SecondScreen(),
+        },*/
 
         theme: ThemeData(
           // Define the default brightness and colors.
@@ -85,6 +90,7 @@ class App extends StatelessWidget {
         home: MessageHandler(
             child: DoubleBackToCloseApp(
                 child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+
                     builder: (ctx, state) {
                       if (state is Authenticated)
                         return MissionListPage();

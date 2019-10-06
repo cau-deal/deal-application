@@ -9,33 +9,15 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'CommonResult.pb.dart' as $2;
+
 import 'AuthService.pbenum.dart';
+import 'PlatformType.pbenum.dart' as $3;
 
 export 'AuthService.pbenum.dart';
 
-class Empty extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Empty', package: const $pb.PackageName('deal'), createEmptyInstance: create)
-    ..hasRequiredFields = false
-  ;
-
-  Empty._() : super();
-  factory Empty() => create();
-  factory Empty.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Empty.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  Empty clone() => Empty()..mergeFromMessage(this);
-  Empty copyWith(void Function(Empty) updates) => super.copyWith((message) => updates(message as Empty));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static Empty create() => Empty._();
-  Empty createEmptyInstance() => create();
-  static $pb.PbList<Empty> createRepeated() => $pb.PbList<Empty>();
-  @$core.pragma('dart2js:noInline')
-  static Empty getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Empty>(create);
-  static Empty _defaultInstance;
-}
-
 class SignInRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('SignInRequest', package: const $pb.PackageName('deal'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('SignInRequest', createEmptyInstance: create)
     ..aOS(1, 'email')
     ..aOS(2, 'password')
     ..hasRequiredFields = false
@@ -76,12 +58,12 @@ class SignInRequest extends $pb.GeneratedMessage {
 }
 
 class SignUpRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('SignUpRequest', package: const $pb.PackageName('deal'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('SignUpRequest', createEmptyInstance: create)
     ..aOS(1, 'email')
     ..aOS(2, 'password')
-    ..aOB(3, 'agreeWithTerms', protoName: 'agreeWithTerms')
-    ..e<AccountType>(4, 'type', $pb.PbFieldType.OE, defaultOrMaker: AccountType.EMAIL, valueOf: AccountType.valueOf, enumValues: AccountType.values)
-    ..e<PlatformType>(5, 'platform', $pb.PbFieldType.OE, defaultOrMaker: PlatformType.UNKNOWN, valueOf: PlatformType.valueOf, enumValues: PlatformType.values)
+    ..aOB(3, 'agreeWithTerms')
+    ..e<AccountType>(4, 'type', $pb.PbFieldType.OE, defaultOrMaker: AccountType.UNKNOWN_ACCOUNT_TYPE, valueOf: AccountType.valueOf, enumValues: AccountType.values)
+    ..e<$3.PlatformType>(5, 'platform', $pb.PbFieldType.OE, defaultOrMaker: $3.PlatformType.UNKNOWN_PLATFORM_TYPE, valueOf: $3.PlatformType.valueOf, enumValues: $3.PlatformType.values)
     ..hasRequiredFields = false
   ;
 
@@ -137,59 +119,49 @@ class SignUpRequest extends $pb.GeneratedMessage {
   void clearType() => clearField(4);
 
   @$pb.TagNumber(5)
-  PlatformType get platform => $_getN(4);
+  $3.PlatformType get platform => $_getN(4);
   @$pb.TagNumber(5)
-  set platform(PlatformType v) { setField(5, v); }
+  set platform($3.PlatformType v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasPlatform() => $_has(4);
   @$pb.TagNumber(5)
   void clearPlatform() => clearField(5);
 }
 
-class CommonResult extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('CommonResult', package: const $pb.PackageName('deal'), createEmptyInstance: create)
-    ..e<ResultCode>(1, 'resultCode', $pb.PbFieldType.OE, protoName: 'resultCode', defaultOrMaker: ResultCode.SUCCESS, valueOf: ResultCode.valueOf, enumValues: ResultCode.values)
-    ..aOS(2, 'message')
+class FindPasswordRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('FindPasswordRequest', createEmptyInstance: create)
+    ..aOS(1, 'email')
     ..hasRequiredFields = false
   ;
 
-  CommonResult._() : super();
-  factory CommonResult() => create();
-  factory CommonResult.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory CommonResult.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  CommonResult clone() => CommonResult()..mergeFromMessage(this);
-  CommonResult copyWith(void Function(CommonResult) updates) => super.copyWith((message) => updates(message as CommonResult));
+  FindPasswordRequest._() : super();
+  factory FindPasswordRequest() => create();
+  factory FindPasswordRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory FindPasswordRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  FindPasswordRequest clone() => FindPasswordRequest()..mergeFromMessage(this);
+  FindPasswordRequest copyWith(void Function(FindPasswordRequest) updates) => super.copyWith((message) => updates(message as FindPasswordRequest));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static CommonResult create() => CommonResult._();
-  CommonResult createEmptyInstance() => create();
-  static $pb.PbList<CommonResult> createRepeated() => $pb.PbList<CommonResult>();
+  static FindPasswordRequest create() => FindPasswordRequest._();
+  FindPasswordRequest createEmptyInstance() => create();
+  static $pb.PbList<FindPasswordRequest> createRepeated() => $pb.PbList<FindPasswordRequest>();
   @$core.pragma('dart2js:noInline')
-  static CommonResult getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CommonResult>(create);
-  static CommonResult _defaultInstance;
+  static FindPasswordRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FindPasswordRequest>(create);
+  static FindPasswordRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  ResultCode get resultCode => $_getN(0);
+  $core.String get email => $_getSZ(0);
   @$pb.TagNumber(1)
-  set resultCode(ResultCode v) { setField(1, v); }
+  set email($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasResultCode() => $_has(0);
+  $core.bool hasEmail() => $_has(0);
   @$pb.TagNumber(1)
-  void clearResultCode() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get message => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set message($core.String v) { $_setString(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasMessage() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearMessage() => clearField(2);
+  void clearEmail() => clearField(1);
 }
 
 class JWTResult extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('JWTResult', package: const $pb.PackageName('deal'), createEmptyInstance: create)
-    ..e<JWTType>(1, 'type', $pb.PbFieldType.OE, defaultOrMaker: JWTType.ACCESS, valueOf: JWTType.valueOf, enumValues: JWTType.values)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('JWTResult', createEmptyInstance: create)
+    ..e<JWTType>(1, 'type', $pb.PbFieldType.OE, defaultOrMaker: JWTType.UNKNOWN_JWTTYPE, valueOf: JWTType.valueOf, enumValues: JWTType.values)
     ..aOS(2, 'token')
     ..hasRequiredFields = false
   ;
@@ -229,8 +201,8 @@ class JWTResult extends $pb.GeneratedMessage {
 }
 
 class SignInResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('SignInResponse', package: const $pb.PackageName('deal'), createEmptyInstance: create)
-    ..aOM<CommonResult>(1, 'result', subBuilder: CommonResult.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('SignInResponse', createEmptyInstance: create)
+    ..aOM<$2.CommonResult>(1, 'result', subBuilder: $2.CommonResult.create)
     ..pc<JWTResult>(2, 'jwt', $pb.PbFieldType.PM, subBuilder: JWTResult.create)
     ..hasRequiredFields = false
   ;
@@ -251,23 +223,23 @@ class SignInResponse extends $pb.GeneratedMessage {
   static SignInResponse _defaultInstance;
 
   @$pb.TagNumber(1)
-  CommonResult get result => $_getN(0);
+  $2.CommonResult get result => $_getN(0);
   @$pb.TagNumber(1)
-  set result(CommonResult v) { setField(1, v); }
+  set result($2.CommonResult v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasResult() => $_has(0);
   @$pb.TagNumber(1)
   void clearResult() => clearField(1);
   @$pb.TagNumber(1)
-  CommonResult ensureResult() => $_ensure(0);
+  $2.CommonResult ensureResult() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.List<JWTResult> get jwt => $_getList(1);
 }
 
 class SignUpResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('SignUpResponse', package: const $pb.PackageName('deal'), createEmptyInstance: create)
-    ..aOM<CommonResult>(1, 'result', subBuilder: CommonResult.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('SignUpResponse', createEmptyInstance: create)
+    ..aOM<$2.CommonResult>(1, 'result', subBuilder: $2.CommonResult.create)
     ..pc<JWTResult>(2, 'jwt', $pb.PbFieldType.PM, subBuilder: JWTResult.create)
     ..hasRequiredFields = false
   ;
@@ -288,17 +260,50 @@ class SignUpResponse extends $pb.GeneratedMessage {
   static SignUpResponse _defaultInstance;
 
   @$pb.TagNumber(1)
-  CommonResult get result => $_getN(0);
+  $2.CommonResult get result => $_getN(0);
   @$pb.TagNumber(1)
-  set result(CommonResult v) { setField(1, v); }
+  set result($2.CommonResult v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasResult() => $_has(0);
   @$pb.TagNumber(1)
   void clearResult() => clearField(1);
   @$pb.TagNumber(1)
-  CommonResult ensureResult() => $_ensure(0);
+  $2.CommonResult ensureResult() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.List<JWTResult> get jwt => $_getList(1);
+}
+
+class FindPasswordResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('FindPasswordResponse', createEmptyInstance: create)
+    ..aOM<$2.CommonResult>(1, 'result', subBuilder: $2.CommonResult.create)
+    ..hasRequiredFields = false
+  ;
+
+  FindPasswordResponse._() : super();
+  factory FindPasswordResponse() => create();
+  factory FindPasswordResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory FindPasswordResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  FindPasswordResponse clone() => FindPasswordResponse()..mergeFromMessage(this);
+  FindPasswordResponse copyWith(void Function(FindPasswordResponse) updates) => super.copyWith((message) => updates(message as FindPasswordResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static FindPasswordResponse create() => FindPasswordResponse._();
+  FindPasswordResponse createEmptyInstance() => create();
+  static $pb.PbList<FindPasswordResponse> createRepeated() => $pb.PbList<FindPasswordResponse>();
+  @$core.pragma('dart2js:noInline')
+  static FindPasswordResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FindPasswordResponse>(create);
+  static FindPasswordResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.CommonResult get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result($2.CommonResult v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  $2.CommonResult ensureResult() => $_ensure(0);
 }
 
