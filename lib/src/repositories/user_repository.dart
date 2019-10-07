@@ -25,8 +25,8 @@ class UserRepository {
 
   Future<SignInResponse> signInWithEmail(String email, String password) async {
     return await _authService.signInWithCredential(
-        email: email,
-        password: password,
+      email: email,
+      password: password,
     );
   }
 
