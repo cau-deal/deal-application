@@ -17,7 +17,7 @@ const AccountType$json = const {
 const JWTType$json = const {
   '1': 'JWTType',
   '2': const [
-    const {'1': 'UNKNOWN_JWTTYPE', '2': 0},
+    const {'1': 'UNKNOWN_JWT_TYPE', '2': 0},
     const {'1': 'ACCESS', '2': 1},
     const {'1': 'REFRESH', '2': 2},
   ],
@@ -77,6 +77,14 @@ const FindPasswordResponse$json = const {
   '1': 'FindPasswordResponse',
   '2': const [
     const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
+  ],
+};
+
+const TokenResponse$json = const {
+  '1': 'TokenResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
+    const {'1': 'jwt', '3': 2, '4': 1, '5': 11, '6': '.JWTResult', '10': 'jwt'},
   ],
 };
 

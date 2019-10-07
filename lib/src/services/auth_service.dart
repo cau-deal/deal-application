@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:deal/src/custom/modules/grpc_singleton.dart';
 import 'package:deal/src/protos/AuthService/AuthService.pbgrpc.dart';
+import 'package:deal/src/protos/AuthService/CommonResult.pb.dart';
 import 'package:deal/src/protos/AuthService/PlatformType.pbenum.dart';
 import 'package:grpc/grpc.dart';
 import 'package:meta/meta.dart';
@@ -22,6 +23,26 @@ class AuthService {
     );
 
     return AuthService(client: client);
+  }
+
+
+  Future<SignInResponse> signInWithCredential({
+    String email, String password
+  }) async {
+
+    SignInResponse res = SignInResponse();
+
+    try {
+      SignInRequest req = SignInRequest();
+      req.email = email;
+      req.password = password;
+      res = await client.signInWithCredential(req);
+
+    } catch(e){
+      print(e.toString());
+    }
+
+    return res;
   }
 
 

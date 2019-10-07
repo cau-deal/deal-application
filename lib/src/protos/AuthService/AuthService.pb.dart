@@ -161,7 +161,7 @@ class FindPasswordRequest extends $pb.GeneratedMessage {
 
 class JWTResult extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('JWTResult', createEmptyInstance: create)
-    ..e<JWTType>(1, 'type', $pb.PbFieldType.OE, defaultOrMaker: JWTType.UNKNOWN_JWTTYPE, valueOf: JWTType.valueOf, enumValues: JWTType.values)
+    ..e<JWTType>(1, 'type', $pb.PbFieldType.OE, defaultOrMaker: JWTType.UNKNOWN_JWT_TYPE, valueOf: JWTType.valueOf, enumValues: JWTType.values)
     ..aOS(2, 'token')
     ..hasRequiredFields = false
   ;
@@ -305,5 +305,50 @@ class FindPasswordResponse extends $pb.GeneratedMessage {
   void clearResult() => clearField(1);
   @$pb.TagNumber(1)
   $2.CommonResult ensureResult() => $_ensure(0);
+}
+
+class TokenResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('TokenResponse', createEmptyInstance: create)
+    ..aOM<$2.CommonResult>(1, 'result', subBuilder: $2.CommonResult.create)
+    ..aOM<JWTResult>(2, 'jwt', subBuilder: JWTResult.create)
+    ..hasRequiredFields = false
+  ;
+
+  TokenResponse._() : super();
+  factory TokenResponse() => create();
+  factory TokenResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TokenResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  TokenResponse clone() => TokenResponse()..mergeFromMessage(this);
+  TokenResponse copyWith(void Function(TokenResponse) updates) => super.copyWith((message) => updates(message as TokenResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static TokenResponse create() => TokenResponse._();
+  TokenResponse createEmptyInstance() => create();
+  static $pb.PbList<TokenResponse> createRepeated() => $pb.PbList<TokenResponse>();
+  @$core.pragma('dart2js:noInline')
+  static TokenResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TokenResponse>(create);
+  static TokenResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.CommonResult get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result($2.CommonResult v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  $2.CommonResult ensureResult() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  JWTResult get jwt => $_getN(1);
+  @$pb.TagNumber(2)
+  set jwt(JWTResult v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasJwt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearJwt() => clearField(2);
+  @$pb.TagNumber(2)
+  JWTResult ensureJwt() => $_ensure(1);
 }
 

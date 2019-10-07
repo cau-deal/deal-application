@@ -1,5 +1,6 @@
+import 'package:deal/src/blocs/auth/auth_bloc.dart';
+import 'package:deal/src/blocs/auth/bloc.dart';
 import 'package:deal/src/blocs/login/bloc.dart';
-import 'package:deal/src/custom/widgets/double_back_to_close_app.dart';
 import 'package:deal/src/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:deal/generated/i18n.dart';
@@ -12,6 +13,8 @@ import 'package:deal/src/screens/mission_list/mission_list.dart';
 import 'package:deal/src/screens/forgot_password/forgot_password.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 
 class LoginEmailPage extends StatefulWidget {
 
@@ -52,7 +55,19 @@ class LoginEmailState extends State<LoginEmailPage> {
   Widget build(BuildContext ctx) {
     return BlocListener<LoginBloc, LoginState>(
       listener: (ctx, state){
-        print(state);
+        if (state.isFailure) {
+          print("???");
+          Fluttertoast.showToast(msg: "로그인 실패");
+        }
+        if (state.isSubmitting) {
+          Fluttertoast.showToast(msg: "로그인 요청중..");
+        }
+        if (state.isSuccess) {
+          BlocProvider.of<AuthenticationBloc>(context).dispatch(LoggedIn());
+          Navigator.pushAndRemoveUntil(ctx, MaterialPageRoute(
+              builder: (ctx) => MissionListPage()),
+                  (Route<dynamic> route) => false);
+        }
       },
       child: BlocBuilder<LoginBloc, LoginState>(
         builder: (ctx, state){
@@ -99,13 +114,7 @@ class LoginEmailState extends State<LoginEmailPage> {
                                     buttonColor: Color(0xFF5f75ac),
                                     textColor: Colors.white,
                                     text: S.of(ctx).prompt_login,
-                                    onPressed: () {
-                                      Navigator.pushAndRemoveUntil(
-                                          ctx,
-                                          MaterialPageRoute(builder: (ctx) => MissionListPage()),
-                                              (Route<dynamic> route) => false
-                                      );
-                                    }
+                                    onPressed: isLoginButtonEnabled(state)? _onFormSubmitted : (){}
                                 ),
                               ),
                               margin: EdgeInsets.only(top: 50)
@@ -155,6 +164,15 @@ class LoginEmailState extends State<LoginEmailPage> {
   void _onPasswordChanged() {
     _loginBloc.dispatch(
       PasswordChanged(password: _passwordController.text),
+    );
+  }
+
+  void _onFormSubmitted() {
+    _loginBloc.dispatch(
+      LoginWithCredentialsPressed(
+        email: _emailController.text,
+        password: _passwordController.text,
+      ),
     );
   }
 

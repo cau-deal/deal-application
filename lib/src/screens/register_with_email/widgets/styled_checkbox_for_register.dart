@@ -25,7 +25,13 @@ class CommonTextStyle{
 
 class StyledCheckboxForRegister extends StatefulWidget {
 
-  StyledCheckboxForRegister();
+  final bool value;
+  final Function onChanged;
+
+  StyledCheckboxForRegister({
+    @required this.value,
+    @required this.onChanged
+  });
 
   @override
   StyledCheckboxStateForRegister createState() => new StyledCheckboxStateForRegister();
@@ -34,13 +40,7 @@ class StyledCheckboxForRegister extends StatefulWidget {
 
 class StyledCheckboxStateForRegister extends State<StyledCheckboxForRegister> {
 
-  bool isChecked = false;
-
   StyledCheckboxStateForRegister();
-
-  void onChanged(){
-    setState((){ isChecked = !isChecked; });
-  }
 
   void onTap(BuildContext ctx){
     Navigator.push(ctx, MaterialPageRoute(builder:(ctx) => AgreementsPage()));
@@ -65,8 +65,8 @@ class StyledCheckboxStateForRegister extends State<StyledCheckboxForRegister> {
                       unselectedWidgetColor: Color(0xffCECECE)
                   ),
                   child: new Checkbox(
-                    value: isChecked,
-                    onChanged: (val){ onChanged(); },
+                    value: widget.value,
+                    onChanged: widget.onChanged,
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     activeColor: Color(0xff5F75AC),
                   )
@@ -83,7 +83,7 @@ class StyledCheckboxStateForRegister extends State<StyledCheckboxForRegister> {
                         TextSpan(
                             text: S.of(context).agreement_register1,
                             style: _labelTextStyle,
-                            recognizer: new TapGestureRecognizer()..onTap = (){ onChanged(); }
+                            recognizer: new TapGestureRecognizer()..onTap = (){ }
                         ),
                         TextSpan(
                             text: S.of(context).agreements,
@@ -105,7 +105,7 @@ class StyledCheckboxStateForRegister extends State<StyledCheckboxForRegister> {
                         TextSpan(
                             text: S.of(context).agreement_register2,
                             style: _labelTextStyle,
-                            recognizer: new TapGestureRecognizer()..onTap = (){ onChanged(); }
+                            recognizer: new TapGestureRecognizer()..onTap = (){ }
                 )
                       ]
                     ),

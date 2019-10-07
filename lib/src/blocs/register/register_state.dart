@@ -6,6 +6,7 @@ class RegisterState {
   final bool isEmailValid;
   final bool isPasswordValid;
   final bool isAgreeWithTerm;
+  final bool isSamePassword;
   final bool isSubmitting;
   final bool isSuccess;
   final bool isFailure;
@@ -15,20 +16,22 @@ class RegisterState {
   RegisterState({
     @required this.isEmailValid,
     @required this.isPasswordValid,
+    @required this.isAgreeWithTerm,
+    @required this.isSamePassword,
     @required this.isSubmitting,
     @required this.isSuccess,
     @required this.isFailure,
-    @required this.isAgreeWithTerm,
   });
 
   factory RegisterState.empty() {
     return RegisterState(
       isEmailValid: true,
       isPasswordValid: true,
+      isAgreeWithTerm: false,
+      isSamePassword: true,
       isSubmitting: false,
       isSuccess: false,
       isFailure: false,
-      isAgreeWithTerm: true,
     );
   }
 
@@ -37,9 +40,10 @@ class RegisterState {
       isEmailValid: true,
       isPasswordValid: true,
       isSubmitting: true,
+      isAgreeWithTerm: true,
+      isSamePassword: true,
       isSuccess: false,
       isFailure: false,
-      isAgreeWithTerm: true,
     );
   }
 
@@ -47,10 +51,11 @@ class RegisterState {
     return RegisterState(
       isEmailValid: true,
       isPasswordValid: true,
+      isAgreeWithTerm: true,
+      isSamePassword: true,
       isSubmitting: false,
       isSuccess: false,
       isFailure: true,
-      isAgreeWithTerm: true,
     );
   }
 
@@ -58,10 +63,11 @@ class RegisterState {
     return RegisterState(
       isEmailValid: true,
       isPasswordValid: true,
+      isAgreeWithTerm: true,
+      isSamePassword: true,
       isSubmitting: false,
       isSuccess: true,
       isFailure: false,
-      isAgreeWithTerm: true,
     );
   }
 
@@ -69,10 +75,12 @@ class RegisterState {
     bool isEmailValid,
     bool isPasswordValid,
     bool isAgreeWithTerm,
+    bool isSamePassword,
   }) {
     return copyWith(
       isEmailValid: isEmailValid,
       isPasswordValid: isPasswordValid,
+      isSamePassword: isSamePassword,
       isAgreeWithTerm: isAgreeWithTerm,
       isSubmitting: false,
       isSuccess: false,
@@ -84,6 +92,7 @@ class RegisterState {
     bool isEmailValid,
     bool isPasswordValid,
     bool isSubmitEnabled,
+    bool isSamePassword,
     bool isAgreeWithTerm,
     bool isSubmitting,
     bool isSuccess,
@@ -92,6 +101,7 @@ class RegisterState {
     return RegisterState(
       isEmailValid: isEmailValid ?? this.isEmailValid,
       isPasswordValid: isPasswordValid ?? this.isPasswordValid,
+      isSamePassword: isSamePassword ?? this.isSamePassword,
       isAgreeWithTerm: isAgreeWithTerm ?? this.isAgreeWithTerm,
       isSubmitting: isSubmitting ?? this.isSubmitting,
       isSuccess: isSuccess ?? this.isSuccess,
@@ -104,6 +114,7 @@ class RegisterState {
     return '''LoginState {
       isEmailValid: $isEmailValid,
       isPasswordValid: $isPasswordValid,
+      isSamePassword: $isSamePassword,
       isSubmitting: $isSubmitting,
       isSuccess: $isSuccess,
       isFailure: $isFailure,

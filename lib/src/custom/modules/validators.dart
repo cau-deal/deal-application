@@ -13,4 +13,9 @@ class Validators {
   static isValidPassword(String password) {
     return _passwordRegExp.hasMatch(password);
   }
+
+  static isSamePassword(String password1, String password2) {
+    return password1 == password2;
+  }
+
 }

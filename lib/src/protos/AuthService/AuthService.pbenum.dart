@@ -27,12 +27,12 @@ class AccountType extends $pb.ProtobufEnum {
 }
 
 class JWTType extends $pb.ProtobufEnum {
-  static const JWTType UNKNOWN_JWTTYPE = JWTType._(0, 'UNKNOWN_JWTTYPE');
+  static const JWTType UNKNOWN_JWT_TYPE = JWTType._(0, 'UNKNOWN_JWT_TYPE');
   static const JWTType ACCESS = JWTType._(1, 'ACCESS');
   static const JWTType REFRESH = JWTType._(2, 'REFRESH');
 
   static const $core.List<JWTType> values = <JWTType> [
-    UNKNOWN_JWTTYPE,
+    UNKNOWN_JWT_TYPE,
     ACCESS,
     REFRESH,
   ];

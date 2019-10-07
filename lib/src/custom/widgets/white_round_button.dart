@@ -5,7 +5,7 @@ class WhiteRoundButton extends StatelessWidget {
   final String text;
   final Color textColor;
   final Color buttonColor;
-  final String assetImage;
+  final dynamic icon;
   final Function() onPressed;
 
   WhiteRoundButton({
@@ -13,7 +13,7 @@ class WhiteRoundButton extends StatelessWidget {
     this.buttonColor = const Color(0xFFFFFFFF),
     @required this.onPressed,
     this.textColor = const Color(0xFF000000),
-    this.assetImage
+    this.icon
   });
 
   @override
@@ -28,14 +28,22 @@ class WhiteRoundButton extends StatelessWidget {
             onPressed: onPressed,
             disabledColor: Color(0xffeeeeee),
             disabledTextColor: Colors.black,
-            child: this.assetImage == null ?
+            child: this.icon == null ?
                 Text(text, style: TextStyle(color: textColor, fontWeight:FontWeight.w700)) :
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Container(
                         margin: const EdgeInsets.only(right: 5.0),
-                        child: Image.asset(this.assetImage, width: 28, height: 28)
+                        child: SizedBox(
+                          width: 28,
+                          height: 28,
+                          child: IconButton(
+                              padding: new EdgeInsets.all(2.0),
+                              icon: this.icon,
+                              onPressed: null
+                          )
+                        )
                     ),
                     Text(text, style: TextStyle(color: textColor, fontSize: 14, fontWeight:FontWeight.w600))
                   ],

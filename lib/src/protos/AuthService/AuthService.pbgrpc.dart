@@ -17,22 +17,22 @@ export 'AuthService.pb.dart';
 class AuthServiceClient extends $grpc.Client {
   static final _$signInWithCredential =
       $grpc.ClientMethod<$0.SignInRequest, $0.SignInResponse>(
-          '/AuthService/signInWithCredential',
+          '/AuthService/SignInWithCredential',
           ($0.SignInRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $0.SignInResponse.fromBuffer(value));
   static final _$signInWithToken =
       $grpc.ClientMethod<$1.Empty, $0.SignInResponse>(
-          '/AuthService/signInWithToken',
+          '/AuthService/SignInWithToken',
           ($1.Empty value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $0.SignInResponse.fromBuffer(value));
   static final _$signUp =
       $grpc.ClientMethod<$0.SignUpRequest, $0.SignUpResponse>(
-          '/AuthService/signUp',
+          '/AuthService/SignUp',
           ($0.SignUpRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $0.SignUpResponse.fromBuffer(value));
   static final _$findPassword =
       $grpc.ClientMethod<$0.FindPasswordRequest, $0.FindPasswordResponse>(
-          '/AuthService/findPassword',
+          '/AuthService/FindPassword',
           ($0.FindPasswordRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.FindPasswordResponse.fromBuffer(value));
@@ -79,21 +79,21 @@ abstract class AuthServiceBase extends $grpc.Service {
 
   AuthServiceBase() {
     $addMethod($grpc.ServiceMethod<$0.SignInRequest, $0.SignInResponse>(
-        'signInWithCredential',
+        'SignInWithCredential',
         signInWithCredential_Pre,
         false,
         false,
         ($core.List<$core.int> value) => $0.SignInRequest.fromBuffer(value),
         ($0.SignInResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$1.Empty, $0.SignInResponse>(
-        'signInWithToken',
+        'SignInWithToken',
         signInWithToken_Pre,
         false,
         false,
         ($core.List<$core.int> value) => $1.Empty.fromBuffer(value),
         ($0.SignInResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.SignUpRequest, $0.SignUpResponse>(
-        'signUp',
+        'SignUp',
         signUp_Pre,
         false,
         false,
@@ -101,7 +101,7 @@ abstract class AuthServiceBase extends $grpc.Service {
         ($0.SignUpResponse value) => value.writeToBuffer()));
     $addMethod(
         $grpc.ServiceMethod<$0.FindPasswordRequest, $0.FindPasswordResponse>(
-            'findPassword',
+            'FindPassword',
             findPassword_Pre,
             false,
             false,

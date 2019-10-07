@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:deal/src/protos/AuthService/AuthService.pb.dart';
+import 'package:deal/src/protos/AuthService/CommonResult.pb.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:deal/src/custom/modules/validators.dart';
 import 'package:deal/src/repositories/user_repository.dart';
@@ -25,6 +27,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       Stream<LoginEvent> events,
       Stream<LoginState> Function(LoginEvent event) next,
       ) {
+
     final observableStream = events as Observable<LoginEvent>;
     final nonDebounceStream = observableStream.where((event) {
       return (event is! EmailChanged && event is! PasswordChanged);
@@ -32,17 +35,22 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     final debounceStream = observableStream.where((event) {
       return (event is EmailChanged || event is PasswordChanged);
     }).debounceTime(Duration(milliseconds: 300));
+
     return super.transformEvents(nonDebounceStream.mergeWith([debounceStream]), next);
   }
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
+
     if (event is EmailChanged) {
       yield* _mapEmailChangedToState(event.email);
+
     } else if (event is PasswordChanged) {
       yield* _mapPasswordChangedToState(event.password);
+
     } else if (event is LoginWithGooglePressed) {
       yield* _mapLoginWithGooglePressedToState();
+
     } else if (event is LoginWithCredentialsPressed) {
       yield* _mapLoginWithCredentialsPressedToState(
         email: event.email,
@@ -79,11 +87,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     yield LoginState.loading();
 
     try {
-      await _userRepository.signInWithEmail(email, password);
-      yield LoginState.success();
+      SignInResponse res = await _userRepository.signInWithEmail(email, password);
+
+      print(res.jwt);
+      
+      yield (res.result.resultCode == ResultCode.SUCCESS)? LoginState.success() : LoginState.failure();
+
     } catch (_) {
       yield LoginState.failure();
     }
+
   }
 
 }

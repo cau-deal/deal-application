@@ -1,3 +1,4 @@
+import 'package:deal/src/protos/AuthService/AuthService.pb.dart';
 import 'package:deal/src/protos/AuthService/AuthService.pbenum.dart';
 import 'package:deal/src/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,11 +23,14 @@ class UserRepository {
     );
   }
 
-  Future<void> signInWithEmail(String email, String password) {
-    // TODO gRPC Service 연동 필요
+  Future<SignInResponse> signInWithEmail(String email, String password) async {
+    return await _authService.signInWithCredential(
+        email: email,
+        password: password,
+    );
   }
 
-  Future<void> signUpWithEmail({String email, String password, bool agreeWithTerms}) async {
+  Future<SignUpResponse> signUpWithEmail({String email, String password, bool agreeWithTerms}) async {
     return await _authService.signUp(
       email: email,
       password: password,

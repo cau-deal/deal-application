@@ -17,6 +17,7 @@ import 'package:deal/src/screens/register_with_email//register_with_email.dart';
 import 'package:deal/src/custom/widgets/white_round_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+
 class LoginSelectPage extends StatefulWidget {
 
   final UserRepository userRepository;
@@ -136,7 +137,7 @@ class LoginSelectState extends State<LoginSelectPage>{
                               );
                             },
                             buttonColor: Color(0xffffffff),
-                            assetImage: 'res/images/google-logo.png',
+                            icon: Image.asset('res/images/google-logo.png'),
                             text: S.of(ctx).login_with_google,
                           ),
                         ),

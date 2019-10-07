@@ -28,29 +28,37 @@ class RegisterWithEmailPage extends StatefulWidget {
 
 class RegisterFormState extends State<RegisterWithEmailPage> {
 
+  RegisterBloc _registerBloc;
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _password2Controller = TextEditingController();
 
-  RegisterBloc _registerBloc;
+  bool isChecked;
 
   bool get isPopulated => _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty;
 
   bool isRegisterButtonEnabled(RegisterState state) {
-    return state.isFormValid && isPopulated && !state.isSubmitting;
+    return state.isFormValid && isPopulated && !state.isSubmitting && state.isAgreeWithTerm;
   }
 
   @override
   void initState() {
     super.initState();
+
+    isChecked = false;
+
     _registerBloc = BlocProvider.of<RegisterBloc>(context);
     _emailController.addListener(_onEmailChanged);
     _passwordController.addListener(_onPasswordChanged);
+    _password2Controller.addListener(_onPassword2Changed);
   }
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _password2Controller.dispose();
     super.dispose();
   }
 
@@ -66,11 +74,28 @@ class RegisterFormState extends State<RegisterWithEmailPage> {
     );
   }
 
+  void _onPassword2Changed() {
+    _registerBloc.dispatch(
+      Password2Changed(
+          password1: _passwordController.text,
+          password2: _password2Controller.text
+      ),
+    );
+  }
+
+  void _onCheckboxChanged(bool value) {
+    this.isChecked = value;
+    _registerBloc.dispatch(
+        AgreementChanged(checked: value)
+    );
+  }
+
   void _onFormSubmitted() {
     _registerBloc.dispatch(
       Submitted(
         email: _emailController.text,
         password: _passwordController.text,
+        agreeWithTerms: this.isChecked
       ),
     );
   }
@@ -80,14 +105,14 @@ class RegisterFormState extends State<RegisterWithEmailPage> {
     return BlocListener<RegisterBloc, RegisterState>(
       listener: (ctx, state){
         if (state.isSubmitting) {
-          Fluttertoast.showToast(msg: "요청중...");
+          Fluttertoast.showToast(msg: "서버 요청중...");
         }
         if (state.isSuccess) {
           BlocProvider.of<AuthenticationBloc>(context).dispatch(LoggedIn());
           Navigator.of(context).pop();
         }
         if (state.isFailure) {
-          Fluttertoast.showToast(msg: "로그인 실패..");
+          Fluttertoast.showToast(msg: "회원가입 실패");
         }
       },
       child: BlocBuilder<RegisterBloc, RegisterState>(
@@ -106,7 +131,7 @@ class RegisterFormState extends State<RegisterWithEmailPage> {
                                 autovalidate: true,
                                 controller: _emailController,
                                 validator: (_) {
-                                  return !state.isEmailValid ? 'Invalid Email' : null;
+                                  return !state.isEmailValid ? '올바른 이메일이 아닙니다.' : null;
                                 },
                               ),
                               margin: EdgeInsets.only(top: 32)
@@ -119,7 +144,7 @@ class RegisterFormState extends State<RegisterWithEmailPage> {
                                 autovalidate: true,
                                 controller: _passwordController,
                                 validator: (_) {
-                                  return !state.isPasswordValid ? 'Invalid Password' : null;
+                                  return !state.isPasswordValid ? '올바른 패스워드가 아닙니다.' : null;
                                 },
                               ),
                               margin: EdgeInsets.only(top: 12)
@@ -130,15 +155,19 @@ class RegisterFormState extends State<RegisterWithEmailPage> {
                                 placeholder: S.of(ctx).login_password_retry_hint,
                                 obscure: true,
                                 autovalidate: true,
+                                controller: _password2Controller,
                                 validator: (_) {
-                                  return !state.isPasswordValid ? 'Invalid Password' : null;
+                                  return !state.isSamePassword ? '패스워드가 다릅니다.' : null;
                                 },
                               ),
                               margin: EdgeInsets.only(top: 12)
                           ),
 
                           Container(
-                              child: StyledCheckboxForRegister(),
+                              child: StyledCheckboxForRegister(
+                                value: this.isChecked,
+                                onChanged: _onCheckboxChanged,
+                              ),
                               margin: EdgeInsets.only(top: 20)
                           ),
 
