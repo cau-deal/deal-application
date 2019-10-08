@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:deal/src/custom/modules/grpc_singleton.dart';
 import 'package:deal/src/protos/AuthService/AuthService.pbgrpc.dart';
+import 'package:deal/src/protos/AuthService/Empty.pb.dart';
 import 'package:deal/src/protos/AuthService/PlatformType.pbenum.dart';
 import 'package:grpc/grpc.dart';
 import 'package:meta/meta.dart';
@@ -43,6 +44,25 @@ class AuthService {
     return res;
   }
 
+  Future<SignInResponse> signInWithToken({
+    String accessToken,
+    String aud
+  }) async {
+
+    SignInResponse res = SignInResponse();
+
+    try {
+      Empty req = Empty();
+      res = await client.signInWithToken(req,
+          options: CallOptions(metadata: {'ticket':accessToken, 'aud':aud})
+      );
+
+    } catch(e){
+      print(e.toString());
+    }
+
+    return res;
+  }
 
   Future<SignInResponse> signInWithGoogle({
     String email,

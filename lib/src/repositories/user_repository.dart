@@ -56,6 +56,10 @@ class UserRepository {
     return await _authService.findPassword(email: email);
   }
 
+  Future<SignInResponse> signInWithToken({String accessToken, String aud}) async {
+    return await _authService.signInWithToken(accessToken: accessToken, aud: aud);
+  }
+
   Future<void> signOut() async {
     return Future.wait([
       // TODO gRPC Signout 필요

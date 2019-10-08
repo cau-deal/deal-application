@@ -11,6 +11,11 @@ class Uninitialized extends AuthenticationState {
   String toString() => 'Uninitialized';
 }
 
+class Authenticating extends AuthenticationState {
+  @override
+  String toString() => 'Authenticating';
+}
+
 class Authenticated extends AuthenticationState {
   final String displayName;
 

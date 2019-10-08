@@ -7,6 +7,7 @@ import 'package:deal/src/custom/modules/validators.dart';
 import 'package:deal/src/repositories/user_repository.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'bloc.dart';
 
@@ -80,6 +81,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       SignInResponse res = await _userRepository.signInWithGoogle();
 
+      if(res.result.resultCode == ResultCode.SUCCESS) {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+
+        String accessToken = res.jwt[0].token;
+        prefs.setString("ticket", accessToken);
+        prefs.setString("aud", "");
+      }
+
       yield (res.result.resultCode == ResultCode.SUCCESS)? LoginState.success() : LoginState.failure();
 
     } catch (_) {
@@ -108,7 +117,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       SignInResponse res = await _userRepository.signInWithEmail(email, password);
 
-      print(res.jwt);
+      if(res.result.resultCode == ResultCode.SUCCESS) {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+
+        String accessToken = res.jwt[0].token;
+        prefs.setString("ticket", accessToken);
+        prefs.setString("aud", email);
+      }
 
       yield (res.result.resultCode == ResultCode.SUCCESS)? LoginState.success() : LoginState.failure();
 

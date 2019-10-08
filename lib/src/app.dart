@@ -90,14 +90,11 @@ class App extends StatelessWidget {
         home: MessageHandler(
             child: DoubleBackToCloseApp(
                 child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-
                     builder: (ctx, state) {
                       if (state is Authenticated)
                         return MissionListPage();
                       else
-                        return LoginSelectPage(
-                          userRepository: _userRepository,
-                        );
+                        return LoginSelectPage(userRepository: _userRepository);
                     })
             )
         )
