@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 
 
@@ -60,18 +61,17 @@ class _MessageHandlerState extends State<MessageHandler> {
     //Needed by iOS only
     _firebaseMessaging.requestNotificationPermissions(
         const IosNotificationSettings(sound: true, badge: true, alert: true));
-    _firebaseMessaging.onIosSettingsRegistered
-        .listen((IosNotificationSettings settings) {
+    _firebaseMessaging.onIosSettingsRegistered.listen((IosNotificationSettings settings) {
       print("Settings registered: $settings");
     });
 
     //Getting the token from FCM
     _firebaseMessaging.getToken().then((String token) {
       assert(token != null);
-      setState(() {
-        _homeScreenText = "Push Messaging token: \n\n $token";
-      });
-      print(_homeScreenText);
+      _firebaseMessaging.subscribeToTopic('all');
+      _firebaseMessaging.subscribeToTopic('agree');
+
+      Fluttertoast.showToast(msg: 'FCM key : $token');
     });
   }
 

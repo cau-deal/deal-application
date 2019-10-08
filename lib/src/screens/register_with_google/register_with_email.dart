@@ -115,7 +115,7 @@ class RegisterFormState extends State<RegisterWithEmailPage> {
     return BlocListener<RegisterBloc, RegisterState>(
       listener: (ctx, state){
         if (state.isSubmitting) {
-//          Fluttertoast.showToast(msg: "서버 요청중...");
+          Fluttertoast.showToast(msg: "서버 요청중...");
         }
         if (state.isSuccess) {
           BlocProvider.of<AuthenticationBloc>(context).dispatch(LoggedIn());
