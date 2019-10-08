@@ -37,36 +37,13 @@ class LoginSelectState extends State<LoginSelectPage>{
 
   double opacity = 1.0;
 
-  void initDynamicLinks() async {
-    final PendingDynamicLinkData data = await FirebaseDynamicLinks.instance.getInitialLink();
-    final Uri deepLink = data?.link;
-
-    if (deepLink != null) {
-      Navigator.pushNamedAndRemoveUntil(context, deepLink.path,  (Route<dynamic> route) => false);
-    }
-
-    FirebaseDynamicLinks.instance.onLink(
-        onSuccess: (PendingDynamicLinkData dynamicLink) async {
-          final Uri deepLink = dynamicLink?.link;
-          if (deepLink != null) {
-            Navigator.pushNamedAndRemoveUntil(context, deepLink.path,  (Route<dynamic> route) => false);
-          }
-        },
-        onError: (OnLinkErrorException e) async {
-          throw e;
-        }
-    );
-  }
-
   void onLastScroll( double opacity ){
     this.setState((){ this.opacity = opacity; });
   }
 
-
   @override
   void initState() {
     super.initState();
-    initDynamicLinks();
   }
 
   @override
