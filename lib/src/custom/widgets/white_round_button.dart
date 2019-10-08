@@ -7,13 +7,15 @@ class WhiteRoundButton extends StatelessWidget {
   final Color buttonColor;
   final dynamic icon;
   final Function() onPressed;
+  final FocusNode focusNode;
 
   WhiteRoundButton({
     @required this.text,
     this.buttonColor = const Color(0xFFFFFFFF),
     @required this.onPressed,
     this.textColor = const Color(0xFF000000),
-    this.icon
+    this.icon,
+    this.focusNode
   });
 
   @override
@@ -28,6 +30,7 @@ class WhiteRoundButton extends StatelessWidget {
             onPressed: onPressed,
             disabledColor: Color(0xffeeeeee),
             disabledTextColor: Colors.black,
+            focusNode: this.focusNode,
             child: this.icon == null ?
                 Text(text, style: TextStyle(color: textColor, fontWeight:FontWeight.w700)) :
                 Row(

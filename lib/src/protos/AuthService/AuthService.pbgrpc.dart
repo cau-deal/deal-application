@@ -20,6 +20,11 @@ class AuthServiceClient extends $grpc.Client {
           '/AuthService/SignInWithCredential',
           ($0.SignInRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $0.SignInResponse.fromBuffer(value));
+  static final _$signInWithGoogle =
+      $grpc.ClientMethod<$0.GoogleSignInRequest, $0.SignInResponse>(
+          '/AuthService/SignInWithGoogle',
+          ($0.GoogleSignInRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $0.SignInResponse.fromBuffer(value));
   static final _$signInWithToken =
       $grpc.ClientMethod<$1.Empty, $0.SignInResponse>(
           '/AuthService/SignInWithToken',
@@ -45,6 +50,15 @@ class AuthServiceClient extends $grpc.Client {
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$signInWithCredential, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.SignInResponse> signInWithGoogle(
+      $0.GoogleSignInRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$signInWithGoogle, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -85,6 +99,14 @@ abstract class AuthServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.SignInRequest.fromBuffer(value),
         ($0.SignInResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GoogleSignInRequest, $0.SignInResponse>(
+        'SignInWithGoogle',
+        signInWithGoogle_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.GoogleSignInRequest.fromBuffer(value),
+        ($0.SignInResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$1.Empty, $0.SignInResponse>(
         'SignInWithToken',
         signInWithToken_Pre,
@@ -115,6 +137,11 @@ abstract class AuthServiceBase extends $grpc.Service {
     return signInWithCredential(call, await request);
   }
 
+  $async.Future<$0.SignInResponse> signInWithGoogle_Pre($grpc.ServiceCall call,
+      $async.Future<$0.GoogleSignInRequest> request) async {
+    return signInWithGoogle(call, await request);
+  }
+
   $async.Future<$0.SignInResponse> signInWithToken_Pre(
       $grpc.ServiceCall call, $async.Future<$1.Empty> request) async {
     return signInWithToken(call, await request);
@@ -133,6 +160,8 @@ abstract class AuthServiceBase extends $grpc.Service {
 
   $async.Future<$0.SignInResponse> signInWithCredential(
       $grpc.ServiceCall call, $0.SignInRequest request);
+  $async.Future<$0.SignInResponse> signInWithGoogle(
+      $grpc.ServiceCall call, $0.GoogleSignInRequest request);
   $async.Future<$0.SignInResponse> signInWithToken(
       $grpc.ServiceCall call, $1.Empty request);
   $async.Future<$0.SignUpResponse> signUp(

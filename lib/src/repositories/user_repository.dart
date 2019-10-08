@@ -7,19 +7,32 @@ import 'package:google_sign_in/google_sign_in.dart';
 class UserRepository {
 
   final GoogleSignIn _googleSignIn;
+  final FirebaseAuth _firebaseAuth;
   final AuthService _authService;
 
-  UserRepository({GoogleSignIn googleSignIn, AuthService authService})
+  UserRepository({GoogleSignIn googleSignIn, AuthService authService, FirebaseAuth firebaseAuth})
       : _googleSignIn = googleSignIn ?? GoogleSignIn(),
+        _firebaseAuth = FirebaseAuth.instance,
         _authService = authService ?? AuthService.init();
 
 
-  Future<AuthCredential> signInWithGoogle() async {
+  Future<SignInResponse> signInWithGoogle() async {
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-    return GoogleAuthProvider.getCredential(
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
+    );
+
+    final FirebaseUser user = (await _firebaseAuth.signInWithCredential(credential)).user;
+
+    assert(user.email != null);
+    assert(!user.isAnonymous);
+
+    return _authService.signInWithGoogle(
+      email: user.email,
+      password: user.uid,
+      profileImageUrl: user.photoUrl
     );
   }
 
@@ -37,6 +50,10 @@ class UserRepository {
       agreeWithTerms: agreeWithTerms,
       accountType: AccountType.EMAIL
     );
+  }
+
+  Future<FindPasswordResponse> findPassword({String email}) async {
+    return await _authService.findPassword(email: email);
   }
 
   Future<void> signOut() async {

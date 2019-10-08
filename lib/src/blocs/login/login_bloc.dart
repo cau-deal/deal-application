@@ -51,6 +51,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     } else if (event is LoginWithGooglePressed) {
       yield* _mapLoginWithGooglePressedToState();
 
+    } else if (event is FindPasswordPressed) {
+      yield* _mapFindPasswordPressedToState(
+        email: event.email
+      );
+
     } else if (event is LoginWithCredentialsPressed) {
       yield* _mapLoginWithCredentialsPressedToState(
         email: event.email,
@@ -73,8 +78,22 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _mapLoginWithGooglePressedToState() async* {
     try {
-      await _userRepository.signInWithGoogle();
-      yield LoginState.success();
+      SignInResponse res = await _userRepository.signInWithGoogle();
+
+      yield (res.result.resultCode == ResultCode.SUCCESS)? LoginState.success() : LoginState.failure();
+
+    } catch (_) {
+      yield LoginState.failure();
+    }
+  }
+
+  Stream<LoginState> _mapFindPasswordPressedToState({ String email }) async* {
+    try {
+      yield LoginState.loading();
+
+      await _userRepository.findPassword(email: email);
+      yield LoginState.failure(); // 무조건 실패처리한다. (로그인 되면 안됨)
+
     } catch (_) {
       yield LoginState.failure();
     }
@@ -90,7 +109,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       SignInResponse res = await _userRepository.signInWithEmail(email, password);
 
       print(res.jwt);
-      
+
       yield (res.result.resultCode == ResultCode.SUCCESS)? LoginState.success() : LoginState.failure();
 
     } catch (_) {

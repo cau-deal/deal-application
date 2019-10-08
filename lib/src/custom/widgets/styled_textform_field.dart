@@ -10,9 +10,14 @@ class StyledTextFormField extends StatelessWidget {
   final bool autovalidate;
   final bool autocorrect;
 
+  final TextInputAction textInputAction;
+
+  final FocusNode focusNode;
+
   final Function validator;
   final Function onChanged;
   final Function onEditingComplete;
+  final Function onFieldSubmitted;
 
   TextEditingController controller = TextEditingController();
 
@@ -26,7 +31,10 @@ class StyledTextFormField extends StatelessWidget {
     this.onEditingComplete,
     this.controller,
     this.autovalidate = false,
-    this.autocorrect = false
+    this.autocorrect = false,
+    this.focusNode,
+    this.onFieldSubmitted,
+    this.textInputAction
   });
 
   @override
@@ -51,10 +59,13 @@ class StyledTextFormField extends StatelessWidget {
         //fillColor: Colors.green
       ),
       onEditingComplete: this.onEditingComplete,
+      onFieldSubmitted: this.onFieldSubmitted,
       onChanged: this.onChanged,
       validator: this.validator,
       keyboardType: this.textInputType,
+      textInputAction: this.textInputAction,
       obscureText: this.obscure,
+      focusNode: this.focusNode,
       style: new TextStyle(
           fontSize: 16,
           color: Colors.black,

@@ -112,12 +112,16 @@ class LoginSelectState extends State<LoginSelectPage>{
                               tag: 'parallax_button',
                               child: WhiteRoundButton(
                                 onPressed: () {
-                                  Navigator.push(ctx, FadeRoute(
-                                      page: BlocProvider(
-                                        builder: (ctx)=> LoginBloc(userRepository: widget.userRepository),
-                                        child: LoginEmailPage(userRepository: widget.userRepository)
-                                      ),
-                                  ));
+                                  Navigator.push(
+                                      ctx,
+                                      MaterialPageRoute(
+                                        fullscreenDialog: true,
+                                        builder: (context) => BlocProvider<LoginBloc>(
+                                            builder: (context)=> LoginBloc(userRepository: widget.userRepository),
+                                            child: LoginEmailPage(userRepository: widget.userRepository)
+                                        )
+                                      )
+                                  );
                                 },
                                 buttonColor: Color(0xFF5f75ac),
                                 textColor: Colors.white,
@@ -132,7 +136,11 @@ class LoginSelectState extends State<LoginSelectPage>{
                               Navigator.push(
                                   ctx,
                                   MaterialPageRoute(
-                                    fullscreenDialog: true, builder:(ctx) => LoginGooglePage()
+                                      fullscreenDialog: true,
+                                      builder: (context) => BlocProvider<LoginBloc>(
+                                          builder: (context)=> LoginBloc(userRepository: widget.userRepository),
+                                          child: LoginGooglePage(userRepository: widget.userRepository)
+                                      )
                                   )
                               );
                             },

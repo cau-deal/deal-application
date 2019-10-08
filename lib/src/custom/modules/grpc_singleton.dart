@@ -24,7 +24,9 @@ class GrpcClientSingleton {
         port: 9090,
         options: ChannelOptions(
           credentials: channelCredentials,
-          idleTimeout: Duration(minutes: 1),
+          userAgent: Platform.isAndroid? "DEAL-ANDROID" : "DEAL-IOS",
+          connectionTimeout: Duration(seconds: 5),
+          idleTimeout: Duration(seconds: 10),
         )
     );
 

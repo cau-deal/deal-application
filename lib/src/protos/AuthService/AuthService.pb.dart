@@ -57,6 +57,51 @@ class SignInRequest extends $pb.GeneratedMessage {
   void clearPassword() => clearField(2);
 }
 
+class GoogleSignInRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GoogleSignInRequest', createEmptyInstance: create)
+    ..aOM<SignInRequest>(1, 'credential', subBuilder: SignInRequest.create)
+    ..aOM<GoogleProfile>(2, 'profile', subBuilder: GoogleProfile.create)
+    ..hasRequiredFields = false
+  ;
+
+  GoogleSignInRequest._() : super();
+  factory GoogleSignInRequest() => create();
+  factory GoogleSignInRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GoogleSignInRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GoogleSignInRequest clone() => GoogleSignInRequest()..mergeFromMessage(this);
+  GoogleSignInRequest copyWith(void Function(GoogleSignInRequest) updates) => super.copyWith((message) => updates(message as GoogleSignInRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GoogleSignInRequest create() => GoogleSignInRequest._();
+  GoogleSignInRequest createEmptyInstance() => create();
+  static $pb.PbList<GoogleSignInRequest> createRepeated() => $pb.PbList<GoogleSignInRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GoogleSignInRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GoogleSignInRequest>(create);
+  static GoogleSignInRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  SignInRequest get credential => $_getN(0);
+  @$pb.TagNumber(1)
+  set credential(SignInRequest v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCredential() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCredential() => clearField(1);
+  @$pb.TagNumber(1)
+  SignInRequest ensureCredential() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  GoogleProfile get profile => $_getN(1);
+  @$pb.TagNumber(2)
+  set profile(GoogleProfile v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasProfile() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearProfile() => clearField(2);
+  @$pb.TagNumber(2)
+  GoogleProfile ensureProfile() => $_ensure(1);
+}
+
 class SignUpRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('SignUpRequest', createEmptyInstance: create)
     ..aOS(1, 'email')
@@ -157,6 +202,37 @@ class FindPasswordRequest extends $pb.GeneratedMessage {
   $core.bool hasEmail() => $_has(0);
   @$pb.TagNumber(1)
   void clearEmail() => clearField(1);
+}
+
+class GoogleProfile extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GoogleProfile', createEmptyInstance: create)
+    ..aOS(1, 'profileImage')
+    ..hasRequiredFields = false
+  ;
+
+  GoogleProfile._() : super();
+  factory GoogleProfile() => create();
+  factory GoogleProfile.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GoogleProfile.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GoogleProfile clone() => GoogleProfile()..mergeFromMessage(this);
+  GoogleProfile copyWith(void Function(GoogleProfile) updates) => super.copyWith((message) => updates(message as GoogleProfile));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GoogleProfile create() => GoogleProfile._();
+  GoogleProfile createEmptyInstance() => create();
+  static $pb.PbList<GoogleProfile> createRepeated() => $pb.PbList<GoogleProfile>();
+  @$core.pragma('dart2js:noInline')
+  static GoogleProfile getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GoogleProfile>(create);
+  static GoogleProfile _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get profileImage => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set profileImage($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasProfileImage() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearProfileImage() => clearField(1);
 }
 
 class JWTResult extends $pb.GeneratedMessage {

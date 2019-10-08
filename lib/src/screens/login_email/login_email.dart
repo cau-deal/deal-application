@@ -8,6 +8,8 @@ import 'package:deal/generated/i18n.dart';
 import 'package:deal/src/custom/widgets/white_round_button.dart';
 import 'package:deal/src/custom/widgets/styled_textform_field.dart';
 import 'package:deal/src/custom/widgets/tall_height_app_bar_container.dart';
+import 'package:deal/src/custom/widgets/custom_progress_hud.dart';
+
 
 import 'package:deal/src/screens/mission_list/mission_list.dart';
 import 'package:deal/src/screens/forgot_password/forgot_password.dart';
@@ -18,11 +20,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginEmailPage extends StatefulWidget {
 
-  final UserRepository _userRepository;
+  final UserRepository userRepository;
 
   LoginEmailPage({Key key, @required UserRepository userRepository})
       : assert(userRepository != null),
-        _userRepository = userRepository,
+        userRepository = userRepository,
         super(key: key);
 
   @override
@@ -34,9 +36,13 @@ class LoginEmailState extends State<LoginEmailPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  final FocusNode _idFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
+  final FocusNode _btnLoginNode = FocusNode();
+
   LoginBloc _loginBloc;
 
-  UserRepository get _userRepository => widget._userRepository;
+  UserRepository get _userRepository => widget.userRepository;
   bool get isPopulated => _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty;
 
   bool isLoginButtonEnabled(LoginState state){
@@ -56,14 +62,13 @@ class LoginEmailState extends State<LoginEmailPage> {
     return BlocListener<LoginBloc, LoginState>(
       listener: (ctx, state){
         if (state.isFailure) {
-          print("???");
-          Fluttertoast.showToast(msg: "로그인 실패");
+          Fluttertoast.showToast(msg: "아이디와 비밀번호를 확인해주세요.");
         }
         if (state.isSubmitting) {
-          Fluttertoast.showToast(msg: "로그인 요청중..");
+//          Fluttertoast.showToast(msg: "로그인 요청중..");
         }
         if (state.isSuccess) {
-          BlocProvider.of<AuthenticationBloc>(context).dispatch(LoggedIn());
+          BlocProvider.of<AuthenticationBloc>(ctx).dispatch(LoggedIn());
           Navigator.pushAndRemoveUntil(ctx, MaterialPageRoute(
               builder: (ctx) => MissionListPage()),
                   (Route<dynamic> route) => false);
@@ -71,77 +76,106 @@ class LoginEmailState extends State<LoginEmailPage> {
       },
       child: BlocBuilder<LoginBloc, LoginState>(
         builder: (ctx, state){
-          return new TallHeightAppBarContainer(
-              text: S.of(ctx).title_login_with_email,
-              child: Container(
-                  padding: EdgeInsets.only(left: 42, right: 42),
-                  child: Container(
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                              child: StyledTextFormField(
-                                placeholder: S.of(ctx).login_email_hint,
-                                textInputType: TextInputType.emailAddress,
-                                autovalidate: true,
-                                autocorrect: false,
-                                validator: (_){
-                                  return !state.isEmailValid? 'Invalid Email' : null;
-                                },
-                                controller: this._emailController,
-                              ),
-                              margin: EdgeInsets.only(top: 32)
-                          ),
-
-                          Container(
-                              child: StyledTextFormField(
-                                placeholder: S.of(ctx).login_password_hint,
-                                controller: this._passwordController,
-                                autovalidate: true,
-                                autocorrect: false,
-                                validator: (_){
-                                  return !state.isPasswordValid? 'Invalid Password' : null;
-                                },
-                                obscure: true,
-                              ),
-                              margin: EdgeInsets.only(top: 12)
-                          ),
-
-                          //Login Button
-                          Container(
-                              child: Hero(
-                                tag: 'parallax_button',
-                                child: WhiteRoundButton (
-                                    buttonColor: Color(0xFF5f75ac),
-                                    textColor: Colors.white,
-                                    text: S.of(ctx).prompt_login,
-                                    onPressed: isLoginButtonEnabled(state)? _onFormSubmitted : (){}
+          return CustomProgressHUD(
+            child: TallHeightAppBarContainer(
+                text: S.of(ctx).title_login_with_email,
+                child: Container(
+                    padding: EdgeInsets.only(left: 42, right: 42),
+                    child: Container(
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                                child: StyledTextFormField(
+                                  placeholder: S.of(ctx).login_email_hint,
+                                  textInputType: TextInputType.emailAddress,
+                                  textInputAction: TextInputAction.next,
+                                  autovalidate: true,
+                                  autocorrect: false,
+                                  validator: (_){
+                                    return !state.isEmailValid? 'Invalid Email' : null;
+                                  },
+                                  controller: this._emailController,
+                                  focusNode: this._idFocusNode,
+                                  onFieldSubmitted: (_) {
+                                    _focusChange(context, _idFocusNode, _passwordFocusNode);
+                                  },
                                 ),
-                              ),
-                              margin: EdgeInsets.only(top: 50)
-                          ),
-
-
-                          Container(
-                            margin: const EdgeInsets.only(top: 25.0),
-                            child: new InkWell(
-                              child: new RichText(
-                                  text: TextSpan(
-                                    text:  S.of(ctx).prompt_forgot_password,
-                                    style: new TextStyle(
-                                        fontFamily: "NanumSquare",
-                                        color: Color(0xFF5f75ac),
-                                        fontWeight: FontWeight.w500,
-                                        decoration: TextDecoration.underline
-                                    ),
-                                  )
-                              ),
-                              onTap: () => Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => ForgotPasswordPage())),
+                                margin: EdgeInsets.only(top: 32)
                             ),
-                          ),
-                        ],
-                      )
-                  )
-              )
+
+                            Container(
+                                child: StyledTextFormField(
+                                  textInputAction: TextInputAction.done,
+                                  placeholder: S.of(ctx).login_password_hint,
+                                  controller: this._passwordController,
+                                  autovalidate: true,
+                                  autocorrect: false,
+                                  validator: (_){
+                                    return !state.isPasswordValid? 'Invalid Password' : null;
+                                  },
+                                  obscure: true,
+                                  focusNode: this._passwordFocusNode,
+                                  onFieldSubmitted: (_) {
+                                    _focusChange(context, _passwordFocusNode, _btnLoginNode);
+                                  }
+                                ),
+                                margin: EdgeInsets.only(top: 12)
+                            ),
+
+                            //Login Button
+                            Container(
+                                child: Hero(
+                                  tag: 'parallax_button',
+                                  child: WhiteRoundButton (
+                                      buttonColor: Color(0xFF5f75ac),
+                                      textColor: Colors.white,
+                                      text: S.of(ctx).prompt_login,
+                                      focusNode: _btnLoginNode,
+                                      onPressed: isLoginButtonEnabled(state)? _onFormSubmitted : (){
+                                        Fluttertoast.showToast(msg: "아이디와 비밀번호를 확인해주세요.");
+                                      }
+                                  ),
+                                ),
+                                margin: EdgeInsets.only(top: 50)
+                            ),
+
+
+                            Container(
+                              margin: const EdgeInsets.only(top: 25.0),
+                              child: new InkWell(
+                                child: new RichText(
+                                    text: TextSpan(
+                                      text:  S.of(ctx).prompt_forgot_password,
+                                      style: new TextStyle(
+                                          fontFamily: "NanumSquare",
+                                          color: Color(0xFF5f75ac),
+                                          fontWeight: FontWeight.w500,
+                                          decoration: TextDecoration.underline
+                                      ),
+                                    )
+                                ),
+                                onTap: (){
+                                  Navigator.push(
+                                      ctx,
+                                      MaterialPageRoute(
+                                          builder: (context) => BlocProvider<LoginBloc>(
+                                              builder: (context)=> LoginBloc(userRepository: widget.userRepository),
+                                              child: ForgotPasswordPage(userRepository: widget.userRepository)
+                                          )
+                                      )
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        )
+                    )
+                )
+            ),
+            inAsyncCall: state.isSubmitting,
+            opacity: 0.5,
+            color: Colors.black,
+            dismissible: true,
           );
         }
       )
@@ -174,6 +208,11 @@ class LoginEmailState extends State<LoginEmailPage> {
         password: _passwordController.text,
       ),
     );
+  }
+
+  void _focusChange(BuildContext context, FocusNode currentFocus,FocusNode nextFocus) {
+    currentFocus.unfocus();
+    FocusScope.of(context).requestFocus(nextFocus);
   }
 
 }

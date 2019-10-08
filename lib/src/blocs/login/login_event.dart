@@ -54,3 +54,12 @@ class LoginWithCredentialsPressed extends LoginEvent {
     return 'LoginWithCredentialsPressed { email: $email, password: $password }';
   }
 }
+
+class FindPasswordPressed extends LoginEvent {
+  final String email;
+
+  FindPasswordPressed({@required this.email});
+
+  @override
+  String toString() => 'FindPasswordPressed';
+}

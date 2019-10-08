@@ -31,6 +31,14 @@ const SignInRequest$json = const {
   ],
 };
 
+const GoogleSignInRequest$json = const {
+  '1': 'GoogleSignInRequest',
+  '2': const [
+    const {'1': 'credential', '3': 1, '4': 1, '5': 11, '6': '.SignInRequest', '10': 'credential'},
+    const {'1': 'profile', '3': 2, '4': 1, '5': 11, '6': '.GoogleProfile', '10': 'profile'},
+  ],
+};
+
 const SignUpRequest$json = const {
   '1': 'SignUpRequest',
   '2': const [
@@ -46,6 +54,13 @@ const FindPasswordRequest$json = const {
   '1': 'FindPasswordRequest',
   '2': const [
     const {'1': 'email', '3': 1, '4': 1, '5': 9, '10': 'email'},
+  ],
+};
+
+const GoogleProfile$json = const {
+  '1': 'GoogleProfile',
+  '2': const [
+    const {'1': 'profile_image', '3': 1, '4': 1, '5': 9, '10': 'profileImage'},
   ],
 };
 

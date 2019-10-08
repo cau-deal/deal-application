@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:deal/src/custom/modules/grpc_singleton.dart';
 import 'package:deal/src/protos/AuthService/AuthService.pbgrpc.dart';
-import 'package:deal/src/protos/AuthService/CommonResult.pb.dart';
 import 'package:deal/src/protos/AuthService/PlatformType.pbenum.dart';
 import 'package:grpc/grpc.dart';
 import 'package:meta/meta.dart';
@@ -14,14 +13,13 @@ class AuthService {
   AuthService({ @required this.client }):assert(client != null);
 
   static Future<AuthService> init() async {
-    var client = AuthServiceClient(
+    AuthServiceClient client = AuthServiceClient(
       await GrpcClientSingleton.instance.channel,
       options: CallOptions(
-        timeout: Duration(minutes: 3),
+        timeout: Duration(seconds: 5),
         metadata: { "ticket": "jwtjwt" }
       )
     );
-
     return AuthService(client: client);
   }
 
@@ -37,6 +35,33 @@ class AuthService {
       req.email = email;
       req.password = password;
       res = await client.signInWithCredential(req);
+
+    } catch(e){
+      print(e.toString());
+    }
+
+    return res;
+  }
+
+
+  Future<SignInResponse> signInWithGoogle({
+    String email,
+    String password,
+    String profileImageUrl
+  }) async {
+
+    SignInResponse res = SignInResponse();
+
+    try {
+      GoogleSignInRequest req = GoogleSignInRequest();
+      req.credential = SignInRequest();
+      req.profile = GoogleProfile();
+
+      req.credential.email = email;
+      req.credential.password = password;
+      req.profile.profileImage = profileImageUrl;
+
+      res = await client.signInWithGoogle(req);
 
     } catch(e){
       print(e.toString());
@@ -63,6 +88,25 @@ class AuthService {
       print(e.toString());
       throw Exception(e.toString());
     }
+  }
+
+
+  Future<FindPasswordResponse> findPassword({
+    String email
+  }) async {
+
+    FindPasswordResponse res = FindPasswordResponse();
+
+    try {
+      FindPasswordRequest req = FindPasswordRequest();
+      req.email = email;
+      res = await client.findPassword(req);
+
+    } catch(e){
+      print(e.toString());
+    }
+
+    return res;
   }
 
 }
