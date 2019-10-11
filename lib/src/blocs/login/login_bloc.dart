@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:deal/src/protos/AuthService/AuthService.pb.dart';
-import 'package:deal/src/protos/AuthService/CommonResult.pb.dart';
+import 'package:deal/src/protos/AuthService.pb.dart';
+import 'package:deal/src/protos/CommonResult.pb.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:deal/src/custom/modules/validators.dart';
 import 'package:deal/src/repositories/user_repository.dart';

@@ -1,24 +1,26 @@
 import 'dart:io';
 
 import 'package:deal/src/custom/modules/grpc_singleton.dart';
-import 'package:deal/src/protos/AuthService/AuthService.pbgrpc.dart';
-import 'package:deal/src/protos/AuthService/Empty.pb.dart';
-import 'package:deal/src/protos/AuthService/PlatformType.pbenum.dart';
+import 'package:deal/src/protos/AuthService.pbgrpc.dart';
+import 'package:deal/src/protos/Empty.pb.dart';
+import 'package:deal/src/protos/PlatformType.pbenum.dart';
 import 'package:grpc/grpc.dart';
 import 'package:meta/meta.dart';
 
-class AuthService {
+import 'base_service.dart';
+
+class AuthService extends BaseService {
 
   AuthServiceClient client;
 
-  AuthService({ @required this.client }):assert(client != null);
+  AuthService({ @required this.client }):assert(client != null), super();
 
   static Future<AuthService> init() async {
     AuthServiceClient client = AuthServiceClient(
       await GrpcClientSingleton.instance.channel,
       options: CallOptions(
-        timeout: Duration(seconds: 5),
-        metadata: { "ticket": "jwtjwt" }
+          timeout: Duration(seconds: 5),
+          metadata: { "ticket": "jwtjwt" }
       )
     );
     return AuthService(client: client);

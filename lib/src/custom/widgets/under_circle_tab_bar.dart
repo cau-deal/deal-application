@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 class UnderCircleTabBar extends StatelessWidget {
 
   final List<String> items;
+  final TabController _controller;
 
   UnderCircleTabBar({
     @required this.items,
-  }) : assert(items != null);
+    controller,
+  }) : assert(items != null),
+        this._controller = controller;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +28,7 @@ class UnderCircleTabBar extends StatelessWidget {
         padding: EdgeInsets.only(left: 15, right: 15),
         height: 40,
         child: TabBar(
+            controller: _controller,
             unselectedLabelStyle: TextStyle(fontFamily: "NanumSquare", fontSize: 12.0, fontWeight: FontWeight.w600),
             labelStyle: TextStyle(fontFamily: "NanumSquare", fontSize: 12.0, fontWeight: FontWeight.w600),
             indicator: CustomTabIndicator(),

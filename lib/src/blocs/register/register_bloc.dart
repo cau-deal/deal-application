@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:deal/src/custom/modules/validators.dart';
-import 'package:deal/src/protos/AuthService/AuthService.pb.dart';
-import 'package:deal/src/protos/AuthService/CommonResult.pbenum.dart';
+import 'package:deal/src/protos/AuthService.pb.dart';
+import 'package:deal/src/protos/CommonResult.pbenum.dart';
 import 'package:deal/src/repositories/user_repository.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';

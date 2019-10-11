@@ -37,6 +37,8 @@ class S implements WidgetsLocalizations {
   String get prompt_double_tab => "'뒤로' 버튼을 한번 더 누르시면 종료됩니다.";
   String get prompt_forgot_password => "Forget your password?";
   String get prompt_login => "Sign in";
+  String get prompt_phone_auth => "DEAL 서비스를 이용하기 위해서는\n최초 1회 본인인증이 필요합니다.";
+  String get prompt_phone_auth_button => "( 여기를 눌러 본인인증을 진행해주세요 )";
   String get register => "Sign up";
   String get send_email => "send email";
   String get title_agreements => "약관 확인";
@@ -73,9 +75,13 @@ class $ko extends S {
   @override
   String get title_preferences => "설정";
   @override
+  String get prompt_phone_auth_button => "( 여기를 눌러 본인인증을 진행해주세요 )";
+  @override
   String get location_information_agreements => "위치기반서비스 이용약관";
   @override
   String get prompt_double_tab => "'뒤로' 버튼을 한번 더 누르시면 종료됩니다.";
+  @override
+  String get prompt_phone_auth => "DEAL 서비스를 이용하기 위해서는\n최초 1회 본인인증이 필요합니다.";
   @override
   String get login_password_hint => "비밀번호를 입력해주세요";
   @override

@@ -20,11 +20,12 @@ class CommonAppBarContainer extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final ModalRoute<dynamic> parentRoute = ModalRoute.of(context);
-    final bool canPop = parentRoute?.canPop ?? false;
+    final bool useCloseButton = parentRoute is PageRoute<dynamic> && parentRoute.fullscreenDialog;
+
 
     return new Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(58.0),
+          preferredSize: Size.fromHeight(56.0),
           child: AppBar(
             elevation: 0,
             backgroundColor: Colors.white,
@@ -35,14 +36,25 @@ class CommonAppBarContainer extends StatelessWidget {
                 )
               ) : null,
             ), preferredSize: Size.fromHeight(0.0)),
-            automaticallyImplyLeading: true,
+            automaticallyImplyLeading: false,
             titleSpacing: 0,
-            title: Text(this.text, style:TextStyle(
-              fontFamily: "NanumSquare",
-              fontWeight: FontWeight.w700,
-              fontSize: 16.0,
-              letterSpacing: -0.5,
-              ),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: useCloseButton?
+                    Icon(Icons.close, color:Colors.black) :
+                    Icon(Icons.arrow_back_ios, color: Colors.black),
+                ),
+                Text(this.text, style:TextStyle(
+                  fontFamily: "NanumSquare",
+                  fontWeight: FontWeight.w700,
+                  fontSize: 16.0,
+                  letterSpacing: -0.5,
+                ))
+              ],
             ),
           ),
       ),

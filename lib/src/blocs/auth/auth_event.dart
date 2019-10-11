@@ -6,7 +6,7 @@ abstract class AuthenticationEvent extends Equatable {
   AuthenticationEvent([List props = const []]) : super(props);
 }
 
-class AppStarted extends AuthenticationEvent {
+class AuthInitialized extends AuthenticationEvent {
   @override
   String toString() => 'AppStarted';
 }

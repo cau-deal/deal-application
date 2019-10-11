@@ -1,5 +1,5 @@
-import 'package:deal/src/protos/AuthService/AuthService.pb.dart';
-import 'package:deal/src/protos/AuthService/AuthService.pbenum.dart';
+import 'package:deal/src/protos/AuthService.pb.dart';
+import 'package:deal/src/protos/AuthService.pbenum.dart';
 import 'package:deal/src/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
