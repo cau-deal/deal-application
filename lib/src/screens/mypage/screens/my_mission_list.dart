@@ -19,11 +19,6 @@ class MyMissionListView extends StatelessWidget {
                 color: Colors.amberAccent
             )
         ),
-        Center(
-            child: Container(
-                color: Colors.white
-            )
-        ),
       ],
     );
   }

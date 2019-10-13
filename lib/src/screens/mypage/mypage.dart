@@ -1,10 +1,7 @@
-import 'package:deal/src/blocs/login/bloc.dart';
 import 'package:deal/src/blocs/mypage/bloc.dart';
 import 'package:deal/src/screens/mypage/screens/my_message_list.dart';
 import 'package:deal/src/screens/mypage/screens/my_mission_list.dart';
 import 'package:deal/src/screens/mypage/screens/my_point_list.dart';
-import 'package:deal/src/screens/mypage/screens/total_mission.dart';
-import 'package:deal/src/screens/mypage/screens/unverified.dart';
 import 'package:deal/src/screens/mypage/widgets/number_button.dart';
 import 'package:deal/src/screens/preferences/preferences.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +61,7 @@ class MyPageScreenState extends State<MyPage> with TickerProviderStateMixin {
             this._currentTabBarView = MyPointListView(tabController: this._tabController);
 
           } else if(state.isMissionSection) {
-            this._currentItems = ['전체 의뢰', '수행중인 의뢰', '등록한 의뢰'];
+            this._currentItems = ['수행중인 의뢰', '등록한 의뢰'];
             this._tabController = TabController(length: this._currentItems.length, vsync: this);
             this._currentTabBarView = MyMissionListView(tabController:this._tabController);
 

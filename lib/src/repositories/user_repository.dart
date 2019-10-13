@@ -56,8 +56,8 @@ class UserRepository {
     return await _authService.findPassword(email: email);
   }
 
-  Future<SignInResponse> signInWithToken({String accessToken, String aud}) async {
-    return await _authService.signInWithToken(accessToken: accessToken, aud: aud);
+  Future<SignInResponse> signInWithToken({String accessToken}) async {
+    return await _authService.signInWithToken(accessToken: accessToken);
   }
 
   Future<void> signOut() async {

@@ -41,12 +41,11 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     try {
 
       String accessToken = _sharedPreferences.getString("ticket") ?? "";
-      String aud = _sharedPreferences.get("aud") ?? "";
       bool isValid = false;
 
-      if(accessToken != "" && aud != "") {
+      if(accessToken != "") {
         yield Authenticating();
-        SignInResponse res = await _userRepository.signInWithToken(accessToken: accessToken, aud: aud);
+        SignInResponse res = await _userRepository.signInWithToken(accessToken: accessToken);
         isValid = res?.result?.resultCode == ResultCode.SUCCESS;
       }
 
