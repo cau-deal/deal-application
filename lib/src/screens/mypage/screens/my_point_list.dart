@@ -12,16 +12,8 @@ class MyPointListView extends StatelessWidget {
     return TabBarView(
       controller: this.tabController,
       children: <Widget>[
-        Center(
-            child: Container(
-                color: Colors.white
-            )
-        ),
-        Center(
-            child: Container(
-                color: Colors.pinkAccent
-            )
-        ),
+        MyTotalMissionPage(),
+        MyTotalMissionPage(),
       ],
     );
   }

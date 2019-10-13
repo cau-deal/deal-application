@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class CommonAppBarContainer extends StatelessWidget {
 
   final Widget child;
+  final Widget header;
+
   final String text;
   final IconData icon;
   final double iconSize;
@@ -14,7 +16,8 @@ class CommonAppBarContainer extends StatelessWidget {
     this.iconSize = 16.0,
     this.icon = Icons.arrow_back_ios,
     this.showBottomBorder = true,
-  }) : assert(child != null), assert(text != null);
+    this.header,
+  }) : assert(child != null);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +49,7 @@ class CommonAppBarContainer extends StatelessWidget {
                   onPressed: () => Navigator.pop(context),
                   icon: useCloseButton?
                     Icon(Icons.close, color:Colors.black) :
-                    Icon(Icons.arrow_back_ios, color: Colors.black),
+                    Icon(Icons.arrow_back_ios, color: Colors.black, size: 15),
                 ),
                 Text(this.text, style:TextStyle(
                   fontFamily: "NanumSquare",
@@ -65,7 +68,6 @@ class CommonAppBarContainer extends StatelessWidget {
           child: this.child,
         )
       ),
-
     );
   }
 }
