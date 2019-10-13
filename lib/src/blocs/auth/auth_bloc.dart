@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:deal/src/protos/AuthService/AuthService.pb.dart';
-import 'package:deal/src/protos/AuthService/CommonResult.pb.dart';
+import 'package:deal/src/protos/AuthService.pb.dart';
+import 'package:deal/src/protos/CommonResult.pb.dart';
 import 'package:deal/src/repositories/user_repository.dart';
 
 import 'package:bloc/bloc.dart';
@@ -28,7 +28,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
 
   @override
   Stream<AuthenticationState> mapEventToState(AuthenticationEvent event) async* {
-    if (event is AppStarted) {
+    if (event is AuthInitialized) {
       yield* _mapAppStartedToState();
     } else if (event is LoggedIn) {
       yield* _mapLoggedInToState();
@@ -41,12 +41,11 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     try {
 
       String accessToken = _sharedPreferences.getString("ticket") ?? "";
-      String aud = _sharedPreferences.get("aud") ?? "";
       bool isValid = false;
 
-      if(accessToken != "" && aud != "") {
+      if(accessToken != "") {
         yield Authenticating();
-        SignInResponse res = await _userRepository.signInWithToken(accessToken: accessToken, aud: aud);
+        SignInResponse res = await _userRepository.signInWithToken(accessToken: accessToken);
         isValid = res?.result?.resultCode == ResultCode.SUCCESS;
       }
 

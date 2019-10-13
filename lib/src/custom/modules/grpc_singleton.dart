@@ -25,8 +25,8 @@ class GrpcClientSingleton {
         options: ChannelOptions(
           credentials: channelCredentials,
           userAgent: Platform.isAndroid? "DEAL-ANDROID" : "DEAL-IOS",
-          connectionTimeout: Duration(seconds: 5),
-          idleTimeout: Duration(seconds: 10),
+          connectionTimeout: Duration(seconds: 30),
+          idleTimeout: Duration(seconds: 30),
         )
     );
 

@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'blocs/auth/bloc.dart';
+import 'blocs/verified/bloc.dart';
 import 'custom/widgets/double_back_to_close_app.dart';
 
 import 'screens/login_select/login_select.dart';
@@ -60,11 +61,17 @@ class App extends StatelessWidget {
 
             // Define the default TextTheme. Use this to specify the default
             // text styling for headlines, titles, bodies of text, and more.
-//          textTheme: TextTheme(
-//            headline: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-//            title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-//            body1: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-//          ),
+            textTheme: TextTheme(
+              headline: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+              title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+              body1: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+            ),
+
+            primaryTextTheme: TextTheme(
+                title: TextStyle(
+                    color: Colors.black
+                )
+            ),
 
             buttonTheme: ButtonThemeData(
                 buttonColor: Color(0xFF5f75ac),
@@ -91,10 +98,11 @@ class App extends StatelessWidget {
             child: DoubleBackToCloseApp(
                 child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
                     builder: (ctx, state) {
-                      if (state is Authenticated)
+                      if (state is Authenticated) {
                         return MissionListPage();
-                      else
+                      } else {
                         return LoginSelectPage(userRepository: _userRepository);
+                      }
                     })
             )
         )

@@ -1,6 +1,8 @@
+import 'package:deal/src/blocs/mypage/bloc.dart';
 import 'package:deal/src/custom/widgets/under_circle_tab_bar.dart';
 import 'package:deal/src/screens/mypage/mypage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'animated_count.dart';
 
@@ -72,9 +74,13 @@ class MissionListTabContainer extends StatelessWidget {
                             iconSize: 24,
                             padding: EdgeInsets.zero,
                             onPressed:(){
-                              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                                return MyPage();
-                              }));
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (_) {
+                                    return BlocProvider<MyPageBloc>(
+                                      builder: (ctx) => MyPageBloc()..dispatch(MissionClicked()),
+                                      child: MyPage()
+                                    );
+                                }));
                             }
                         )
                     ),

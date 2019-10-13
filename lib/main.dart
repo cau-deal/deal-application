@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:deal/src/blocs/verified/bloc.dart';
 import 'package:deal/src/services/auth_service.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_crashlytics/flutter_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:preferences/preferences.dart';
 
 import 'src/app.dart';
 import 'src/blocs/auth/bloc.dart';
@@ -33,13 +35,19 @@ void main() async {
       authService: await AuthService.init()
     );
     final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await PrefService.init(prefix: 'pref_');
 
     runApp(
-      BlocProvider(
-          builder: (context) => AuthenticationBloc(
+      MultiBlocProvider(
+          providers: [
+            BlocProvider<AuthenticationBloc>(builder: (ctx) => AuthenticationBloc(
               userRepository: userRepository,
               sharedPreferences: sharedPreferences
-          )..dispatch(AppStarted()),
+            )..dispatch(AuthInitialized())),
+            BlocProvider<VerificationBloc>(builder: (ctx) => VerificationBloc(
+
+            )..dispatch(VerificationInitialized()))
+          ],
           child: App(userRepository: userRepository)
       )
     );
