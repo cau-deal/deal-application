@@ -1,6 +1,7 @@
 import 'package:deal/src/custom/dialogs/date_range_picker.dart';
 import 'package:deal/src/custom/dialogs/simple_list_dialog.dart';
 import 'package:deal/src/custom/widgets/badge.dart';
+import 'package:deal/src/screens/qna/question.dart';
 import 'package:deal/src/screens/report/report.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart';
@@ -141,14 +142,15 @@ class MissionCreateHeaderState extends State<MissionCreateHeader> {
                       ],
                     ),
                     GestureDetector(
-                      onTap: (){ Navigator.push(context, MaterialPageRoute(builder: (ctx)=>ReportPage(), fullscreenDialog: true)); },
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (ctx)=>QuestionPage(), fullscreenDialog: true));
+                        },
                       child: Row(
                         children: <Widget>[
                           SizedBox(width: 20, height: 20, child: IconButton(
                             icon: Image.asset("res/images/emoji-tired.png"),
                             iconSize: 16,
                             padding: EdgeInsets.all(0),
-                            onPressed: (){} ,
                           )),
                           Text("문의하기", style: TextStyle(letterSpacing:-0.5, fontSize: 12, color: Color(0xff333333),))
                         ],

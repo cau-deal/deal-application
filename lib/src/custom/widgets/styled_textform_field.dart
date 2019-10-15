@@ -66,10 +66,11 @@ class StyledTextFormField extends StatelessWidget {
       textInputAction: this.textInputAction,
       obscureText: this.obscure,
       focusNode: this.focusNode,
-      style: new TextStyle(
-          fontSize: 16,
-          color: Colors.black,
-          fontWeight: FontWeight.w600
+      style: TextStyle(
+        fontSize: 16,
+        color: Colors.black,
+        fontWeight: FontWeight.w600,
+        textBaseline: TextBaseline.alphabetic
       ),
     );
   }

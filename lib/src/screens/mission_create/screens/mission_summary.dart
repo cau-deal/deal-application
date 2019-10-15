@@ -118,7 +118,7 @@ class MissionSummaryPageState extends State<MissionSummaryPage>
                       children: <Widget>[
                         Container(
                             child: MissionCreateTextFormField(
-                              placeholder: "목표 건수",
+                              placeholder: "목표",
                               textSize: 19,
                               textAlign: TextAlign.right,
                               textInputType: TextInputType.number,
@@ -145,6 +145,7 @@ class MissionSummaryPageState extends State<MissionSummaryPage>
                             padding: EdgeInsets.all(5),
                             child: Text(
                                 "의뢰는 입력하신 의뢰 단위로 수행자에게 할당이 됩니다. (의뢰 단위 : 0)\n"
+                                "목표건수는 입력하신 의뢰 단위의 배수로 설정이 돼야합니다.\n"
                                 "의뢰 등록시 '목표건수 * (포인트/단위) + 수수료' 포인트가 사용됩니다. (소모 예상 포인트 : 0)",
                                 style: TextStyle(color: Colors.black, height: 1.5, fontSize: 14)
                             )

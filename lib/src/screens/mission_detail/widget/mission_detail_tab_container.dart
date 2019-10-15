@@ -46,12 +46,13 @@ class MissionDetailTabContainerState extends State<MissionDetailTabContainer> {
                   background: Hero(
                     tag: 'mission_list_thumbnail_${widget.idx}',
                     child: Container(
+                      margin: EdgeInsets.only(bottom: 120.0),
                       decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("res/images/default_thumbnail.png"),
-                            fit: BoxFit.cover,
-                          ),
+                        image: DecorationImage(
+                          image: AssetImage("res/images/default_thumbnail.png"),
+                          fit: BoxFit.cover,
                         ),
+                      ),
                     ),
                   ),
                 ),

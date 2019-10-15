@@ -1,7 +1,7 @@
 import 'package:deal/src/custom/widgets/white_round_button.dart';
 import 'package:deal/src/screens/mission_create/widget/mission_create_header.dart';
 import 'package:deal/src/screens/mission_create/widget/mission_create_list.dart';
-import 'package:deal/src/screens/mission_create/widget/mission_detail_tab_container.dart';
+import 'package:deal/src/screens/mission_create/widget/mission_create_tab_container.dart';
 import 'package:flutter/material.dart';
 
 class MissionCreatePage extends StatelessWidget {
@@ -14,7 +14,7 @@ class MissionCreatePage extends StatelessWidget {
   Widget build(BuildContext ctx) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
-      body: MissionDetailTabContainer(
+      body: MissionCreateTabContainer(
         idx: idx,
         items: ['의뢰내용', '수행방법', '의뢰약관'],
         header: MissionCreateHeader(),
