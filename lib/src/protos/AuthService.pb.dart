@@ -204,6 +204,37 @@ class FindPasswordRequest extends $pb.GeneratedMessage {
   void clearEmail() => clearField(1);
 }
 
+class CheckDuplicationEmailRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('CheckDuplicationEmailRequest', createEmptyInstance: create)
+    ..aOS(1, 'email')
+    ..hasRequiredFields = false
+  ;
+
+  CheckDuplicationEmailRequest._() : super();
+  factory CheckDuplicationEmailRequest() => create();
+  factory CheckDuplicationEmailRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CheckDuplicationEmailRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  CheckDuplicationEmailRequest clone() => CheckDuplicationEmailRequest()..mergeFromMessage(this);
+  CheckDuplicationEmailRequest copyWith(void Function(CheckDuplicationEmailRequest) updates) => super.copyWith((message) => updates(message as CheckDuplicationEmailRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static CheckDuplicationEmailRequest create() => CheckDuplicationEmailRequest._();
+  CheckDuplicationEmailRequest createEmptyInstance() => create();
+  static $pb.PbList<CheckDuplicationEmailRequest> createRepeated() => $pb.PbList<CheckDuplicationEmailRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CheckDuplicationEmailRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CheckDuplicationEmailRequest>(create);
+  static CheckDuplicationEmailRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get email => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set email($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasEmail() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEmail() => clearField(1);
+}
+
 class GoogleProfile extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('GoogleProfile', createEmptyInstance: create)
     ..aOS(1, 'profileImage')
@@ -353,6 +384,7 @@ class SignUpResponse extends $pb.GeneratedMessage {
 class FindPasswordResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('FindPasswordResponse', createEmptyInstance: create)
     ..aOM<$2.CommonResult>(1, 'result', subBuilder: $2.CommonResult.create)
+    ..aOS(2, 'changePasswordUrl')
     ..hasRequiredFields = false
   ;
 
@@ -381,6 +413,15 @@ class FindPasswordResponse extends $pb.GeneratedMessage {
   void clearResult() => clearField(1);
   @$pb.TagNumber(1)
   $2.CommonResult ensureResult() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get changePasswordUrl => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set changePasswordUrl($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasChangePasswordUrl() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearChangePasswordUrl() => clearField(2);
 }
 
 class TokenResponse extends $pb.GeneratedMessage {
@@ -426,5 +467,48 @@ class TokenResponse extends $pb.GeneratedMessage {
   void clearJwt() => clearField(2);
   @$pb.TagNumber(2)
   JWTResult ensureJwt() => $_ensure(1);
+}
+
+class CheckDuplicationEmailResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('CheckDuplicationEmailResponse', createEmptyInstance: create)
+    ..aOM<$2.CommonResult>(1, 'result', subBuilder: $2.CommonResult.create)
+    ..e<IsDuplicationEmail>(2, 'isDuplicationEmail', $pb.PbFieldType.OE, defaultOrMaker: IsDuplicationEmail.UNKNOWN_IS_DUPLICATION_EMAIL, valueOf: IsDuplicationEmail.valueOf, enumValues: IsDuplicationEmail.values)
+    ..hasRequiredFields = false
+  ;
+
+  CheckDuplicationEmailResponse._() : super();
+  factory CheckDuplicationEmailResponse() => create();
+  factory CheckDuplicationEmailResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CheckDuplicationEmailResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  CheckDuplicationEmailResponse clone() => CheckDuplicationEmailResponse()..mergeFromMessage(this);
+  CheckDuplicationEmailResponse copyWith(void Function(CheckDuplicationEmailResponse) updates) => super.copyWith((message) => updates(message as CheckDuplicationEmailResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static CheckDuplicationEmailResponse create() => CheckDuplicationEmailResponse._();
+  CheckDuplicationEmailResponse createEmptyInstance() => create();
+  static $pb.PbList<CheckDuplicationEmailResponse> createRepeated() => $pb.PbList<CheckDuplicationEmailResponse>();
+  @$core.pragma('dart2js:noInline')
+  static CheckDuplicationEmailResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CheckDuplicationEmailResponse>(create);
+  static CheckDuplicationEmailResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.CommonResult get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result($2.CommonResult v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  $2.CommonResult ensureResult() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  IsDuplicationEmail get isDuplicationEmail => $_getN(1);
+  @$pb.TagNumber(2)
+  set isDuplicationEmail(IsDuplicationEmail v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasIsDuplicationEmail() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearIsDuplicationEmail() => clearField(2);
 }
 

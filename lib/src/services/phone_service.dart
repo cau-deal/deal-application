@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:deal/src/custom/modules/grpc_singleton.dart';
+import 'package:deal/src/protos/Date.pb.dart';
 import 'package:deal/src/protos/Empty.pb.dart';
 import 'package:deal/src/protos/PhoneService.pbgrpc.dart';
 import 'package:grpc/grpc.dart';
@@ -23,6 +24,39 @@ class PhoneService extends BaseService {
       )
     );
     return PhoneService(client: client);
+  }
+
+
+  Future<PhoneAuthResponse> authenticateWithPhone({
+    String accessToken,
+    String phoneNumber,
+    String name,
+    MobileCarrier carrier,
+    bool isNative,
+    Date birthDay,
+    Sex gender
+  }) async {
+
+    PhoneAuthResponse res = PhoneAuthResponse();
+
+    try {
+      PhoneAuthRequest req;
+      req.name = name;
+      req.isNative = true;
+      req.phoneNum = phoneNumber;
+      req.mobileCarrier = carrier;
+      req.sex = gender;
+      req.birthday = birthDay;
+
+      res = await client.phoneAuth(req,
+          options: CallOptions(metadata: {'ticket':accessToken})
+      );
+
+    } catch(e){
+      print(e.toString());
+    }
+
+    return res;
   }
 
 }

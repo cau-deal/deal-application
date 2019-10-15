@@ -43,3 +43,20 @@ class JWTType extends $pb.ProtobufEnum {
   const JWTType._($core.int v, $core.String n) : super(v, n);
 }
 
+class IsDuplicationEmail extends $pb.ProtobufEnum {
+  static const IsDuplicationEmail UNKNOWN_IS_DUPLICATION_EMAIL = IsDuplicationEmail._(0, 'UNKNOWN_IS_DUPLICATION_EMAIL');
+  static const IsDuplicationEmail TRUE_IS_DUPLICATION_EMAIL = IsDuplicationEmail._(1, 'TRUE_IS_DUPLICATION_EMAIL');
+  static const IsDuplicationEmail FALSE_IS_DUPLICATION_EMAIL = IsDuplicationEmail._(2, 'FALSE_IS_DUPLICATION_EMAIL');
+
+  static const $core.List<IsDuplicationEmail> values = <IsDuplicationEmail> [
+    UNKNOWN_IS_DUPLICATION_EMAIL,
+    TRUE_IS_DUPLICATION_EMAIL,
+    FALSE_IS_DUPLICATION_EMAIL,
+  ];
+
+  static final $core.Map<$core.int, IsDuplicationEmail> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static IsDuplicationEmail valueOf($core.int value) => _byValue[value];
+
+  const IsDuplicationEmail._($core.int v, $core.String n) : super(v, n);
+}
+

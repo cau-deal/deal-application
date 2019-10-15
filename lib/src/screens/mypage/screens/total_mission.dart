@@ -23,10 +23,10 @@ class MyTotalMissionPageState extends State<MyTotalMissionPage>{
   num isLoadingState = 1;
 
   var list = [
-    { "title": "위에서 아래로", "body": "쭉 땡겨봐여", "top": true },
-    { "title": "위에서 아래로", "body": "쭉 땡겨봐여", "top": true },
-    { "title": "위에서 아래로", "body": "쭉 땡겨봐여", "top": true },
-    { "title": "위에서 아래로", "body": "쭉 땡겨봐여", "top": true }
+    { "thumbnail": "res/images/default_thumbnail.png", "title": "위에서 아래로", "body": "쭉 땡겨봐여", "top": true },
+    { "thumbnail": "res/images/default_thumbnail.png", "title": "위에서 아래로", "body": "쭉 땡겨봐여", "top": true },
+    { "thumbnail": "res/images/default_thumbnail.png", "title": "위에서 아래로", "body": "쭉 땡겨봐여", "top": true },
+    { "thumbnail": "res/images/default_thumbnail.png", "title": "위에서 아래로", "body": "쭉 땡겨봐여", "top": true }
   ];
 
   void _onPageFinished(String value) {
@@ -46,7 +46,9 @@ class MyTotalMissionPageState extends State<MyTotalMissionPage>{
                   final data = list[index];
                   return MissionListTile(
                     idx: index,
+                    thumbnail: data['thumbnail'],
                     title: data['title'],
+                    subTitle: data['title'],
                   );
                 },
               )

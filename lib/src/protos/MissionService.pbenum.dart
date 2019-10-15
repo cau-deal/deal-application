@@ -30,6 +30,31 @@ class MissionState extends $pb.ProtobufEnum {
   const MissionState._($core.int v, $core.String n) : super(v, n);
 }
 
+class ConductMissionState extends $pb.ProtobufEnum {
+  static const ConductMissionState UNKNOWN_CONDUCT_MISSION_STATE = ConductMissionState._(0, 'UNKNOWN_CONDUCT_MISSION_STATE');
+  static const ConductMissionState DURING_MISSION_CONDUCT_MISSION_STATE = ConductMissionState._(1, 'DURING_MISSION_CONDUCT_MISSION_STATE');
+  static const ConductMissionState WAITING_VERIFICATION_CONDUCT_MISSION_STATE = ConductMissionState._(2, 'WAITING_VERIFICATION_CONDUCT_MISSION_STATE');
+  static const ConductMissionState DURING_VERIFICATION_CONDUCT_MISSION_STATE = ConductMissionState._(3, 'DURING_VERIFICATION_CONDUCT_MISSION_STATE');
+  static const ConductMissionState COMPLETE_VERIFICATION_CONDUCT_MISSION_STATE = ConductMissionState._(4, 'COMPLETE_VERIFICATION_CONDUCT_MISSION_STATE');
+  static const ConductMissionState RETURN_VERIFICATION_CONDUCT_MISSION_STATE = ConductMissionState._(5, 'RETURN_VERIFICATION_CONDUCT_MISSION_STATE');
+  static const ConductMissionState FAIL_MISSION_CONDUCT_MISSION_STATE = ConductMissionState._(6, 'FAIL_MISSION_CONDUCT_MISSION_STATE');
+
+  static const $core.List<ConductMissionState> values = <ConductMissionState> [
+    UNKNOWN_CONDUCT_MISSION_STATE,
+    DURING_MISSION_CONDUCT_MISSION_STATE,
+    WAITING_VERIFICATION_CONDUCT_MISSION_STATE,
+    DURING_VERIFICATION_CONDUCT_MISSION_STATE,
+    COMPLETE_VERIFICATION_CONDUCT_MISSION_STATE,
+    RETURN_VERIFICATION_CONDUCT_MISSION_STATE,
+    FAIL_MISSION_CONDUCT_MISSION_STATE,
+  ];
+
+  static final $core.Map<$core.int, ConductMissionState> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static ConductMissionState valueOf($core.int value) => _byValue[value];
+
+  const ConductMissionState._($core.int v, $core.String n) : super(v, n);
+}
+
 class MissionType extends $pb.ProtobufEnum {
   static const MissionType UNKNOWN_MISSION_TYPE = MissionType._(0, 'UNKNOWN_MISSION_TYPE');
   static const MissionType ALL_MISSION_TYPE = MissionType._(1, 'ALL_MISSION_TYPE');
@@ -49,21 +74,21 @@ class MissionType extends $pb.ProtobufEnum {
   const MissionType._($core.int v, $core.String n) : super(v, n);
 }
 
-class RegistMissionResult extends $pb.ProtobufEnum {
-  static const RegistMissionResult UNKNOWN_REGIST_MISSION_RESULT = RegistMissionResult._(0, 'UNKNOWN_REGIST_MISSION_RESULT');
-  static const RegistMissionResult SUCCESS_REGIST_MISSION_RESULT = RegistMissionResult._(1, 'SUCCESS_REGIST_MISSION_RESULT');
-  static const RegistMissionResult FAIL_REGIST_MISSION_RESULT = RegistMissionResult._(2, 'FAIL_REGIST_MISSION_RESULT');
+class RegisterMissionResult extends $pb.ProtobufEnum {
+  static const RegisterMissionResult UNKNOWN_REGISTER_MISSION_RESULT = RegisterMissionResult._(0, 'UNKNOWN_REGISTER_MISSION_RESULT');
+  static const RegisterMissionResult SUCCESS_REGISTER_MISSION_RESULT = RegisterMissionResult._(1, 'SUCCESS_REGISTER_MISSION_RESULT');
+  static const RegisterMissionResult FAIL_REGISTER_MISSION_RESULT = RegisterMissionResult._(2, 'FAIL_REGISTER_MISSION_RESULT');
 
-  static const $core.List<RegistMissionResult> values = <RegistMissionResult> [
-    UNKNOWN_REGIST_MISSION_RESULT,
-    SUCCESS_REGIST_MISSION_RESULT,
-    FAIL_REGIST_MISSION_RESULT,
+  static const $core.List<RegisterMissionResult> values = <RegisterMissionResult> [
+    UNKNOWN_REGISTER_MISSION_RESULT,
+    SUCCESS_REGISTER_MISSION_RESULT,
+    FAIL_REGISTER_MISSION_RESULT,
   ];
 
-  static final $core.Map<$core.int, RegistMissionResult> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static RegistMissionResult valueOf($core.int value) => _byValue[value];
+  static final $core.Map<$core.int, RegisterMissionResult> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static RegisterMissionResult valueOf($core.int value) => _byValue[value];
 
-  const RegistMissionResult._($core.int v, $core.String n) : super(v, n);
+  const RegisterMissionResult._($core.int v, $core.String n) : super(v, n);
 }
 
 class SearchMissionResult extends $pb.ProtobufEnum {
@@ -121,13 +146,13 @@ class RelevantType extends $pb.ProtobufEnum {
   static const RelevantType UNKNOWN_RELEVANT_TYPE = RelevantType._(0, 'UNKNOWN_RELEVANT_TYPE');
   static const RelevantType ALL_RELEVANT_TYPE = RelevantType._(1, 'ALL_RELEVANT_TYPE');
   static const RelevantType PROCESSING_RELEVANT_TYPE = RelevantType._(2, 'PROCESSING_RELEVANT_TYPE');
-  static const RelevantType REGIST_RELEVANT_TYPE = RelevantType._(3, 'REGIST_RELEVANT_TYPE');
+  static const RelevantType REGISTER_RELEVANT_TYPE = RelevantType._(3, 'REGISTER_RELEVANT_TYPE');
 
   static const $core.List<RelevantType> values = <RelevantType> [
     UNKNOWN_RELEVANT_TYPE,
     ALL_RELEVANT_TYPE,
     PROCESSING_RELEVANT_TYPE,
-    REGIST_RELEVANT_TYPE,
+    REGISTER_RELEVANT_TYPE,
   ];
 
   static final $core.Map<$core.int, RelevantType> _byValue = $pb.ProtobufEnum.initByValue(values);

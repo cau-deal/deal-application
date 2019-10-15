@@ -188,6 +188,47 @@ class Profile extends $pb.GeneratedMessage {
   void clearName() => clearField(6);
 }
 
+class AuthInfo extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AuthInfo', createEmptyInstance: create)
+    ..e<IsAuth>(1, 'isPhoneAuth', $pb.PbFieldType.OE, defaultOrMaker: IsAuth.UNKNOWN_IS_AUTH, valueOf: IsAuth.valueOf, enumValues: IsAuth.values)
+    ..e<IsAuth>(2, 'isAccountAuth', $pb.PbFieldType.OE, defaultOrMaker: IsAuth.UNKNOWN_IS_AUTH, valueOf: IsAuth.valueOf, enumValues: IsAuth.values)
+    ..hasRequiredFields = false
+  ;
+
+  AuthInfo._() : super();
+  factory AuthInfo() => create();
+  factory AuthInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AuthInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  AuthInfo clone() => AuthInfo()..mergeFromMessage(this);
+  AuthInfo copyWith(void Function(AuthInfo) updates) => super.copyWith((message) => updates(message as AuthInfo));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static AuthInfo create() => AuthInfo._();
+  AuthInfo createEmptyInstance() => create();
+  static $pb.PbList<AuthInfo> createRepeated() => $pb.PbList<AuthInfo>();
+  @$core.pragma('dart2js:noInline')
+  static AuthInfo getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AuthInfo>(create);
+  static AuthInfo _defaultInstance;
+
+  @$pb.TagNumber(1)
+  IsAuth get isPhoneAuth => $_getN(0);
+  @$pb.TagNumber(1)
+  set isPhoneAuth(IsAuth v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasIsPhoneAuth() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearIsPhoneAuth() => clearField(1);
+
+  @$pb.TagNumber(2)
+  IsAuth get isAccountAuth => $_getN(1);
+  @$pb.TagNumber(2)
+  set isAccountAuth(IsAuth v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasIsAccountAuth() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearIsAccountAuth() => clearField(2);
+}
+
 class ChangePasswordResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChangePasswordResponse', createEmptyInstance: create)
     ..aOM<$2.CommonResult>(1, 'result', subBuilder: $2.CommonResult.create)
@@ -274,5 +315,50 @@ class LookUpUserInfoResponse extends $pb.GeneratedMessage {
   void clearProfile() => clearField(2);
   @$pb.TagNumber(2)
   Profile ensureProfile() => $_ensure(1);
+}
+
+class LookUpAuthInfoResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('LookUpAuthInfoResponse', createEmptyInstance: create)
+    ..aOM<$2.CommonResult>(1, 'result', subBuilder: $2.CommonResult.create)
+    ..aOM<AuthInfo>(2, 'authInfo', subBuilder: AuthInfo.create)
+    ..hasRequiredFields = false
+  ;
+
+  LookUpAuthInfoResponse._() : super();
+  factory LookUpAuthInfoResponse() => create();
+  factory LookUpAuthInfoResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory LookUpAuthInfoResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  LookUpAuthInfoResponse clone() => LookUpAuthInfoResponse()..mergeFromMessage(this);
+  LookUpAuthInfoResponse copyWith(void Function(LookUpAuthInfoResponse) updates) => super.copyWith((message) => updates(message as LookUpAuthInfoResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static LookUpAuthInfoResponse create() => LookUpAuthInfoResponse._();
+  LookUpAuthInfoResponse createEmptyInstance() => create();
+  static $pb.PbList<LookUpAuthInfoResponse> createRepeated() => $pb.PbList<LookUpAuthInfoResponse>();
+  @$core.pragma('dart2js:noInline')
+  static LookUpAuthInfoResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LookUpAuthInfoResponse>(create);
+  static LookUpAuthInfoResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.CommonResult get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result($2.CommonResult v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  $2.CommonResult ensureResult() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  AuthInfo get authInfo => $_getN(1);
+  @$pb.TagNumber(2)
+  set authInfo(AuthInfo v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasAuthInfo() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAuthInfo() => clearField(2);
+  @$pb.TagNumber(2)
+  AuthInfo ensureAuthInfo() => $_ensure(1);
 }
 

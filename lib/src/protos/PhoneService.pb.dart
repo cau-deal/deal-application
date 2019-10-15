@@ -23,6 +23,7 @@ class PhoneAuthRequest extends $pb.GeneratedMessage {
     ..e<MobileCarrier>(3, 'mobileCarrier', $pb.PbFieldType.OE, defaultOrMaker: MobileCarrier.UNKNOWN_MOBILE_CARRIER, valueOf: MobileCarrier.valueOf, enumValues: MobileCarrier.values)
     ..aOB(4, 'isNative')
     ..aOM<$1.Date>(5, 'birthday', subBuilder: $1.Date.create)
+    ..e<Sex>(6, 'sex', $pb.PbFieldType.OE, defaultOrMaker: Sex.UNKNOWN_SEX, valueOf: Sex.valueOf, enumValues: Sex.values)
     ..hasRequiredFields = false
   ;
 
@@ -87,6 +88,15 @@ class PhoneAuthRequest extends $pb.GeneratedMessage {
   void clearBirthday() => clearField(5);
   @$pb.TagNumber(5)
   $1.Date ensureBirthday() => $_ensure(4);
+
+  @$pb.TagNumber(6)
+  Sex get sex => $_getN(5);
+  @$pb.TagNumber(6)
+  set sex(Sex v) { setField(6, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasSex() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearSex() => clearField(6);
 }
 
 class PhoneAuthResponse extends $pb.GeneratedMessage {

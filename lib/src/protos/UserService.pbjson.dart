@@ -34,6 +34,15 @@ const ChangePasswordResult$json = const {
   ],
 };
 
+const IsAuth$json = const {
+  '1': 'IsAuth',
+  '2': const [
+    const {'1': 'UNKNOWN_IS_AUTH', '2': 0},
+    const {'1': 'TRUE_IS_AUTH', '2': 1},
+    const {'1': 'FALSE_IS_AUTH', '2': 2},
+  ],
+};
+
 const ChangePasswordRequest$json = const {
   '1': 'ChangePasswordRequest',
   '2': const [
@@ -63,6 +72,14 @@ const Profile$json = const {
   ],
 };
 
+const AuthInfo$json = const {
+  '1': 'AuthInfo',
+  '2': const [
+    const {'1': 'is_phone_auth', '3': 1, '4': 1, '5': 14, '6': '.IsAuth', '10': 'isPhoneAuth'},
+    const {'1': 'is_account_auth', '3': 2, '4': 1, '5': 14, '6': '.IsAuth', '10': 'isAccountAuth'},
+  ],
+};
+
 const ChangePasswordResponse$json = const {
   '1': 'ChangePasswordResponse',
   '2': const [
@@ -76,6 +93,14 @@ const LookUpUserInfoResponse$json = const {
   '2': const [
     const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
     const {'1': 'profile', '3': 2, '4': 1, '5': 11, '6': '.Profile', '10': 'profile'},
+  ],
+};
+
+const LookUpAuthInfoResponse$json = const {
+  '1': 'LookUpAuthInfoResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
+    const {'1': 'auth_info', '3': 2, '4': 1, '5': 11, '6': '.AuthInfo', '10': 'authInfo'},
   ],
 };
 

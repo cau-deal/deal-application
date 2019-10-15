@@ -44,6 +44,7 @@ const PhoneAuthRequest$json = const {
     const {'1': 'mobile_carrier', '3': 3, '4': 1, '5': 14, '6': '.MobileCarrier', '10': 'mobileCarrier'},
     const {'1': 'is_native', '3': 4, '4': 1, '5': 8, '10': 'isNative'},
     const {'1': 'birthday', '3': 5, '4': 1, '5': 11, '6': '.Date', '10': 'birthday'},
+    const {'1': 'sex', '3': 6, '4': 1, '5': 14, '6': '.Sex', '10': 'sex'},
   ],
 };
 

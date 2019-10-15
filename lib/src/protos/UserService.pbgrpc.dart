@@ -33,6 +33,12 @@ class UserServiceClient extends $grpc.Client {
           ($1.Empty value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.LookUpUserInfoResponse.fromBuffer(value));
+  static final _$lookUpAuthInfo =
+      $grpc.ClientMethod<$1.Empty, $0.LookUpAuthInfoResponse>(
+          '/UserService/LookUpAuthInfo',
+          ($1.Empty value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.LookUpAuthInfoResponse.fromBuffer(value));
 
   UserServiceClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
@@ -60,6 +66,15 @@ class UserServiceClient extends $grpc.Client {
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$lookUpUserInfo, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.LookUpAuthInfoResponse> lookUpAuthInfo(
+      $1.Empty request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$lookUpAuthInfo, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -94,6 +109,13 @@ abstract class UserServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $1.Empty.fromBuffer(value),
         ($0.LookUpUserInfoResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.Empty, $0.LookUpAuthInfoResponse>(
+        'LookUpAuthInfo',
+        lookUpAuthInfo_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.Empty.fromBuffer(value),
+        ($0.LookUpAuthInfoResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.ChangePasswordResponse> changePassword_Pre(
@@ -113,10 +135,17 @@ abstract class UserServiceBase extends $grpc.Service {
     return lookUpUserInfo(call, await request);
   }
 
+  $async.Future<$0.LookUpAuthInfoResponse> lookUpAuthInfo_Pre(
+      $grpc.ServiceCall call, $async.Future<$1.Empty> request) async {
+    return lookUpAuthInfo(call, await request);
+  }
+
   $async.Future<$0.ChangePasswordResponse> changePassword(
       $grpc.ServiceCall call, $0.ChangePasswordRequest request);
   $async.Future<$0.ChangePasswordResponse> changePasswordWithEmail(
       $grpc.ServiceCall call, $0.ChangePasswordWithEmailRequest request);
   $async.Future<$0.LookUpUserInfoResponse> lookUpUserInfo(
+      $grpc.ServiceCall call, $1.Empty request);
+  $async.Future<$0.LookUpAuthInfoResponse> lookUpAuthInfo(
       $grpc.ServiceCall call, $1.Empty request);
 }

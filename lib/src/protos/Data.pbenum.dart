@@ -36,6 +36,7 @@ class DataState extends $pb.ProtobufEnum {
   static const DataState DURING_VERIFICATION = DataState._(4, 'DURING_VERIFICATION');
   static const DataState COMPLETE_VERIFICATION = DataState._(5, 'COMPLETE_VERIFICATION');
   static const DataState RETURN_VERIFICATION = DataState._(6, 'RETURN_VERIFICATION');
+  static const DataState FAIL_DATA_STATE = DataState._(7, 'FAIL_DATA_STATE');
 
   static const $core.List<DataState> values = <DataState> [
     UNKNOWN_DATA_STATE,
@@ -45,6 +46,7 @@ class DataState extends $pb.ProtobufEnum {
     DURING_VERIFICATION,
     COMPLETE_VERIFICATION,
     RETURN_VERIFICATION,
+    FAIL_DATA_STATE,
   ];
 
   static final $core.Map<$core.int, DataState> _byValue = $pb.ProtobufEnum.initByValue(values);
@@ -55,15 +57,15 @@ class DataState extends $pb.ProtobufEnum {
 
 class MissionExplanationImageType extends $pb.ProtobufEnum {
   static const MissionExplanationImageType UNKNOWN_MISSION_EXPLANATION_IMAGE_TYPE = MissionExplanationImageType._(0, 'UNKNOWN_MISSION_EXPLANATION_IMAGE_TYPE');
-  static const MissionExplanationImageType THUMBNAIL = MissionExplanationImageType._(1, 'THUMBNAIL');
-  static const MissionExplanationImageType BACKGROUND = MissionExplanationImageType._(2, 'BACKGROUND');
-  static const MissionExplanationImageType MAIN_TEXT = MissionExplanationImageType._(3, 'MAIN_TEXT');
+  static const MissionExplanationImageType THUMBNAIL_MISSION_EXPLANATION_IMAGE_TYPE = MissionExplanationImageType._(1, 'THUMBNAIL_MISSION_EXPLANATION_IMAGE_TYPE');
+  static const MissionExplanationImageType BACKGROUND_MISSION_EXPLANATION_IMAGE_TYPE = MissionExplanationImageType._(2, 'BACKGROUND_MISSION_EXPLANATION_IMAGE_TYPE');
+  static const MissionExplanationImageType MAIN_TEXT_MISSION_EXPLANATION_IMAGE_TYPE = MissionExplanationImageType._(3, 'MAIN_TEXT_MISSION_EXPLANATION_IMAGE_TYPE');
 
   static const $core.List<MissionExplanationImageType> values = <MissionExplanationImageType> [
     UNKNOWN_MISSION_EXPLANATION_IMAGE_TYPE,
-    THUMBNAIL,
-    BACKGROUND,
-    MAIN_TEXT,
+    THUMBNAIL_MISSION_EXPLANATION_IMAGE_TYPE,
+    BACKGROUND_MISSION_EXPLANATION_IMAGE_TYPE,
+    MAIN_TEXT_MISSION_EXPLANATION_IMAGE_TYPE,
   ];
 
   static final $core.Map<$core.int, MissionExplanationImageType> _byValue = $pb.ProtobufEnum.initByValue(values);

@@ -23,6 +23,15 @@ const JWTType$json = const {
   ],
 };
 
+const IsDuplicationEmail$json = const {
+  '1': 'IsDuplicationEmail',
+  '2': const [
+    const {'1': 'UNKNOWN_IS_DUPLICATION_EMAIL', '2': 0},
+    const {'1': 'TRUE_IS_DUPLICATION_EMAIL', '2': 1},
+    const {'1': 'FALSE_IS_DUPLICATION_EMAIL', '2': 2},
+  ],
+};
+
 const SignInRequest$json = const {
   '1': 'SignInRequest',
   '2': const [
@@ -52,6 +61,13 @@ const SignUpRequest$json = const {
 
 const FindPasswordRequest$json = const {
   '1': 'FindPasswordRequest',
+  '2': const [
+    const {'1': 'email', '3': 1, '4': 1, '5': 9, '10': 'email'},
+  ],
+};
+
+const CheckDuplicationEmailRequest$json = const {
+  '1': 'CheckDuplicationEmailRequest',
   '2': const [
     const {'1': 'email', '3': 1, '4': 1, '5': 9, '10': 'email'},
   ],
@@ -92,6 +108,7 @@ const FindPasswordResponse$json = const {
   '1': 'FindPasswordResponse',
   '2': const [
     const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
+    const {'1': 'change_password_url', '3': 2, '4': 1, '5': 9, '10': 'changePasswordUrl'},
   ],
 };
 
@@ -100,6 +117,14 @@ const TokenResponse$json = const {
   '2': const [
     const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
     const {'1': 'jwt', '3': 2, '4': 1, '5': 11, '6': '.JWTResult', '10': 'jwt'},
+  ],
+};
+
+const CheckDuplicationEmailResponse$json = const {
+  '1': 'CheckDuplicationEmailResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
+    const {'1': 'is_duplication_email', '3': 2, '4': 1, '5': 14, '6': '.IsDuplicationEmail', '10': 'isDuplicationEmail'},
   ],
 };
 

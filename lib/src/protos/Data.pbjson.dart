@@ -25,6 +25,7 @@ const DataState$json = const {
     const {'1': 'DURING_VERIFICATION', '2': 4},
     const {'1': 'COMPLETE_VERIFICATION', '2': 5},
     const {'1': 'RETURN_VERIFICATION', '2': 6},
+    const {'1': 'FAIL_DATA_STATE', '2': 7},
   ],
 };
 
@@ -32,9 +33,9 @@ const MissionExplanationImageType$json = const {
   '1': 'MissionExplanationImageType',
   '2': const [
     const {'1': 'UNKNOWN_MISSION_EXPLANATION_IMAGE_TYPE', '2': 0},
-    const {'1': 'THUMBNAIL', '2': 1},
-    const {'1': 'BACKGROUND', '2': 2},
-    const {'1': 'MAIN_TEXT', '2': 3},
+    const {'1': 'THUMBNAIL_MISSION_EXPLANATION_IMAGE_TYPE', '2': 1},
+    const {'1': 'BACKGROUND_MISSION_EXPLANATION_IMAGE_TYPE', '2': 2},
+    const {'1': 'MAIN_TEXT_MISSION_EXPLANATION_IMAGE_TYPE', '2': 3},
   ],
 };
 
@@ -42,7 +43,7 @@ const Data$json = const {
   '1': 'Data',
   '2': const [
     const {'1': 'url', '3': 1, '4': 1, '5': 9, '10': 'url'},
-    const {'1': 'mission_id', '3': 2, '4': 1, '5': 5, '10': 'missionId'},
+    const {'1': 'conduct_mission_id', '3': 2, '4': 1, '5': 5, '10': 'conductMissionId'},
     const {'1': 'state', '3': 3, '4': 1, '5': 14, '6': '.DataState', '10': 'state'},
   ],
 };

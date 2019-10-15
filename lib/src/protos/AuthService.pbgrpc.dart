@@ -41,6 +41,12 @@ class AuthServiceClient extends $grpc.Client {
           ($0.FindPasswordRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.FindPasswordResponse.fromBuffer(value));
+  static final _$checkDuplicationEmail = $grpc.ClientMethod<
+          $0.CheckDuplicationEmailRequest, $0.CheckDuplicationEmailResponse>(
+      '/AuthService/CheckDuplicationEmail',
+      ($0.CheckDuplicationEmailRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.CheckDuplicationEmailResponse.fromBuffer(value));
 
   AuthServiceClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
@@ -83,6 +89,15 @@ class AuthServiceClient extends $grpc.Client {
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$findPassword, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.CheckDuplicationEmailResponse> checkDuplicationEmail(
+      $0.CheckDuplicationEmailRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$checkDuplicationEmail, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -130,6 +145,15 @@ abstract class AuthServiceBase extends $grpc.Service {
             ($core.List<$core.int> value) =>
                 $0.FindPasswordRequest.fromBuffer(value),
             ($0.FindPasswordResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.CheckDuplicationEmailRequest,
+            $0.CheckDuplicationEmailResponse>(
+        'CheckDuplicationEmail',
+        checkDuplicationEmail_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.CheckDuplicationEmailRequest.fromBuffer(value),
+        ($0.CheckDuplicationEmailResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.SignInResponse> signInWithCredential_Pre(
@@ -158,6 +182,12 @@ abstract class AuthServiceBase extends $grpc.Service {
     return findPassword(call, await request);
   }
 
+  $async.Future<$0.CheckDuplicationEmailResponse> checkDuplicationEmail_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.CheckDuplicationEmailRequest> request) async {
+    return checkDuplicationEmail(call, await request);
+  }
+
   $async.Future<$0.SignInResponse> signInWithCredential(
       $grpc.ServiceCall call, $0.SignInRequest request);
   $async.Future<$0.SignInResponse> signInWithGoogle(
@@ -168,4 +198,6 @@ abstract class AuthServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.SignUpRequest request);
   $async.Future<$0.FindPasswordResponse> findPassword(
       $grpc.ServiceCall call, $0.FindPasswordRequest request);
+  $async.Future<$0.CheckDuplicationEmailResponse> checkDuplicationEmail(
+      $grpc.ServiceCall call, $0.CheckDuplicationEmailRequest request);
 }

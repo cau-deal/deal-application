@@ -64,3 +64,20 @@ class ChangePasswordResult extends $pb.ProtobufEnum {
   const ChangePasswordResult._($core.int v, $core.String n) : super(v, n);
 }
 
+class IsAuth extends $pb.ProtobufEnum {
+  static const IsAuth UNKNOWN_IS_AUTH = IsAuth._(0, 'UNKNOWN_IS_AUTH');
+  static const IsAuth TRUE_IS_AUTH = IsAuth._(1, 'TRUE_IS_AUTH');
+  static const IsAuth FALSE_IS_AUTH = IsAuth._(2, 'FALSE_IS_AUTH');
+
+  static const $core.List<IsAuth> values = <IsAuth> [
+    UNKNOWN_IS_AUTH,
+    TRUE_IS_AUTH,
+    FALSE_IS_AUTH,
+  ];
+
+  static final $core.Map<$core.int, IsAuth> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static IsAuth valueOf($core.int value) => _byValue[value];
+
+  const IsAuth._($core.int v, $core.String n) : super(v, n);
+}
+

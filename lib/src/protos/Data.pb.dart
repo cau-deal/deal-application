@@ -16,7 +16,7 @@ export 'Data.pbenum.dart';
 class Data extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('Data', createEmptyInstance: create)
     ..aOS(1, 'url')
-    ..a<$core.int>(2, 'missionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, 'conductMissionId', $pb.PbFieldType.O3)
     ..e<DataState>(3, 'state', $pb.PbFieldType.OE, defaultOrMaker: DataState.UNKNOWN_DATA_STATE, valueOf: DataState.valueOf, enumValues: DataState.values)
     ..hasRequiredFields = false
   ;
@@ -46,13 +46,13 @@ class Data extends $pb.GeneratedMessage {
   void clearUrl() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.int get missionId => $_getIZ(1);
+  $core.int get conductMissionId => $_getIZ(1);
   @$pb.TagNumber(2)
-  set missionId($core.int v) { $_setSignedInt32(1, v); }
+  set conductMissionId($core.int v) { $_setSignedInt32(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasMissionId() => $_has(1);
+  $core.bool hasConductMissionId() => $_has(1);
   @$pb.TagNumber(2)
-  void clearMissionId() => clearField(2);
+  void clearConductMissionId() => clearField(2);
 
   @$pb.TagNumber(3)
   DataState get state => $_getN(2);
