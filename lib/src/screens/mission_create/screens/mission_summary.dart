@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:deal/src/custom/dialogs/simple_list_dialog.dart';
 import 'package:deal/src/custom/widgets/badge.dart';
 import 'package:deal/src/screens/mission_create/widget/mission_create_textform_field.dart';
 import 'package:deal/src/screens/mission_detail/modules/custom_image_delegate.dart';
@@ -20,22 +21,54 @@ class MissionSummaryPage extends StatefulWidget {
 class MissionSummaryPageState extends State<MissionSummaryPage>
     with AutomaticKeepAliveClientMixin<MissionSummaryPage> {
 
-  var doc;
+  TextEditingController totalNumController;
+
+  NotusDocument doc;
+  String koreanUnit;
 
   @override
   void initState() {
     super.initState();
-    doc = NotusDocument.fromDelta(
-        Delta()..insert(
-            "여기 있는 항목은 markdown rendering 되었습니다.\n"
-                "여기 있는 항목은 markdown rendering 되었습니다.\n"
-                "여기 있는 항목은 markdown rendering 되었습니다.\n"
-        )
-    );
+
+    totalNumController = TextEditingController();
+
+    koreanUnit = "영";
+    totalNumController.addListener((){
+      setState(() {
+        koreanUnit = numKorean(totalNumController.text);
+      });
+    });
+  }
+
+
+  @override
+  void dispose() {
+    totalNumController.dispose();
+    super.dispose();
+  }
+
+  String numKorean(String s) {
+    var hanA = ["","일","이","삼","사","오","육","칠","팔","구","십"];
+    var danA = ["","십","백","천","","십","백","천","","십","백","천","","십","백","천"];
+    var result = "";
+    for(int i=0; i<s.length; i++) {
+      String str = "";
+      String han = hanA[int.parse(s[s.length-(i+1)])];
+      if(han != "") str += han+danA[i];
+      if(i == 4) str += "만";
+      if(i == 8) str += "억";
+      if(i == 12) str += "조";
+      result = str + result;
+    }
+
+    if(s.length == 0){ result = "영"; }
+
+    return result;
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Container(
         padding: EdgeInsets.only(left: 15, right:15, top: 30),
         alignment: Alignment.centerLeft,
@@ -79,20 +112,75 @@ class MissionSummaryPageState extends State<MissionSummaryPage>
             ContentHeader(label: "목표"),
             Container(
               padding: EdgeInsets.all(10),
-              child: Row(
+              child: Column(
                 children: <Widget>[
-                  Container(
-                    child: MissionCreateTextFormField(
-                        placeholder: "목표 건수",
-                        textSize: 18,
-                        textAlign: TextAlign.right,
-                        textInputType: TextInputType.number
-                    ),
-                    width: 80
+                  Row(
+                      children: <Widget>[
+                        Container(
+                            child: MissionCreateTextFormField(
+                              placeholder: "목표 건수",
+                              textSize: 19,
+                              textAlign: TextAlign.right,
+                              textInputType: TextInputType.number,
+                              controller: totalNumController,
+                            ),
+                            width: 90
+                        ),
+                        Text(" 건", style: TextStyle(color: Color(0xFF333333), fontSize: 18, fontWeight: FontWeight.w700)),
+                        Text(" ($koreanUnit 건)", style: TextStyle(color: Color(0xFF999999), fontSize: 14, fontWeight: FontWeight.w500))
+                      ]
                   ),
-                  Text(" 건", style: TextStyle(color: Color(0xFF333333), fontSize: 18, fontWeight: FontWeight.w700)),
-                ]
+                  SizedBox(height: 15),
+                  Container(
+                    color: Color(0xffeeeeee),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding ( 
+                          child: Icon(Icons.help, color: Colors.black45,),
+                          padding: EdgeInsets.all(5),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.all(5),
+                            child: Text(
+                                "의뢰는 입력하신 의뢰 단위로 수행자에게 할당이 됩니다. (의뢰 단위 : 0)\n"
+                                "의뢰 등록시 '목표건수 * (포인트/단위) + 수수료' 포인트가 사용됩니다. (소모 예상 포인트 : 0)",
+                                style: TextStyle(color: Colors.black, height: 1.5, fontSize: 14)
+                            )
+                          )
+                        )
+                      ],
+                    ),
+                  )
+                ],
               )
+            ),
+            SizedBox(height: 25),
+
+            ContentHeader(label: "의뢰 종류"),
+            Container(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                        children: <Widget>[
+                          GestureDetector(
+                              onTap: () async{
+                                String _result = await showDialog(context: context, builder: (ctx)=> SimpleListDialog(
+                                  title: '데이터 종류',
+                                  options: ['설문조사', '이미지 라벨링', '음성'],
+                                ));
+                              },
+                              child: Text("데이터 종류", style: TextStyle(color: Color(0xff999999)),)
+                          ),
+                          SizedBox(width: 5,),
+                          Badge(text: "카테고리", fontSize: 14,)
+                        ]
+                    ),
+                    SizedBox(height: 15),
+                  ],
+                )
             ),
             SizedBox(height: 25),
 
@@ -104,7 +192,10 @@ class MissionSummaryPageState extends State<MissionSummaryPage>
                 onTap: () async{
                   var _doc = await Navigator.push(
                       context,
-                      MaterialPageRoute(builder:(ctx) => MissionCreateEditor(doc: doc), fullscreenDialog: true)
+                      MaterialPageRoute(
+                          builder:(ctx) => MissionCreateEditor(doc: doc),
+                          fullscreenDialog: true
+                      )
                   );
                   setState(() { if(_doc != null) doc = _doc; });
                 },
@@ -119,9 +210,17 @@ class MissionSummaryPageState extends State<MissionSummaryPage>
                         )
                     ),
                   ),
-                  child: ZefyrView(
+                  child: (doc != null)? ZefyrView(
                     document: doc,
                     imageDelegate: CustomImageDelegate(),
+                  ): Container(
+                    height: 150,
+                    width: double.infinity,
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Color(0xffeeeeee)
+                    ),
+                    child: Text("의뢰 설명을 입력해주세요.", style: TextStyle(color: Colors.black),)
                   )
                 )
               )

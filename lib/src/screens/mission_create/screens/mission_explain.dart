@@ -24,17 +24,11 @@ class MissionExplainPageState extends State<MissionExplainPage>
   @override
   void initState() {
     super.initState();
-    doc = NotusDocument.fromDelta(
-        Delta()..insert(
-            "여기 있는 항목은 markdown rendering 되었습니다.\n"
-                "여기 있는 항목은 markdown rendering 되었습니다.\n"
-                "여기 있는 항목은 markdown rendering 되었습니다.\n"
-        )
-    );
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Container(
         padding: EdgeInsets.only(left: 15, right:15, top: 30),
         alignment: Alignment.centerLeft,
@@ -63,9 +57,17 @@ class MissionExplainPageState extends State<MissionExplainPage>
                             )
                         ),
                       ),
-                      child: ZefyrView(
+                      child: (doc != null)? ZefyrView(
                         document: doc,
                         imageDelegate: CustomImageDelegate(),
+                      ): Container(
+                          height: 350,
+                          width: double.infinity,
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: Color(0xffeeeeee)
+                          ),
+                          child: Text("수행 방법을 입력해주세요.", style: TextStyle(color: Colors.black),)
                       )
                   )
               )

@@ -48,9 +48,9 @@ class MissionCreateHeaderState extends State<MissionCreateHeader> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
 //                        Text("신발에 점찍기", style: TextStyle(color: Color(0xFF333333), fontSize: 16, fontWeight: FontWeight.w700)),
-                        Container(child: MissionCreateTextFormField(placeholder: "제목을 입력해주세요"), width:200, padding: EdgeInsets.zero, margin: EdgeInsets.zero,),
+                        Container(child: MissionCreateTextFormField(placeholder: "제목을 입력해주세요", textSize: 18), width:200, padding: EdgeInsets.zero, margin: EdgeInsets.zero,),
                         SizedBox(height: 5,),
-                        Container(child: MissionCreateTextFormField(placeholder: "부제목을 입력해주세요", textSize: 13), width:200),
+                        Container(child: MissionCreateTextFormField(placeholder: "부제목을 입력해주세요", textSize: 14), width:200),
                         //Text("신발에 점만 찍으면 돼요!", style: TextStyle(color: Color(0xFF444444), fontSize: 13)),
                       ],
                     ),

@@ -23,9 +23,9 @@ class MissionDetailHeader extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text("신발에 점찍기", style: TextStyle(color: Color(0xFF333333), fontSize: 16, fontWeight: FontWeight.w700)),
+                        Text("신발에 점찍기", style: TextStyle(color: Color(0xFF333333), fontSize: 18, fontWeight: FontWeight.w700)),
                         SizedBox(height: 5,),
-                        Text("신발에 점만 찍으면 돼요!", style: TextStyle(color: Color(0xFF444444), fontSize: 13)),
+                        Text("신발에 점만 찍으면 돼요!", style: TextStyle(color: Color(0xFF444444), fontSize: 14)),
                       ],
                     ),
                     Column(

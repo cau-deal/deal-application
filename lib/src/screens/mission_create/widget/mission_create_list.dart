@@ -8,12 +8,16 @@ class MissionCreateListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TabBarView(
-      children: <Widget>[
-        MissionSummaryPage(),
-        MissionExplainPage(),
-        MissionAgreementPage(),
-      ],
+    return Scaffold(
+      resizeToAvoidBottomPadding: false,
+      backgroundColor: Colors.white,
+      body: TabBarView(
+        children: <Widget>[
+          MissionSummaryPage(),
+          MissionExplainPage(),
+          MissionAgreementPage(),
+        ],
+      )
     );
   }
 }

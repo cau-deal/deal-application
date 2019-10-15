@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:deal/src/custom/dialogs/confirm_dialog.dart';
 import 'package:deal/src/custom/widgets/common_app_bar_container.dart';
 import 'package:deal/src/screens/mission_create/modules/custom_image_delegate.dart';
+import 'package:quill_delta/quill_delta.dart';
 import 'package:flutter/material.dart';
 import 'package:zefyr/zefyr.dart';
 
@@ -32,7 +32,9 @@ class _MissionCreateEditorState extends State<MissionCreateEditor> {
   void initState() {
     _focusNode = FocusNode();
     setState(() {
-      NotusDocument _doc = widget.doc;
+      NotusDocument _doc = widget.doc?? NotusDocument.fromDelta(
+        Delta()..insert("\n")
+      );
       _controller = ZefyrController(_doc);
       /*_sub = _controller.document.changes.listen((change) {
 //      print('${change.source}: ${change.change}');
@@ -77,7 +79,7 @@ class _MissionCreateEditorState extends State<MissionCreateEditor> {
         ConfirmAction confirm = await showDialog<ConfirmAction>(
           context: context,
           barrierDismissible: false,
-          builder: (ctx) => ConfirmDialog(content: "의뢰내용을 저장하시겠습니까?",)
+          builder: (ctx) => ConfirmDialog(content: "변경사항을 저장하시겠습니까?",)
         );
         if( confirm == ConfirmAction.ACCEPT ){
           Navigator.pop(context, _controller.document);
