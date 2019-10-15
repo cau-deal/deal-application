@@ -36,7 +36,8 @@ class MissionDetailTabContainerState extends State<MissionDetailTabContainer> {
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled){
             return [
               SliverAppBar(
-                expandedHeight: 360.0,
+                brightness: Brightness.light,
+                expandedHeight: 320.0,
                 elevation: 0,
                 backgroundColor: Colors.white,
                 floating: true,

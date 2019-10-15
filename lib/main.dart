@@ -26,6 +26,12 @@ void main() async {
     }
   };
 
+  SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent, //top bar color
+        statusBarIconBrightness: Brightness.light, //top bar icons
+      )
+  );
   await FlutterCrashlytics().initialize();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 

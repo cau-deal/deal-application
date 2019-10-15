@@ -38,12 +38,12 @@ class _Page1State extends State<Page1> {
   void initState() {
     super.initState();
     list = [
-      /*{
+      {
         "top": true,
         "title": "의뢰 등록하기",
         "body": "데이터가 필요하세요? 의뢰를 등록해보세요!",
         "thumbnail": "res/images/deal-thumbnail.png"
-      },*/
+      },
       { "title": "위에서 아래로", "body": "쭉 땡겨봐여", "cost": 123 },
       { "title": "걷는 곳 주변 사진찍기", "body": "운동도 하고 돈도 벌고 1석 2조!", "cost": 50 },
       { "title": "걷는 곳 주변 사진찍기", "body": "운동도 하고 돈도 벌고 1석 2조!", "cost": 100 },

@@ -10,6 +10,8 @@ class CommonAppBarContainer extends StatelessWidget {
   final double iconSize;
   final bool showBottomBorder;
 
+  final Function onBackPressed;
+
   CommonAppBarContainer({
     @required this.child,
     @required this.text,
@@ -17,6 +19,7 @@ class CommonAppBarContainer extends StatelessWidget {
     this.icon = Icons.arrow_back_ios,
     this.showBottomBorder = true,
     this.header,
+    this.onBackPressed,
   }) : assert(child != null);
 
   @override
@@ -25,11 +28,11 @@ class CommonAppBarContainer extends StatelessWidget {
     final ModalRoute<dynamic> parentRoute = ModalRoute.of(context);
     final bool useCloseButton = parentRoute is PageRoute<dynamic> && parentRoute.fullscreenDialog;
 
-
     return new Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(56.0),
           child: AppBar(
+            brightness: Brightness.light,
             elevation: 0,
             backgroundColor: Colors.white,
             bottom: PreferredSize(child: Container(
@@ -46,7 +49,7 @@ class CommonAppBarContainer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 IconButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: (){ if(this.onBackPressed != null){ onBackPressed(); } else Navigator.pop(context); },
                   icon: useCloseButton?
                     Icon(Icons.close, color:Colors.black) :
                     Icon(Icons.arrow_back_ios, color: Colors.black, size: 15),

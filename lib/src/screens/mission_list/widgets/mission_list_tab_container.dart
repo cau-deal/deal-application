@@ -32,6 +32,7 @@ class MissionListTabContainer extends StatelessWidget {
                   floating: true,
                   pinned: true,
                   snap: true,
+                  brightness: Brightness.light,
                   title: Container(
                       padding: EdgeInsets.only(top: 10.0),
                       child: AnimatedCount(

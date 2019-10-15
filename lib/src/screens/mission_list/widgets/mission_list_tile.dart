@@ -1,3 +1,4 @@
+import 'package:deal/src/screens/mission_create/mission_create.dart';
 import 'package:deal/src/screens/mission_detail/mission_detail.dart';
 import 'package:flutter/material.dart';
 
@@ -25,8 +26,9 @@ class MissionListTile extends StatelessWidget {
       child: GestureDetector(
           onTap: (){
             Navigator.push(
-                context, MaterialPageRoute(builder:(ctx) => MissionDetailPage(idx: idx))
-            );
+                context, MaterialPageRoute(builder:(ctx) =>
+                          (!this.isTopMission)? MissionDetailPage(idx: idx) : MissionCreatePage(idx: idx)
+            ));
           },
           child: Container(
               color: Colors.white,

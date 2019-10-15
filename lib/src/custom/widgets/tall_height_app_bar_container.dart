@@ -22,6 +22,7 @@ class TallHeightAppBarContainer extends StatelessWidget {
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(64.0),
           child: AppBar(
+            brightness: Brightness.light,
             elevation: 0,
             backgroundColor: Colors.white,
             bottom: PreferredSize(child: Container(), preferredSize: Size.fromHeight(0.0)),

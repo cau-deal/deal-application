@@ -36,6 +36,7 @@ class MyPageTabContainerState extends State<MyPageTabContainer> {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled){
           return [
             SliverAppBar(
+              brightness: Brightness.light,
               expandedHeight: 240.0,
               elevation: 0,
               backgroundColor: Colors.white,
