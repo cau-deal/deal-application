@@ -1,5 +1,6 @@
 import 'package:deal/src/blocs/mypage/bloc.dart';
 import 'package:deal/src/custom/widgets/under_circle_tab_bar.dart';
+import 'package:deal/src/screens/misson_search/mission_search.dart';
 import 'package:deal/src/screens/mypage/mypage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,6 +32,7 @@ class MissionListTabContainer extends StatelessWidget {
                   floating: true,
                   pinned: true,
                   snap: true,
+                  brightness: Brightness.light,
                   title: Container(
                       padding: EdgeInsets.only(top: 10.0),
                       child: AnimatedCount(
@@ -63,6 +65,15 @@ class MissionListTabContainer extends StatelessWidget {
                           icon: Image.asset("res/images/icon_tune.png"),
                           iconSize: 24,
                           padding: EdgeInsets.all(0),
+                          onPressed: (){
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (_) {
+                                  return BlocProvider<MyPageBloc>(
+                                      builder: (ctx) => MyPageBloc()..dispatch(MissionClicked()),
+                                      child: MissionSearchPage()
+                                  );
+                                }));
+                          },
                         )
                     ),
                     SizedBox( width:5 ),

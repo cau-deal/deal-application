@@ -1,5 +1,6 @@
 import 'package:deal/src/blocs/verified/bloc.dart';
 import 'package:deal/src/custom/widgets/common_app_bar_container.dart';
+import 'package:deal/src/screens/mission_list/widgets/mission_list_tile.dart';
 import 'package:deal/src/screens/mypage/screens/unverified.dart';
 import 'package:deal/src/screens/mypage/screens/unverified_phone_auth.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,13 @@ class MyTotalMissionPageState extends State<MyTotalMissionPage>{
 
   num isLoadingState = 1;
 
+  var list = [
+    { "title": "위에서 아래로", "body": "쭉 땡겨봐여", "top": true },
+    { "title": "위에서 아래로", "body": "쭉 땡겨봐여", "top": true },
+    { "title": "위에서 아래로", "body": "쭉 땡겨봐여", "top": true },
+    { "title": "위에서 아래로", "body": "쭉 땡겨봐여", "top": true }
+  ];
+
   void _onPageFinished(String value) {
     setState(() { isLoadingState = 0; });
   }
@@ -31,54 +39,17 @@ class MyTotalMissionPageState extends State<MyTotalMissionPage>{
         builder: (ctx, state){
           if(state is PhoneVerified){
             return Container(
-              alignment: Alignment.center,
-              child: GestureDetector(
-                child: Center(
-                    child : SizedBox(
-                      width: double.infinity,
-                      height: 300,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Image.asset("res/images/logo-grey.png", height: 150),
-                          SizedBox(height: 20),
-                          Text(
-                            "이곳은 내 전체 의뢰 목록 조회 페이지입니다.",
-                            style: TextStyle(
-                                color: Color(0xff909090),
-                                fontFamily: "NanumSquare",
-                                fontSize: 16,
-                                letterSpacing: -0.5,
-                                height: 1.5
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          SizedBox(height: 20),
-                          Text(
-                            S.of(ctx).prompt_phone_auth_button,
-                            style: TextStyle(
-                                color: Color(0xff000000),
-                                fontFamily: "NanumSquare",
-                                fontSize: 14,
-                                letterSpacing: -0.5,
-                                height: 1.5
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                    )
-                ),
-                onTap: (){
-                  Navigator.of(ctx).push(
-                      MaterialPageRoute(
-                          builder: (ctx)=> UnverifiedPhoneAuthPage(),
-                          fullscreenDialog: true
-                      )
+              color: Colors.white,
+              child: ListView.builder(
+                itemCount: list.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final data = list[index];
+                  return MissionListTile(
+                    idx: index,
+                    title: data['title'],
                   );
                 },
-              ),
-              color: Colors.white,
+              )
             );
           } else {
             return UnverifiedPage();

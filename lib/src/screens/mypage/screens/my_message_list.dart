@@ -1,4 +1,6 @@
+import 'package:deal/src/screens/mission_list/widgets/mission_list_tile.dart';
 import 'package:deal/src/screens/mypage/screens/total_mission.dart';
+import 'package:deal/src/screens/mypage/widgets/message_list_tile.dart';
 import 'package:flutter/material.dart';
 
 class MyMessageListView extends StatelessWidget {
@@ -9,22 +11,76 @@ class MyMessageListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    var list = [
+      { "title": "새로운 공지사항이 등록되었습니다", "date":"2019-10-14" },
+      { "title": "새로운 공지사항이 등록되었습니다", "date":"2019-10-12" },
+    ];
+
     return TabBarView(
       controller: tabController,
       children: <Widget>[
         Center(
             child: Container(
-                color: Colors.amberAccent
+                padding: EdgeInsets.only(top: 10),
+                color: Colors.white,
+                child: MediaQuery.removePadding(
+                    context: context,
+                    removeTop: true,
+                    child: ListView.builder(
+                      itemCount: list.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final data = list[index];
+                        return MessageListTile(
+                          idx: index,
+                          title: data['title'],
+                          date: data['date']
+                        );
+                      },
+                    )
+                )
             )
         ),
         Center(
             child: Container(
-                color: Colors.pinkAccent
+                padding: EdgeInsets.only(top: 10),
+                color: Colors.white,
+                child: MediaQuery.removePadding(
+                    context: context,
+                    removeTop: true,
+                    child: ListView.builder(
+                      itemCount: list.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final data = list[index];
+                        return MessageListTile(
+                            idx: index,
+                            title: data['title'],
+                            date: data['date']
+                        );
+                      },
+                    )
+                )
             )
         ),
         Center(
             child: Container(
-                color: Colors.white
+                padding: EdgeInsets.only(top: 10),
+                color: Colors.white,
+                child: MediaQuery.removePadding(
+                    context: context,
+                    removeTop: true,
+                    child: ListView.builder(
+                      itemCount: list.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final data = list[index];
+                        return MessageListTile(
+                            idx: index,
+                            title: data['title'],
+                            date: data['date']
+                        );
+                      },
+                    )
+                )
             )
         ),
       ],

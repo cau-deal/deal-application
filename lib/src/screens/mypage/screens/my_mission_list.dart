@@ -14,11 +14,7 @@ class MyMissionListView extends StatelessWidget {
       controller: tabController,
       children: <Widget>[
         MyTotalMissionPage(),
-        Center(
-            child: Container(
-                color: Colors.amberAccent
-            )
-        ),
+        MyTotalMissionPage(),
       ],
     );
   }
