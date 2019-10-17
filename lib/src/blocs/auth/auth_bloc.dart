@@ -14,7 +14,6 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   final UserRepository _userRepository;
   final SharedPreferences _sharedPreferences;
 
-
   AuthenticationBloc({
     @required UserRepository userRepository,
     @required SharedPreferences sharedPreferences
@@ -80,7 +79,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   }
 
   Stream<AuthenticationState> _mapLoggedInToState() async* {
-    yield Authenticated(await _userRepository.getUser());
+    yield Authenticated("test");
   }
 
   Stream<AuthenticationState> _mapLoggedOutToState() async* {

@@ -37,7 +37,7 @@ class MyTotalMissionPageState extends State<MyTotalMissionPage>{
   Widget build(BuildContext ctx) {
     return BlocBuilder<VerificationBloc, VerificationState>(
         builder: (ctx, state){
-          if(state is PhoneVerified){
+          if(state is PhoneVerified || state is Verified){
             return Container(
               color: Colors.white,
               child: ListView.builder(

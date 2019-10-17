@@ -1,6 +1,8 @@
 import 'package:deal/src/protos/AuthService.pb.dart';
 import 'package:deal/src/protos/AuthService.pbenum.dart';
+import 'package:deal/src/protos/UserService.pbgrpc.dart';
 import 'package:deal/src/services/auth_service.dart';
+import 'package:deal/src/services/user_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -9,11 +11,17 @@ class UserRepository {
   final GoogleSignIn _googleSignIn;
   final FirebaseAuth _firebaseAuth;
   final AuthService _authService;
+  final UserService _userService;
 
-  UserRepository({GoogleSignIn googleSignIn, AuthService authService, FirebaseAuth firebaseAuth})
-      : _googleSignIn = googleSignIn ?? GoogleSignIn(),
+  UserRepository({
+    GoogleSignIn googleSignIn,
+    AuthService authService,
+    UserService userService,
+    FirebaseAuth firebaseAuth
+  }) : _googleSignIn = googleSignIn ?? GoogleSignIn(),
         _firebaseAuth = FirebaseAuth.instance,
-        _authService = authService ?? AuthService.init();
+        _authService = authService ?? AuthService.init(),
+        _userService = userService ?? UserService.init();
 
 
   Future<SignInResponse> signInWithGoogle() async {
@@ -67,15 +75,14 @@ class UserRepository {
     ]);
   }
 
+  Future<LookUpAuthInfoResponse> lookUpAuthInfo({String accessToken}) async {
+    return await _userService.lookUpUserAuthInfo(accessToken: accessToken);
+  }
+
   Future<bool> isSignedIn() async {
     return false;
     //final currentUser = await _firebaseAuth.currentUser();
     //return currentUser != null;
-  }
-
-  Future<String> getUser() async {
-    return "";
-    //return (await _firebaseAuth.currentUser()).email;
   }
 
 }

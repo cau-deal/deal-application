@@ -4,6 +4,7 @@ class CommonAppBarContainer extends StatelessWidget {
 
   final Widget child;
   final Widget header;
+  final List<Widget> actions;
 
   final String text;
   final IconData icon;
@@ -19,6 +20,7 @@ class CommonAppBarContainer extends StatelessWidget {
     this.icon = Icons.arrow_back_ios,
     this.showBottomBorder = true,
     this.header,
+    this.actions,
     this.onBackPressed,
   }) : assert(child != null);
 
@@ -44,6 +46,7 @@ class CommonAppBarContainer extends StatelessWidget {
             ), preferredSize: Size.fromHeight(0.0)),
             automaticallyImplyLeading: false,
             titleSpacing: 0,
+            actions: this.actions,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -54,12 +57,18 @@ class CommonAppBarContainer extends StatelessWidget {
                     Icon(Icons.close, color:Colors.black) :
                     Icon(Icons.arrow_back_ios, color: Colors.black, size: 15),
                 ),
-                Text(this.text, style:TextStyle(
-                  fontFamily: "NanumSquare",
-                  fontWeight: FontWeight.w700,
-                  fontSize: 16.0,
-                  letterSpacing: -0.5,
-                ))
+                (this.text == null)
+                    ? Container(
+                      color: Colors.white,
+                      width: 300,
+                      child: header
+                    )
+                    : Text(this.text, style:TextStyle(
+                        fontFamily: "NanumSquare",
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16.0,
+                        letterSpacing: -0.5,
+                      ))
               ],
             ),
           ),

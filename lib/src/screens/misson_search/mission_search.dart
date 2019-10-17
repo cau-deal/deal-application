@@ -28,8 +28,28 @@ class MissionSearchPageState extends State<MissionSearchPage>{
   @override
   Widget build(BuildContext ctx) {
     return CommonAppBarContainer(
-        text: ' ',
-        child: Container(
+      text: null,
+      header: TextFormField(
+        autofocus: true,
+        scrollPadding: EdgeInsets.zero,
+        decoration: InputDecoration.collapsed(
+          hintText: '검색',
+          fillColor: Colors.white,
+          hasFloatingPlaceholder: true,
+          hintStyle: TextStyle(fontSize: 16, color: Color(0xffAEAEAE), height: 1.0, textBaseline: TextBaseline.ideographic),
+        ),
+        style: TextStyle(
+            fontSize: 16,
+            color: Colors.black,
+            height: 1.0,
+            fontWeight: FontWeight.w600,
+            textBaseline: TextBaseline.alphabetic
+        ),
+      ),
+      actions: <Widget>[
+        IconButton( icon: Icon(Icons.search, color: Colors.black) )
+      ],
+      child: Container(
             padding: EdgeInsets.only(left: 20, right: 15, top: 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,

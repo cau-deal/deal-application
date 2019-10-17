@@ -37,10 +37,10 @@ class PhoneService extends BaseService {
     Sex gender
   }) async {
 
+    PhoneAuthRequest req = PhoneAuthRequest();
     PhoneAuthResponse res = PhoneAuthResponse();
 
     try {
-      PhoneAuthRequest req;
       req.name = name;
       req.isNative = true;
       req.phoneNum = phoneNumber;
@@ -48,9 +48,7 @@ class PhoneService extends BaseService {
       req.sex = gender;
       req.birthday = birthDay;
 
-      res = await client.phoneAuth(req,
-          options: CallOptions(metadata: {'ticket':accessToken})
-      );
+      res = await client.phoneAuth(req, options: CallOptions(metadata: {'ticket':accessToken}));
 
     } catch(e){
       print(e.toString());
