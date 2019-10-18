@@ -117,10 +117,7 @@ class RegisterFormState extends State<RegisterWithEmailPage> {
         if (state.isSubmitting) {
 //          Fluttertoast.showToast(msg: "서버 요청중...");
         }
-        if (state.isSuccess) {
-          BlocProvider.of<AuthenticationBloc>(context).dispatch(LoggedIn());
-          Navigator.of(context).pop();
-        }
+        if (state.isSuccess) { Navigator.of(context).pop(); }
         if (state.isFailure) {
           Fluttertoast.showToast(msg: "아이디와 비밀번호를 확인해주세요");
         }

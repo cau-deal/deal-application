@@ -5,6 +5,7 @@ import 'package:deal/src/services/auth_service.dart';
 import 'package:deal/src/services/user_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserRepository {
 
@@ -79,10 +80,23 @@ class UserRepository {
     return await _userService.lookUpUserAuthInfo(accessToken: accessToken);
   }
 
-  Future<bool> isSignedIn() async {
-    return false;
-    //final currentUser = await _firebaseAuth.currentUser();
-    //return currentUser != null;
+  Future<LookUpUserInfoResponse> lookUpUserInfo({String accessToken}) async {
+    return await _userService.lookUpUserProfileInfo(accessToken: accessToken);
+  }
+
+  Future<String> getAccessToken() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getString('ticket')?? "";
+  }
+
+  Future<bool> hasToken() async {
+    return await getAccessToken() != "";
+  }
+
+  Future<void> persistToken(String token) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("ticket", token);
+    return;
   }
 
 }

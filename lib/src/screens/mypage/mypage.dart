@@ -1,4 +1,7 @@
+import 'package:deal/src/blocs/auth/auth_bloc.dart';
+import 'package:deal/src/blocs/auth/auth_state.dart';
 import 'package:deal/src/blocs/mypage/bloc.dart';
+import 'package:deal/src/blocs/verified/bloc.dart';
 import 'package:deal/src/screens/mypage/screens/my_message_list.dart';
 import 'package:deal/src/screens/mypage/screens/my_mission_list.dart';
 import 'package:deal/src/screens/mypage/screens/my_point_list.dart';
@@ -18,16 +21,28 @@ class MyPage extends StatefulWidget {
 class MyPageScreenState extends State<MyPage> with TickerProviderStateMixin {
 
   MyPageBloc _myPageBloc;
+  VerificationBloc _verificationBloc;
+
   List<String> _currentItems;
   Widget _currentTabBarView;
   TabController _tabController;
 
+  AuthenticationState authState;
+  String _userEmail;
+
   @override
   void initState() {
     this._myPageBloc = BlocProvider.of<MyPageBloc>(context);
+    this._verificationBloc = BlocProvider.of<VerificationBloc>(context);
+
+    this._userEmail = (_verificationBloc.currentState is Verified)
+        ? (_verificationBloc.currentState as Verified).profile.email
+        : (_verificationBloc.currentState as UnVerified).userEmail;
+
     this._currentItems = [];
     this._tabController = TabController(length: this._currentItems.length, vsync: this);
     this._currentTabBarView = TabBarView(children: [], controller: this._tabController);
+
     super.initState();
   }
 
@@ -53,25 +68,23 @@ class MyPageScreenState extends State<MyPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext ctx) {
     return BlocListener<MyPageBloc, MyPageState>(
-      listener: (ctx, state){
-        setState((){
-          if(state.isPointSection){
-            this._currentItems = ['포인트 입금내역', '포인트 출금내역'];
-            this._tabController = TabController(length: this._currentItems.length, vsync: this);
-            this._currentTabBarView = MyPointListView(tabController: this._tabController);
+     listener: (ctx, state){
+          setState((){
+            if(state.isPointSection){
+              this._currentItems = ['포인트 입금내역', '포인트 출금내역'];
+              this._tabController = TabController(length: this._currentItems.length, vsync: this);
+              this._currentTabBarView = MyPointListView(tabController: this._tabController);
 
-          } else if(state.isMissionSection) {
-            this._currentItems = ['수행중인 의뢰', '등록한 의뢰'];
-            this._tabController = TabController(length: this._currentItems.length, vsync: this);
-            this._currentTabBarView = MyMissionListView(tabController:this._tabController);
-
-          } else if(state.isMessageSection) {
-            this._currentItems = ['읽지 않음', '읽음', '전체'];
-            this._tabController = TabController(length: this._currentItems.length, vsync: this);
-            this._currentTabBarView = MyMessageListView(tabController:this._tabController);
-          }
-
-        });
+            } else if(state.isMissionSection) {
+              this._currentItems = ['수행중인 의뢰', '등록한 의뢰'];
+              this._tabController = TabController(length: this._currentItems.length, vsync: this);
+              this._currentTabBarView = MyMissionListView(tabController:this._tabController);
+            } else if(state.isMessageSection) {
+              this._currentItems = ['읽지 않음', '읽음', '전체'];
+              this._tabController = TabController(length: this._currentItems.length, vsync: this);
+              this._currentTabBarView = MyMessageListView(tabController:this._tabController);
+            }
+          });
       },
       child: new MyPageTabContainer(
         tabController: this._tabController,
@@ -101,7 +114,7 @@ class MyPageScreenState extends State<MyPage> with TickerProviderStateMixin {
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         children: <Widget>[
-                                          Text("deal@cau.ac.kr", style:TextStyle(fontSize: 12, color: Colors.black54)),
+                                          Text("$_userEmail", style:TextStyle(fontSize: 12, color: Colors.black54)),
                                           SizedBox(width:8),
                                           SizedBox(
                                               width: 18,

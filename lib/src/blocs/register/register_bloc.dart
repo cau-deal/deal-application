@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:deal/src/blocs/auth/bloc.dart';
 import 'package:deal/src/custom/modules/validators.dart';
 import 'package:deal/src/protos/AuthService.pb.dart';
 import 'package:deal/src/protos/CommonResult.pbenum.dart';
@@ -11,12 +12,13 @@ import 'bloc.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
-  final UserRepository _userRepository;
+  final UserRepository userRepository;
+  final AuthenticationBloc authenticationBloc;
 
   RegisterBloc({
-    @required UserRepository userRepository,
-  })  : assert(userRepository != null),
-        _userRepository = userRepository;
+    @required this.userRepository,
+    @required this.authenticationBloc
+  }) : assert(userRepository != null), assert(authenticationBloc != null);
 
   @override
   RegisterState get initialState => RegisterState.empty();
@@ -89,16 +91,18 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     yield RegisterState.loading();
 
     try {
-      SignUpResponse res = await _userRepository.signUpWithEmail(
+      bool isValid = false;
+      SignUpResponse res = await userRepository.signUpWithEmail(
         email: email,
         password: password,
         agreeWithTerms: agreeWithTerms
       );
 
-      yield (res.result.resultCode == ResultCode.SUCCESS)
-          ? RegisterState.success() : RegisterState.failure();
+      isValid = res.result.resultCode == ResultCode.SUCCESS;
 
-      print(res);
+      if(isValid){ authenticationBloc.dispatch(LoggedIn(token: res.jwt[0])); }
+
+      yield isValid? RegisterState.success() : RegisterState.failure();
 
     } catch (_) {
       yield RegisterState.failure();

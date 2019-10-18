@@ -68,7 +68,6 @@ class LoginEmailState extends State<LoginEmailPage> {
 //          Fluttertoast.showToast(msg: "로그인 요청중..");
         }
         if (state.isSuccess) {
-          BlocProvider.of<AuthenticationBloc>(ctx).dispatch(LoggedIn());
           Navigator.pushAndRemoveUntil(ctx, MaterialPageRoute(
               builder: (ctx) => MissionListPage()),
                   (Route<dynamic> route) => false);
@@ -159,7 +158,10 @@ class LoginEmailState extends State<LoginEmailPage> {
                                       ctx,
                                       MaterialPageRoute(
                                           builder: (context) => BlocProvider<LoginBloc>(
-                                              builder: (context)=> LoginBloc(userRepository: widget.userRepository),
+                                              builder: (context)=> LoginBloc(
+                                                  userRepository: widget.userRepository,
+                                                  authenticationBloc: BlocProvider.of<AuthenticationBloc>(context)
+                                              ),
                                               child: ForgotPasswordPage(userRepository: widget.userRepository)
                                           )
                                       )

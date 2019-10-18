@@ -1,4 +1,6 @@
+import 'package:deal/src/blocs/auth/auth_bloc.dart';
 import 'package:deal/src/blocs/mypage/bloc.dart';
+import 'package:deal/src/blocs/verified/bloc.dart';
 import 'package:deal/src/custom/widgets/under_circle_tab_bar.dart';
 import 'package:deal/src/screens/misson_search/mission_search.dart';
 import 'package:deal/src/screens/mypage/mypage.dart';
@@ -88,7 +90,7 @@ class MissionListTabContainer extends StatelessWidget {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (_) {
                                     return BlocProvider<MyPageBloc>(
-                                      builder: (ctx) => MyPageBloc()..dispatch(MissionClicked()),
+                                      builder: (BuildContext ctx) => MyPageBloc()..dispatch(MissionClicked()),
                                       child: MyPage()
                                     );
                                 }));

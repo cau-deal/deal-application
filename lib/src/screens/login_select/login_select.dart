@@ -106,14 +106,11 @@ class LoginSelectState extends State<LoginSelectPage>{
                                                     fullscreenDialog: true,
                                                     builder: (context) =>
                                                         BlocProvider<LoginBloc>(
-                                                            builder: (
-                                                                context) =>
-                                                                LoginBloc(
-                                                                    userRepository: widget
-                                                                        .userRepository),
-                                                            child: LoginEmailPage(
-                                                                userRepository: widget
-                                                                    .userRepository)
+                                                            builder: (context) => LoginBloc(
+                                                                userRepository: widget.userRepository,
+                                                                authenticationBloc: BlocProvider.of<AuthenticationBloc>(context)
+                                                            ),
+                                                            child: LoginEmailPage(userRepository: widget.userRepository)
                                                         )
                                                 )
                                             );
@@ -138,21 +135,19 @@ class LoginSelectState extends State<LoginSelectPage>{
                                                     BlocProvider<LoginBloc>(
                                                         builder: (context) =>
                                                             LoginBloc(
-                                                                userRepository: widget
-                                                                    .userRepository),
+                                                                userRepository: widget.userRepository,
+                                                                authenticationBloc: BlocProvider.of<AuthenticationBloc>(context)
+                                                            ),
                                                         child: LoginGooglePage(
-                                                            userRepository: widget
-                                                                .userRepository)
+                                                            userRepository: widget.userRepository
+                                                        )
                                                     )
                                             )
                                         );
                                       },
                                       buttonColor: Color(0xffffffff),
-                                      icon: Image.asset(
-                                          'res/images/google-logo.png'),
-                                      text: S
-                                          .of(ctx)
-                                          .login_with_google,
+                                      icon: Image.asset('res/images/google-logo.png'),
+                                      text: S.of(ctx).login_with_google,
                                     ),
                                   ),
                                   Container(
@@ -171,11 +166,12 @@ class LoginSelectState extends State<LoginSelectPage>{
                                                           RegisterBloc>(
                                                           builder: (context) =>
                                                               RegisterBloc(
-                                                                  userRepository: widget
-                                                                      .userRepository),
+                                                                  userRepository: widget.userRepository,
+                                                                  authenticationBloc: BlocProvider.of<AuthenticationBloc>(context)
+                                                              ),
                                                           child: RegisterWithEmailPage(
-                                                              userRepository: widget
-                                                                  .userRepository)
+                                                              userRepository: widget.userRepository
+                                                          )
                                                       )
                                               ));
                                             },

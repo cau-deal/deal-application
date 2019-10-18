@@ -52,10 +52,7 @@ class LoginGooglePageState extends State<LoginGooglePage> {
           Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
           Navigator.pop(ctx);
         }
-        if (state.isSuccess) {
-          BlocProvider.of<AuthenticationBloc>(ctx).dispatch(LoggedIn());
-          Navigator.pop(ctx);
-        }
+        if (state.isSuccess) { Navigator.pop(ctx); }
       },
       child: BlocBuilder<LoginBloc, LoginState>(
         builder: (ctx, state){

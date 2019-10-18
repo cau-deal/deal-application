@@ -12,6 +12,10 @@ class AuthInitialized extends AuthenticationEvent {
 }
 
 class LoggedIn extends AuthenticationEvent {
+  final token;
+
+  LoggedIn({this.token});
+
   @override
   String toString() => 'LoggedIn';
 }

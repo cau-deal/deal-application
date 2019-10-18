@@ -99,7 +99,8 @@ class App extends StatelessWidget {
                       } else {
                         return LoginSelectPage(userRepository: _userRepository);
                       }
-                    })
+                    }
+                )
             )
         )
     );

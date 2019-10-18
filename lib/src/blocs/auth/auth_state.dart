@@ -17,12 +17,15 @@ class Authenticating extends AuthenticationState {
 }
 
 class Authenticated extends AuthenticationState {
-  final String displayName;
+  final String accessToken;
 
-  Authenticated(this.displayName) : super([displayName]);
+  Authenticated({ this.accessToken }) : super([accessToken]);
 
   @override
-  String toString() => 'Authenticated { displayName: $displayName }';
+  List<Object> get props => [accessToken];
+
+  @override
+  String toString() => 'Authenticated { token: $accessToken }';
 }
 
 class Unauthenticated extends AuthenticationState {

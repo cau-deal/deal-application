@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:deal/src/blocs/auth/auth_bloc.dart';
 import 'package:deal/src/protos/CommonResult.pbenum.dart';
 import 'package:deal/src/protos/Date.pb.dart';
 import 'package:deal/src/protos/PhoneService.pbgrpc.dart';
@@ -19,9 +20,10 @@ enum VerificationType {
 
 class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
 
-  final UserRepository _userRepository;
+  final UserRepository userRepository;
 
-  VerificationBloc({ userRepository }) :_userRepository = userRepository;
+  VerificationBloc({ this.userRepository })
+      : assert(userRepository != null);
 
   @override
   VerificationState get initialState => UnVerified();
@@ -40,33 +42,45 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
   Stream<VerificationState> _mapVerifiedInitializedState() async* {
 
     try {
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      String accessToken = preferences.getString('ticket')?? "";
 
-      if( accessToken != "" ) {
+      String accessToken = await userRepository.getAccessToken();
+
+      if( await userRepository.hasToken() ) {
+
         yield Verifying();
 
-        LookUpAuthInfoResponse res = await _userRepository.lookUpAuthInfo(
-            accessToken: accessToken);
+        LookUpAuthInfoResponse authRes = await userRepository.lookUpAuthInfo(accessToken: accessToken);
+        LookUpUserInfoResponse userRes = await userRepository.lookUpUserInfo(accessToken: accessToken);
 
-        if (res.result.resultCode == ResultCode.SUCCESS) {
-          if (res.authInfo.isPhoneAuth == IsAuth.TRUE_IS_AUTH &&
-              res.authInfo.isAccountAuth == IsAuth.TRUE_IS_AUTH) {
-            yield Verified();
-          } else if (res.authInfo.isPhoneAuth == IsAuth.TRUE_IS_AUTH) {
-            yield PhoneVerified();
-          } else if (res.authInfo.isAccountAuth == IsAuth.TRUE_IS_AUTH) {
-            yield AccountVerified();
-          } else {
-            yield UnVerified();
-          }
+        bool isPhoneAuth = authRes.authInfo.isPhoneAuth == IsAuth.TRUE_IS_AUTH;
+        bool isAccountAuth = authRes.authInfo.isAccountAuth == IsAuth.TRUE_IS_AUTH;
+
+        if(userRes.result.resultCode != ResultCode.SUCCESS){
+          yield UnVerified( userEmail: '' );
         }
+
+        Profile profile = userRes.profile;
+
+        if (authRes.result.resultCode == ResultCode.SUCCESS) {
+
+          yield ( isPhoneAuth || isAccountAuth )
+              ? Verified(
+                  accountVerified: isAccountAuth,
+                  phoneVerified: isPhoneAuth,
+                  profile: profile
+                )
+              : UnVerified( userEmail: profile.email );
+
+        } else {
+          yield UnVerified( userEmail: profile.email );
+        }
+
+      } else {
+        yield UnVerified( userEmail: '' );
       }
 
-      yield UnVerified();
-
     } catch (_) {
-      yield UnVerified();
+      yield UnVerified( userEmail: '' );
     }
   }
 

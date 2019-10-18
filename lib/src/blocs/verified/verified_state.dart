@@ -1,3 +1,4 @@
+import 'package:deal/src/protos/UserService.pbgrpc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -6,19 +7,17 @@ abstract class VerificationState extends Equatable {
   VerificationState([List props = const []]) : super(props);
 }
 
-class PhoneVerified extends VerificationState {
-  @override
-  String toString() => 'Phone Verified';
-}
-
-class AccountVerified extends VerificationState {
-  @override
-  String toString() => 'Phone Verified';
-}
-
 class Verified extends VerificationState {
+
+  final bool accountVerified;
+  final bool phoneVerified;
+
+  final Profile profile;
+
+  Verified({ this.accountVerified, this.phoneVerified, this.profile });
+
   @override
-  String toString() => 'Both Verified';
+  String toString() => 'Verified';
 }
 
 class Verifying extends VerificationState {
@@ -27,6 +26,11 @@ class Verifying extends VerificationState {
 }
 
 class UnVerified extends VerificationState {
+
+  final String userEmail;
+
+  UnVerified({this.userEmail});
+
   @override
-  String toString() => 'Unauthenticated';
+  String toString() => 'Unverified';
 }

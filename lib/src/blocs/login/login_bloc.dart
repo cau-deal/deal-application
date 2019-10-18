@@ -1,24 +1,26 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:deal/src/blocs/auth/auth_bloc.dart';
+import 'package:deal/src/blocs/auth/bloc.dart';
 import 'package:deal/src/protos/AuthService.pb.dart';
 import 'package:deal/src/protos/CommonResult.pb.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:deal/src/custom/modules/validators.dart';
 import 'package:deal/src/repositories/user_repository.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'bloc.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
-  final UserRepository _userRepository;
+  final UserRepository userRepository;
+  final AuthenticationBloc authenticationBloc;
 
   LoginBloc({
-    @required UserRepository userRepository,
+    @required this.userRepository,
+    @required this.authenticationBloc
   })  : assert(userRepository != null),
-        _userRepository = userRepository;
+        assert(authenticationBloc != null);
 
   @override
   LoginState get initialState => LoginState.empty();
@@ -79,17 +81,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _mapLoginWithGooglePressedToState() async* {
     try {
-      SignInResponse res = await _userRepository.signInWithGoogle();
+      SignInResponse res = await userRepository.signInWithGoogle();
 
       if(res.result.resultCode == ResultCode.SUCCESS) {
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-
         String accessToken = res.jwt[0].token;
-        prefs.setString("ticket", accessToken);
-        prefs.setString("aud", "");
+        authenticationBloc.dispatch(LoggedIn(token: accessToken));
       }
 
-      yield (res.result.resultCode == ResultCode.SUCCESS)? LoginState.success() : LoginState.failure();
+      yield (res.result.resultCode == ResultCode.SUCCESS) ? LoginState.success() : LoginState.failure();
 
     } catch (_) {
       yield LoginState.failure();
@@ -100,7 +99,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       yield LoginState.loading();
 
-      await _userRepository.findPassword(email: email);
+      await userRepository.findPassword(email: email);
       yield LoginState.failure(); // 무조건 실패처리한다. (로그인 되면 안됨)
 
     } catch (_) {
@@ -115,14 +114,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     yield LoginState.loading();
 
     try {
-      SignInResponse res = await _userRepository.signInWithEmail(email, password);
+      SignInResponse res = await userRepository.signInWithEmail(email, password);
 
       if(res.result.resultCode == ResultCode.SUCCESS) {
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-
         String accessToken = res.jwt[0].token;
-        prefs.setString("ticket", accessToken);
-        prefs.setString("aud", email);
+        authenticationBloc.dispatch(LoggedIn(token: accessToken));
       }
 
       yield (res.result.resultCode == ResultCode.SUCCESS)? LoginState.success() : LoginState.failure();

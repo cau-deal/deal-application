@@ -54,8 +54,7 @@ void main() async {
       MultiBlocProvider(
           providers: [
             BlocProvider<AuthenticationBloc>(builder: (ctx) => AuthenticationBloc(
-              userRepository: userRepository,
-              sharedPreferences: sharedPreferences
+              userRepository: userRepository
             )..dispatch(AuthInitialized())),
             BlocProvider<VerificationBloc>(builder: (ctx) => VerificationBloc(
               userRepository: userRepository

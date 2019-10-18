@@ -44,4 +44,20 @@ class UserService extends BaseService {
     return res;
   }
 
+  Future<LookUpUserInfoResponse> lookUpUserProfileInfo({
+    String accessToken,
+  }) async {
+
+    Empty req = Empty();
+    LookUpUserInfoResponse res = LookUpUserInfoResponse();
+
+    try {
+      res = await client.lookUpUserInfo(req, options: CallOptions(metadata: {'ticket':accessToken}));
+    } catch(e){
+      print(e.toString());
+    }
+
+    return res;
+  }
+
 }

@@ -12,14 +12,10 @@ import 'bloc.dart';
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   final UserRepository _userRepository;
-  final SharedPreferences _sharedPreferences;
 
   AuthenticationBloc({
-    @required UserRepository userRepository,
-    @required SharedPreferences sharedPreferences
-  }) : assert(userRepository != null),
-        _sharedPreferences = sharedPreferences,
-        _userRepository = userRepository;
+    @required UserRepository userRepository
+  }) : assert(userRepository != null), _userRepository = userRepository;
 
   @override
   AuthenticationState get initialState => Uninitialized();
@@ -30,7 +26,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     if (event is AuthInitialized) {
       yield* _mapAppStartedToState();
     } else if (event is LoggedIn) {
-      yield* _mapLoggedInToState();
+      yield* _mapLoggedInToState(token: event.token);
     } else if (event is LoggedOut) {
       yield* _mapLoggedOutToState();
     }
@@ -39,21 +35,16 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   Stream<AuthenticationState> _mapAppStartedToState() async* {
     try {
 
-      String accessToken = _sharedPreferences.getString("ticket") ?? "";
+      String accessToken = await _userRepository.getAccessToken();
       bool isValid = false;
 
-      if(accessToken != "") {
+      if(await _userRepository.hasToken()) {
         yield Authenticating();
         SignInResponse res = await _userRepository.signInWithToken(accessToken: accessToken);
         isValid = res?.result?.resultCode == ResultCode.SUCCESS;
       }
 
-      if (isValid) {
-        yield Authenticated("");
-
-      } else {
-        yield Unauthenticated();
-      }
+      yield (isValid)? Authenticated(accessToken: accessToken) : Unauthenticated();
 
       //      final PendingDynamicLinkData data = await FirebaseDynamicLinks.instance.getInitialLink();
 //
@@ -78,11 +69,14 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     }
   }
 
-  Stream<AuthenticationState> _mapLoggedInToState() async* {
-    yield Authenticated("test");
+  Stream<AuthenticationState> _mapLoggedInToState({String token}) async* {
+    yield Authenticating();
+    await _userRepository.persistToken(token);
+    yield Authenticated(accessToken: token);
   }
 
   Stream<AuthenticationState> _mapLoggedOutToState() async* {
+    yield Authenticating();
     _userRepository.signOut();
     yield Unauthenticated();
   }

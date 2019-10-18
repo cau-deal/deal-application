@@ -29,6 +29,12 @@ class MyTotalMissionPageState extends State<MyTotalMissionPage>{
     { "thumbnail": "res/images/default_thumbnail.png", "title": "위에서 아래로", "body": "쭉 땡겨봐여", "top": true }
   ];
 
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   void _onPageFinished(String value) {
     setState(() { isLoadingState = 0; });
   }
@@ -37,7 +43,7 @@ class MyTotalMissionPageState extends State<MyTotalMissionPage>{
   Widget build(BuildContext ctx) {
     return BlocBuilder<VerificationBloc, VerificationState>(
         builder: (ctx, state){
-          if(state is PhoneVerified || state is Verified){
+          if(state is Verified && state.phoneVerified ){
             return Container(
               color: Colors.white,
               child: ListView.builder(

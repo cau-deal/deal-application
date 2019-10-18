@@ -57,7 +57,7 @@ class ForgotPasswordState extends State<ForgotPasswordPage> {
   @override
   void initState() {
     super.initState();
-    _loginBloc =  BlocProvider.of<LoginBloc>(context);
+    _loginBloc = BlocProvider.of<LoginBloc>(context);
     _emailController.addListener(_onEmailChanged);
   }
 
