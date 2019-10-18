@@ -41,11 +41,16 @@ class UnverifiedPhoneAuthPageState extends State<UnverifiedPhoneAuthPage>{
   Widget build(BuildContext ctx) {
     return BlocListener<VerificationBloc, VerificationState>(
       listener: (ctx, state){
-        if(state is! Verifying){
-          setState(() { this.isLoadingState = 0; });
-          Navigator.pop(ctx);
-        } else {
+        if(state is Verifying){
           setState(() { this.isLoadingState = 1; });
+        } else if(state is Verified) {
+          setState(() { this.isLoadingState = 0; });
+          Fluttertoast.showToast(msg: "인증에 성공했습니다.");
+          Navigator.pop(ctx);
+        } else if (state is UnVerified){
+          setState(() { this.isLoadingState = 0; });
+          Fluttertoast.showToast(msg: "인증에 실패했습니다.");
+          Navigator.pop(ctx);
         }
       },
       child: CommonAppBarContainer(

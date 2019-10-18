@@ -29,7 +29,7 @@ class PreferencePageState extends State<PreferenceCustomPage> {
             },
             separatorBuilder: (context, i){
               if( widget.preferences[i] is! PreferenceCustomTitle){
-                return Divider(height: 1, color: Color(0xffa3a3a3));
+                return Divider(height: 1, color: Color(0xffe3e3e3));
               } else {
                 return Divider(height: 0, color: Colors.white);
               }

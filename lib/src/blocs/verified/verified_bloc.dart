@@ -63,13 +63,21 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
 
         if (authRes.result.resultCode == ResultCode.SUCCESS) {
 
-          yield ( isPhoneAuth || isAccountAuth )
-              ? Verified(
-                  accountVerified: isAccountAuth,
-                  phoneVerified: isPhoneAuth,
-                  profile: profile
-                )
-              : UnVerified( userEmail: profile.email );
+          if( isPhoneAuth ){
+            yield Verified(
+                accountVerified: isAccountAuth,
+                phoneVerified: isPhoneAuth,
+                profile: profile
+            );
+          } else if ( isAccountAuth ){
+            yield Verified(
+                accountVerified: isAccountAuth,
+                phoneVerified: isPhoneAuth,
+                profile: Profile()..name="회원"
+            );
+          } else {
+            yield UnVerified( userEmail: profile.email );
+          }
 
         } else {
           yield UnVerified( userEmail: profile.email );
@@ -87,36 +95,33 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
   Stream<VerificationState> _mapAppStartedToState() async* {
     try {
 
-      //String accessToken = _sharedPreferences.getString("ticket") ?? "";
-      //String aud = _sharedPreferences.get("aud") ?? "";
-      //bool isValid = false;
+      String accessToken = await userRepository.getAccessToken();
 
-      //await _userRepository.signInWithToken(accessToken: accessToken, aud: aud);
+      if( await userRepository.hasToken() ) {
+        yield Verifying();
+        LookUpUserInfoResponse userRes = await userRepository.lookUpUserInfo(accessToken: accessToken);
+        yield UnVerified(userEmail: (userRes.result.resultCode == ResultCode.SUCCESS)? userRes.profile.email : "");
+      } else {
+        yield UnVerified();
+      }
 
-      yield UnVerified();
-
-    } catch (_) {
+    } catch(e) {
       yield UnVerified();
     }
   }
 
   Stream<VerificationState> _mapVerifiedPhoneToState(VerificationSuccess event) async* {
     try {
-      // todo make verifying state (로딩 스테이트)
-      // 인증시키고 (PhoneService)
-      // userService에서 인증정보 가져다가 PhoneVerified State로 전환
-
       yield Verifying();
 
       PhoneService _phoneService = await PhoneService.init();
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      String accessToken = preferences.getString('ticket')?? "";
+      String accessToken = await userRepository.getAccessToken();
 
       String jsonData = event.data;
 
       var result = jsonDecode(jsonData);
 
-      if(accessToken != "") {
+      if(await userRepository.hasToken()) {
 
         MobileCarrier carrier = MobileCarrier.UNKNOWN_MOBILE_CARRIER;
         switch(result['carrier']){
@@ -141,11 +146,13 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
 
         if( res?.result?.resultCode == ResultCode.SUCCESS ){
           yield* _mapVerifiedInitializedState();
+        } else {
+          yield UnVerified();
         }
 
+      } else {
+        yield UnVerified();
       }
-
-      yield UnVerified();
 
     } catch (_) {
       print(_.toString());
