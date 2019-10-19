@@ -1,3 +1,5 @@
+import 'package:deal/src/blocs/inquiry/bloc.dart';
+import 'package:deal/src/blocs/inquiry/inquiry_state.dart';
 import 'package:deal/src/custom/widgets/common_app_bar_container.dart';
 import 'package:deal/src/custom/widgets/styled_textform_field.dart';
 import 'package:deal/src/custom/widgets/white_round_button.dart';
@@ -5,6 +7,8 @@ import 'package:deal/src/screens/mission_detail/modules/custom_image_delegate.da
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:deal/generated/i18n.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:zefyr/zefyr.dart';
 
 
@@ -16,6 +20,9 @@ class QuestionPage extends StatefulWidget {
 
 class QuestionPageState extends State<QuestionPage>{
 
+  InquiryBloc _inquiryBloc;
+
+  final TextEditingController _titleController = TextEditingController();
   final ZefyrController _controller = ZefyrController(NotusDocument());
   final FocusNode _focusNode = FocusNode();
 
@@ -28,9 +35,33 @@ class QuestionPageState extends State<QuestionPage>{
     { "title": "기타" },
   ];
 
+  bool get isPopulated => _titleController.text.isNotEmpty;
+
+  bool isSubmitButtonEnabled(InquiryState state){
+    return state.isFormValid && isPopulated && !state.isSubmitting;
+  }
+
+  void _onTitleChanged() {
+    _inquiryBloc.dispatch(TitleChanged(title: _titleController.text));
+  }
+
+  void _onContentChanged() {
+    _inquiryBloc.dispatch(ContentChanged(contents: _controller.document.toPlainText()));
+  }
+
   @override
   void initState() {
+    this._inquiryBloc = BlocProvider.of<InquiryBloc>(context);
+    this._titleController.addListener(_onTitleChanged);
+    this._controller.addListener(_onContentChanged);
     super.initState();
+  }
+
+
+  @override
+  void dispose() {
+    this._titleController.dispose();
+    super.dispose();
   }
 
   Widget buildEditor() {
@@ -77,47 +108,69 @@ class QuestionPageState extends State<QuestionPage>{
           resizeToAvoidBottomPadding: true,
           backgroundColor: Colors.white,
           body: ZefyrScaffold(
-            child: Container(
-                padding: EdgeInsets.only(left: 15, right: 15, top: 15),
-                child: Column(
-                  children: <Widget>[
-                    StyledTextFormField(
-                      placeholder: '문의 제목',
-                    ),
-                    SizedBox(height: 20),
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      color: Color(0xffeeeeee),
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxHeight: 230.0,
+            child: BlocListener<InquiryBloc, InquiryState>(
+              listener: (ctx, state){
+                if (state.isFailure) {
+                  Fluttertoast.showToast(msg: "오류 발생!");
+                }
+                if (state.isSubmitting) {
+                  Fluttertoast.showToast(msg: "전송중..");
+                }
+                if (state.isSuccess) {
+                  Fluttertoast.showToast(msg: "성공");
+                  Navigator.pop(ctx);
+                }
+              },
+              child: BlocBuilder<InquiryBloc, InquiryState>(
+                builder: (ctx, state) => Container(
+                    padding: EdgeInsets.only(left: 15, right: 15, top: 15),
+                    child: Column(
+                      children: <Widget>[
+                        StyledTextFormField(
+                          placeholder: '문의 제목',
+                          controller: this._titleController,
                         ),
-                        child: Scrollbar(
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.vertical,
-                            reverse: true,
-                            child: SizedBox(
-                              height: 230.0,
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                child: buildEditor()
+                        SizedBox(height: 20),
+                        Container(
+                          alignment: Alignment.bottomCenter,
+                          color: Color(0xffeeeeee),
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(
+                              maxHeight: 230.0,
+                            ),
+                            child: Scrollbar(
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.vertical,
+                                reverse: true,
+                                child: SizedBox(
+                                  height: 230.0,
+                                  child: Padding(
+                                      padding: EdgeInsets.symmetric(horizontal: 10),
+                                      child: buildEditor()
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                    Container(
-                        padding: EdgeInsets.only(top: 30),
-                        child: WhiteRoundButton (
-                            buttonColor: Color(0xFF5f75ac),
-                            textColor: Colors.white,
-                            text: '문의하기',
-                            onPressed: (){ Navigator.pop(ctx); }
+                        Container(
+                            padding: EdgeInsets.only(top: 30),
+                            child: WhiteRoundButton (
+                                buttonColor: Color(0xFF5f75ac),
+                                textColor: Colors.white,
+                                text: '문의하기',
+                                onPressed: isSubmitButtonEnabled(state)? (){
+                                  _inquiryBloc.dispatch(Submitted(
+                                    title: this._titleController.text,
+                                    contents: this._controller.document.toPlainText()
+                                  ));
+                                } : null
+                            )
                         )
+                      ],
                     )
-                  ],
-                )
+                ),
+              )
             ),
           ),
         )

@@ -37,11 +37,10 @@ class DealService extends BaseService {
   }) async {
 
     InquiryResponse res = InquiryResponse();
+    InquiryRequest req = InquiryRequest();
+    Inquiry inq = Inquiry();
 
     try {
-      InquiryRequest req;
-      Inquiry inq;
-
       inq.title = title;
       inq.contents = content;
       inq.category = category;
@@ -52,6 +51,23 @@ class DealService extends BaseService {
           options: CallOptions(metadata: {'ticket':accessToken})
       );
 
+    } catch(e){
+      print(e.toString());
+    }
+
+    return res;
+  }
+
+
+  Future<LookUpInquiryResponse> fetchInquiryHistory({String accessToken}) async {
+
+    LookUpInquiryResponse res = LookUpInquiryResponse();
+    Empty req = Empty();
+
+    try {
+      res = await client.lookUpInquiry(req,
+          options: CallOptions(metadata: {'ticket':accessToken})
+      );
     } catch(e){
       print(e.toString());
     }

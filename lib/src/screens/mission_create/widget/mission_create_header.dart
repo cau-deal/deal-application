@@ -1,9 +1,11 @@
+import 'package:deal/src/blocs/inquiry/bloc.dart';
 import 'package:deal/src/custom/dialogs/date_range_picker.dart';
 import 'package:deal/src/custom/dialogs/simple_list_dialog.dart';
 import 'package:deal/src/custom/widgets/badge.dart';
+import 'package:deal/src/repositories/user_repository.dart';
 import 'package:deal/src/screens/qna/question.dart';
-import 'package:deal/src/screens/report/report.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart';
 import 'package:intl/intl.dart';
 
@@ -143,7 +145,19 @@ class MissionCreateHeaderState extends State<MissionCreateHeader> {
                     ),
                     GestureDetector(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (ctx)=>QuestionPage(), fullscreenDialog: true));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (ctx){
+                                  return BlocProvider<InquiryBloc>(
+                                    builder: (BuildContext ctx) => InquiryBloc(
+                                        RepositoryProvider.of<UserRepository>(context)
+                                    ),
+                                    child: QuestionPage()
+                                  );
+                                },
+                                fullscreenDialog: true
+                            ));
                         },
                       child: Row(
                         children: <Widget>[

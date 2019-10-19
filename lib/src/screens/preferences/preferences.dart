@@ -1,6 +1,11 @@
+import 'package:deal/src/blocs/inquiry/bloc.dart';
+import 'package:deal/src/blocs/inquiry_history/bloc.dart';
 import 'package:deal/src/custom/dialogs/confirm_dialog.dart';
 import 'package:deal/src/custom/widgets/common_app_bar_container.dart';
+import 'package:deal/src/repositories/deal_repository.dart';
+import 'package:deal/src/repositories/user_repository.dart';
 import 'package:deal/src/screens/agreements/agreements.dart';
+import 'package:deal/src/screens/preferences/screen/question_history.dart';
 import 'package:deal/src/screens/preferences/widgets/preferences_custom_action.dart';
 import 'package:deal/src/screens/preferences/widgets/preferences_custom_dialog_link.dart';
 import 'package:deal/src/screens/preferences/widgets/preferences_custom_link.dart';
@@ -8,8 +13,10 @@ import 'package:deal/src/screens/preferences/widgets/preferences_custom_switch.d
 import 'package:deal/src/screens/preferences/widgets/preferences_custom_text.dart';
 import 'package:deal/src/screens/preferences/widgets/preferences_custom_title.dart';
 import 'package:deal/src/screens/qna/question.dart';
+import 'package:deal/src/services/deal_service.dart';
 import 'package:flutter/material.dart';
 import 'package:deal/generated/i18n.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:package_info/package_info.dart';
 
@@ -58,12 +65,31 @@ class PreferencesState extends State<PreferencesPage>{
                   PreferenceCustomAction(
                     "문의하기",
                     onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => QuestionPage()));
+                      Navigator.push(context,
+                          MaterialPageRoute(
+                              builder: (ctx){
+                                return BlocProvider<InquiryBloc>(
+                                    builder: (BuildContext ctx) => InquiryBloc(
+                                        RepositoryProvider.of<UserRepository>(context)
+                                    ),
+                                    child: QuestionPage()
+                                );
+                              })
+                      );
                     },
                   ),
                   PreferenceCustomPageLink(
-                    "신고내역",
-                    page: Container(),
+                    "문의내역",
+                    page: BlocProvider<InquiryHistoryBloc>(
+                      builder: (context) => InquiryHistoryBloc(
+                        dealRepository: RepositoryProvider.of<DealRepository>(context),
+                        userRepository: RepositoryProvider.of<UserRepository>(context)
+                      )..dispatch(Fetch()),
+                      child: Container(
+                          color: Colors.white,
+                          child: QuestionHistoryScreen()
+                      ),
+                    ),
                   ),
 
                   PreferenceCustomTitle('Personalization'),

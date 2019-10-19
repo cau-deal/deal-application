@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:deal/src/blocs/verified/bloc.dart';
+import 'package:deal/src/repositories/deal_repository.dart';
 import 'package:deal/src/services/auth_service.dart';
+import 'package:deal/src/services/deal_service.dart';
 import 'package:deal/src/services/user_service.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,20 +49,35 @@ void main() async {
       authService: await AuthService.init(),
       userService: await UserService.init()
     );
+    final DealRepository dealRepository = DealRepository(
+      dealService: await DealService.init()
+    );
+
     final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await PrefService.init(prefix: 'pref_');
 
     runApp(
-      MultiBlocProvider(
-          providers: [
-            BlocProvider<AuthenticationBloc>(builder: (ctx) => AuthenticationBloc(
-              userRepository: userRepository
-            )..dispatch(AuthInitialized())),
-            BlocProvider<VerificationBloc>(builder: (ctx) => VerificationBloc(
-              userRepository: userRepository
-            )..dispatch(VerificationInitialized()))
-          ],
-          child: App(userRepository: userRepository)
+      MultiRepositoryProvider(
+        providers:[
+          RepositoryProvider<UserRepository>(
+            builder: (context) => userRepository,
+          ),
+          RepositoryProvider<DealRepository>(
+            builder: (context) => dealRepository,
+          ),
+        ],
+
+        child: MultiBlocProvider(
+            providers: [
+              BlocProvider<AuthenticationBloc>(builder: (ctx) => AuthenticationBloc(
+                  userRepository: userRepository
+              )..dispatch(AuthInitialized())),
+              BlocProvider<VerificationBloc>(builder: (ctx) => VerificationBloc(
+                  userRepository: userRepository
+              )..dispatch(VerificationInitialized()))
+            ],
+            child: App(userRepository: userRepository)
+        )
       )
     );
 
