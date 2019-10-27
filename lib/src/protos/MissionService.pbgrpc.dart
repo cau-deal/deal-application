@@ -11,6 +11,7 @@ import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
 import 'MissionService.pb.dart' as $0;
+import 'Empty.pb.dart' as $1;
 export 'MissionService.pb.dart';
 
 class MissionServiceClient extends $grpc.Client {
@@ -32,13 +33,20 @@ class MissionServiceClient extends $grpc.Client {
           ($0.MissionIdRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.SearchMissionWithIdResponse.fromBuffer(value));
-  static final _$searchMissionReleventMe = $grpc.ClientMethod<
-          $0.SearchMissionReleventMeRequest,
-          $0.SearchMissionReleventMeResponse>(
-      '/MissionService/SearchMissionReleventMe',
-      ($0.SearchMissionReleventMeRequest value) => value.writeToBuffer(),
+  static final _$searchRegisterMissionRelevantMe = $grpc.ClientMethod<
+          $0.SearchMissionRelevantMeRequest,
+          $0.SearchRegisterMissionRelevantMeResponse>(
+      '/MissionService/SearchRegisterMissionRelevantMe',
+      ($0.SearchMissionRelevantMeRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $0.SearchMissionReleventMeResponse.fromBuffer(value));
+          $0.SearchRegisterMissionRelevantMeResponse.fromBuffer(value));
+  static final _$searchConductMissionRelevantMe = $grpc.ClientMethod<
+          $0.SearchMissionRelevantMeRequest,
+          $0.SearchConductMissionRelevantMeResponse>(
+      '/MissionService/SearchConductMissionRelevantMe',
+      ($0.SearchMissionRelevantMeRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.SearchConductMissionRelevantMeResponse.fromBuffer(value));
   static final _$getAssignedMission =
       $grpc.ClientMethod<$0.MissionIdRequest, $0.GetAssignedMissionResponse>(
           '/MissionService/GetAssignedMission',
@@ -59,6 +67,12 @@ class MissionServiceClient extends $grpc.Client {
       ($0.SubmitProcessMissionOutputRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $0.SubmitProcessMissionOutputResponse.fromBuffer(value));
+  static final _$countFetchMission =
+      $grpc.ClientMethod<$1.Empty, $0.CountFetchMissionResponse>(
+          '/MissionService/CountFetchMission',
+          ($1.Empty value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.CountFetchMissionResponse.fromBuffer(value));
 
   MissionServiceClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
@@ -90,11 +104,20 @@ class MissionServiceClient extends $grpc.Client {
     return $grpc.ResponseFuture(call);
   }
 
-  $grpc.ResponseFuture<$0.SearchMissionReleventMeResponse>
-      searchMissionReleventMe($0.SearchMissionReleventMeRequest request,
+  $grpc.ResponseFuture<$0.SearchRegisterMissionRelevantMeResponse>
+      searchRegisterMissionRelevantMe($0.SearchMissionRelevantMeRequest request,
+          {$grpc.CallOptions options}) {
+    final call = $createCall(_$searchRegisterMissionRelevantMe,
+        $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.SearchConductMissionRelevantMeResponse>
+      searchConductMissionRelevantMe($0.SearchMissionRelevantMeRequest request,
           {$grpc.CallOptions options}) {
     final call = $createCall(
-        _$searchMissionReleventMe, $async.Stream.fromIterable([request]),
+        _$searchConductMissionRelevantMe, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -122,6 +145,15 @@ class MissionServiceClient extends $grpc.Client {
           {$grpc.CallOptions options}) {
     final call = $createCall(
         _$submitProcessMissionOutput, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.CountFetchMissionResponse> countFetchMission(
+      $1.Empty request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$countFetchMission, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -157,15 +189,26 @@ abstract class MissionServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.MissionIdRequest.fromBuffer(value),
         ($0.SearchMissionWithIdResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.SearchMissionReleventMeRequest,
-            $0.SearchMissionReleventMeResponse>(
-        'SearchMissionReleventMe',
-        searchMissionReleventMe_Pre,
+    $addMethod($grpc.ServiceMethod<$0.SearchMissionRelevantMeRequest,
+            $0.SearchRegisterMissionRelevantMeResponse>(
+        'SearchRegisterMissionRelevantMe',
+        searchRegisterMissionRelevantMe_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $0.SearchMissionReleventMeRequest.fromBuffer(value),
-        ($0.SearchMissionReleventMeResponse value) => value.writeToBuffer()));
+            $0.SearchMissionRelevantMeRequest.fromBuffer(value),
+        ($0.SearchRegisterMissionRelevantMeResponse value) =>
+            value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.SearchMissionRelevantMeRequest,
+            $0.SearchConductMissionRelevantMeResponse>(
+        'SearchConductMissionRelevantMe',
+        searchConductMissionRelevantMe_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.SearchMissionRelevantMeRequest.fromBuffer(value),
+        ($0.SearchConductMissionRelevantMeResponse value) =>
+            value.writeToBuffer()));
     $addMethod(
         $grpc.ServiceMethod<$0.MissionIdRequest, $0.GetAssignedMissionResponse>(
             'GetAssignedMission',
@@ -195,6 +238,13 @@ abstract class MissionServiceBase extends $grpc.Service {
             $0.SubmitProcessMissionOutputRequest.fromBuffer(value),
         ($0.SubmitProcessMissionOutputResponse value) =>
             value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.Empty, $0.CountFetchMissionResponse>(
+        'CountFetchMission',
+        countFetchMission_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.Empty.fromBuffer(value),
+        ($0.CountFetchMissionResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.RegisterMissionResponse> registerMission_Pre(
@@ -215,10 +265,16 @@ abstract class MissionServiceBase extends $grpc.Service {
     return searchMissionWithId(call, await request);
   }
 
-  $async.Future<$0.SearchMissionReleventMeResponse> searchMissionReleventMe_Pre(
-      $grpc.ServiceCall call,
-      $async.Future<$0.SearchMissionReleventMeRequest> request) async {
-    return searchMissionReleventMe(call, await request);
+  $async.Future<$0.SearchRegisterMissionRelevantMeResponse>
+      searchRegisterMissionRelevantMe_Pre($grpc.ServiceCall call,
+          $async.Future<$0.SearchMissionRelevantMeRequest> request) async {
+    return searchRegisterMissionRelevantMe(call, await request);
+  }
+
+  $async.Future<$0.SearchConductMissionRelevantMeResponse>
+      searchConductMissionRelevantMe_Pre($grpc.ServiceCall call,
+          $async.Future<$0.SearchMissionRelevantMeRequest> request) async {
+    return searchConductMissionRelevantMe(call, await request);
   }
 
   $async.Future<$0.GetAssignedMissionResponse> getAssignedMission_Pre(
@@ -239,14 +295,23 @@ abstract class MissionServiceBase extends $grpc.Service {
     return submitProcessMissionOutput(call, await request);
   }
 
+  $async.Future<$0.CountFetchMissionResponse> countFetchMission_Pre(
+      $grpc.ServiceCall call, $async.Future<$1.Empty> request) async {
+    return countFetchMission(call, await request);
+  }
+
   $async.Future<$0.RegisterMissionResponse> registerMission(
       $grpc.ServiceCall call, $0.RegisterMissionRequest request);
   $async.Future<$0.SearchMissionResponse> searchMission(
       $grpc.ServiceCall call, $0.SearchMissionRequest request);
   $async.Future<$0.SearchMissionWithIdResponse> searchMissionWithId(
       $grpc.ServiceCall call, $0.MissionIdRequest request);
-  $async.Future<$0.SearchMissionReleventMeResponse> searchMissionReleventMe(
-      $grpc.ServiceCall call, $0.SearchMissionReleventMeRequest request);
+  $async.Future<$0.SearchRegisterMissionRelevantMeResponse>
+      searchRegisterMissionRelevantMe(
+          $grpc.ServiceCall call, $0.SearchMissionRelevantMeRequest request);
+  $async.Future<$0.SearchConductMissionRelevantMeResponse>
+      searchConductMissionRelevantMe(
+          $grpc.ServiceCall call, $0.SearchMissionRelevantMeRequest request);
   $async.Future<$0.GetAssignedMissionResponse> getAssignedMission(
       $grpc.ServiceCall call, $0.MissionIdRequest request);
   $async.Future<$0.SubmitCollectMissionOutputResponse>
@@ -255,4 +320,6 @@ abstract class MissionServiceBase extends $grpc.Service {
   $async.Future<$0.SubmitProcessMissionOutputResponse>
       submitProcessMissionOutput(
           $grpc.ServiceCall call, $0.SubmitProcessMissionOutputRequest request);
+  $async.Future<$0.CountFetchMissionResponse> countFetchMission(
+      $grpc.ServiceCall call, $1.Empty request);
 }

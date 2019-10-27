@@ -12,10 +12,7 @@ class PreferenceCustomTitle extends StatelessWidget {
       padding: EdgeInsets.only(left: leftPadding, bottom: 0.0, top: 20.0),
       child: Text(
         title,
-        style: style ??
-            TextStyle(
-                color: Theme.of(context).accentColor,
-                fontWeight: FontWeight.bold),
+        style: style ?? TextStyle(color: Theme.of(context).accentColor, fontWeight: FontWeight.bold),
       ),
     );
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class PreferenceCustomText extends StatelessWidget {
-
   final String title;
   final String subtitle;
 
@@ -17,10 +16,7 @@ class PreferenceCustomText extends StatelessWidget {
       decoration: decoration,
       child: ListTile(
         title: Text(title, style: style),
-        subtitle: Text(subtitle, style: TextStyle(
-          fontSize: 14,
-          color: Colors.black45
-        )),
+        subtitle: Text(subtitle, style: TextStyle(fontSize: 14, color: Colors.black45)),
       ),
     );
   }

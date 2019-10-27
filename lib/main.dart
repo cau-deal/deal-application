@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:deal/src/blocs/verified/bloc.dart';
 import 'package:deal/src/repositories/deal_repository.dart';
+import 'package:deal/src/repositories/mission_repository.dart';
 import 'package:deal/src/services/auth_service.dart';
 import 'package:deal/src/services/deal_service.dart';
+import 'package:deal/src/services/mission_service.dart';
 import 'package:deal/src/services/user_service.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,6 +54,13 @@ void main() async {
     final DealRepository dealRepository = DealRepository(
       dealService: await DealService.init()
     );
+    final MissionRepository missionRepository = MissionRepository(
+      missionService: await MissionService.init()
+    );
+
+    final VerificationBloc verificationBloc = VerificationBloc(
+      userRepository: userRepository
+    );
 
     final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await PrefService.init(prefix: 'pref_');
@@ -65,16 +74,18 @@ void main() async {
           RepositoryProvider<DealRepository>(
             builder: (context) => dealRepository,
           ),
+          RepositoryProvider<MissionRepository>(
+            builder: (context) => missionRepository,
+          ),
         ],
 
         child: MultiBlocProvider(
             providers: [
               BlocProvider<AuthenticationBloc>(builder: (ctx) => AuthenticationBloc(
-                  userRepository: userRepository
-              )..dispatch(AuthInitialized())),
-              BlocProvider<VerificationBloc>(builder: (ctx) => VerificationBloc(
-                  userRepository: userRepository
-              )..dispatch(VerificationInitialized()))
+                  userRepository: userRepository,
+                verificationBloc: verificationBloc
+              )..add(AuthInitialized())),
+              BlocProvider<VerificationBloc>(builder: (ctx) => verificationBloc)
             ],
             child: App(userRepository: userRepository)
         )

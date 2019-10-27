@@ -45,6 +45,12 @@ class PointServiceClient extends $grpc.Client {
           ($1.WithdrawRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $1.WithdrawResponse.fromBuffer(value));
+  static final _$lookUpEarnForADay =
+      $grpc.ClientMethod<$0.Empty, $1.LookUpEarnForADayResponse>(
+          '/PointService/LookUpEarnForADay',
+          ($0.Empty value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $1.LookUpEarnForADayResponse.fromBuffer(value));
 
   PointServiceClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
@@ -85,6 +91,15 @@ class PointServiceClient extends $grpc.Client {
   $grpc.ResponseFuture<$1.WithdrawResponse> withdraw($1.WithdrawRequest request,
       {$grpc.CallOptions options}) {
     final call = $createCall(_$withdraw, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$1.LookUpEarnForADayResponse> lookUpEarnForADay(
+      $0.Empty request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$lookUpEarnForADay, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -133,6 +148,13 @@ abstract class PointServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $1.WithdrawRequest.fromBuffer(value),
         ($1.WithdrawResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.Empty, $1.LookUpEarnForADayResponse>(
+        'LookUpEarnForADay',
+        lookUpEarnForADay_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.Empty.fromBuffer(value),
+        ($1.LookUpEarnForADayResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$1.LookUpBalanceResponse> lookUpBalance_Pre(
@@ -162,6 +184,11 @@ abstract class PointServiceBase extends $grpc.Service {
     return withdraw(call, await request);
   }
 
+  $async.Future<$1.LookUpEarnForADayResponse> lookUpEarnForADay_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.Empty> request) async {
+    return lookUpEarnForADay(call, await request);
+  }
+
   $async.Future<$1.LookUpBalanceResponse> lookUpBalance(
       $grpc.ServiceCall call, $0.Empty request);
   $async.Future<$1.LookUpPointHistoryResponse> lookUpPlusPointHistory(
@@ -172,4 +199,6 @@ abstract class PointServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $1.DepositRequest request);
   $async.Future<$1.WithdrawResponse> withdraw(
       $grpc.ServiceCall call, $1.WithdrawRequest request);
+  $async.Future<$1.LookUpEarnForADayResponse> lookUpEarnForADay(
+      $grpc.ServiceCall call, $0.Empty request);
 }

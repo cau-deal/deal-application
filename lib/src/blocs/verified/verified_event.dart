@@ -13,8 +13,18 @@ class VerificationInitialized extends VerificationEvent {
   String toString() => 'AppStarted';
 }
 
-class VerificationFailed extends VerificationEvent {
+class VerificationRequest extends VerificationEvent {
 
+  final VerificationType type;
+  final String data;
+
+  VerificationRequest(this.type, this.data);
+
+  @override
+  String toString() => 'AppStarted';
+}
+
+class VerificationFailed extends VerificationEvent {
   final String reason;
   final VerificationType type;
 
@@ -25,7 +35,6 @@ class VerificationFailed extends VerificationEvent {
 }
 
 class VerificationSuccess extends VerificationEvent {
-
   final VerificationType type;
   final String data;
 

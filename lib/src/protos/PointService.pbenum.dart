@@ -10,20 +10,20 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 class PointAlterReason extends $pb.ProtobufEnum {
-  static const PointAlterReason UNKNOWN_PointPlusReason = PointAlterReason._(0, 'UNKNOWN_PointPlusReason');
+  static const PointAlterReason UNKNOWN_POINT_ALTER_REASON = PointAlterReason._(0, 'UNKNOWN_POINT_ALTER_REASON');
   static const PointAlterReason DEPOSIT = PointAlterReason._(1, 'DEPOSIT');
   static const PointAlterReason WITHDRAW = PointAlterReason._(2, 'WITHDRAW');
-  static const PointAlterReason COMPLETE_MISSION = PointAlterReason._(3, 'COMPLETE_MISSION');
-  static const PointAlterReason REQUSET_MISSION = PointAlterReason._(4, 'REQUSET_MISSION');
+  static const PointAlterReason COMPLETED_MISSION = PointAlterReason._(3, 'COMPLETED_MISSION');
+  static const PointAlterReason REQUEST_MISSION = PointAlterReason._(4, 'REQUEST_MISSION');
   static const PointAlterReason PLUS_EVENT = PointAlterReason._(5, 'PLUS_EVENT');
   static const PointAlterReason MINUS_EVENT = PointAlterReason._(6, 'MINUS_EVENT');
 
   static const $core.List<PointAlterReason> values = <PointAlterReason> [
-    UNKNOWN_PointPlusReason,
+    UNKNOWN_POINT_ALTER_REASON,
     DEPOSIT,
     WITHDRAW,
-    COMPLETE_MISSION,
-    REQUSET_MISSION,
+    COMPLETED_MISSION,
+    REQUEST_MISSION,
     PLUS_EVENT,
     MINUS_EVENT,
   ];

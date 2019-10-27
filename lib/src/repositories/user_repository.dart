@@ -8,22 +8,16 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserRepository {
-
   final GoogleSignIn _googleSignIn;
   final FirebaseAuth _firebaseAuth;
   final AuthService _authService;
   final UserService _userService;
 
-  UserRepository({
-    GoogleSignIn googleSignIn,
-    AuthService authService,
-    UserService userService,
-    FirebaseAuth firebaseAuth
-  }) : _googleSignIn = googleSignIn ?? GoogleSignIn(),
+  UserRepository({GoogleSignIn googleSignIn, AuthService authService, UserService userService, FirebaseAuth firebaseAuth})
+      : _googleSignIn = googleSignIn ?? GoogleSignIn(),
         _firebaseAuth = FirebaseAuth.instance,
         _authService = authService ?? AuthService.init(),
         _userService = userService ?? UserService.init();
-
 
   Future<SignInResponse> signInWithGoogle() async {
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
@@ -38,11 +32,7 @@ class UserRepository {
     assert(user.email != null);
     assert(!user.isAnonymous);
 
-    return _authService.signInWithGoogle(
-      email: user.email,
-      password: user.uid,
-      profileImageUrl: user.photoUrl
-    );
+    return _authService.signInWithGoogle(email: user.email, password: user.uid, profileImageUrl: user.photoUrl);
   }
 
   Future<SignInResponse> signInWithEmail(String email, String password) async {
@@ -53,12 +43,7 @@ class UserRepository {
   }
 
   Future<SignUpResponse> signUpWithEmail({String email, String password, bool agreeWithTerms}) async {
-    return await _authService.signUp(
-      email: email,
-      password: password,
-      agreeWithTerms: agreeWithTerms,
-      accountType: AccountType.EMAIL
-    );
+    return await _authService.signUp(email: email, password: password, agreeWithTerms: agreeWithTerms, accountType: AccountType.EMAIL);
   }
 
   Future<FindPasswordResponse> findPassword({String email}) async {
@@ -67,13 +52,6 @@ class UserRepository {
 
   Future<SignInResponse> signInWithToken({String accessToken}) async {
     return await _authService.signInWithToken(accessToken: accessToken);
-  }
-
-  Future<void> signOut() async {
-    return Future.wait([
-      // TODO gRPC Signout 필요
-      _googleSignIn.signOut(),
-    ]);
   }
 
   Future<LookUpAuthInfoResponse> lookUpAuthInfo({String accessToken}) async {
@@ -86,7 +64,7 @@ class UserRepository {
 
   Future<String> getAccessToken() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    return preferences.getString('ticket')?? "";
+    return preferences.getString('ticket') ?? "";
   }
 
   Future<bool> hasToken() async {
@@ -96,6 +74,13 @@ class UserRepository {
   Future<void> persistToken(String token) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setString("ticket", token);
+    return;
+  }
+
+  Future<void> signOut() async {
+    await _googleSignIn.signOut();
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.remove("ticket");
     return;
   }
 

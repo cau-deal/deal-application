@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:deal/src/blocs/auth/bloc.dart';
 import 'package:deal/src/custom/modules/validators.dart';
@@ -11,24 +12,21 @@ import 'package:rxdart/rxdart.dart';
 import 'bloc.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
-
   final UserRepository userRepository;
   final AuthenticationBloc authenticationBloc;
 
-  RegisterBloc({
-    @required this.userRepository,
-    @required this.authenticationBloc
-  }) : assert(userRepository != null), assert(authenticationBloc != null);
+  RegisterBloc({@required this.userRepository, @required this.authenticationBloc})
+      : assert(userRepository != null),
+        assert(authenticationBloc != null);
 
   @override
   RegisterState get initialState => RegisterState.empty();
 
   @override
   Stream<RegisterState> transformEvents(
-      Stream<RegisterEvent> events,
-      Stream<RegisterState> Function(RegisterEvent event) next,
-      ) {
-
+    Stream<RegisterEvent> events,
+    Stream<RegisterState> Function(RegisterEvent event) next,
+  ) {
     final observableStream = events as Observable<RegisterEvent>;
     final nonDebounceStream = observableStream.where((event) {
       return (event is! EmailChanged && event is! PasswordChanged && event is! Password2Changed);
@@ -43,15 +41,15 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   @override
   Stream<RegisterState> mapEventToState(
-      RegisterEvent event,
-      ) async* {
+    RegisterEvent event,
+  ) async* {
     if (event is EmailChanged) {
       yield* _mapEmailChangedToState(event.email);
     } else if (event is PasswordChanged) {
       yield* _mapPasswordChangedToState(event.password);
-    } else if (event is Password2Changed){
+    } else if (event is Password2Changed) {
       yield* _mapPassword2ChangedToState(event.password1, event.password2);
-    } else if (event is AgreementChanged){
+    } else if (event is AgreementChanged) {
       yield* _mapAgreementChangedToState(event.checked);
     } else if (event is Submitted) {
       yield* _mapFormSubmittedToState(event.email, event.password, event.agreeWithTerms);
@@ -59,54 +57,43 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   }
 
   Stream<RegisterState> _mapEmailChangedToState(String email) async* {
-    yield currentState.update(
+    yield state.update(
       isEmailValid: Validators.isValidEmail(email),
     );
   }
 
   Stream<RegisterState> _mapPasswordChangedToState(String password) async* {
-    yield currentState.update(
+    yield state.update(
       isPasswordValid: Validators.isValidPassword(password),
     );
   }
 
   Stream<RegisterState> _mapPassword2ChangedToState(String password1, String password2) async* {
-    yield currentState.update(
+    yield state.update(
       isSamePassword: Validators.isSamePassword(password1, password2),
     );
   }
 
   Stream<RegisterState> _mapAgreementChangedToState(bool checked) async* {
-    yield currentState.update(
-      isAgreeWithTerm: checked
-    );
+    yield state.update(isAgreeWithTerm: checked);
   }
 
-  Stream<RegisterState> _mapFormSubmittedToState(
-      String email,
-      String password,
-      bool agreeWithTerms
-      ) async* {
-
+  Stream<RegisterState> _mapFormSubmittedToState(String email, String password, bool agreeWithTerms) async* {
     yield RegisterState.loading();
 
     try {
       bool isValid = false;
-      SignUpResponse res = await userRepository.signUpWithEmail(
-        email: email,
-        password: password,
-        agreeWithTerms: agreeWithTerms
-      );
+      SignUpResponse res = await userRepository.signUpWithEmail(email: email, password: password, agreeWithTerms: agreeWithTerms);
 
       isValid = res.result.resultCode == ResultCode.SUCCESS;
 
-      if(isValid){ authenticationBloc.dispatch(LoggedIn(token: res.jwt[0])); }
+      if (isValid) {
+        authenticationBloc.add(LoggedIn(token: res.jwt[0]));
+      }
 
-      yield isValid? RegisterState.success() : RegisterState.failure();
-
+      yield isValid ? RegisterState.success() : RegisterState.failure();
     } catch (_) {
       yield RegisterState.failure();
     }
   }
-
 }

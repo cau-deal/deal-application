@@ -10,27 +10,19 @@ import 'package:meta/meta.dart';
 import 'base_service.dart';
 
 class AuthService extends BaseService {
-
   AuthServiceClient client;
 
-  AuthService({ @required this.client }):assert(client != null), super();
+  AuthService({@required this.client})
+      : assert(client != null),
+        super();
 
   static Future<AuthService> init() async {
-    AuthServiceClient client = AuthServiceClient(
-      await GrpcClientSingleton.instance.channel,
-      options: CallOptions(
-          timeout: Duration(seconds: 10),
-          metadata: { "ticket": "jwtjwt" }
-      )
-    );
+    AuthServiceClient client =
+        AuthServiceClient(await GrpcClientSingleton.instance.channel, options: CallOptions(timeout: Duration(seconds: 10), metadata: {"ticket": "jwtjwt"}));
     return AuthService(client: client);
   }
 
-
-  Future<SignInResponse> signInWithCredential({
-    String email, String password
-  }) async {
-
+  Future<SignInResponse> signInWithCredential({String email, String password}) async {
     SignInResponse res = SignInResponse();
 
     try {
@@ -38,8 +30,7 @@ class AuthService extends BaseService {
       req.email = email;
       req.password = password;
       res = await client.signInWithCredential(req);
-
-    } catch(e){
+    } catch (e) {
       print(e.toString());
     }
 
@@ -47,28 +38,19 @@ class AuthService extends BaseService {
   }
 
   Future<SignInResponse> signInWithToken({String accessToken}) async {
-
     SignInResponse res = SignInResponse();
 
     try {
       Empty req = Empty();
-      res = await client.signInWithToken(req,
-          options: CallOptions(metadata: {'ticket':accessToken})
-      );
-
-    } catch(e){
+      res = await client.signInWithToken(req, options: CallOptions(metadata: {'ticket': accessToken}));
+    } catch (e) {
       print(e.toString());
     }
 
     return res;
   }
 
-  Future<SignInResponse> signInWithGoogle({
-    String email,
-    String password,
-    String profileImageUrl
-  }) async {
-
+  Future<SignInResponse> signInWithGoogle({String email, String password, String profileImageUrl}) async {
     SignInResponse res = SignInResponse();
 
     try {
@@ -81,19 +63,14 @@ class AuthService extends BaseService {
       req.profile.profileImage = profileImageUrl;
 
       res = await client.signInWithGoogle(req);
-
-    } catch(e){
+    } catch (e) {
       print(e.toString());
     }
 
     return res;
   }
 
-
-  Future<SignUpResponse> signUp({
-    String email, String password, bool agreeWithTerms, AccountType accountType
-  }) async {
-
+  Future<SignUpResponse> signUp({String email, String password, bool agreeWithTerms, AccountType accountType}) async {
     try {
       SignUpRequest req = SignUpRequest();
       req.email = email;
@@ -102,30 +79,29 @@ class AuthService extends BaseService {
       req.type = accountType;
       req.platform = Platform.isAndroid ? PlatformType.ANDROID : PlatformType.IOS;
       return await client.signUp(req);
-
-    } catch(e) {
+    } catch (e) {
       print(e.toString());
       throw Exception(e.toString());
     }
   }
 
+  Future<void> signOut() async {
+    try {} catch (e) {
+      print(e.toString());
+    }
+  }
 
-  Future<FindPasswordResponse> findPassword({
-    String email
-  }) async {
-
+  Future<FindPasswordResponse> findPassword({String email}) async {
     FindPasswordResponse res = FindPasswordResponse();
 
     try {
       FindPasswordRequest req = FindPasswordRequest();
       req.email = email;
       res = await client.findPassword(req);
-
-    } catch(e){
+    } catch (e) {
       print(e.toString());
     }
 
     return res;
   }
-
 }

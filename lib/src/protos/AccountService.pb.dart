@@ -51,8 +51,8 @@ class AccountAuthRequest extends $pb.GeneratedMessage {
 class Account extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('Account', createEmptyInstance: create)
     ..aOS(1, 'accountNum')
-    ..aOS(2, 'name')
-    ..e<BANK>(3, 'bank', $pb.PbFieldType.OE, defaultOrMaker: BANK.UNKNOWN_BANK, valueOf: BANK.valueOf, enumValues: BANK.values)
+    ..e<BANK>(2, 'bank', $pb.PbFieldType.OE, defaultOrMaker: BANK.UNKNOWN_BANK, valueOf: BANK.valueOf, enumValues: BANK.values)
+    ..aOS(3, 'accountHolderInfo')
     ..hasRequiredFields = false
   ;
 
@@ -81,22 +81,22 @@ class Account extends $pb.GeneratedMessage {
   void clearAccountNum() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get name => $_getSZ(1);
+  BANK get bank => $_getN(1);
   @$pb.TagNumber(2)
-  set name($core.String v) { $_setString(1, v); }
+  set bank(BANK v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasName() => $_has(1);
+  $core.bool hasBank() => $_has(1);
   @$pb.TagNumber(2)
-  void clearName() => clearField(2);
+  void clearBank() => clearField(2);
 
   @$pb.TagNumber(3)
-  BANK get bank => $_getN(2);
+  $core.String get accountHolderInfo => $_getSZ(2);
   @$pb.TagNumber(3)
-  set bank(BANK v) { setField(3, v); }
+  set accountHolderInfo($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasBank() => $_has(2);
+  $core.bool hasAccountHolderInfo() => $_has(2);
   @$pb.TagNumber(3)
-  void clearBank() => clearField(3);
+  void clearAccountHolderInfo() => clearField(3);
 }
 
 class AccountAuthResponse extends $pb.GeneratedMessage {

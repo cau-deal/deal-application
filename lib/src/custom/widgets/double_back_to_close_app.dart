@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:deal/generated/i18n.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-
 class DoubleBackToCloseApp extends StatefulWidget {
-
   final Widget child;
   final Duration duration;
   final String text;
@@ -14,21 +12,17 @@ class DoubleBackToCloseApp extends StatefulWidget {
     @required this.child,
     this.text,
     this.duration = const Duration(seconds: 4000),
-  }) : assert(child != null),
+  })  : assert(child != null),
         super(key: key);
   @override
   DoubleBackToCloseAppState createState() => DoubleBackToCloseAppState();
 }
 
-
 class DoubleBackToCloseAppState extends State<DoubleBackToCloseApp> {
-
   DateTime lastTimeBackButtonWasTapped;
 
   bool get isAndroid => Theme.of(context).platform == TargetPlatform.android;
-  bool get isVisible =>
-      (lastTimeBackButtonWasTapped == null) ||
-          (DateTime.now().difference(lastTimeBackButtonWasTapped) > widget.duration);
+  bool get isVisible => (lastTimeBackButtonWasTapped == null) || (DateTime.now().difference(lastTimeBackButtonWasTapped) > widget.duration);
 
   @override
   Widget build(BuildContext context) {

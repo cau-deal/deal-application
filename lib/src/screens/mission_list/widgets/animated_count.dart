@@ -22,9 +22,7 @@ class _AnimatedCountState extends AnimatedWidgetBaseState<AnimatedCount> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.count is int
-        ? Text(_intCount.evaluate(animation).toString())
-        : Text(_doubleCount.evaluate(animation).toStringAsFixed(1));
+    return widget.count is int ? Text(_intCount.evaluate(animation).toString()) : Text(_doubleCount.evaluate(animation).toStringAsFixed(1));
   }
 
   @override
@@ -33,13 +31,13 @@ class _AnimatedCountState extends AnimatedWidgetBaseState<AnimatedCount> {
       _intCount = visitor(
         _intCount,
         widget.count,
-            (dynamic value) => IntTween(begin: value),
+        (dynamic value) => IntTween(begin: value),
       );
     } else {
       _doubleCount = visitor(
         _doubleCount,
         widget.count,
-            (dynamic value) => Tween<double>(begin: value),
+        (dynamic value) => Tween<double>(begin: value),
       );
     }
   }

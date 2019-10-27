@@ -15,6 +15,7 @@ class MissionState extends $pb.ProtobufEnum {
   static const MissionState SOLD_OUT = MissionState._(2, 'SOLD_OUT');
   static const MissionState WATING_CONFIRM_PURCHASE = MissionState._(3, 'WATING_CONFIRM_PURCHASE');
   static const MissionState COMPLETE_MISSION = MissionState._(4, 'COMPLETE_MISSION');
+  static const MissionState WATRING_REGISTER = MissionState._(5, 'WATRING_REGISTER');
 
   static const $core.List<MissionState> values = <MissionState> [
     UNKNOWN_MISSION_STATE,
@@ -22,6 +23,7 @@ class MissionState extends $pb.ProtobufEnum {
     SOLD_OUT,
     WATING_CONFIRM_PURCHASE,
     COMPLETE_MISSION,
+    WATRING_REGISTER,
   ];
 
   static final $core.Map<$core.int, MissionState> _byValue = $pb.ProtobufEnum.initByValue(values);
@@ -140,25 +142,6 @@ class SubmitResult extends $pb.ProtobufEnum {
   static SubmitResult valueOf($core.int value) => _byValue[value];
 
   const SubmitResult._($core.int v, $core.String n) : super(v, n);
-}
-
-class RelevantType extends $pb.ProtobufEnum {
-  static const RelevantType UNKNOWN_RELEVANT_TYPE = RelevantType._(0, 'UNKNOWN_RELEVANT_TYPE');
-  static const RelevantType ALL_RELEVANT_TYPE = RelevantType._(1, 'ALL_RELEVANT_TYPE');
-  static const RelevantType PROCESSING_RELEVANT_TYPE = RelevantType._(2, 'PROCESSING_RELEVANT_TYPE');
-  static const RelevantType REGISTER_RELEVANT_TYPE = RelevantType._(3, 'REGISTER_RELEVANT_TYPE');
-
-  static const $core.List<RelevantType> values = <RelevantType> [
-    UNKNOWN_RELEVANT_TYPE,
-    ALL_RELEVANT_TYPE,
-    PROCESSING_RELEVANT_TYPE,
-    REGISTER_RELEVANT_TYPE,
-  ];
-
-  static final $core.Map<$core.int, RelevantType> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static RelevantType valueOf($core.int value) => _byValue[value];
-
-  const RelevantType._($core.int v, $core.String n) : super(v, n);
 }
 
 class MissionPageMode extends $pb.ProtobufEnum {

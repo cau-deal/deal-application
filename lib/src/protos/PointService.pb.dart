@@ -189,7 +189,7 @@ class Withdraw extends $pb.GeneratedMessage {
 class PointHistory extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('PointHistory', createEmptyInstance: create)
     ..aInt64(1, 'val')
-    ..e<PointAlterReason>(2, 'pointAlterReason', $pb.PbFieldType.OE, defaultOrMaker: PointAlterReason.UNKNOWN_PointPlusReason, valueOf: PointAlterReason.valueOf, enumValues: PointAlterReason.values)
+    ..e<PointAlterReason>(2, 'pointAlterReason', $pb.PbFieldType.OE, defaultOrMaker: PointAlterReason.UNKNOWN_POINT_ALTER_REASON, valueOf: PointAlterReason.valueOf, enumValues: PointAlterReason.values)
     ..aOM<$2.Datetime>(3, 'createdAt', subBuilder: $2.Datetime.create)
     ..hasRequiredFields = false
   ;
@@ -322,7 +322,7 @@ class LookUpPointHistoryResponse extends $pb.GeneratedMessage {
 class DepositResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('DepositResponse', createEmptyInstance: create)
     ..aOM<$3.CommonResult>(1, 'result', subBuilder: $3.CommonResult.create)
-    ..e<DepositResult>(2, 'depositeResult', $pb.PbFieldType.OE, defaultOrMaker: DepositResult.UNKNOWN_DEPOSIT_RESULT, valueOf: DepositResult.valueOf, enumValues: DepositResult.values)
+    ..e<DepositResult>(2, 'depositResult', $pb.PbFieldType.OE, defaultOrMaker: DepositResult.UNKNOWN_DEPOSIT_RESULT, valueOf: DepositResult.valueOf, enumValues: DepositResult.values)
     ..hasRequiredFields = false
   ;
 
@@ -353,13 +353,13 @@ class DepositResponse extends $pb.GeneratedMessage {
   $3.CommonResult ensureResult() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  DepositResult get depositeResult => $_getN(1);
+  DepositResult get depositResult => $_getN(1);
   @$pb.TagNumber(2)
-  set depositeResult(DepositResult v) { setField(2, v); }
+  set depositResult(DepositResult v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasDepositeResult() => $_has(1);
+  $core.bool hasDepositResult() => $_has(1);
   @$pb.TagNumber(2)
-  void clearDepositeResult() => clearField(2);
+  void clearDepositResult() => clearField(2);
 }
 
 class WithdrawResponse extends $pb.GeneratedMessage {
@@ -403,5 +403,48 @@ class WithdrawResponse extends $pb.GeneratedMessage {
   $core.bool hasWithdrawResult() => $_has(1);
   @$pb.TagNumber(2)
   void clearWithdrawResult() => clearField(2);
+}
+
+class LookUpEarnForADayResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('LookUpEarnForADayResponse', createEmptyInstance: create)
+    ..aOM<$3.CommonResult>(1, 'result', subBuilder: $3.CommonResult.create)
+    ..aInt64(2, 'val')
+    ..hasRequiredFields = false
+  ;
+
+  LookUpEarnForADayResponse._() : super();
+  factory LookUpEarnForADayResponse() => create();
+  factory LookUpEarnForADayResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory LookUpEarnForADayResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  LookUpEarnForADayResponse clone() => LookUpEarnForADayResponse()..mergeFromMessage(this);
+  LookUpEarnForADayResponse copyWith(void Function(LookUpEarnForADayResponse) updates) => super.copyWith((message) => updates(message as LookUpEarnForADayResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static LookUpEarnForADayResponse create() => LookUpEarnForADayResponse._();
+  LookUpEarnForADayResponse createEmptyInstance() => create();
+  static $pb.PbList<LookUpEarnForADayResponse> createRepeated() => $pb.PbList<LookUpEarnForADayResponse>();
+  @$core.pragma('dart2js:noInline')
+  static LookUpEarnForADayResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LookUpEarnForADayResponse>(create);
+  static LookUpEarnForADayResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $3.CommonResult get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result($3.CommonResult v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  $3.CommonResult ensureResult() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get val => $_getI64(1);
+  @$pb.TagNumber(2)
+  set val($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasVal() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearVal() => clearField(2);
 }
 

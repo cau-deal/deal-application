@@ -1,5 +1,5 @@
-import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 abstract class InquiryEvent extends Equatable {
@@ -28,8 +28,7 @@ class Submitted extends InquiryEvent {
   final String title;
   final String contents;
 
-  Submitted({@required this.title, @required this.contents})
-      : super([title, contents]);
+  Submitted({@required this.title, @required this.contents}) : super([title, contents]);
 
   @override
   String toString() {

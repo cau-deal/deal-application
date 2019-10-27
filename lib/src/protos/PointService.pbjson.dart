@@ -8,11 +8,11 @@
 const PointAlterReason$json = const {
   '1': 'PointAlterReason',
   '2': const [
-    const {'1': 'UNKNOWN_PointPlusReason', '2': 0},
+    const {'1': 'UNKNOWN_POINT_ALTER_REASON', '2': 0},
     const {'1': 'DEPOSIT', '2': 1},
     const {'1': 'WITHDRAW', '2': 2},
-    const {'1': 'COMPLETE_MISSION', '2': 3},
-    const {'1': 'REQUSET_MISSION', '2': 4},
+    const {'1': 'COMPLETED_MISSION', '2': 3},
+    const {'1': 'REQUEST_MISSION', '2': 4},
     const {'1': 'PLUS_EVENT', '2': 5},
     const {'1': 'MINUS_EVENT', '2': 6},
   ],
@@ -110,7 +110,7 @@ const DepositResponse$json = const {
   '1': 'DepositResponse',
   '2': const [
     const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
-    const {'1': 'deposite_result', '3': 2, '4': 1, '5': 14, '6': '.DepositResult', '10': 'depositeResult'},
+    const {'1': 'deposit_result', '3': 2, '4': 1, '5': 14, '6': '.DepositResult', '10': 'depositResult'},
   ],
 };
 
@@ -119,6 +119,14 @@ const WithdrawResponse$json = const {
   '2': const [
     const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
     const {'1': 'withdraw_result', '3': 2, '4': 1, '5': 14, '6': '.WithdrawResult', '10': 'withdrawResult'},
+  ],
+};
+
+const LookUpEarnForADayResponse$json = const {
+  '1': 'LookUpEarnForADayResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
+    const {'1': 'val', '3': 2, '4': 1, '5': 3, '10': 'val'},
   ],
 };
 

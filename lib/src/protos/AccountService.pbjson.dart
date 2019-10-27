@@ -37,8 +37,8 @@ const Account$json = const {
   '1': 'Account',
   '2': const [
     const {'1': 'account_num', '3': 1, '4': 1, '5': 9, '10': 'accountNum'},
-    const {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    const {'1': 'bank', '3': 3, '4': 1, '5': 14, '6': '.BANK', '10': 'bank'},
+    const {'1': 'bank', '3': 2, '4': 1, '5': 14, '6': '.BANK', '10': 'bank'},
+    const {'1': 'account_holder_info', '3': 3, '4': 1, '5': 9, '10': 'accountHolderInfo'},
   ],
 };
 

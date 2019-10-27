@@ -19,7 +19,7 @@ class Authenticating extends AuthenticationState {
 class Authenticated extends AuthenticationState {
   final String accessToken;
 
-  Authenticated({ this.accessToken }) : super([accessToken]);
+  Authenticated({this.accessToken}) : super([accessToken]);
 
   @override
   List<Object> get props => [accessToken];

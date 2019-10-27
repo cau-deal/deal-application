@@ -1,16 +1,12 @@
-import 'dart:convert';
-
+import 'package:bloc/bloc.dart';
 import 'package:deal/src/blocs/inquiry_history/bloc.dart';
 import 'package:deal/src/protos/CommonResult.pb.dart';
 import 'package:deal/src/protos/DealService.pbgrpc.dart';
 import 'package:deal/src/repositories/deal_repository.dart';
 import 'package:deal/src/repositories/user_repository.dart';
-import 'package:deal/src/services/deal_service.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:bloc/bloc.dart';
 
 class InquiryHistoryBloc extends Bloc<InquiryHistoryEvent, InquiryHistoryState> {
-
   final DealRepository dealRepository;
   final UserRepository userRepository;
 
@@ -18,9 +14,9 @@ class InquiryHistoryBloc extends Bloc<InquiryHistoryEvent, InquiryHistoryState> 
 
   @override
   Stream<InquiryHistoryState> transformEvents(
-      Stream<InquiryHistoryEvent> events,
-      Stream<InquiryHistoryState> Function(InquiryHistoryEvent event) next,
-      ) {
+    Stream<InquiryHistoryEvent> events,
+    Stream<InquiryHistoryState> Function(InquiryHistoryEvent event) next,
+  ) {
     return super.transformEvents(
       (events as Observable<InquiryHistoryEvent>).debounceTime(
         Duration(milliseconds: 500),
@@ -34,10 +30,9 @@ class InquiryHistoryBloc extends Bloc<InquiryHistoryEvent, InquiryHistoryState> 
 
   @override
   Stream<InquiryHistoryState> mapEventToState(event) async* {
-
-    if (event is Fetch && !_hasReachedMax(currentState)) {
+    if (event is Fetch && !_hasReachedMax(state)) {
       try {
-        if (currentState is InquiryUninitialized) {
+        if (state is InquiryUninitialized) {
           final inquiries = await _fetchHistory(0, 20);
           yield InquiryLoaded(inquiries: inquiries, hasReachedMax: true);
         }
@@ -51,18 +46,16 @@ class InquiryHistoryBloc extends Bloc<InquiryHistoryEvent, InquiryHistoryState> 
         }*/
 
       } catch (_) {
+        print(_.toString());
         yield InquiryError();
       }
     }
-
   }
 
   bool _hasReachedMax(InquiryHistoryState state) => state is InquiryLoaded && state.hasReachedMax;
 
   Future<List<InquiryWithAnswer>> _fetchHistory(int startIndex, int limit) async {
-    final LookUpInquiryResponse res = await dealRepository.fetchInquiryHistory(
-        await userRepository.getAccessToken()
-    );
+    final LookUpInquiryResponse res = await dealRepository.fetchInquiryHistory(await userRepository.getAccessToken());
 
     if (res.result.resultCode == ResultCode.SUCCESS) {
       return res.inquiries;

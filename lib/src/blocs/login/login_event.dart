@@ -1,5 +1,5 @@
-import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 abstract class LoginEvent extends Equatable {
@@ -28,8 +28,7 @@ class Submitted extends LoginEvent {
   final String email;
   final String password;
 
-  Submitted({@required this.email, @required this.password})
-      : super([email, password]);
+  Submitted({@required this.email, @required this.password}) : super([email, password]);
 
   @override
   String toString() {
@@ -46,8 +45,7 @@ class LoginWithCredentialsPressed extends LoginEvent {
   final String email;
   final String password;
 
-  LoginWithCredentialsPressed({@required this.email, @required this.password})
-      : super([email, password]);
+  LoginWithCredentialsPressed({@required this.email, @required this.password}) : super([email, password]);
 
   @override
   String toString() {

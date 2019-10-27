@@ -8,13 +8,12 @@ abstract class VerificationState extends Equatable {
 }
 
 class Verified extends VerificationState {
-
   final bool accountVerified;
   final bool phoneVerified;
 
   final Profile profile;
 
-  Verified({ this.accountVerified, this.phoneVerified, this.profile });
+  Verified({this.accountVerified, this.phoneVerified, this.profile});
 
   @override
   String toString() => 'Verified';
@@ -26,7 +25,6 @@ class Verifying extends VerificationState {
 }
 
 class UnVerified extends VerificationState {
-
   final String userEmail;
 
   UnVerified({this.userEmail});

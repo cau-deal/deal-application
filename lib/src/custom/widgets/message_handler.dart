@@ -1,23 +1,17 @@
-import 'package:flutter/material.dart';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-
-
-
 class MessageHandler extends StatefulWidget {
-
   final Widget child;
 
-  MessageHandler({ @required this.child });
+  MessageHandler({@required this.child});
 
   @override
   _MessageHandlerState createState() => _MessageHandlerState();
 }
 
 class _MessageHandlerState extends State<MessageHandler> {
-
   String _homeScreenText = "Waiting for token...";
   bool _newNotification = false;
 
@@ -25,7 +19,6 @@ class _MessageHandlerState extends State<MessageHandler> {
 
   @override
   void initState() {
-
     super.initState();
 
     _firebaseMessaging.configure(
@@ -48,7 +41,6 @@ class _MessageHandlerState extends State<MessageHandler> {
             ],
           ),
         );
-
       },
       onLaunch: (Map<String, dynamic> message) async {
         print("onLaunch: $message");
@@ -59,8 +51,7 @@ class _MessageHandlerState extends State<MessageHandler> {
     );
 
     //Needed by iOS only
-    _firebaseMessaging.requestNotificationPermissions(
-        const IosNotificationSettings(sound: true, badge: true, alert: true));
+    _firebaseMessaging.requestNotificationPermissions(const IosNotificationSettings(sound: true, badge: true, alert: true));
     _firebaseMessaging.onIosSettingsRegistered.listen((IosNotificationSettings settings) {
       print("Settings registered: $settings");
     });
@@ -77,9 +68,6 @@ class _MessageHandlerState extends State<MessageHandler> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: widget.child
-    );
+    return Scaffold(body: widget.child);
   }
-
 }

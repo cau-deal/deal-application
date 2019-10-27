@@ -1,10 +1,9 @@
 import 'dart:io';
 
-import 'package:grpc/grpc.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:grpc/grpc.dart';
 
 class GrpcClientSingleton {
-
   static final GrpcClientSingleton _singleton = new GrpcClientSingleton._internal();
   GrpcClientSingleton._internal();
   static GrpcClientSingleton get instance => _singleton;
@@ -12,25 +11,22 @@ class GrpcClientSingleton {
   static ClientChannel _channel;
 
   Future<ClientChannel> get channel async {
-    if( _channel != null ) return _channel;
+    if (_channel != null) return _channel;
 
     final file = await rootBundle.load('res/grpc/public.crt');
     final trustedRoot = file.buffer.asUint8List(file.offsetInBytes, file.lengthInBytes);
     final channelCredentials = ChannelCredentials.secure(certificates: trustedRoot);
 
     _channel = ClientChannel(
-//        "13.209.87.117",
         "grpc.snhyun.me",
         port: 9091,
         options: ChannelOptions(
           credentials: channelCredentials,
-          userAgent: Platform.isAndroid? "DEAL-ANDROID" : "DEAL-IOS",
+          userAgent: Platform.isAndroid ? "DEAL-ANDROID" : "DEAL-IOS",
           connectionTimeout: Duration(seconds: 30),
           idleTimeout: Duration(seconds: 30),
-        )
-    );
+        ));
 
     return _channel;
   }
-
 }

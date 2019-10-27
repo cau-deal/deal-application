@@ -11,7 +11,7 @@ class EntryItem extends StatelessWidget {
     if (root.children.isEmpty) return ListTile(title: Text(root.title));
     return ExpansionTile(
       key: PageStorageKey<Entry>(root),
-      title: Text(root.title, style:TextStyle(color: Colors.black54)),
+      title: Text(root.title, style: TextStyle(color: Colors.black54)),
       children: root.children.map(_buildTiles).toList(),
     );
   }

@@ -1,11 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:deal/generated/i18n.dart';
-
 import 'package:deal/src/custom/widgets/tall_height_app_bar_container.dart';
+import 'package:flutter/material.dart';
 
 import 'widgets/Entry.dart';
 import 'widgets/EntryItem.dart';
-
 
 final List<Entry> data = <Entry>[
   Entry(
@@ -41,24 +39,18 @@ final List<Entry> data = <Entry>[
 ];
 
 class AgreementsPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext ctx) {
     return new TallHeightAppBarContainer(
-      text: S.of(ctx).title_agreements,
-      icon: Icons.close,
-      iconSize: 22.0,
-      child: Container(
-        padding: EdgeInsets.only(left: 42, right: 32),
+        text: S.of(ctx).title_agreements,
+        icon: Icons.close,
+        iconSize: 22.0,
         child: Container(
+            padding: EdgeInsets.only(left: 42, right: 32),
+            child: Container(
 //          color: Colors.pinkAccent,
-          margin: EdgeInsets.only(top: 0),
-          child: ListView.builder(
-              itemBuilder: (BuildContext ctx, int idx) => EntryItem(data[idx]),
-              itemCount: data.length
-          ),
-        )
-      )
-    );
+              margin: EdgeInsets.only(top: 0),
+              child: ListView.builder(itemBuilder: (BuildContext ctx, int idx) => EntryItem(data[idx]), itemCount: data.length),
+            )));
   }
 }

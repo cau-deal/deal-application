@@ -2,7 +2,6 @@ import 'package:meta/meta.dart';
 
 @immutable
 class RegisterState {
-
   final bool isEmailValid;
   final bool isPasswordValid;
   final bool isAgreeWithTerm;

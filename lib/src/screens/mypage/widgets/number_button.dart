@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class LabelNumberButton extends StatelessWidget {
-
   final String title;
   final int number;
   final Function() onPressed;
@@ -14,6 +14,9 @@ class LabelNumberButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext ctx) {
+
+    final formatCurrency = NumberFormat('###,###,###,###');
+
     return ButtonTheme(
         height: 46,
         minWidth: double.infinity,
@@ -23,12 +26,16 @@ class LabelNumberButton extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Align(alignment:Alignment.centerLeft, child: Text(this.title, style: TextStyle(fontSize: 12))),
+                Align(alignment: Alignment.centerLeft, child: Text(
+                    this.title,
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500))
+                ),
                 SizedBox(height: 3),
-                Align(alignment:Alignment.centerLeft, child: Text('${this.number}', style: TextStyle(fontSize: 12)))
+                Align(alignment: Alignment.centerLeft, child: Text(
+                    '${formatCurrency.format(this.number)}',
+                    style: TextStyle(fontSize: 12))
+                )
               ],
-            )
-        )
-    );
+            )));
   }
 }

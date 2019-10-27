@@ -15,13 +15,7 @@ class PreferenceCustomSwitch extends StatefulWidget {
   final Function onChange;
 
   PreferenceCustomSwitch(this.title, this.localKey,
-      {this.desc,
-        this.defaultVal = false,
-        this.ignoreTileTap = false,
-        this.resetOnException = true,
-        this.onEnable,
-        this.onDisable,
-        this.onChange});
+      {this.desc, this.defaultVal = false, this.ignoreTileTap = false, this.resetOnException = true, this.onEnable, this.onDisable, this.onChange});
 
   _PreferenceCustomSwitchState createState() => _PreferenceCustomSwitchState();
 }
@@ -30,8 +24,7 @@ class _PreferenceCustomSwitchState extends State<PreferenceCustomSwitch> {
   @override
   void initState() {
     super.initState();
-    if (PrefService.getBool(widget.localKey) == null)
-      PrefService.setBool(widget.localKey, widget.defaultVal);
+    if (PrefService.getBool(widget.localKey) == null) PrefService.setBool(widget.localKey, widget.defaultVal);
   }
 
   @override
@@ -43,11 +36,7 @@ class _PreferenceCustomSwitchState extends State<PreferenceCustomSwitch> {
         value: PrefService.getBool(widget.localKey) ?? widget.defaultVal,
         onChanged: (val) => val ? onEnable() : onDisable(),
       ),
-      onTap: widget.ignoreTileTap
-          ? null
-          : () => (PrefService.getBool(widget.localKey) ?? widget.defaultVal)
-          ? onDisable()
-          : onEnable(),
+      onTap: widget.ignoreTileTap ? null : () => (PrefService.getBool(widget.localKey) ?? widget.defaultVal) ? onDisable() : onEnable(),
     );
   }
 
