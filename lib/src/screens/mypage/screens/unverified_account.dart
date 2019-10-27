@@ -25,7 +25,7 @@ class UnverifiedAccountPageState extends State<UnverifiedAccountPage> {
                 Image.asset("res/images/logo-grey-won.png", height: 150),
                 SizedBox(height: 20),
                 Text(
-                  "포인트 출금을 위해서는\n계좌 연동이 필요합니다.",
+                  "포인트 조회를 위해서는\n계좌 연동이 필요합니다.",
                   style: TextStyle(color: Color(0xff909090), fontFamily: "NanumSquare", fontSize: 16, letterSpacing: -0.5, height: 1.5),
                   textAlign: TextAlign.center,
                 ),

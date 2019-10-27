@@ -1,6 +1,7 @@
 import 'package:deal/src/blocs/point_history/bloc.dart';
 import 'package:deal/src/blocs/verified/bloc.dart';
 import 'package:deal/src/screens/exception/no_result.dart';
+import 'package:deal/src/screens/mypage/screens/unverified_account.dart';
 import 'package:deal/src/screens/mypage/screens/unverified_phone.dart';
 import 'package:deal/src/screens/mypage/widgets/point_history_tile.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class MyPointHistoryPageState extends State<MyPointHistoryPage> {
         context: context,
         removeTop: true,
         child: BlocBuilder<VerificationBloc, VerificationState>(builder: (ctx, vs) {
-          if (vs is Verified && vs.phoneVerified) {
+          if (vs is Verified && vs.accountVerified) {
 
             return BlocBuilder<PointHistoryBloc, PointHistoryState>(
               builder: (ctx, state){
@@ -74,6 +75,9 @@ class MyPointHistoryPageState extends State<MyPointHistoryPage> {
                 }
               },
             );
+
+          } else if (vs is Verified && vs.phoneVerified) {
+            return UnverifiedAccountPage();
 
           } else {
             return UnverifiedPage();

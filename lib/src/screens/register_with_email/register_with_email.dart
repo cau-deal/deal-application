@@ -103,7 +103,6 @@ class RegisterFormState extends State<RegisterWithEmailPage> {
 //          Fluttertoast.showToast(msg: "서버 요청중...");
       }
       if (state.isSuccess) {
-        BlocProvider.of<AuthenticationBloc>(context).add(LoggedIn(token: await widget._userRepository.getAccessToken()));
         Navigator.of(context).pop();
       }
       if (state.isFailure) {

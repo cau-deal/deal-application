@@ -87,8 +87,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
       isValid = res.result.resultCode == ResultCode.SUCCESS;
 
-      if (isValid) {
-        authenticationBloc.add(LoggedIn(token: res.jwt[0]));
+      if(isValid){
+       authenticationBloc.add(LoggedIn(token: res.jwt[0].token));
       }
 
       yield isValid ? RegisterState.success() : RegisterState.failure();
