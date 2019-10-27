@@ -15,7 +15,7 @@ class MissionState extends $pb.ProtobufEnum {
   static const MissionState SOLD_OUT = MissionState._(2, 'SOLD_OUT');
   static const MissionState WATING_CONFIRM_PURCHASE = MissionState._(3, 'WATING_CONFIRM_PURCHASE');
   static const MissionState COMPLETE_MISSION = MissionState._(4, 'COMPLETE_MISSION');
-  static const MissionState WATRING_REGISTER = MissionState._(5, 'WATRING_REGISTER');
+  static const MissionState WAITING_REGISTER = MissionState._(5, 'WAITING_REGISTER');
 
   static const $core.List<MissionState> values = <MissionState> [
     UNKNOWN_MISSION_STATE,
@@ -23,7 +23,7 @@ class MissionState extends $pb.ProtobufEnum {
     SOLD_OUT,
     WATING_CONFIRM_PURCHASE,
     COMPLETE_MISSION,
-    WATRING_REGISTER,
+    WAITING_REGISTER,
   ];
 
   static final $core.Map<$core.int, MissionState> _byValue = $pb.ProtobufEnum.initByValue(values);

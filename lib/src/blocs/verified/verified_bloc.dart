@@ -6,6 +6,7 @@ import 'package:deal/src/protos/AccountService.pb.dart';
 import 'package:deal/src/protos/CommonResult.pbenum.dart';
 import 'package:deal/src/protos/Date.pb.dart';
 import 'package:deal/src/protos/PhoneService.pbgrpc.dart';
+import 'package:deal/src/protos/Profile.pb.dart';
 import 'package:deal/src/protos/UserService.pb.dart';
 import 'package:deal/src/repositories/user_repository.dart';
 import 'package:deal/src/services/account_service.dart';

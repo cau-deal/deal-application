@@ -1,38 +1,43 @@
-import 'package:deal/src/blocs/mission_create/bloc.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:deal/src/blocs/mission_detail/bloc.dart';
 import 'package:deal/src/repositories/mission_repository.dart';
 import 'package:deal/src/repositories/user_repository.dart';
-import 'package:deal/src/screens/mission_create/mission_create.dart';
 import 'package:deal/src/screens/mission_detail/mission_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyMissionHistoryTile extends StatelessWidget {
   final int idx;
-  final int cost;
   final String thumbnail;
   final String title;
   final String subTitle;
-  final bool isTopMission;
 
-  const MyMissionHistoryTile({Key key, this.thumbnail, this.title, this.subTitle, this.idx, this.cost = 0, this.isTopMission = false}) : super(key: key);
+  final String label;
+
+  const MyMissionHistoryTile({
+    Key key,
+    this.thumbnail,
+    this.title,
+    this.subTitle,
+    this.idx,
+    this.label
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      height: 96,
+      height: 90,
       padding: EdgeInsets.only(left: 15, right: 15),
       child: GestureDetector(
           onTap: () {
             Navigator.push(context, MaterialPageRoute(
-                builder: (ctx) => (!this.isTopMission)
-                    ? MissionDetailPage(idx: idx)
-                    : BlocProvider<MissionCreateBloc>(
-                    builder: (BuildContext ctx) => MissionCreateBloc(
+                builder: (ctx) => BlocProvider<MissionDetailBloc>(
+                    builder: (ctx) => MissionDetailBloc(
                         missionRepository: RepositoryProvider.of<MissionRepository>(context),
                         userRepository: RepositoryProvider.of<UserRepository>(context)
-                    ),
-                    child: MissionCreatePage(idx: idx)
+                    )..add(Fetch(idx)),
+                    child: MissionDetailPage(missionId: idx)
                 )
             ));
           },
@@ -41,19 +46,33 @@ class MyMissionHistoryTile extends StatelessWidget {
               padding: EdgeInsets.only(left: 10),
               child: Row(
                 children: <Widget>[
-                  Container(
-                      color: Colors.white,
-                      child: Container(
-                        width: 64,
-                        height: 64,
-                        margin: EdgeInsets.only(right: 10),
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: Image.network(this.thumbnail),
-                            fit: BoxFit.cover,
+                  Hero(
+                      tag: 'mission_list_thumbnail_${this.idx}',
+                      child: CachedNetworkImage(
+                          imageUrl: this.thumbnail,
+                          imageBuilder: (context, imageProvider) => Container(
+                            margin: EdgeInsets.only(right: 10),
+                            width: 64.0,
+                            height: 64.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              image: DecorationImage(
+                                  image: imageProvider, fit: BoxFit.cover),
+                            ),
                           ),
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                        ),
+                          placeholder: (context, url) => CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => Container(
+                            margin: EdgeInsets.only(right: 10),
+                            width: 64.0,
+                            height: 64.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              image: DecorationImage(
+                                  image: AssetImage("res/images/default_thumbnail.png"),
+                                  fit: BoxFit.cover
+                              ),
+                            ),
+                          )
                       )
                   ),
                   Expanded(
@@ -86,7 +105,8 @@ class MyMissionHistoryTile extends StatelessWidget {
                       )
                   ),
                 ],
-              ))),
+              ))
+      ),
     );
   }
 }

@@ -10,6 +10,7 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'CommonResult.pb.dart' as $2;
+import 'Profile.pb.dart' as $3;
 
 import 'UserService.pbenum.dart';
 
@@ -107,85 +108,35 @@ class ChangePasswordWithEmailRequest extends $pb.GeneratedMessage {
   void clearNewPassword() => clearField(3);
 }
 
-class Profile extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Profile', createEmptyInstance: create)
-    ..aOS(1, 'email')
-    ..a<$core.int>(2, 'level', $pb.PbFieldType.O3)
-    ..e<UserState>(3, 'state', $pb.PbFieldType.OE, defaultOrMaker: UserState.UNKNOWN_USER_STATE, valueOf: UserState.valueOf, enumValues: UserState.values)
-    ..e<Role>(4, 'role', $pb.PbFieldType.OE, defaultOrMaker: Role.UNKNOWN_ROLE, valueOf: Role.valueOf, enumValues: Role.values)
-    ..aOS(5, 'profilePhotoUrl')
-    ..aOS(6, 'name')
+class UpdateProfilePhotoURLRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('UpdateProfilePhotoURLRequest', createEmptyInstance: create)
+    ..aOS(1, 'profilePhotoUrl')
     ..hasRequiredFields = false
   ;
 
-  Profile._() : super();
-  factory Profile() => create();
-  factory Profile.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Profile.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  Profile clone() => Profile()..mergeFromMessage(this);
-  Profile copyWith(void Function(Profile) updates) => super.copyWith((message) => updates(message as Profile));
+  UpdateProfilePhotoURLRequest._() : super();
+  factory UpdateProfilePhotoURLRequest() => create();
+  factory UpdateProfilePhotoURLRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateProfilePhotoURLRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  UpdateProfilePhotoURLRequest clone() => UpdateProfilePhotoURLRequest()..mergeFromMessage(this);
+  UpdateProfilePhotoURLRequest copyWith(void Function(UpdateProfilePhotoURLRequest) updates) => super.copyWith((message) => updates(message as UpdateProfilePhotoURLRequest));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static Profile create() => Profile._();
-  Profile createEmptyInstance() => create();
-  static $pb.PbList<Profile> createRepeated() => $pb.PbList<Profile>();
+  static UpdateProfilePhotoURLRequest create() => UpdateProfilePhotoURLRequest._();
+  UpdateProfilePhotoURLRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateProfilePhotoURLRequest> createRepeated() => $pb.PbList<UpdateProfilePhotoURLRequest>();
   @$core.pragma('dart2js:noInline')
-  static Profile getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Profile>(create);
-  static Profile _defaultInstance;
+  static UpdateProfilePhotoURLRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateProfilePhotoURLRequest>(create);
+  static UpdateProfilePhotoURLRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get email => $_getSZ(0);
+  $core.String get profilePhotoUrl => $_getSZ(0);
   @$pb.TagNumber(1)
-  set email($core.String v) { $_setString(0, v); }
+  set profilePhotoUrl($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasEmail() => $_has(0);
+  $core.bool hasProfilePhotoUrl() => $_has(0);
   @$pb.TagNumber(1)
-  void clearEmail() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.int get level => $_getIZ(1);
-  @$pb.TagNumber(2)
-  set level($core.int v) { $_setSignedInt32(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasLevel() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearLevel() => clearField(2);
-
-  @$pb.TagNumber(3)
-  UserState get state => $_getN(2);
-  @$pb.TagNumber(3)
-  set state(UserState v) { setField(3, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasState() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearState() => clearField(3);
-
-  @$pb.TagNumber(4)
-  Role get role => $_getN(3);
-  @$pb.TagNumber(4)
-  set role(Role v) { setField(4, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasRole() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearRole() => clearField(4);
-
-  @$pb.TagNumber(5)
-  $core.String get profilePhotoUrl => $_getSZ(4);
-  @$pb.TagNumber(5)
-  set profilePhotoUrl($core.String v) { $_setString(4, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasProfilePhotoUrl() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearProfilePhotoUrl() => clearField(5);
-
-  @$pb.TagNumber(6)
-  $core.String get name => $_getSZ(5);
-  @$pb.TagNumber(6)
-  set name($core.String v) { $_setString(5, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasName() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearName() => clearField(6);
+  void clearProfilePhotoUrl() => clearField(1);
 }
 
 class AuthInfo extends $pb.GeneratedMessage {
@@ -275,7 +226,7 @@ class ChangePasswordResponse extends $pb.GeneratedMessage {
 class LookUpUserInfoResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('LookUpUserInfoResponse', createEmptyInstance: create)
     ..aOM<$2.CommonResult>(1, 'result', subBuilder: $2.CommonResult.create)
-    ..aOM<Profile>(2, 'profile', subBuilder: Profile.create)
+    ..aOM<$3.Profile>(2, 'profile', subBuilder: $3.Profile.create)
     ..hasRequiredFields = false
   ;
 
@@ -306,15 +257,15 @@ class LookUpUserInfoResponse extends $pb.GeneratedMessage {
   $2.CommonResult ensureResult() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  Profile get profile => $_getN(1);
+  $3.Profile get profile => $_getN(1);
   @$pb.TagNumber(2)
-  set profile(Profile v) { setField(2, v); }
+  set profile($3.Profile v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasProfile() => $_has(1);
   @$pb.TagNumber(2)
   void clearProfile() => clearField(2);
   @$pb.TagNumber(2)
-  Profile ensureProfile() => $_ensure(1);
+  $3.Profile ensureProfile() => $_ensure(1);
 }
 
 class LookUpAuthInfoResponse extends $pb.GeneratedMessage {
@@ -360,5 +311,38 @@ class LookUpAuthInfoResponse extends $pb.GeneratedMessage {
   void clearAuthInfo() => clearField(2);
   @$pb.TagNumber(2)
   AuthInfo ensureAuthInfo() => $_ensure(1);
+}
+
+class UpdateProfilePhotoURLResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('UpdateProfilePhotoURLResponse', createEmptyInstance: create)
+    ..aOM<$2.CommonResult>(1, 'result', subBuilder: $2.CommonResult.create)
+    ..hasRequiredFields = false
+  ;
+
+  UpdateProfilePhotoURLResponse._() : super();
+  factory UpdateProfilePhotoURLResponse() => create();
+  factory UpdateProfilePhotoURLResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateProfilePhotoURLResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  UpdateProfilePhotoURLResponse clone() => UpdateProfilePhotoURLResponse()..mergeFromMessage(this);
+  UpdateProfilePhotoURLResponse copyWith(void Function(UpdateProfilePhotoURLResponse) updates) => super.copyWith((message) => updates(message as UpdateProfilePhotoURLResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UpdateProfilePhotoURLResponse create() => UpdateProfilePhotoURLResponse._();
+  UpdateProfilePhotoURLResponse createEmptyInstance() => create();
+  static $pb.PbList<UpdateProfilePhotoURLResponse> createRepeated() => $pb.PbList<UpdateProfilePhotoURLResponse>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateProfilePhotoURLResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateProfilePhotoURLResponse>(create);
+  static UpdateProfilePhotoURLResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.CommonResult get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result($2.CommonResult v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  $2.CommonResult ensureResult() => $_ensure(0);
 }
 

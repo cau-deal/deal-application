@@ -1,5 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:deal/src/blocs/mission_detail/bloc.dart';
 import 'package:deal/src/custom/widgets/under_circle_tab_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MissionDetailTabContainer extends StatefulWidget {
   final int idx;
@@ -35,19 +38,34 @@ class MissionDetailTabContainerState extends State<MissionDetailTabContainer> {
                 floating: true,
                 pinned: true,
                 snap: false,
-                flexibleSpace: FlexibleSpaceBar(
-                  background: Hero(
-                    tag: 'mission_list_thumbnail_${widget.idx}',
-                    child: Container(
-                      margin: EdgeInsets.only(bottom: 120.0),
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage("res/images/default_thumbnail.png"),
-                          fit: BoxFit.cover,
+                flexibleSpace: BlocBuilder<MissionDetailBloc, MissionDetailState>(
+                  builder: (ctx, state){
+                    return FlexibleSpaceBar(
+                      background: Hero(
+                        tag: 'mission_list_thumbnail_${widget.idx}',
+                        child: Container(
+                          margin: EdgeInsets.only(bottom: 120.0),
+                          child: CachedNetworkImage(
+                              imageUrl: state.thumbnailUri,
+                              imageBuilder: (context, imageProvider) => Container(
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: imageProvider, fit: BoxFit.cover),
+                                ),
+                              ),
+                              errorWidget: (context, url, error) => Container(
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage("res/images/default_thumbnail.png"),
+                                      fit: BoxFit.cover
+                                  ),
+                                ),
+                              )
+                          )
                         ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
                 titleSpacing: 0,
                 bottom: PreferredSize(

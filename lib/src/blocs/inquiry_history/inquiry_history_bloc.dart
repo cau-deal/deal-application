@@ -60,6 +60,7 @@ class InquiryHistoryBloc extends Bloc<InquiryHistoryEvent, InquiryHistoryState> 
     if (res.result.resultCode == ResultCode.SUCCESS) {
       return res.inquiries;
     } else {
+      print(res.result.message);
       throw Exception('error fetching posts');
     }
   }

@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:deal/src/blocs/mission_create/bloc.dart';
+import 'package:deal/src/blocs/mission_detail/bloc.dart';
 import 'package:deal/src/repositories/mission_repository.dart';
 import 'package:deal/src/repositories/user_repository.dart';
 import 'package:deal/src/screens/mission_create/mission_create.dart';
@@ -25,8 +27,14 @@ class MissionListTile extends StatelessWidget {
       child: GestureDetector(
           onTap: () {
             Navigator.push(context, MaterialPageRoute(
-                builder: (ctx) => (!this.isTopMission)
-                    ? MissionDetailPage(idx: idx)
+                builder: (ctx) => (this.idx != -1)
+                    ? BlocProvider<MissionDetailBloc>(
+                        builder: (ctx) => MissionDetailBloc(
+                          missionRepository: RepositoryProvider.of<MissionRepository>(context),
+                          userRepository: RepositoryProvider.of<UserRepository>(context)
+                        )..add(Fetch(idx)),
+                        child: MissionDetailPage(missionId: idx)
+                      )
                     : BlocProvider<MissionCreateBloc>(
                         builder: (BuildContext ctx) => MissionCreateBloc(
                             missionRepository: RepositoryProvider.of<MissionRepository>(context),
@@ -41,22 +49,45 @@ class MissionListTile extends StatelessWidget {
               padding: EdgeInsets.only(left: 10),
               child: Row(
                 children: <Widget>[
-                  Container(
-                      color: Colors.white,
-                      child: Hero(
-                          tag: 'mission_list_thumbnail_$idx',
-                          child: Container(
-                            width: 64,
-                            height: 64,
-                            margin: EdgeInsets.only(right: 10),
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(this.thumbnail),
-                                fit: BoxFit.cover,
-                              ),
-                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                  Hero(
+                    tag: 'mission_list_thumbnail_${this.idx}',
+                    child: (this.thumbnail.startsWith("asset://")) ? Container(
+                      margin: EdgeInsets.only(right: 10),
+                      width: 64.0,
+                      height: 64.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        image: DecorationImage(
+                            image: AssetImage(this.thumbnail.replaceAll("asset://", "")),
+                            fit: BoxFit.fill
+                        ),
+                      ),
+                    ) : CachedNetworkImage(
+                        imageUrl: this.thumbnail,
+                        imageBuilder: (context, imageProvider) => Container(
+                          margin: EdgeInsets.only(right: 10),
+                          width: 64.0,
+                          height: 64.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            image: DecorationImage(
+                                image: imageProvider, fit: BoxFit.cover),
+                          ),
+                        ),
+                        errorWidget: (context, url, error) => Container(
+                          margin: EdgeInsets.only(right: 10),
+                          width: 64.0,
+                          height: 64.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            image: DecorationImage(
+                                image: AssetImage("res/images/default_thumbnail.png"),
+                                fit: BoxFit.cover
                             ),
-                          ))),
+                          ),
+                        )
+                    )
+                  ),
                   Expanded(
                       child: Container(
                           color: Colors.white,
@@ -83,31 +114,28 @@ class MissionListTile extends StatelessWidget {
                                     style: TextStyle(fontFamily: "NanumSquare", color: Colors.black54, fontSize: 13, decoration: TextDecoration.none)),
                               ),
                             ],
-                          ))),
-                  if (this.isTopMission)
-                    Container(
-                        margin: EdgeInsets.only(left: 5),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            SizedBox(
-                                width: 32,
-                                height: 32,
-                                child: IconButton(
-                                  icon: Image.asset("res/images/app-logo-black.png"),
-                                  iconSize: 32,
-                                  padding: EdgeInsets.all(0),
-                                )),
-                            Text("$cost",
-                                style: TextStyle(
-                                  letterSpacing: -0.5,
-                                  fontSize: 15,
-                                  color: Color(0xff333333),
-                                ))
-                          ],
-                        ))
+                          )
+                      )
+                  ),
+                  (this.idx != -1)? Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                          width: 32,
+                          height: 32,
+                          child: IconButton(
+                            icon: Image.asset("res/images/app-logo-black.png"),
+                            iconSize: 32,
+                            padding: EdgeInsets.all(0),
+                          )
+                      ),
+                      Text('$cost', style:TextStyle(color: Colors.black87, fontSize: 14))
+                    ],
+                  ): Container(width: 0)
                 ],
-              ))),
+              ))
+      ),
     );
   }
 }

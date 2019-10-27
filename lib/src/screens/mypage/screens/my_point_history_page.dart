@@ -1,5 +1,6 @@
 import 'package:deal/src/blocs/point_history/bloc.dart';
 import 'package:deal/src/blocs/verified/bloc.dart';
+import 'package:deal/src/screens/exception/no_result.dart';
 import 'package:deal/src/screens/mypage/screens/unverified_phone.dart';
 import 'package:deal/src/screens/mypage/widgets/point_history_tile.dart';
 import 'package:flutter/material.dart';
@@ -67,27 +68,7 @@ class MyPointHistoryPageState extends State<MyPointHistoryPage> {
                           );
                         },
                       )
-                  ) : Container(
-                    color: Colors.white,
-                    child: Center(
-                        child: SizedBox(
-                          width: double.infinity,
-                          height: 300,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Image.asset("res/images/logo-grey.png", height: 150),
-                              SizedBox(height: 20),
-                              Text(
-                                "기록이 없습니다.",
-                                style: TextStyle(color: Color(0xff909090), fontFamily: "NanumSquare", fontSize: 16, letterSpacing: -0.5, height: 1.5),
-                                textAlign: TextAlign.center,
-                              )
-                            ],
-                          ),
-                        )
-                    )
-                  );
+                  ) : NoResultScreen();
                 } else {
                   return Container();
                 }

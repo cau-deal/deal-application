@@ -16,7 +16,7 @@ class MessageListTile extends StatelessWidget {
       padding: EdgeInsets.only(left: 15, right: 15),
       child: GestureDetector(
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (ctx) => MissionDetailPage(idx: idx)));
+//            Navigator.push(context, MaterialPageRoute(builder: (ctx) => MissionDetailPage(idx: idx)));
           },
           child: Container(
               color: Colors.white,

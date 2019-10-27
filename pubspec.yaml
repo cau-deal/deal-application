@@ -43,6 +43,7 @@ dependencies:
   firebase_messaging: ^5.1.6
   firebase_auth: ^0.14.0+5
 
+  cached_network_image: ^1.1.2+1
   webview_flutter: 0.3.14+1
   preferences: ^4.0.0
 

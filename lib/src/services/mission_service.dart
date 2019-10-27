@@ -78,7 +78,15 @@ class MissionService extends BaseService {
     return res;
   }
 
-  Future<SearchMissionResponse> searchMission({String accessToken, MissionType type, String keyword, MissionPageMode mode, int offset, int amount}) async {
+  Future<SearchMissionResponse> fetchMission({
+    String accessToken,
+    MissionType type,
+    String keyword,
+    MissionPageMode mode,
+    int offset,
+    int amount
+  }) async {
+
     SearchMissionRequest req = SearchMissionRequest();
     SearchMissionResponse res = SearchMissionResponse();
 
@@ -89,7 +97,27 @@ class MissionService extends BaseService {
       req.missionPage.offset = offset;
       req.missionPage.amount = amount;
 
-      res = await client.searchMission(req, options: CallOptions(metadata: {'ticket': accessToken}));
+      res = await client.searchMission(
+          req,
+          options: CallOptions(metadata: {'ticket': accessToken})
+      );
+
+    } catch (e) {
+      print(e.toString());
+    }
+
+    return res;
+  }
+
+
+  Future<SearchMissionWithIdResponse> fetchMissionById({String accessToken, int missionId}) async {
+
+    MissionIdRequest req = MissionIdRequest();
+    SearchMissionWithIdResponse res = SearchMissionWithIdResponse();
+
+    try {
+      req.missionId = missionId;
+      res = await client.searchMissionWithId(req, options: CallOptions(metadata: {'ticket': accessToken}));
     } catch (e) {
       print(e.toString());
     }
@@ -127,6 +155,45 @@ class MissionService extends BaseService {
 
     return res;
   }
+
+  Future<SearchConductMissionRelevantMeResponse> fetchConductMissionRelevantFromMe({String accessToken}) async {
+    SearchMissionRelevantMeRequest req = SearchMissionRelevantMeRequest();
+    SearchConductMissionRelevantMeResponse res = SearchConductMissionRelevantMeResponse();
+
+    req.missionPage = MissionPage();
+    req.missionPage.missionPageMode = MissionPageMode.INITIALIZE_MISSION_PAGE;
+    req.missionPage.offset = 0;
+    req.missionPage.amount = 30;
+
+    try {
+      res = await client.searchConductMissionRelevantMe(req, options: CallOptions(metadata: {'ticket': accessToken}));
+    } catch (e) {
+      print(e.toString());
+    }
+
+    return res;
+  }
+
+  Future<GetAssignedMissionResponse> assignByMissionId({String accessToken, int missionId}) async {
+    MissionIdRequest req = MissionIdRequest();
+    GetAssignedMissionResponse res = GetAssignedMissionResponse();
+
+    req.missionId = missionId;
+
+    try {
+      res = await client.getAssignedMission(
+          req,
+          options: CallOptions(metadata: {'ticket': accessToken})
+      );
+    } catch (e) {
+      print(e.toString());
+    }
+
+    return res;
+  }
+
+//  rpc GetAssignedMission(MissionIdRequest) returns (GetAssignedMissionResponse);
+
 
 //  rpc SearchRegisterMissionRelevantMe(SearchMissionRelevantMeRequest) returns (SearchRegisterMissionRelevantMeResponse);
 //  rpc SearchConductMissionRelevantMe(SearchMissionRelevantMeRequest) returns (SearchConductMissionRelevantMeResponse);

@@ -39,6 +39,12 @@ class UserServiceClient extends $grpc.Client {
           ($1.Empty value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.LookUpAuthInfoResponse.fromBuffer(value));
+  static final _$updateProfilePhotoURL = $grpc.ClientMethod<
+          $0.UpdateProfilePhotoURLRequest, $0.UpdateProfilePhotoURLResponse>(
+      '/UserService/UpdateProfilePhotoURL',
+      ($0.UpdateProfilePhotoURLRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.UpdateProfilePhotoURLResponse.fromBuffer(value));
 
   UserServiceClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
@@ -75,6 +81,15 @@ class UserServiceClient extends $grpc.Client {
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$lookUpAuthInfo, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.UpdateProfilePhotoURLResponse> updateProfilePhotoURL(
+      $0.UpdateProfilePhotoURLRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$updateProfilePhotoURL, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -116,6 +131,15 @@ abstract class UserServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $1.Empty.fromBuffer(value),
         ($0.LookUpAuthInfoResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UpdateProfilePhotoURLRequest,
+            $0.UpdateProfilePhotoURLResponse>(
+        'UpdateProfilePhotoURL',
+        updateProfilePhotoURL_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.UpdateProfilePhotoURLRequest.fromBuffer(value),
+        ($0.UpdateProfilePhotoURLResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.ChangePasswordResponse> changePassword_Pre(
@@ -140,6 +164,12 @@ abstract class UserServiceBase extends $grpc.Service {
     return lookUpAuthInfo(call, await request);
   }
 
+  $async.Future<$0.UpdateProfilePhotoURLResponse> updateProfilePhotoURL_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.UpdateProfilePhotoURLRequest> request) async {
+    return updateProfilePhotoURL(call, await request);
+  }
+
   $async.Future<$0.ChangePasswordResponse> changePassword(
       $grpc.ServiceCall call, $0.ChangePasswordRequest request);
   $async.Future<$0.ChangePasswordResponse> changePasswordWithEmail(
@@ -148,4 +178,6 @@ abstract class UserServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $1.Empty request);
   $async.Future<$0.LookUpAuthInfoResponse> lookUpAuthInfo(
       $grpc.ServiceCall call, $1.Empty request);
+  $async.Future<$0.UpdateProfilePhotoURLResponse> updateProfilePhotoURL(
+      $grpc.ServiceCall call, $0.UpdateProfilePhotoURLRequest request);
 }

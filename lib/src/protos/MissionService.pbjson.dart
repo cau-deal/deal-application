@@ -13,7 +13,7 @@ const MissionState$json = const {
     const {'1': 'SOLD_OUT', '2': 2},
     const {'1': 'WATING_CONFIRM_PURCHASE', '2': 3},
     const {'1': 'COMPLETE_MISSION', '2': 4},
-    const {'1': 'WATRING_REGISTER', '2': 5},
+    const {'1': 'WAITING_REGISTER', '2': 5},
   ],
 };
 
@@ -267,6 +267,14 @@ const CountFetchMissionResponse$json = const {
   '2': const [
     const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
     const {'1': 'val', '3': 2, '4': 1, '5': 3, '10': 'val'},
+  ],
+};
+
+const GetMissionOwnerInfoResponse$json = const {
+  '1': 'GetMissionOwnerInfoResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
+    const {'1': 'register_profile', '3': 2, '4': 1, '5': 11, '6': '.Profile', '10': 'registerProfile'},
   ],
 };
 

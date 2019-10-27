@@ -63,6 +63,7 @@ class _MessageHandlerState extends State<MessageHandler> {
       _firebaseMessaging.subscribeToTopic('agree');
 
       Fluttertoast.showToast(msg: 'FCM key : $token');
+      print(token);
     });
   }
 

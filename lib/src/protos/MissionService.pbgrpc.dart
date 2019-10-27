@@ -73,6 +73,12 @@ class MissionServiceClient extends $grpc.Client {
           ($1.Empty value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.CountFetchMissionResponse.fromBuffer(value));
+  static final _$getMissionOwnerInfo =
+      $grpc.ClientMethod<$0.MissionIdRequest, $0.GetMissionOwnerInfoResponse>(
+          '/MissionService/GetMissionOwnerInfo',
+          ($0.MissionIdRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.GetMissionOwnerInfoResponse.fromBuffer(value));
 
   MissionServiceClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
@@ -154,6 +160,15 @@ class MissionServiceClient extends $grpc.Client {
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$countFetchMission, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.GetMissionOwnerInfoResponse> getMissionOwnerInfo(
+      $0.MissionIdRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$getMissionOwnerInfo, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -245,6 +260,14 @@ abstract class MissionServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $1.Empty.fromBuffer(value),
         ($0.CountFetchMissionResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.MissionIdRequest,
+            $0.GetMissionOwnerInfoResponse>(
+        'GetMissionOwnerInfo',
+        getMissionOwnerInfo_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.MissionIdRequest.fromBuffer(value),
+        ($0.GetMissionOwnerInfoResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.RegisterMissionResponse> registerMission_Pre(
@@ -300,6 +323,12 @@ abstract class MissionServiceBase extends $grpc.Service {
     return countFetchMission(call, await request);
   }
 
+  $async.Future<$0.GetMissionOwnerInfoResponse> getMissionOwnerInfo_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.MissionIdRequest> request) async {
+    return getMissionOwnerInfo(call, await request);
+  }
+
   $async.Future<$0.RegisterMissionResponse> registerMission(
       $grpc.ServiceCall call, $0.RegisterMissionRequest request);
   $async.Future<$0.SearchMissionResponse> searchMission(
@@ -322,4 +351,6 @@ abstract class MissionServiceBase extends $grpc.Service {
           $grpc.ServiceCall call, $0.SubmitProcessMissionOutputRequest request);
   $async.Future<$0.CountFetchMissionResponse> countFetchMission(
       $grpc.ServiceCall call, $1.Empty request);
+  $async.Future<$0.GetMissionOwnerInfoResponse> getMissionOwnerInfo(
+      $grpc.ServiceCall call, $0.MissionIdRequest request);
 }

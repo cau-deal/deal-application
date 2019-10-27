@@ -13,6 +13,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 import 'Data.pb.dart' as $2;
 import 'Datetime.pb.dart' as $3;
 import 'CommonResult.pb.dart' as $4;
+import 'Profile.pb.dart' as $5;
 
 import 'MissionService.pbenum.dart';
 import 'Data.pbenum.dart' as $2;
@@ -1134,5 +1135,50 @@ class CountFetchMissionResponse extends $pb.GeneratedMessage {
   $core.bool hasVal() => $_has(1);
   @$pb.TagNumber(2)
   void clearVal() => clearField(2);
+}
+
+class GetMissionOwnerInfoResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetMissionOwnerInfoResponse', createEmptyInstance: create)
+    ..aOM<$4.CommonResult>(1, 'result', subBuilder: $4.CommonResult.create)
+    ..aOM<$5.Profile>(2, 'registerProfile', subBuilder: $5.Profile.create)
+    ..hasRequiredFields = false
+  ;
+
+  GetMissionOwnerInfoResponse._() : super();
+  factory GetMissionOwnerInfoResponse() => create();
+  factory GetMissionOwnerInfoResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetMissionOwnerInfoResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetMissionOwnerInfoResponse clone() => GetMissionOwnerInfoResponse()..mergeFromMessage(this);
+  GetMissionOwnerInfoResponse copyWith(void Function(GetMissionOwnerInfoResponse) updates) => super.copyWith((message) => updates(message as GetMissionOwnerInfoResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetMissionOwnerInfoResponse create() => GetMissionOwnerInfoResponse._();
+  GetMissionOwnerInfoResponse createEmptyInstance() => create();
+  static $pb.PbList<GetMissionOwnerInfoResponse> createRepeated() => $pb.PbList<GetMissionOwnerInfoResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetMissionOwnerInfoResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetMissionOwnerInfoResponse>(create);
+  static GetMissionOwnerInfoResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $4.CommonResult get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result($4.CommonResult v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  $4.CommonResult ensureResult() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $5.Profile get registerProfile => $_getN(1);
+  @$pb.TagNumber(2)
+  set registerProfile($5.Profile v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasRegisterProfile() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRegisterProfile() => clearField(2);
+  @$pb.TagNumber(2)
+  $5.Profile ensureRegisterProfile() => $_ensure(1);
 }
 

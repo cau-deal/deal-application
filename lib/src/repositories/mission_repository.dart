@@ -29,13 +29,48 @@ class MissionRepository {
     );
   }
 
-  Future<SearchMissionResponse> getTotalMissionList({int offset, int, amount}) async {
-    return await _missionService.searchMission(
-        accessToken: "", type: MissionType.ALL_MISSION_TYPE, keyword: "", mode: MissionPageMode.INITIALIZE_MISSION_PAGE, offset: offset, amount: amount);
+  Future<SearchMissionResponse> getTotalMissionList({String accessToken, MissionType type}) async {
+    return await _missionService.fetchMission(
+        accessToken: accessToken,
+        type: type,
+        keyword: "",
+        mode: MissionPageMode.INITIALIZE_MISSION_PAGE,
+        offset: 0,
+        amount: 100
+    );
+  }
+
+  Future<SearchMissionResponse> fetchMissionList({String accessToken, MissionType type}) async {
+    return await _missionService.fetchMission(
+      accessToken: accessToken,
+      type: type,
+      keyword: "",
+      mode: MissionPageMode.INITIALIZE_MISSION_PAGE,
+      offset: 0,
+      amount: 100
+    );
+  }
+
+  Future<SearchMissionWithIdResponse> fetchMissionById({String accessToken, int missionId}) async {
+    return await _missionService.fetchMissionById(
+      accessToken: accessToken,
+      missionId: missionId
+    );
+  }
+
+  Future<GetAssignedMissionResponse> assignMissionById({String accessToken, int missionId}) async {
+    return await _missionService.assignByMissionId(
+        accessToken: accessToken,
+        missionId: missionId
+    );
   }
 
   Future<SearchRegisterMissionRelevantMeResponse> fetchRegisterMissionRelevantFromMe({String accessToken}) async {
     return await _missionService.fetchRegisterMissionRelevantFromMe(accessToken: accessToken);
+  }
+
+  Future<SearchConductMissionRelevantMeResponse> fetchConductMissionRelevantFromMe({String accessToken}) async {
+    return await _missionService.fetchConductMissionRelevantFromMe(accessToken: accessToken);
   }
 
 }

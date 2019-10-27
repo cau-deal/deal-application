@@ -1,7 +1,6 @@
 import 'package:deal/src/blocs/point_history/bloc.dart';
 import 'package:deal/src/repositories/user_repository.dart';
 import 'package:deal/src/screens/mypage/screens/my_point_history_page.dart';
-import 'package:deal/src/screens/mypage/screens/total_mission.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

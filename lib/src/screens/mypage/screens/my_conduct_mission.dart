@@ -1,4 +1,4 @@
-import 'package:deal/src/blocs/register_mission_history/bloc.dart';
+import 'package:deal/src/blocs/conduct_mission_history/bloc.dart';
 import 'package:deal/src/blocs/verified/bloc.dart';
 import 'package:deal/src/protos/MissionService.pb.dart';
 import 'package:deal/src/screens/exception/no_result.dart';
@@ -8,26 +8,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class MyRegisterMissionPage extends StatefulWidget {
+class MyConductMissionPage extends StatefulWidget {
   @override
-  MyRegisterMissionPageState createState() {
-    return MyRegisterMissionPageState();
+  MyConductMissionPageState createState() {
+    return MyConductMissionPageState();
   }
 }
 
-class MyRegisterMissionPageState extends State<MyRegisterMissionPage> {
+class MyConductMissionPageState extends State<MyConductMissionPage> {
 
-  RegisterMissionHistoryBloc _registerMissionHistoryBloc;
+  ConductMissionHistoryBloc _conductMissionHistoryBloc;
 
   @override
   void initState() {
     super.initState();
-    this._registerMissionHistoryBloc = BlocProvider.of<RegisterMissionHistoryBloc>(context)..add(Fetch());
+    this._conductMissionHistoryBloc = BlocProvider.of<ConductMissionHistoryBloc>(context)..add(Fetch());
   }
 
   @override
   void dispose() {
-    _registerMissionHistoryBloc.close();
+    _conductMissionHistoryBloc.close();
     super.dispose();
   }
 
@@ -38,7 +38,7 @@ class MyRegisterMissionPageState extends State<MyRegisterMissionPage> {
         return MediaQuery.removePadding(
             context: context,
             removeTop: true,
-            child: BlocBuilder<RegisterMissionHistoryBloc, RegisterMissionHistoryState>(
+            child: BlocBuilder<ConductMissionHistoryBloc, ConductMissionHistoryState>(
               builder: (ctx, state){
 
                 if (state is HistoryUninitialized) {
@@ -50,24 +50,22 @@ class MyRegisterMissionPageState extends State<MyRegisterMissionPage> {
                       )
                   );
                 } else if( state is HistoryLoaded ){
-                  return (state.histories.length > 0)
-                      ? Container(
+                  return ( state.histories.length > 0 )? Container(
                       color: Colors.white,
                       child: ListView.builder(
                         itemCount: state.histories.length,
                         itemBuilder: (BuildContext context, int index) {
-                          final MissionProto data = state.histories[index];
+                          final ConductMissionProto data = state.histories[index];
                           return MyMissionHistoryTile(
                             idx: data.missionId,
                             thumbnail: data.thumbnailUrl,
                             title: data.title,
                             subTitle: data.summary,
-                            label: data.missionState.toString()
+                            label: data.conductMissionState.toString()
                           );
                         },
                       )
-                  )
-                      : NoResultScreen();
+                  ) : NoResultScreen();
                 } else {
                   return Container(
                     color: Colors.white,

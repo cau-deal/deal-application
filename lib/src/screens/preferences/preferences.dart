@@ -8,6 +8,7 @@ import 'package:deal/src/custom/widgets/common_app_bar_container.dart';
 import 'package:deal/src/repositories/deal_repository.dart';
 import 'package:deal/src/repositories/user_repository.dart';
 import 'package:deal/src/screens/agreements/agreements.dart';
+import 'package:deal/src/screens/login_select/login_select.dart';
 import 'package:deal/src/screens/preferences/screen/question_history.dart';
 import 'package:deal/src/screens/preferences/widgets/preferences_custom_action.dart';
 import 'package:deal/src/screens/preferences/widgets/preferences_custom_dialog_link.dart';
@@ -104,7 +105,13 @@ class PreferencesState extends State<PreferencesPage> {
                           dialog: ConfirmDialog(content: "로그아웃 하시겠습니까?", ternary: false),
                           onPop: (){
                             BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
-                            Navigator.of(context).popUntil((route) => route.isFirst);
+                            Navigator.pushAndRemoveUntil(
+                                ctx,
+                                MaterialPageRoute(builder: (ctx) => LoginSelectPage(
+                                  userRepository: RepositoryProvider.of<UserRepository>(context),
+                                )), (Route<dynamic> route) => false
+                            );
+//                            Navigator.of(context).popUntil((route) => route.isFirst);
                           },
                         ),
 

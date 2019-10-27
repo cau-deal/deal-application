@@ -1,5 +1,3 @@
-import 'package:deal/generated/i18n.dart';
-import 'package:deal/src/screens/mypage/screens/unverified_phone_auth.dart';
 import 'package:flutter/material.dart';
 
 class ExceptionScreen extends StatefulWidget {
@@ -8,6 +6,8 @@ class ExceptionScreen extends StatefulWidget {
     return ExceptionScreenState();
   }
 }
+
+
 
 class ExceptionScreenState extends State<ExceptionScreen> {
   @override

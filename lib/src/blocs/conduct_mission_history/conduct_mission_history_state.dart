@@ -2,28 +2,28 @@ import 'package:deal/src/protos/DealService.pbgrpc.dart';
 import 'package:deal/src/protos/MissionService.pb.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class RegisterMissionHistoryState extends Equatable {
-  RegisterMissionHistoryState();
+abstract class ConductMissionHistoryState extends Equatable {
+  ConductMissionHistoryState();
 
   @override
   List<Object> get props => [];
 }
 
-class HistoryUninitialized extends RegisterMissionHistoryState {
-  final List<MissionProto> histories;
+class HistoryUninitialized extends ConductMissionHistoryState {
+  final List<ConductMissionProto> histories;
   HistoryUninitialized({this.histories});
 }
 
-class HistoryError extends RegisterMissionHistoryState {}
+class HistoryError extends ConductMissionHistoryState {}
 
-class HistoryLoaded extends RegisterMissionHistoryState {
-  final List<MissionProto> histories;
+class HistoryLoaded extends ConductMissionHistoryState {
+  final List<ConductMissionProto> histories;
   final bool hasReachedMax;
 
   HistoryLoaded({this.histories, this.hasReachedMax});
 
   HistoryLoaded copyWith({
-    List<MissionProto> histories,
+    List<ConductMissionProto> histories,
     bool hasReachedMax,
   }) {
     return HistoryLoaded(

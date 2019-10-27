@@ -2,6 +2,7 @@ import 'package:deal/src/blocs/auth/auth_state.dart';
 import 'package:deal/src/blocs/mypage/bloc.dart';
 import 'package:deal/src/blocs/verified/bloc.dart';
 import 'package:deal/src/custom/widgets/badge.dart';
+import 'package:deal/src/protos/Profile.pb.dart';
 import 'package:deal/src/protos/UserService.pbgrpc.dart';
 import 'package:deal/src/screens/mypage/screens/my_message_list.dart';
 import 'package:deal/src/screens/mypage/screens/my_mission_list.dart';

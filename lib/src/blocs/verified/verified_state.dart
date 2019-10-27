@@ -1,3 +1,4 @@
+import 'package:deal/src/protos/Profile.pb.dart';
 import 'package:deal/src/protos/UserService.pbgrpc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
