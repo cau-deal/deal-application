@@ -1182,3 +1182,46 @@ class GetMissionOwnerInfoResponse extends $pb.GeneratedMessage {
   $5.Profile ensureRegisterProfile() => $_ensure(1);
 }
 
+class GetParticipatedMissionStateResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetParticipatedMissionStateResponse', createEmptyInstance: create)
+    ..aOM<$4.CommonResult>(1, 'result', subBuilder: $4.CommonResult.create)
+    ..e<ConductMissionState>(2, 'conductMissionState', $pb.PbFieldType.OE, defaultOrMaker: ConductMissionState.UNKNOWN_CONDUCT_MISSION_STATE, valueOf: ConductMissionState.valueOf, enumValues: ConductMissionState.values)
+    ..hasRequiredFields = false
+  ;
+
+  GetParticipatedMissionStateResponse._() : super();
+  factory GetParticipatedMissionStateResponse() => create();
+  factory GetParticipatedMissionStateResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetParticipatedMissionStateResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetParticipatedMissionStateResponse clone() => GetParticipatedMissionStateResponse()..mergeFromMessage(this);
+  GetParticipatedMissionStateResponse copyWith(void Function(GetParticipatedMissionStateResponse) updates) => super.copyWith((message) => updates(message as GetParticipatedMissionStateResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetParticipatedMissionStateResponse create() => GetParticipatedMissionStateResponse._();
+  GetParticipatedMissionStateResponse createEmptyInstance() => create();
+  static $pb.PbList<GetParticipatedMissionStateResponse> createRepeated() => $pb.PbList<GetParticipatedMissionStateResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetParticipatedMissionStateResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetParticipatedMissionStateResponse>(create);
+  static GetParticipatedMissionStateResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $4.CommonResult get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result($4.CommonResult v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  $4.CommonResult ensureResult() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  ConductMissionState get conductMissionState => $_getN(1);
+  @$pb.TagNumber(2)
+  set conductMissionState(ConductMissionState v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasConductMissionState() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearConductMissionState() => clearField(2);
+}
+

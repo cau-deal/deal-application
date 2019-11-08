@@ -79,6 +79,12 @@ class MissionServiceClient extends $grpc.Client {
           ($0.MissionIdRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.GetMissionOwnerInfoResponse.fromBuffer(value));
+  static final _$getParticipatedMissionState = $grpc.ClientMethod<
+          $0.MissionIdRequest, $0.GetParticipatedMissionStateResponse>(
+      '/MissionService/GetParticipatedMissionState',
+      ($0.MissionIdRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.GetParticipatedMissionStateResponse.fromBuffer(value));
 
   MissionServiceClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
@@ -169,6 +175,15 @@ class MissionServiceClient extends $grpc.Client {
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$getMissionOwnerInfo, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.GetParticipatedMissionStateResponse>
+      getParticipatedMissionState($0.MissionIdRequest request,
+          {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$getParticipatedMissionState, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -268,6 +283,15 @@ abstract class MissionServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.MissionIdRequest.fromBuffer(value),
         ($0.GetMissionOwnerInfoResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.MissionIdRequest,
+            $0.GetParticipatedMissionStateResponse>(
+        'GetParticipatedMissionState',
+        getParticipatedMissionState_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.MissionIdRequest.fromBuffer(value),
+        ($0.GetParticipatedMissionStateResponse value) =>
+            value.writeToBuffer()));
   }
 
   $async.Future<$0.RegisterMissionResponse> registerMission_Pre(
@@ -329,6 +353,12 @@ abstract class MissionServiceBase extends $grpc.Service {
     return getMissionOwnerInfo(call, await request);
   }
 
+  $async.Future<$0.GetParticipatedMissionStateResponse>
+      getParticipatedMissionState_Pre($grpc.ServiceCall call,
+          $async.Future<$0.MissionIdRequest> request) async {
+    return getParticipatedMissionState(call, await request);
+  }
+
   $async.Future<$0.RegisterMissionResponse> registerMission(
       $grpc.ServiceCall call, $0.RegisterMissionRequest request);
   $async.Future<$0.SearchMissionResponse> searchMission(
@@ -353,4 +383,7 @@ abstract class MissionServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $1.Empty request);
   $async.Future<$0.GetMissionOwnerInfoResponse> getMissionOwnerInfo(
       $grpc.ServiceCall call, $0.MissionIdRequest request);
+  $async.Future<$0.GetParticipatedMissionStateResponse>
+      getParticipatedMissionState(
+          $grpc.ServiceCall call, $0.MissionIdRequest request);
 }
