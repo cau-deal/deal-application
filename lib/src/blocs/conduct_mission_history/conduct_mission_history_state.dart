@@ -1,4 +1,3 @@
-import 'package:deal/src/protos/DealService.pbgrpc.dart';
 import 'package:deal/src/protos/MissionService.pb.dart';
 import 'package:equatable/equatable.dart';
 

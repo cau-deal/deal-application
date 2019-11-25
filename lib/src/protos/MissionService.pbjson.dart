@@ -27,6 +27,7 @@ const ConductMissionState$json = const {
     const {'1': 'COMPLETE_VERIFICATION_CONDUCT_MISSION_STATE', '2': 4},
     const {'1': 'RETURN_VERIFICATION_CONDUCT_MISSION_STATE', '2': 5},
     const {'1': 'FAIL_MISSION_CONDUCT_MISSION_STATE', '2': 6},
+    const {'1': 'INIT_CONDUCT_MISSION_STATE', '2': 7},
   ],
 };
 
@@ -89,6 +90,8 @@ const RegisterMissionRequest$json = const {
   '1': 'RegisterMissionRequest',
   '2': const [
     const {'1': 'mission', '3': 1, '4': 1, '5': 11, '6': '.Mission', '10': 'mission'},
+    const {'1': 'datas', '3': 2, '4': 3, '5': 11, '6': '.Data', '10': 'datas'},
+    const {'1': 'labels', '3': 3, '4': 3, '5': 9, '10': 'labels'},
   ],
 };
 
@@ -128,6 +131,13 @@ const SubmitProcessMissionOutputRequest$json = const {
   '2': const [
     const {'1': 'mission_id', '3': 1, '4': 1, '5': 5, '10': 'missionId'},
     const {'1': 'datas', '3': 2, '4': 3, '5': 11, '6': '.ProcessedImageData', '10': 'datas'},
+  ],
+};
+
+const UrlRequest$json = const {
+  '1': 'UrlRequest',
+  '2': const [
+    const {'1': 'url', '3': 1, '4': 1, '5': 9, '10': 'url'},
   ],
 };
 
@@ -275,6 +285,30 @@ const GetMissionOwnerInfoResponse$json = const {
   '2': const [
     const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
     const {'1': 'register_profile', '3': 2, '4': 1, '5': 11, '6': '.Profile', '10': 'registerProfile'},
+  ],
+};
+
+const GetParticipatedMissionStateResponse$json = const {
+  '1': 'GetParticipatedMissionStateResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
+    const {'1': 'conduct_mission_state', '3': 2, '4': 1, '5': 14, '6': '.ConductMissionState', '10': 'conductMissionState'},
+  ],
+};
+
+const GetLabelsResponse$json = const {
+  '1': 'GetLabelsResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
+    const {'1': 'labels', '3': 2, '4': 3, '5': 9, '10': 'labels'},
+  ],
+};
+
+const GetLabelingResultResponse$json = const {
+  '1': 'GetLabelingResultResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
+    const {'1': 'label_result', '3': 2, '4': 1, '5': 9, '10': 'labelResult'},
   ],
 };
 

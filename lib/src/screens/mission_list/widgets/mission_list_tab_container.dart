@@ -70,20 +70,33 @@ class MissionListTabContainer extends StatelessWidget {
                       SizedBox(
                           width: 24,
                           height: 24,
-                          child: IconButton(
-                              icon: Image.asset("res/images/icon_mypage.png"),
-                              iconSize: 24,
-                              padding: EdgeInsets.zero,
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (_) {
-                                  return BlocProvider<MyPageBloc>(
-                                      builder: (BuildContext ctx) => MyPageBloc(
-                                          RepositoryProvider.of<UserRepository>(ctx)
-                                      )..add(MyPageInitialized()),
-                                      child: MyPage()
-                                  );
-                                }));
-                              })),
+                          child: Stack(
+                            children: <Widget>[
+                              IconButton(
+                                  icon: Image.asset("res/images/icon_mypage.png"),
+                                  iconSize: 24,
+                                  padding: EdgeInsets.zero,
+                                  onPressed: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (_) {
+                                      return BlocProvider<MyPageBloc>(
+                                          builder: (BuildContext ctx) => MyPageBloc(
+                                              RepositoryProvider.of<UserRepository>(ctx)
+                                          )..add(MyPageInitialized()),
+                                          child: MyPage()
+                                      );
+                                    }));
+                                  }
+                                  ),
+                              /*Positioned(
+                                top:0,
+                                right:0,
+                                width:10,
+                                height:10,
+                                child: ,
+                              )*/
+                            ],
+                          )
+                      ),
                       SizedBox(width: 15)
                     ],
                   )

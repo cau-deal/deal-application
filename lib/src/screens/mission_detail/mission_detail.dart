@@ -33,6 +33,44 @@ class MissionDetailPageState extends State<MissionDetailPage> {
     this._missionDetailBloc.close();
   }
 
+  String getButtonText(ConductMissionState cms, MissionState ms){
+
+//    1. DURING_MISSION (진행 중)
+//    2. WAITING_VERIFICATION(검수 대기중)
+//    3. DURING_VERIFICATION(검수 진행중)
+//    4. COMPLETE_MISSION (완료)
+//    5. RETURN_VERIFICATION (반려)
+//    6. FAIL_MISSION (미션 실패, ex> 시간 초과)
+
+    switch(ms){
+      case MissionState.WAITING_REGISTER:
+        return "등록대기";
+      case MissionState.SOLD_OUT:
+        return "할당완료";
+      case MissionState.COMPLETE_MISSION:
+        return "미션 완료";
+    }
+
+    switch(cms){
+      case ConductMissionState.INIT_CONDUCT_MISSION_STATE:
+        return "참여하기";
+      case ConductMissionState.DURING_MISSION_CONDUCT_MISSION_STATE:
+        return "진행중";
+      case ConductMissionState.WAITING_VERIFICATION_CONDUCT_MISSION_STATE:
+        return "검수 대기중";
+      case ConductMissionState.DURING_VERIFICATION_CONDUCT_MISSION_STATE:
+        return "검수 진행중";
+      case ConductMissionState.COMPLETE_VERIFICATION_CONDUCT_MISSION_STATE:
+        return "미션 완료";
+      case ConductMissionState.RETURN_VERIFICATION_CONDUCT_MISSION_STATE:
+        return "미션 반려";
+      case ConductMissionState.UNKNOWN_CONDUCT_MISSION_STATE:
+      default: {
+        return "완료됨";
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext ctx) {
     return Scaffold(
@@ -53,8 +91,8 @@ class MissionDetailPageState extends State<MissionDetailPage> {
                   child: WhiteRoundButton(
                       buttonColor: Color(0xFF5f75ac),
                       textColor: Colors.white,
-                      text: (state.missionState == MissionState.DURING_MISSION)? '참여중' : '참여하기',
-                      onPressed:(state.missionState == MissionState.DURING_MISSION)? null : () {
+                      text: getButtonText(state.conductMissionState, state.missionState),
+                      onPressed:(state.conductMissionState != ConductMissionState.INIT_CONDUCT_MISSION_STATE)? null : () {
                         this._missionDetailBloc.add(ButtonPressed(widget.missionId));
                       }
                    )

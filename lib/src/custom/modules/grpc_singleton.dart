@@ -19,11 +19,11 @@ class GrpcClientSingleton {
 
     _channel = ClientChannel(
         "grpc.snhyun.me",
-        port: 9092,
+        port: 9090,
         options: ChannelOptions(
           credentials: channelCredentials,
           userAgent: Platform.isAndroid ? "DEAL-ANDROID" : "DEAL-IOS",
-          connectionTimeout: Duration(seconds: 30),
+          connectionTimeout: Duration(seconds: 5),
           idleTimeout: Duration(seconds: 30),
         ));
 

@@ -40,6 +40,7 @@ class ConductMissionState extends $pb.ProtobufEnum {
   static const ConductMissionState COMPLETE_VERIFICATION_CONDUCT_MISSION_STATE = ConductMissionState._(4, 'COMPLETE_VERIFICATION_CONDUCT_MISSION_STATE');
   static const ConductMissionState RETURN_VERIFICATION_CONDUCT_MISSION_STATE = ConductMissionState._(5, 'RETURN_VERIFICATION_CONDUCT_MISSION_STATE');
   static const ConductMissionState FAIL_MISSION_CONDUCT_MISSION_STATE = ConductMissionState._(6, 'FAIL_MISSION_CONDUCT_MISSION_STATE');
+  static const ConductMissionState INIT_CONDUCT_MISSION_STATE = ConductMissionState._(7, 'INIT_CONDUCT_MISSION_STATE');
 
   static const $core.List<ConductMissionState> values = <ConductMissionState> [
     UNKNOWN_CONDUCT_MISSION_STATE,
@@ -49,6 +50,7 @@ class ConductMissionState extends $pb.ProtobufEnum {
     COMPLETE_VERIFICATION_CONDUCT_MISSION_STATE,
     RETURN_VERIFICATION_CONDUCT_MISSION_STATE,
     FAIL_MISSION_CONDUCT_MISSION_STATE,
+    INIT_CONDUCT_MISSION_STATE,
   ];
 
   static final $core.Map<$core.int, ConductMissionState> _byValue = $pb.ProtobufEnum.initByValue(values);

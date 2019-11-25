@@ -111,6 +111,7 @@ const DepositResponse$json = const {
   '2': const [
     const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
     const {'1': 'deposit_result', '3': 2, '4': 1, '5': 14, '6': '.DepositResult', '10': 'depositResult'},
+    const {'1': 'kakaopay_url', '3': 3, '4': 1, '5': 9, '10': 'kakaopayUrl'},
   ],
 };
 

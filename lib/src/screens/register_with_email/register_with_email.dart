@@ -1,5 +1,4 @@
 import 'package:deal/generated/i18n.dart';
-import 'package:deal/src/blocs/auth/bloc.dart';
 import 'package:deal/src/blocs/register/bloc.dart';
 import 'package:deal/src/custom/widgets/styled_textform_field.dart';
 import 'package:deal/src/custom/widgets/tall_height_app_bar_container.dart';

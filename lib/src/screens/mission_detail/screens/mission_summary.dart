@@ -47,10 +47,10 @@ class MissionSummaryPageState extends State<MissionSummaryPage> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text("이승현", style: TextStyle(color: Color(0xFF333333), fontSize: 14, fontWeight: FontWeight.w700)),
+                            Text("${state.owner.name}", style: TextStyle(color: Color(0xFF333333), fontSize: 14, fontWeight: FontWeight.w700)),
                             SizedBox(height: 5),
                             Badge(
-                              text: "Lv. 10",
+                              text: "Lv. ${state.owner.level}",
                               color: Color(0xffF7CF00),
                             )
                           ],

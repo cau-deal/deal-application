@@ -12,7 +12,10 @@ class ContentHeader extends StatelessWidget {
       decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Color(0xffCECECE), width: 1.0))),
       child: Text(
         this.label,
-        style: TextStyle(fontSize: 14.0, color: Color(0xff333333), letterSpacing: -0.2),
+        style: TextStyle(fontSize: 14.0, color: Color(0xff333333), fontFamily: "NanumSquare",
+            fontWeight: FontWeight.w500,
+            decoration: TextDecoration.none,
+            letterSpacing: -0.2),
       ),
     );
   }

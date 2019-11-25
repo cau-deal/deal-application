@@ -2,8 +2,6 @@ import 'package:deal/generated/i18n.dart';
 import 'package:deal/src/blocs/auth/bloc.dart';
 import 'package:deal/src/blocs/login/bloc.dart';
 import 'package:deal/src/blocs/register/bloc.dart';
-import 'package:deal/src/custom/widgets/custom_progress_hud.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:deal/src/custom/widgets/white_round_button.dart';
 import 'package:deal/src/repositories/user_repository.dart';
 import 'package:deal/src/screens/login_email/login_email.dart';
@@ -13,6 +11,7 @@ import 'package:deal/src/screens/register_with_email//register_with_email.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class LoginSelectPage extends StatefulWidget {
   final UserRepository userRepository;

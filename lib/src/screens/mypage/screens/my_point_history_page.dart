@@ -1,5 +1,6 @@
+import 'package:deal/src/blocs/auth/auth_bloc.dart';
+import 'package:deal/src/blocs/auth/bloc.dart';
 import 'package:deal/src/blocs/point_history/bloc.dart';
-import 'package:deal/src/blocs/verified/bloc.dart';
 import 'package:deal/src/screens/exception/no_result.dart';
 import 'package:deal/src/screens/mypage/screens/unverified_account.dart';
 import 'package:deal/src/screens/mypage/screens/unverified_phone.dart';
@@ -40,8 +41,8 @@ class MyPointHistoryPageState extends State<MyPointHistoryPage> {
     return MediaQuery.removePadding(
         context: context,
         removeTop: true,
-        child: BlocBuilder<VerificationBloc, VerificationState>(builder: (ctx, vs) {
-          if (vs is Verified && vs.accountVerified) {
+        child: BlocBuilder<AuthenticationBloc, AuthenticationState>(builder: (ctx, vs) {
+          if (vs is Authenticated && vs.isAccountAuth) {
 
             return BlocBuilder<PointHistoryBloc, PointHistoryState>(
               builder: (ctx, state){
@@ -76,7 +77,7 @@ class MyPointHistoryPageState extends State<MyPointHistoryPage> {
               },
             );
 
-          } else if (vs is Verified && vs.phoneVerified) {
+          } else if (vs is Authenticated && vs.isPhoneAuth) {
             return UnverifiedAccountPage();
 
           } else {

@@ -1,7 +1,6 @@
 import 'package:deal/generated/i18n.dart';
-import 'package:deal/src/blocs/verified/bloc.dart';
+import 'package:deal/src/blocs/auth/bloc.dart';
 import 'package:deal/src/custom/widgets/common_app_bar_container.dart';
-import 'package:deal/src/custom/widgets/custom_progress_hud.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -17,13 +16,13 @@ class UnverifiedPhoneAuthPage extends StatefulWidget {
 
 class UnverifiedPhoneAuthPageState extends State<UnverifiedPhoneAuthPage> {
   WebViewController _webController;
-  VerificationBloc _verificationBloc;
+  AuthenticationBloc _authenticationBloc;
 
   num isLoadingState = 0;
 
   @override
   void initState() {
-    this._verificationBloc = BlocProvider.of<VerificationBloc>(context);
+    this._authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
     super.initState();
   }
 
@@ -40,19 +39,19 @@ class UnverifiedPhoneAuthPageState extends State<UnverifiedPhoneAuthPage> {
 
   @override
   Widget build(BuildContext ctx) {
-    return BlocListener<VerificationBloc, VerificationState>(
+    return BlocListener<AuthenticationBloc, AuthenticationState>(
         listener: (ctx, state) {
-          if (state is Verifying) {
+          if (state is Authenticating) {
             setState(() {
               this.isLoadingState = 0;
             });
-          } else if (state is Verified && state.phoneVerified) {
+          } else if (state is Authenticated && state.isPhoneAuth) {
             setState(() {
               this.isLoadingState = 1;
             });
             Fluttertoast.showToast(msg: "인증에 성공했습니다.");
             Navigator.pop(ctx);
-          } else if (state is UnVerified) {
+          } else {
             setState(() {
               this.isLoadingState = 0;
             });
@@ -84,7 +83,7 @@ class UnverifiedPhoneAuthPageState extends State<UnverifiedPhoneAuthPage> {
                                   final String msg = message.message;
                                   final List<String> tokens = msg.split(" ");
                                   if (tokens[0] == "COMPLETE") {
-                                    _verificationBloc.add(VerificationRequest(VerificationType.PHONE, tokens[1]));
+                                    _authenticationBloc.add(VerificationRequest(VerificationType.PHONE, tokens[1]));
                                   }
                                 })
                           ]),

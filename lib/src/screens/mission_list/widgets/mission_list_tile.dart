@@ -22,7 +22,7 @@ class MissionListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      height: 96,
+      height: 90,
       padding: EdgeInsets.only(left: 15, right: 15),
       child: GestureDetector(
           onTap: () {

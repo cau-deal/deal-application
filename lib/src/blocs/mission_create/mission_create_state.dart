@@ -1,6 +1,5 @@
 import 'package:deal/src/protos/Data.pb.dart';
 import 'package:deal/src/protos/MissionService.pbenum.dart';
-import 'package:deal/src/screens/agreements/agreements.dart';
 import 'package:meta/meta.dart';
 
 @immutable

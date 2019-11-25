@@ -1,6 +1,4 @@
 import 'package:deal/src/blocs/fetch_mission_list/bloc.dart';
-import 'package:deal/src/blocs/mission_detail/bloc.dart';
-import 'package:deal/src/blocs/point_history/bloc.dart';
 import 'package:deal/src/custom/widgets/double_back_to_close_app.dart';
 import 'package:deal/src/protos/MissionService.pbenum.dart';
 import 'package:deal/src/repositories/mission_repository.dart';

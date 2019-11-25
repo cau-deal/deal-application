@@ -192,6 +192,32 @@ class MissionService extends BaseService {
     return res;
   }
 
+  Future<GetMissionOwnerInfoResponse> fetchOwnerInfoByMissionId({String accessToken, int missionId}) async {
+    MissionIdRequest req = MissionIdRequest()..missionId=missionId;
+    GetMissionOwnerInfoResponse res = GetMissionOwnerInfoResponse();
+
+    try {
+      res = await client.getMissionOwnerInfo(req, options: CallOptions(metadata: {'ticket': accessToken}));
+    } catch (_) {
+      print(_.toString());
+    }
+
+    return res;
+  }
+
+  Future<GetParticipatedMissionStateResponse> fetchConductMissionStateByMissionId({String accessToken, int missionId}) async {
+    MissionIdRequest req = MissionIdRequest()..missionId=missionId;
+    GetParticipatedMissionStateResponse res = GetParticipatedMissionStateResponse();
+
+    try {
+      res = await client.getParticipatedMissionState(req, options: CallOptions(metadata: {'ticket': accessToken}));
+    } catch (_) {
+      print(_.toString());
+    }
+
+    return res;
+  }
+
 //  rpc GetAssignedMission(MissionIdRequest) returns (GetAssignedMissionResponse);
 
 

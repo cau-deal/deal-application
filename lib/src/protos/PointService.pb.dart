@@ -323,6 +323,7 @@ class DepositResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('DepositResponse', createEmptyInstance: create)
     ..aOM<$3.CommonResult>(1, 'result', subBuilder: $3.CommonResult.create)
     ..e<DepositResult>(2, 'depositResult', $pb.PbFieldType.OE, defaultOrMaker: DepositResult.UNKNOWN_DEPOSIT_RESULT, valueOf: DepositResult.valueOf, enumValues: DepositResult.values)
+    ..aOS(3, 'kakaopayUrl')
     ..hasRequiredFields = false
   ;
 
@@ -360,6 +361,15 @@ class DepositResponse extends $pb.GeneratedMessage {
   $core.bool hasDepositResult() => $_has(1);
   @$pb.TagNumber(2)
   void clearDepositResult() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get kakaopayUrl => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set kakaopayUrl($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasKakaopayUrl() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearKakaopayUrl() => clearField(3);
 }
 
 class WithdrawResponse extends $pb.GeneratedMessage {
