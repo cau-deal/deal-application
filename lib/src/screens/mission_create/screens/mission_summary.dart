@@ -1,5 +1,5 @@
+import 'package:deal/src/blocs/auth/bloc.dart';
 import 'package:deal/src/blocs/mission_create/bloc.dart';
-import 'package:deal/src/blocs/verified/bloc.dart';
 import 'package:deal/src/custom/dialogs/simple_list_dialog.dart';
 import 'package:deal/src/custom/widgets/badge.dart';
 import 'package:deal/src/protos/Data.pbenum.dart';
@@ -20,7 +20,6 @@ class MissionSummaryPage extends StatefulWidget {
 
 class MissionSummaryPageState extends State<MissionSummaryPage> with AutomaticKeepAliveClientMixin<MissionSummaryPage> {
 
-  VerificationBloc _verificationBloc;
   MissionCreateBloc _missionCreateBloc;
 
   TextEditingController totalNumController;
@@ -32,7 +31,6 @@ class MissionSummaryPageState extends State<MissionSummaryPage> with AutomaticKe
   void initState() {
     super.initState();
 
-    _verificationBloc = BlocProvider.of<VerificationBloc>(context);
     _missionCreateBloc = BlocProvider.of<MissionCreateBloc>(context);
 
     totalNumController = TextEditingController();
@@ -105,9 +103,9 @@ class MissionSummaryPageState extends State<MissionSummaryPage> with AutomaticKe
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return BlocBuilder<VerificationBloc, VerificationState>(
+    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
         builder: (ctx, state){
-          return (state is Verified && state.phoneVerified)
+          return (state is Authenticated && state.isPhoneAuth)
               ? Container(
                   padding: EdgeInsets.only(left: 15, right: 15, top: 30),
                   alignment: Alignment.centerLeft,

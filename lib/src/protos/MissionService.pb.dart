@@ -23,6 +23,8 @@ export 'MissionService.pbenum.dart';
 class RegisterMissionRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('RegisterMissionRequest', createEmptyInstance: create)
     ..aOM<Mission>(1, 'mission', subBuilder: Mission.create)
+    ..pc<$2.Data>(2, 'datas', $pb.PbFieldType.PM, subBuilder: $2.Data.create)
+    ..pPS(3, 'labels')
     ..hasRequiredFields = false
   ;
 
@@ -51,6 +53,12 @@ class RegisterMissionRequest extends $pb.GeneratedMessage {
   void clearMission() => clearField(1);
   @$pb.TagNumber(1)
   Mission ensureMission() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.List<$2.Data> get datas => $_getList(1);
+
+  @$pb.TagNumber(3)
+  $core.List<$core.String> get labels => $_getList(2);
 }
 
 class SearchMissionRequest extends $pb.GeneratedMessage {
@@ -238,6 +246,37 @@ class SubmitProcessMissionOutputRequest extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(2)
   $core.List<$2.ProcessedImageData> get datas => $_getList(1);
+}
+
+class UrlRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('UrlRequest', createEmptyInstance: create)
+    ..aOS(1, 'url')
+    ..hasRequiredFields = false
+  ;
+
+  UrlRequest._() : super();
+  factory UrlRequest() => create();
+  factory UrlRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UrlRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  UrlRequest clone() => UrlRequest()..mergeFromMessage(this);
+  UrlRequest copyWith(void Function(UrlRequest) updates) => super.copyWith((message) => updates(message as UrlRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UrlRequest create() => UrlRequest._();
+  UrlRequest createEmptyInstance() => create();
+  static $pb.PbList<UrlRequest> createRepeated() => $pb.PbList<UrlRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UrlRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UrlRequest>(create);
+  static UrlRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get url => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set url($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUrl() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUrl() => clearField(1);
 }
 
 class Mission extends $pb.GeneratedMessage {
@@ -1223,5 +1262,85 @@ class GetParticipatedMissionStateResponse extends $pb.GeneratedMessage {
   $core.bool hasConductMissionState() => $_has(1);
   @$pb.TagNumber(2)
   void clearConductMissionState() => clearField(2);
+}
+
+class GetLabelsResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetLabelsResponse', createEmptyInstance: create)
+    ..aOM<$4.CommonResult>(1, 'result', subBuilder: $4.CommonResult.create)
+    ..pPS(2, 'labels')
+    ..hasRequiredFields = false
+  ;
+
+  GetLabelsResponse._() : super();
+  factory GetLabelsResponse() => create();
+  factory GetLabelsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetLabelsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetLabelsResponse clone() => GetLabelsResponse()..mergeFromMessage(this);
+  GetLabelsResponse copyWith(void Function(GetLabelsResponse) updates) => super.copyWith((message) => updates(message as GetLabelsResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetLabelsResponse create() => GetLabelsResponse._();
+  GetLabelsResponse createEmptyInstance() => create();
+  static $pb.PbList<GetLabelsResponse> createRepeated() => $pb.PbList<GetLabelsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetLabelsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetLabelsResponse>(create);
+  static GetLabelsResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $4.CommonResult get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result($4.CommonResult v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  $4.CommonResult ensureResult() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.List<$core.String> get labels => $_getList(1);
+}
+
+class GetLabelingResultResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetLabelingResultResponse', createEmptyInstance: create)
+    ..aOM<$4.CommonResult>(1, 'result', subBuilder: $4.CommonResult.create)
+    ..aOS(2, 'labelResult')
+    ..hasRequiredFields = false
+  ;
+
+  GetLabelingResultResponse._() : super();
+  factory GetLabelingResultResponse() => create();
+  factory GetLabelingResultResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetLabelingResultResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetLabelingResultResponse clone() => GetLabelingResultResponse()..mergeFromMessage(this);
+  GetLabelingResultResponse copyWith(void Function(GetLabelingResultResponse) updates) => super.copyWith((message) => updates(message as GetLabelingResultResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetLabelingResultResponse create() => GetLabelingResultResponse._();
+  GetLabelingResultResponse createEmptyInstance() => create();
+  static $pb.PbList<GetLabelingResultResponse> createRepeated() => $pb.PbList<GetLabelingResultResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetLabelingResultResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetLabelingResultResponse>(create);
+  static GetLabelingResultResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $4.CommonResult get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result($4.CommonResult v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  $4.CommonResult ensureResult() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get labelResult => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set labelResult($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasLabelResult() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLabelResult() => clearField(2);
 }
 

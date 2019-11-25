@@ -1,5 +1,5 @@
+import 'package:deal/src/blocs/auth/bloc.dart';
 import 'package:deal/src/blocs/mission_create/bloc.dart';
-import 'package:deal/src/blocs/verified/bloc.dart';
 import 'package:deal/src/custom/dialogs/confirm_dialog.dart';
 import 'package:deal/src/custom/widgets/custom_progress_hud.dart';
 import 'package:deal/src/custom/widgets/white_round_button.dart';
@@ -35,9 +35,9 @@ class MissionCreatePageState extends State<MissionCreatePage> {
       },
       child: BlocBuilder<MissionCreateBloc, MissionCreateState>(
           builder: (ctx, state) {
-            return BlocBuilder<VerificationBloc, VerificationState>(
-              builder: (ctx, vstate){
-                return (vstate is UnVerified || (vstate is Verified && !vstate.phoneVerified) )
+            return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+              builder: (ctx, as){
+                return (as is Unauthenticated || (as is Authenticated && !as.isPhoneAuth) )
                     ? ExceptionScreen()
                     : WillPopScope(
                     child: Scaffold(

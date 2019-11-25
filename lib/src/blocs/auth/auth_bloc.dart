@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:deal/src/blocs/auth/bloc.dart' as prefix0;
-import 'package:deal/src/blocs/verified/bloc.dart';
+import 'package:deal/src/blocs/auth/bloc.dart';
 import 'package:deal/src/protos/AuthService.pb.dart';
 import 'package:deal/src/protos/CommonResult.pb.dart';
+import 'package:deal/src/protos/UserService.pb.dart';
 import 'package:deal/src/repositories/user_repository.dart';
 import 'package:meta/meta.dart';
 
@@ -12,15 +12,12 @@ import 'bloc.dart';
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   final UserRepository _userRepository;
-  final VerificationBloc _verificationBloc;
 
   AuthenticationBloc({
     @required UserRepository userRepository,
-    @required VerificationBloc verificationBloc
   })
       : assert(userRepository != null),
-        _userRepository = userRepository,
-        _verificationBloc = verificationBloc;
+        _userRepository = userRepository;
 
   @override
   AuthenticationState get initialState => Uninitialized();
@@ -33,8 +30,8 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       yield* _mapLoggedInToState(token: event.token);
     } else if (event is LoggedOut) {
       yield* _mapLoggedOutToState();
-    } else if (event is prefix0.VerificationRequest){
-      yield* _mapVerificationRequestToState();
+    } else if (event is VerificationRequest){
+      yield* _mapVerificationRequestToState(event);
     }
   }
 
@@ -49,27 +46,24 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
         isValid = res?.result?.resultCode == ResultCode.SUCCESS;
       }
 
-      if(isValid){ _verificationBloc.add(VerificationInitialized()); }
+      if(isValid){
+        LookUpAuthInfoResponse authRes = await _userRepository.lookUpAuthInfo(accessToken: accessToken);
+        LookUpUserInfoResponse userRes = await _userRepository.lookUpUserInfo(accessToken: accessToken);
 
-      yield (isValid) ? Authenticated(accessToken: accessToken) : Unauthenticated();
+        bool isPhoneAuth = authRes.authInfo.isPhoneAuth == IsAuth.TRUE_IS_AUTH;
+        bool isAccountAuth = authRes.authInfo.isAccountAuth == IsAuth.TRUE_IS_AUTH;
+//        Profile profile = (userRes.result.resultCode == ResultCode.SUCCESS && isPhoneAuth) ? userRes.profile : Profile()..name="회원"..email=userRes.profile.email;
 
-      //      final PendingDynamicLinkData data = await FirebaseDynamicLinks.instance.getInitialLink();
-//
-//      if (deepLink != null) {
-//        Navigator.pushNamedAndRemoveUntil(context, deepLink.path,  (Route<dynamic> route) => false);
-//      }
-//
-//      FirebaseDynamicLinks.instance.onLink(
-//          onSuccess: (PendingDynamicLinkData dynamicLink) async {
-//            final Uri deepLink = dynamicLink?.link;
-//            if (deepLink != null) {
-//              Navigator.pushNamedAndRemoveUntil(context, deepLink.path,  (Route<dynamic> route) => false);
-//            }
-//          },
-//          onError: (OnLinkErrorException e) async {
-//            throw e;
-//          }
-//      );
+        yield Authenticated(
+          accessToken: accessToken,
+          profile: userRes.profile,
+          isPhoneAuth: isPhoneAuth,
+          isAccountAuth: isAccountAuth,
+        );
+
+      } else {
+        yield Unauthenticated();
+      }
 
     } catch (_) {
       yield Unauthenticated();
@@ -79,158 +73,36 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   Stream<AuthenticationState> _mapLoggedInToState({String token}) async* {
     yield Authenticating();
     await _userRepository.persistToken(token);
-    _verificationBloc.add(VerificationInitialized());
-    yield Authenticated(accessToken: token);
+    yield* _mapAppStartedToState();
+//    yield Authenticated(accessToken: token);
   }
 
   Stream<AuthenticationState> _mapLoggedOutToState() async* {
     yield Authenticating();
     await _userRepository.signOut();
-    _verificationBloc.add(VerificationInitialized());
-    yield Unauthenticated();
+    yield* _mapAppStartedToState();
   }
 
-  Stream<AuthenticationState> _mapVerificationRequestToState() async* {
+  Stream<AuthenticationState> _mapVerificationRequestToState(VerificationRequest evt) async* {
     yield Authenticating();
-    await _userRepository.signOut();
-    _verificationBloc.add(VerificationInitialized());
-    yield Unauthenticated();
-  }
 
-  Stream<VerificationState> _mapVerifiedPhoneToState(VerificationRequest event) async* {
-    try {
-      yield Verifying();
-
-      PhoneService _phoneService = await PhoneService.init();
-      String accessToken = await userRepository.getAccessToken();
-
-      String jsonData = event.data;
-
-      var result = jsonDecode(jsonData);
-
-      if (await userRepository.hasToken()) {
-        MobileCarrier carrier = MobileCarrier.UNKNOWN_MOBILE_CARRIER;
-        switch (result['carrier']) {
-          case "KTF":
-            {
-              carrier = MobileCarrier.KTF;
-            }
-            break;
-          case "SKT":
-            {
-              carrier = MobileCarrier.SKT;
-            }
-            break;
-          case "LGU":
-            {
-              carrier = MobileCarrier.LGU;
-            }
-            break;
-          case "KTR":
-            {
-              carrier = MobileCarrier.KTR;
-            }
-            break;
-          case "SKR":
-            {
-              carrier = MobileCarrier.SKR;
-            }
-            break;
-          case "LGR":
-            {
-              carrier = MobileCarrier.LGR;
-            }
-            break;
-          default:
-            {
-              carrier = MobileCarrier.UNKNOWN_MOBILE_CARRIER;
-            }
-        }
-
-        PhoneAuthResponse res = await _phoneService.authenticateWithPhone(
-            accessToken: accessToken,
-            phoneNumber: result['phone'],
-            name: result['name'],
-            isNative: true,
-            gender: result['sex'] == 'M' ? Sex.MALE : Sex.FEMALE,
-            carrier: carrier,
-            birthDay: Date()
-              ..year = result['birth1']
-              ..month = result['birth2']
-              ..day = result['birth3']);
-
-        yield* _mapVerifiedInitializedState();
-
-      } else {
-        yield UnVerified();
-      }
-    } catch (_) {
-      print(_.toString());
-      yield UnVerified();
-    }
-  }
-
-  Stream<VerificationState> _mapVerifiedAccountToState(VerificationRequest event) async* {
-    try {
-      yield Verifying();
-
-      AccountService _accountService = await AccountService.init();
-      String accessToken = await userRepository.getAccessToken();
-
-      String jsonData = event.data;
-
-      var result = jsonDecode(jsonData);
-
-      if (await userRepository.hasToken()) {
-        BANK bank = BANK.UNKNOWN_BANK;
-        switch (result['bank']) {
-          case "NH농협은행":
-            {
-              bank = BANK.NH;
-            }
-            break;
-          case "IBK기업은행":
-            {
-              bank = BANK.IBK;
-            }
-            break;
-          case "KB국민은행":
-            {
-              bank = BANK.KB;
-            }
-            break;
-          case "카카오뱅크":
-            {
-              bank = BANK.KAKAO;
-            }
-            break;
-          case "우리은행":
-            {
-              bank = BANK.WOORI;
-            }
-            break;
-          default:
-            {
-              bank = BANK.UNKNOWN_BANK;
-            }
-        }
-
-        await _accountService.authenticateWithAccount(
-            accessToken: accessToken,
-            bank: bank,
-            account: result['accnum'],
-            owner: result['owner']
+    switch(evt.type){
+      case VerificationType.PHONE : {
+        await _userRepository.authenticateWithPhone(
+            accessToken: await _userRepository.getAccessToken(),
+            jsonData: evt.data
         );
+      } break;
 
-        yield* _mapVerifiedInitializedState();
-
-      } else {
-        yield UnVerified();
-      }
-    } catch (_) {
-      print(_.toString());
-      yield UnVerified();
+      case VerificationType.ACCOUNT : {
+        await _userRepository.authenticateWithAccount(
+            accessToken: await _userRepository.getAccessToken(),
+            jsonData: evt.data
+        );
+      } break;
     }
+
+    yield* _mapAppStartedToState();
   }
 
 }

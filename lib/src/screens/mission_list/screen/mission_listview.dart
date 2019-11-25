@@ -1,5 +1,6 @@
+import 'package:deal/src/blocs/auth/auth_bloc.dart';
+import 'package:deal/src/blocs/auth/bloc.dart';
 import 'package:deal/src/blocs/fetch_mission_list/bloc.dart';
-import 'package:deal/src/blocs/verified/bloc.dart';
 import 'package:deal/src/screens/exception/no_result.dart';
 import 'package:deal/src/screens/mission_list/widgets/mission_list_tile.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,6 @@ class MissionListView extends StatefulWidget {
 class MissionListViewState extends State<MissionListView> {
 
   FetchMissionBloc _fetchMissionBloc;
-  VerificationBloc _verificationBloc;
 
   RefreshController _refreshController = RefreshController(initialRefresh: false);
 
@@ -36,7 +36,6 @@ class MissionListViewState extends State<MissionListView> {
   void initState() {
     super.initState();
     _fetchMissionBloc = BlocProvider.of<FetchMissionBloc>(context);
-    _verificationBloc = BlocProvider.of<VerificationBloc>(context);
 
     _fetchMissionBloc.add(
         AttachStaticMission(
@@ -74,37 +73,31 @@ class MissionListViewState extends State<MissionListView> {
                   child: MediaQuery.removePadding(
                       context: context,
                       removeTop: true,
-                      child: SmartRefresher(
-                          enablePullUp: false,
-                          enablePullDown: true,
-                          controller: _refreshController,
-                          header: WaterDropHeader(),
-                          onRefresh: _onRefresh,
-                          child: BlocBuilder<VerificationBloc, VerificationState>(
-                            builder: (ctx, vs){
-                              return ListView.builder(
-                                itemCount: state.fetchedList.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  final data = state.fetchedList[index];
-
-                                  if( data.missionId == -1 && vs is! Verified || (vs is Verified && !vs.phoneVerified) ){
-                                    return Container(height: 0);
-                                  } else {
-                                    return MissionListTile(
-                                      idx: data.missionId,
-                                      thumbnail: data.thumbnailUrl,
-                                      title: data.title,
-                                      subTitle: data.summary,
-                                      cost: data.priceOfPackage,
-                                    );
-                                  }
-
-                                },
-                              );
+                      child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                        builder: (ctx, as){
+                          return ListView.separated(
+                            itemCount: state.fetchedList.length,
+                            separatorBuilder: (context, i) {
+                              return Divider(height: 0, color: Colors.white);
                             },
-                          )
+                            itemBuilder: (BuildContext context, int index) {
+                              final data = state.fetchedList[index];
+                              if( data.missionId == -1 && (as is Authenticated && !as.isPhoneAuth) ){
+                                return Container(height: 0);
+                              } else {
+                                return MissionListTile(
+                                  idx: data.missionId,
+                                  thumbnail: data.thumbnailUrl,
+                                  title: data.title,
+                                  subTitle: data.summary,
+                                  cost: data.priceOfPackage,
+                                );
+                              }
+                            },
+                          );
+                        },
                       )
-                  )
+                  ),
                 )
               : NoResultScreen();
         } else {

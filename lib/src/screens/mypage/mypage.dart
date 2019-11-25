@@ -1,14 +1,13 @@
 import 'package:deal/src/blocs/auth/auth_state.dart';
+import 'package:deal/src/blocs/auth/bloc.dart';
 import 'package:deal/src/blocs/mypage/bloc.dart';
-import 'package:deal/src/blocs/verified/bloc.dart';
 import 'package:deal/src/custom/widgets/badge.dart';
 import 'package:deal/src/protos/Profile.pb.dart';
-import 'package:deal/src/protos/UserService.pbgrpc.dart';
 import 'package:deal/src/screens/mypage/screens/my_message_list.dart';
 import 'package:deal/src/screens/mypage/screens/my_mission_list.dart';
 import 'package:deal/src/screens/mypage/screens/my_point_list.dart';
-import 'package:deal/src/screens/mypage/widgets/point_extra_header.dart';
 import 'package:deal/src/screens/mypage/widgets/number_button.dart';
+import 'package:deal/src/screens/mypage/widgets/point_extra_header.dart';
 import 'package:deal/src/screens/preferences/preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -111,60 +110,61 @@ class MyPageScreenState extends State<MyPage> with TickerProviderStateMixin {
                     children: <Widget>[
                       Container(
                           height: 70,
-                          child: BlocBuilder<VerificationBloc, VerificationState>(
+                          child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
                             builder: (ctx, state) {
-                              String _userEmail = "loading..";
-                              Profile _profile = Profile();
+                              String _userEmail = "Verifying...";
+                              Profile _profile = Profile()..name="회원";
 
-                              if (state is! Verifying) {
-                                _userEmail = (state is Verified) ? state.profile.email : (state as UnVerified).userEmail;
-                                _profile = (state is Verified) ? (state.profile) : (Profile()..name = "회원");
+                              if(state is Authenticated){
+                                _userEmail = state.profile.email;
+                                _profile = state.profile;
                               }
 
                               return Row(
                                 children: <Widget>[
                                   Expanded(
                                       child: Container(
-                                    padding: EdgeInsets.only(left: 30, top: 5),
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        Row(
+                                        padding: EdgeInsets.only(left: 30, top: 5),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: <Widget>[
-                                            Align(
-                                              child: Text("${_profile.name}님 환영합니다.",
-                                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black)),
-                                              alignment: Alignment.centerLeft,
+                                            Row(
+                                              children: <Widget>[
+                                                Align(
+                                                  child: Text("${_profile.name}님 환영합니다.",
+                                                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black)),
+                                                  alignment: Alignment.centerLeft,
+                                                ),
+                                                SizedBox(width: 5),
+                                                Badge(
+                                                  text: "Lv. ${_profile.level}",
+                                                  color: Color(0xffF7CF00),
+                                                )
+                                              ],
                                             ),
-                                            SizedBox(width: 5),
-                                            Badge(
-                                              text: "Lv. ${_profile.level}",
-                                              color: Color(0xffF7CF00),
+                                            SizedBox(height: 5),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              children: <Widget>[
+                                                Text("$_userEmail", style: TextStyle(fontSize: 12, color: Colors.black54)),
+                                                SizedBox(width: 8),
+                                                SizedBox(
+                                                    width: 18,
+                                                    height: 18,
+                                                    child: IconButton(
+                                                      icon: Icon(Icons.settings, color: Color(0xff5F75AC)),
+                                                      iconSize: 18,
+                                                      padding: EdgeInsets.zero,
+                                                      onPressed: () {
+                                                        this._onSettingButtonClick(ctx);
+                                                      },
+                                                    ))
+                                              ],
                                             )
                                           ],
                                         ),
-                                        SizedBox(height: 5),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: <Widget>[
-                                            Text("$_userEmail", style: TextStyle(fontSize: 12, color: Colors.black54)),
-                                            SizedBox(width: 8),
-                                            SizedBox(
-                                                width: 18,
-                                                height: 18,
-                                                child: IconButton(
-                                                  icon: Icon(Icons.settings, color: Color(0xff5F75AC)),
-                                                  iconSize: 18,
-                                                  padding: EdgeInsets.zero,
-                                                  onPressed: () {
-                                                    this._onSettingButtonClick(ctx);
-                                                  },
-                                                ))
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  )),
+                                      )
+                                  ),
                                   Container(
                                       height: 70,
                                       width: 70,

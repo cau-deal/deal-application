@@ -85,6 +85,18 @@ class MissionServiceClient extends $grpc.Client {
       ($0.MissionIdRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $0.GetParticipatedMissionStateResponse.fromBuffer(value));
+  static final _$getLabels =
+      $grpc.ClientMethod<$0.MissionIdRequest, $0.GetLabelsResponse>(
+          '/MissionService/GetLabels',
+          ($0.MissionIdRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.GetLabelsResponse.fromBuffer(value));
+  static final _$getLabelingResult =
+      $grpc.ClientMethod<$0.UrlRequest, $0.GetLabelingResultResponse>(
+          '/MissionService/GetLabelingResult',
+          ($0.UrlRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.GetLabelingResultResponse.fromBuffer(value));
 
   MissionServiceClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
@@ -184,6 +196,23 @@ class MissionServiceClient extends $grpc.Client {
           {$grpc.CallOptions options}) {
     final call = $createCall(
         _$getParticipatedMissionState, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.GetLabelsResponse> getLabels(
+      $0.MissionIdRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(_$getLabels, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.GetLabelingResultResponse> getLabelingResult(
+      $0.UrlRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$getLabelingResult, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -292,6 +321,20 @@ abstract class MissionServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) => $0.MissionIdRequest.fromBuffer(value),
         ($0.GetParticipatedMissionStateResponse value) =>
             value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.MissionIdRequest, $0.GetLabelsResponse>(
+        'GetLabels',
+        getLabels_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.MissionIdRequest.fromBuffer(value),
+        ($0.GetLabelsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UrlRequest, $0.GetLabelingResultResponse>(
+        'GetLabelingResult',
+        getLabelingResult_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.UrlRequest.fromBuffer(value),
+        ($0.GetLabelingResultResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.RegisterMissionResponse> registerMission_Pre(
@@ -359,6 +402,16 @@ abstract class MissionServiceBase extends $grpc.Service {
     return getParticipatedMissionState(call, await request);
   }
 
+  $async.Future<$0.GetLabelsResponse> getLabels_Pre($grpc.ServiceCall call,
+      $async.Future<$0.MissionIdRequest> request) async {
+    return getLabels(call, await request);
+  }
+
+  $async.Future<$0.GetLabelingResultResponse> getLabelingResult_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.UrlRequest> request) async {
+    return getLabelingResult(call, await request);
+  }
+
   $async.Future<$0.RegisterMissionResponse> registerMission(
       $grpc.ServiceCall call, $0.RegisterMissionRequest request);
   $async.Future<$0.SearchMissionResponse> searchMission(
@@ -386,4 +439,8 @@ abstract class MissionServiceBase extends $grpc.Service {
   $async.Future<$0.GetParticipatedMissionStateResponse>
       getParticipatedMissionState(
           $grpc.ServiceCall call, $0.MissionIdRequest request);
+  $async.Future<$0.GetLabelsResponse> getLabels(
+      $grpc.ServiceCall call, $0.MissionIdRequest request);
+  $async.Future<$0.GetLabelingResultResponse> getLabelingResult(
+      $grpc.ServiceCall call, $0.UrlRequest request);
 }

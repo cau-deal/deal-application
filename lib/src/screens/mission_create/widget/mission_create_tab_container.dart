@@ -145,7 +145,7 @@ class MissionCreateTabContainerState extends State<MissionCreateTabContainer> {
                         context: context,
                         barrierDismissible: false,
                         builder: (ctx) => ConfirmDialog(
-                          content: "임시저장된 내용이 있습니다.\n불러올까요?",
+                          content: "이전화면으로 돌아갈까요?",
                           ternary: false,
                         ));
                     if (confirm == ConfirmAction.ACCEPT) { Navigator.pop(context); }

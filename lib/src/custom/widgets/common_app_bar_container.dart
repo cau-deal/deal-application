@@ -28,7 +28,7 @@ class CommonAppBarContainer extends StatelessWidget {
     final ModalRoute<dynamic> parentRoute = ModalRoute.of(context);
     final bool useCloseButton = parentRoute is PageRoute<dynamic> && parentRoute.fullscreenDialog;
 
-    return new Scaffold(
+    return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(56.0),
         child: AppBar(

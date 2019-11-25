@@ -73,4 +73,12 @@ class MissionRepository {
     return await _missionService.fetchConductMissionRelevantFromMe(accessToken: accessToken);
   }
 
+  Future<GetMissionOwnerInfoResponse> fetchOwnerInfoByMissionId({String accessToken, int missionId}) async {
+    return await _missionService.fetchOwnerInfoByMissionId(accessToken: accessToken, missionId: missionId);
+  }
+
+  Future<GetParticipatedMissionStateResponse> fetchConductMissionStateByMissionId({String accessToken, int missionId}) async {
+    return await _missionService.fetchConductMissionStateByMissionId(accessToken: accessToken, missionId: missionId);
+  }
+
 }

@@ -1,8 +1,5 @@
 import 'package:deal/src/custom/modules/grpc_singleton.dart';
 import 'package:deal/src/protos/AccountService.pbgrpc.dart';
-import 'package:deal/src/protos/DealService.pb.dart';
-import 'package:deal/src/protos/DealService.pbgrpc.dart';
-import 'package:deal/src/protos/Empty.pb.dart';
 import 'package:grpc/grpc.dart';
 import 'package:meta/meta.dart';
 

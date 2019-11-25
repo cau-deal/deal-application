@@ -1,4 +1,3 @@
-import 'package:deal/src/screens/mission_detail/mission_detail.dart';
 import 'package:flutter/material.dart';
 
 class MessageListTile extends StatelessWidget {

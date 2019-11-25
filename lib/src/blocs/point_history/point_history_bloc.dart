@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:deal/src/protos/CommonResult.pb.dart';
-import 'package:deal/src/protos/DealService.pbgrpc.dart';
 import 'package:deal/src/protos/PointService.pb.dart';
-import 'package:deal/src/repositories/deal_repository.dart';
 import 'package:deal/src/repositories/user_repository.dart';
 import 'package:deal/src/services/point_service.dart';
 import 'package:rxdart/rxdart.dart';

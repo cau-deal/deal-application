@@ -1,5 +1,3 @@
-import 'package:deal/generated/i18n.dart';
-import 'package:deal/src/screens/mypage/screens/unverified_phone_auth.dart';
 import 'package:deal/src/screens/mypage/screens/verify_account_auth.dart';
 import 'package:flutter/material.dart';
 

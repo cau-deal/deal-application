@@ -40,9 +40,23 @@ class MissionDetailBloc extends Bloc<MissionDetailEvent, MissionDetailState> {
             missionId: evt.missionId
         );
 
-        if (res.result.resultCode == ResultCode.SUCCESS
-            && res.searchMissionResult == SearchMissionResult.SUCCESS_SEARCH_MISSION_RESULT) {
+        GetMissionOwnerInfoResponse ownerInfo = await missionRepository.fetchOwnerInfoByMissionId(
+          accessToken: await userRepository.getAccessToken(),
+          missionId: evt.missionId
+        );
 
+        GetParticipatedMissionStateResponse conductMissionState = await missionRepository.fetchConductMissionStateByMissionId(
+          accessToken: await userRepository.getAccessToken(),
+          missionId: evt.missionId
+        );
+
+        bool isValid = (res.result.resultCode == ResultCode.SUCCESS &&
+            res.searchMissionResult == SearchMissionResult.SUCCESS_SEARCH_MISSION_RESULT) &&
+            (ownerInfo.result.resultCode == ResultCode.SUCCESS);
+
+        print(isValid);
+
+        if (isValid) {
           final result = res.mission;
           final missionThumbnail = result.missionExplanationImages
               .where((img) => (img.type == MissionExplanationImageType.THUMBNAIL_MISSION_EXPLANATION_IMAGE_TYPE))
@@ -53,10 +67,14 @@ class MissionDetailBloc extends Bloc<MissionDetailEvent, MissionDetailState> {
             subTitle: result.summary,
             point: result.priceOfPackage,
             unit: result.unitPackage,
+            owner: ownerInfo.registerProfile,
             totalCnt: result.orderPackageQuantity,
             thumbnailUri: missionThumbnail != null? missionThumbnail.url : "",
             missionType: result.missionType,
             missionState: result.missionState,
+            conductMissionState: (conductMissionState.result.resultCode == ResultCode.SUCCESS)
+                ? conductMissionState.conductMissionState
+                : ConductMissionState.UNKNOWN_CONDUCT_MISSION_STATE,
             dataType: result.dataType,
             startDate: convertDate(result.beginning),
             endDate: convertDate(result.deadline),

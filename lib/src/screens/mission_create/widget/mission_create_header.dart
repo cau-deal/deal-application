@@ -1,6 +1,5 @@
 import 'package:deal/src/blocs/inquiry/bloc.dart' as inquiry;
 import 'package:deal/src/blocs/mission_create/bloc.dart';
-import 'package:deal/src/blocs/mission_create/bloc.dart';
 import 'package:deal/src/custom/dialogs/date_range_picker.dart';
 import 'package:deal/src/custom/dialogs/simple_list_dialog.dart';
 import 'package:deal/src/custom/widgets/badge.dart';

@@ -1,16 +1,15 @@
 import 'dart:convert';
 
-import 'package:deal/generated/i18n.dart';
-import 'package:deal/src/blocs/verified/bloc.dart';
+import 'package:deal/src/blocs/auth/auth_bloc.dart';
+import 'package:deal/src/blocs/auth/auth_event.dart';
+import 'package:deal/src/blocs/auth/bloc.dart';
 import 'package:deal/src/custom/widgets/common_app_bar_container.dart';
-import 'package:deal/src/custom/widgets/custom_progress_hud.dart';
 import 'package:deal/src/custom/widgets/white_round_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class VerifyAccountPage extends StatefulWidget {
 
@@ -20,7 +19,7 @@ class VerifyAccountPage extends StatefulWidget {
 
 class VerifyAccountPageState extends State<VerifyAccountPage> {
 
-  VerificationBloc _verificationBloc;
+  AuthenticationBloc _authenticationBloc;
 
   PanelController _panelController;
 
@@ -34,7 +33,7 @@ class VerifyAccountPageState extends State<VerifyAccountPage> {
 
   @override
   void initState() {
-    this._verificationBloc = BlocProvider.of<VerificationBloc>(context);
+    this._authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
 
     this._panelController = PanelController();
     this._bankController = TextEditingController();
@@ -64,23 +63,23 @@ class VerifyAccountPageState extends State<VerifyAccountPage> {
       Fluttertoast.showToast(msg: "입력값을 확인해주세요.");
     } else {
       String data = jsonEncode({ 'bank' : _bankController.text, 'accnum': _accountNumController.text, 'owner': _accountOwnerController.text });
-      _verificationBloc.add(VerificationRequest(VerificationType.ACCOUNT, data));
+      _authenticationBloc.add(VerificationRequest(VerificationType.ACCOUNT, data));
     }
   }
 
   @override
   Widget build(BuildContext ctx) {
-    return BlocListener<VerificationBloc, VerificationState>(
+    return BlocListener<AuthenticationBloc, AuthenticationState>(
         listener: (ctx, state) {
-          if (state is Verifying) {
+          if (state is Authenticating) {
             setState(() { this.index = 1; });
 
-          } else if (state is Verified && state.accountVerified) {
+          } else if (state is Authenticated && state.isAccountAuth) {
             setState(() { this.index = 0; });
             Fluttertoast.showToast(msg: "인증에 성공했습니다.");
             Navigator.pop(ctx);
 
-          } else if (state is Verified && !state.accountVerified ) {
+          } else if (state is Authenticated && !state.isAccountAuth ) {
             setState(() { this.index = 1; });
             Fluttertoast.showToast(msg: "인증에 실패했습니다.");
           }
@@ -138,9 +137,9 @@ class VerifyAccountPageState extends State<VerifyAccountPage> {
                           size: 20.0,
                         )
                     ),
-                    BlocListener<VerificationBloc, VerificationState>(
+                    BlocListener<AuthenticationBloc, AuthenticationState>(
                       listener: (ctx, state){ },
-                      child: BlocBuilder<VerificationBloc, VerificationState>(
+                      child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
                         builder: (ctx, state){
                           return Container(
                               child: SizedBox.expand(
