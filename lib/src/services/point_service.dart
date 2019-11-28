@@ -1,6 +1,9 @@
+import 'dart:ffi';
+
 import 'package:deal/src/custom/modules/grpc_singleton.dart';
 import 'package:deal/src/protos/Empty.pb.dart';
 import 'package:deal/src/protos/PointService.pbgrpc.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
 import 'package:meta/meta.dart';
 
@@ -55,6 +58,26 @@ class PointService extends BaseService {
 
     return res;
   }
+
+  Future<DepositResponse> deposit({String accessToken, int amount}) async {
+    DepositRequest req = DepositRequest();
+    DepositResponse res = DepositResponse();
+
+    try {
+      Deposit d = Deposit();
+      d.val = Int64.parseInt("$amount");
+      d.depositType = DepositType.KAKAO_PAY;
+
+      req.deposit = d;
+      res = await client.deposit(req, options: CallOptions(metadata: {'ticket': accessToken}));
+    } catch (e) {
+      print(e.toString());
+    }
+
+    return res;
+  }
+
+//    rpc Deposit(DepositRequest) returns (DepositResponse);
 
 //  rpc LookUpPlusPointHistory(LookUpPointHistoryRequest) returns (LookUpPointHistoryResponse);
 //  rpc LookUpMinusPointHistory(LookUpPointHistoryRequest) returns (LookUpPointHistoryResponse);

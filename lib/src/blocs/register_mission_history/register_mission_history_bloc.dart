@@ -61,7 +61,8 @@ class RegisterMissionHistoryBloc extends Bloc<RegisterMissionHistoryEvent, Regis
         accessToken: await userRepository.getAccessToken()
     );
 
-    if (res.result.resultCode == ResultCode.SUCCESS &&
+    if (res.
+     result.resultCode == ResultCode.SUCCESS &&
         res.searchMissionResult == SearchMissionResult.SUCCESS_SEARCH_MISSION_RESULT) {
       return res.missionProtoes;
     } else {

@@ -3,6 +3,7 @@ import 'package:deal/src/custom/widgets/double_back_to_close_app.dart';
 import 'package:deal/src/protos/MissionService.pbenum.dart';
 import 'package:deal/src/repositories/mission_repository.dart';
 import 'package:deal/src/repositories/user_repository.dart';
+import 'package:deal/src/screens/mission_list/screen/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,7 +30,7 @@ class MissionListPageState extends State<MissionListPage> with AutomaticKeepAliv
                         missionRepository: RepositoryProvider.of<MissionRepository>(ctx),
                         missionType: MissionType.ALL_MISSION_TYPE
                     ),
-                    child: MissionListView(),
+                    child: MainScreen(),
                   ),
 
                   BlocProvider<FetchMissionBloc>(

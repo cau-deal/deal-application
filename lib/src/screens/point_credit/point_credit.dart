@@ -2,8 +2,14 @@ import 'package:deal/src/custom/widgets/common_app_bar_container.dart';
 import 'package:deal/src/custom/widgets/styled_textform_field.dart';
 import 'package:deal/src/custom/widgets/white_round_button.dart';
 import 'package:deal/src/screens/mission_create/widget/content_header.dart';
+import 'package:deal/src/screens/point_credit/payments/kakaopay.dart';
+import 'package:deal/src/services/point_service.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PointCreditPage extends StatefulWidget {
   @override
@@ -13,24 +19,36 @@ class PointCreditPage extends StatefulWidget {
 }
 
 class PointCreditPageState extends State<PointCreditPage> {
-  var list = [
-    {"title": "비속어 및 공격적인 언어 사용"},
-    {"title": "권리침해 및 사이버 괴롭힘"},
-    {"title": "명의 도용"},
-    {"title": "폭력적 위협"},
-    {"title": "스팸 및 사기"},
-    {"title": "기타"},
-  ];
+
+  List<String> payments = ['무통장입금', '카드결제', '네이버페이', '카카오페이'];
+  TextEditingController priceController;
 
   @override
   void initState() {
     super.initState();
+    this.priceController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    this.priceController.dispose();
+    super.dispose();
+  }
+
+  Future test() async {
+    await Navigator.push(context, MaterialPageRoute(
+        builder: (ctx) => KakaopayProcessScreen(
+          amount: int.parse(priceController.text),
+        ),
+        fullscreenDialog: true
+    ));
   }
 
   @override
   Widget build(BuildContext ctx) {
     return NestedScrollView(
       headerSliverBuilder: (BuildContext ctx, bool b){
+
         return [
           SliverAppBar(
             brightness: Brightness.light,
@@ -49,6 +67,43 @@ class PointCreditPageState extends State<PointCreditPage> {
                       SizedBox(height: 15),
                       Container(
                           height: 45,
+                          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Image.asset("res/images/logo@210.png"),
+                              Expanded(
+                                child: Padding(
+                                  padding: EdgeInsets.all(5),
+                                  child: TextFormField(
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: <TextInputFormatter>[
+                                      LengthLimitingTextInputFormatter(10),
+                                      WhitelistingTextInputFormatter.digitsOnly,
+                                      BlacklistingTextInputFormatter.singleLineFormatter,
+                                    ],
+                                    textAlign: TextAlign.right,
+                                    controller: priceController,
+                                    decoration: InputDecoration.collapsed(
+                                      fillColor: Colors.white,
+                                      hasFloatingPlaceholder: false,
+                                      hintText: ""
+                                    ),
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600,
+                                        textBaseline: TextBaseline.alphabetic
+                                    ),
+                                  )
+                                ),
+                              ),
+                              Text("원", style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w800,
+                              ))
+                            ],
+                          ),
                           decoration: BoxDecoration(
                             color: Color(0xffF7CF00),
                             borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -74,7 +129,34 @@ class PointCreditPageState extends State<PointCreditPage> {
           child: Column(
             children: <Widget>[
               Container(color: Color(0xffeeeeee), height: 15),
-              Container(color: Colors.white, height: 100),
+              Container(
+                  color: Colors.white,
+                  height: 120,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: MediaQuery.removePadding(
+                      context: ctx,
+                      removeTop: true,
+                      child: GridView.count(
+                          crossAxisCount: 2,
+                          shrinkWrap: true,
+                          primary: false,
+                          crossAxisSpacing: 10.0,
+                          mainAxisSpacing: 10.0,
+                          childAspectRatio: 4.0,
+                          children: this.payments.map((label){
+                            return Container(
+                              color: Color(0xffeeeeee),
+                              child: GestureDetector(
+                                onTap: (){ test(); },
+                                child: Center(
+                                    child: Text('$label', style: TextStyle(color: Colors.black, fontSize: 15))
+                                )
+                              ),
+                            );
+                          }).toList()
+                      )
+                  )
+              ),
               Container(color: Color(0xffeeeeee), height: 15),
               Expanded(
                   child: Container(
@@ -106,7 +188,7 @@ class PointCreditPageState extends State<PointCreditPage> {
                   child: WhiteRoundButton(
                     buttonColor: Color(0xFF5f75ac),
                     textColor: Colors.white,
-                    text: '동의/결제',
+                    text: '동의 및 결제요청',
                     onPressed: (){},
                   )
               ),
