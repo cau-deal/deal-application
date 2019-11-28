@@ -54,6 +54,7 @@ class MyPageState {
     );
   }
 
+  // Message Section
   factory MyPageState.message(int point, int mission, int message) {
     return MyPageState(
       point: point,

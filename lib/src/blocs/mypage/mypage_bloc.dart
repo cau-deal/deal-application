@@ -30,7 +30,7 @@ class MyPageBloc extends Bloc<MyPageEvent, MyPageState> {
     } else if (event is MessageClicked) {
       yield* _mapMessageClickedToState();
     }
-  }
+}
 
   Stream<MyPageState> _mapMyPageInitializedToState() async* {
 
@@ -46,6 +46,7 @@ class MyPageBloc extends Bloc<MyPageEvent, MyPageState> {
         String token = await userRepository.getAccessToken();
         LookUpBalanceResponse lbr = await ps.fetchCurrentPoint(accessToken: token);
         CountFetchMissionResponse fmc = await ms.fetchCurrentMissionCount(accessToken: token);
+        // Mission count toal code.
 
         point = (lbr.result.resultCode == ResultCode.SUCCESS)? lbr.balance.toInt() : 0;
         mission = (fmc.result.resultCode == ResultCode.SUCCESS)? fmc.val.toInt() : 0;

@@ -49,7 +49,7 @@ class MyMissionHistoryTile extends StatelessWidget {
       */
       /*
         * ConductState 전이에 대한 설명
-
+1
         (* State *), [ Event ]
         1. DURING_MISSION (진행 중)
         2. WAITING_VERIFICATION(검수 대기중)
