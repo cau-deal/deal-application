@@ -8,6 +8,9 @@ import 'package:deal/src/repositories/user_repository.dart';
 import 'package:deal/src/services/mission_service.dart';
 import 'package:deal/src/services/point_service.dart';
 
+import 'package:deal/src/protos/NotificationService.pb.dart';
+import 'package:deal/src/services/notification_service.dart';
+
 import 'bloc.dart';
 
 class MyPageBloc extends Bloc<MyPageEvent, MyPageState> {
