@@ -27,12 +27,35 @@ class NotificationService extends BaseService {
   Future<GetPushListResponse> requestPushList({String accessToken, IsReadPushType pushType}) async{
     GetPushListResponse res = GetPushListResponse();
     GetPushListRequest req = GetPushListRequest();
-    IsReadPushType ptype = pushType;
-
     try {
-      req.isReadPushType = ptype;
+      req.isReadPushType = pushType;
 
       res = await client.getPushList(req, options:  CallOptions(metadata: {'ticket': accessToken}));
+    } catch(e){
+      print(e.toString());
+    }
+    return res;
+  }
+
+  Future<CountNoReadPushResponse> requestCountNoReadPush({String accessToken}) async{
+    CountNoReadPushResponse res = CountNoReadPushResponse();
+    Empty req = Empty();
+    try{
+      res = await client.countNoReadPush(req, options: CallOptions(metadata: {'ticket': accessToken}));
+    } catch(e){
+      print(e.toString());
+    }
+    return res;
+  }
+
+  Future<ReadPushResponse> requestReadPush({String accessToken, int pushId}) async{
+    ReadPushResponse res= ReadPushResponse();
+    ReadPushRequest req = ReadPushRequest();
+    req.pushId = pushId;
+
+    try {
+      res = await client.readPush(
+          req, options: CallOptions(metadata: {'ticket': accessToken}))
     } catch(e){
       print(e.toString());
     }
