@@ -55,7 +55,7 @@ class NotificationService extends BaseService {
 
     try {
       res = await client.readPush(
-          req, options: CallOptions(metadata: {'ticket': accessToken}))
+          req, options: CallOptions(metadata: {'ticket': accessToken}));
     } catch(e){
       print(e.toString());
     }

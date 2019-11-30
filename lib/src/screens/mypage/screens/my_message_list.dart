@@ -1,4 +1,5 @@
 import 'package:deal/src/screens/mypage/widgets/message_list_tile.dart';
+import 'package:deal/src/blocs/messsage_history/bloc.dart';
 import 'package:flutter/material.dart';
 
 class MyMessageListView extends StatelessWidget {
