@@ -1,4 +1,5 @@
 import 'package:deal/src/screens/mypage/widgets/message_list_tile.dart';
+import 'package:deal/src/blocs/messsage_history/bloc.dart';
 import 'package:flutter/material.dart';
 
 class MyMessageListView extends StatelessWidget {
@@ -9,8 +10,18 @@ class MyMessageListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var list = [
-      {"title": "새로운 공지사항이 등록되었습니다", "date": "2019-10-14"},
-      {"title": "새로운 공지사항이 등록되었습니다", "date": "2019-10-12"},
+      {"title": "새로운 공지사항d이 등록되었습니다", "date": "2019-10-14"},
+    ];
+
+    var list2 = [
+      {"title": "dddddddd등록되었습니다", "date": "2019-10-14"},
+      {"title": "dddddddd등록되었습니다", "date": "2019-10-14"}
+    ];
+
+    var list3 = [
+      {"title": "dddddddd등록되었습니다", "date": "2019-10-14"},
+      {"title": "dddddddd등록되었습니다", "date": "2019-10-14"},
+      {"title": "dddddddd등록되었습니다", "date": "2019-10-14"}
     ];
 
     return TabBarView(
@@ -38,9 +49,9 @@ class MyMessageListView extends StatelessWidget {
                     context: context,
                     removeTop: true,
                     child: ListView.builder(
-                      itemCount: list.length,
+                      itemCount: list2.length,
                       itemBuilder: (BuildContext context, int index) {
-                        final data = list[index];
+                        final data = list2[index];
                         return MessageListTile(idx: index, title: data['title'], date: data['date']);
                       },
                     )))),
@@ -52,9 +63,9 @@ class MyMessageListView extends StatelessWidget {
                     context: context,
                     removeTop: true,
                     child: ListView.builder(
-                      itemCount: list.length,
+                      itemCount: list3.length,
                       itemBuilder: (BuildContext context, int index) {
-                        final data = list[index];
+                        final data = list3[index];
                         return MessageListTile(idx: index, title: data['title'], date: data['date']);
                       },
                     )))),

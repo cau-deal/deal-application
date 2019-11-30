@@ -3,10 +3,12 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:deal/src/protos/CommonResult.pb.dart';
 import 'package:deal/src/protos/MissionService.pb.dart';
+import 'package:deal/src/protos/NotificationService.pb.dart';
 import 'package:deal/src/protos/PointService.pb.dart';
 import 'package:deal/src/repositories/user_repository.dart';
 import 'package:deal/src/services/mission_service.dart';
 import 'package:deal/src/services/point_service.dart';
+import 'package:deal/src/services/notification_service.dart';
 
 import 'bloc.dart';
 
@@ -30,7 +32,7 @@ class MyPageBloc extends Bloc<MyPageEvent, MyPageState> {
     } else if (event is MessageClicked) {
       yield* _mapMessageClickedToState();
     }
-  }
+}
 
   Stream<MyPageState> _mapMyPageInitializedToState() async* {
 
@@ -41,14 +43,19 @@ class MyPageBloc extends Bloc<MyPageEvent, MyPageState> {
     try {
       PointService ps = await PointService.init();
       MissionService ms = await MissionService.init();
+      NotificationService ns = await NotificationService.init();
 
       if( await userRepository.hasToken() ){
         String token = await userRepository.getAccessToken();
         LookUpBalanceResponse lbr = await ps.fetchCurrentPoint(accessToken: token);
         CountFetchMissionResponse fmc = await ms.fetchCurrentMissionCount(accessToken: token);
+        CountNoReadPushResponse nrp = await ns.requestCountNoReadPush(accessToken: token);
+
+        // Mission count toal code.
 
         point = (lbr.result.resultCode == ResultCode.SUCCESS)? lbr.balance.toInt() : 0;
         mission = (fmc.result.resultCode == ResultCode.SUCCESS)? fmc.val.toInt() : 0;
+        message = (nrp.result.resultCode == ResultCode.SUCCESS)? nrp.count.toInt() : 0;
       }
 
     } catch(e){
