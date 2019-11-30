@@ -20,10 +20,12 @@ class MissionDetailPage extends StatefulWidget {
 class MissionDetailPageState extends State<MissionDetailPage> {
 
   MissionDetailBloc _missionDetailBloc;
+  String _buttonText;
 
   @override
   void initState() {
     this._missionDetailBloc = BlocProvider.of<MissionDetailBloc>(context);
+    this._buttonText = "";
     super.initState();
   }
 
@@ -84,20 +86,28 @@ class MissionDetailPageState extends State<MissionDetailPage> {
       bottomNavigationBar: Container(
           color: Colors.white,
           height: 70,
-          child: BlocBuilder<MissionDetailBloc, MissionDetailState>(
-            builder: (ctx, state){
-              return Container(
-                  padding: EdgeInsets.all(15),
-                  child: WhiteRoundButton(
-                      buttonColor: Color(0xFF5f75ac),
-                      textColor: Colors.white,
-                      text: getButtonText(state.conductMissionState, state.missionState),
-                      onPressed:(state.conductMissionState != ConductMissionState.INIT_CONDUCT_MISSION_STATE)? null : () {
-                        this._missionDetailBloc.add(ButtonPressed(widget.missionId));
-                      }
-                   )
-              );
-            }
+          child: BlocListener<MissionDetailBloc, MissionDetailState>(
+              listener: (ctx, state){
+                setState(() {
+                  this._buttonText = getButtonText(state.conductMissionState, state.missionState);
+                });
+              },
+              child: BlocBuilder<MissionDetailBloc, MissionDetailState>(
+                  builder: (ctx, state){
+                    this._buttonText = getButtonText(state.conductMissionState, state.missionState);
+                    return Container(
+                        padding: EdgeInsets.all(15),
+                        child: WhiteRoundButton(
+                            buttonColor: Color(0xFF5f75ac),
+                            textColor: Colors.white,
+                            text: this._buttonText,
+                            onPressed:(state.conductMissionState != ConductMissionState.INIT_CONDUCT_MISSION_STATE)? null : () {
+                              this._missionDetailBloc.add(ButtonPressed(widget.missionId));
+                            }
+                        )
+                    );
+                  }
+              ),
           )
       ),
     );

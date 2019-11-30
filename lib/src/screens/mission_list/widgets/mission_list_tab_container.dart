@@ -20,7 +20,7 @@ class MissionListTabContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: new DefaultTabController(
+        body: DefaultTabController(
             length: 3,
             child: NestedScrollView(
               headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {

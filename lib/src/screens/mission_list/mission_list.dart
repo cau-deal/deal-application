@@ -30,7 +30,10 @@ class MissionListPageState extends State<MissionListPage> with AutomaticKeepAliv
                         missionRepository: RepositoryProvider.of<MissionRepository>(ctx),
                         missionType: MissionType.ALL_MISSION_TYPE
                     ),
-                    child: MainScreen(),
+                    child: Container(
+                      color: Colors.white,
+                      child: MainScreen()
+                    ),
                   ),
 
                   BlocProvider<FetchMissionBloc>(

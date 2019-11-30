@@ -273,7 +273,8 @@ class MissionSummaryPageState extends State<MissionSummaryPage> with AutomaticKe
                         ],
                       );
                     }
-                  ))
+                  )
+          )
               : Container();
         }
     );
