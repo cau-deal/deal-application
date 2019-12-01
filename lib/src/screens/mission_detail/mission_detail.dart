@@ -1,12 +1,18 @@
+import 'package:deal/src/blocs/mission_act/bloc.dart';
 import 'package:deal/src/blocs/mission_detail/bloc.dart';
 import 'package:deal/src/custom/widgets/white_round_button.dart';
 import 'package:deal/src/protos/Data.pbenum.dart';
 import 'package:deal/src/protos/MissionService.pbenum.dart';
+import 'package:deal/src/repositories/mission_repository.dart';
+import 'package:deal/src/repositories/user_repository.dart';
 import 'package:deal/src/screens/mission_act/mission_collect_picture.dart';
+import 'package:deal/src/screens/mission_act/mission_process_image.dart';
 import 'package:deal/src/screens/mission_detail/widget/mission_detail_header.dart';
 import 'package:deal/src/screens/mission_detail/widget/mission_detail_list.dart';
 import 'package:deal/src/screens/mission_detail/widget/mission_detail_tab_container.dart';
 import 'package:deal/src/screens/point_credit/payments/kakaopay.dart';
+import 'package:quill_delta/quill_delta.dart';
+import 'package:zefyr/zefyr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,17 +53,16 @@ class MissionDetailPageState extends State<MissionDetailPage> {
 //    5. RETURN_VERIFICATION (반려)
 //    6. FAIL_MISSION (미션 실패, ex> 시간 초과)
 
-    switch(ms){
-      case MissionState.WAITING_REGISTER:
-        return "등록대기";
-      case MissionState.SOLD_OUT:
-        return "할당완료";
-      case MissionState.COMPLETE_MISSION:
-        return "미션완료";
-    }
-
     switch(cms){
       case ConductMissionState.INIT_CONDUCT_MISSION_STATE:
+        switch(ms){
+          case MissionState.WAITING_REGISTER:
+            return "등록대기";
+          case MissionState.SOLD_OUT:
+            return "할당완료(매진)";
+          case MissionState.COMPLETE_MISSION:
+            return "의뢰 마감";
+        }
         return "의뢰 참여";
       case ConductMissionState.DURING_MISSION_CONDUCT_MISSION_STATE:
         return "의뢰 수행";
@@ -66,13 +71,23 @@ class MissionDetailPageState extends State<MissionDetailPage> {
       case ConductMissionState.DURING_VERIFICATION_CONDUCT_MISSION_STATE:
         return "검수 진행중";
       case ConductMissionState.COMPLETE_VERIFICATION_CONDUCT_MISSION_STATE:
-        return "미션 완료";
+        return "의뢰 완료";
       case ConductMissionState.RETURN_VERIFICATION_CONDUCT_MISSION_STATE:
-        return "미션 반려";
-        // 테스트용으로 만듦.
-    case ConductMissionState.UNKNOWN_CONDUCT_MISSION_STATE:
+        return "의뢰 반려";
+      case ConductMissionState.FAIL_MISSION_CONDUCT_MISSION_STATE:
+        return "의뢰 실패";
+
+      case ConductMissionState.UNKNOWN_CONDUCT_MISSION_STATE:
       default: {
-        return "진행중";
+        switch(ms){
+          case MissionState.WAITING_REGISTER:
+            return "등록대기";
+          case MissionState.SOLD_OUT:
+            return "할당완료";
+          case MissionState.COMPLETE_MISSION:
+            return "의뢰 마감";
+        }
+        return "의뢰 할당중";
       }
     }
   }
@@ -100,14 +115,18 @@ class MissionDetailPageState extends State<MissionDetailPage> {
             case MissionType.COLLECT_MISSION_TYPE:
               {
                 switch (state.dataType) {
-                  case DataType.IMAGE:
-                    return CollectPictureScreen();
+                  case DataType.IMAGE: return CollectPictureScreen(state: state, missionId: widget.missionId);
                 }
 
                 break;
               }
             case MissionType.PROCESS_MISSION_TYPE:
-              break;
+              {
+                switch(state.dataType){
+                  case DataType.IMAGE: return ProcessPictureScreen(state: state, missionId: widget.missionId);
+                }
+                break;
+              }
           }
           break;
         }
@@ -125,8 +144,15 @@ class MissionDetailPageState extends State<MissionDetailPage> {
 
       case ConductMissionState.DURING_MISSION_CONDUCT_MISSION_STATE: {
         await Navigator.push(context, MaterialPageRoute(
-            builder: (ctx) => CollectPictureScreen(
-              amount: 10000,
+            builder: (ctx) => MultiBlocProvider(
+              providers: [
+                BlocProvider<MissionActBloc>(builder: (ctx) => MissionActBloc(
+                    userRepository: RepositoryProvider.of<UserRepository>(context),
+                    missionRepository: RepositoryProvider.of<MissionRepository>(context)
+                )),
+                BlocProvider<MissionDetailBloc>(builder: (ctx) => this._missionDetailBloc)
+              ],
+              child: getRoutePage(state)
             ),
             fullscreenDialog: true
         ));

@@ -109,6 +109,12 @@ class MissionServiceClient extends $grpc.Client {
           ($0.DecidePurchaseRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.DecidePurchaseResponse.fromBuffer(value));
+  static final _$getProcessMissionImages = $grpc.ClientMethod<
+          $0.MissionIdRequest, $0.GetProcessMissionImagesResponse>(
+      '/MissionService/GetProcessMissionImages',
+      ($0.MissionIdRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.GetProcessMissionImagesResponse.fromBuffer(value));
 
   MissionServiceClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
@@ -242,6 +248,15 @@ class MissionServiceClient extends $grpc.Client {
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$decidePurchase, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.GetProcessMissionImagesResponse>
+      getProcessMissionImages($0.MissionIdRequest request,
+          {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$getProcessMissionImages, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -382,6 +397,14 @@ abstract class MissionServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $0.DecidePurchaseRequest.fromBuffer(value),
         ($0.DecidePurchaseResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.MissionIdRequest,
+            $0.GetProcessMissionImagesResponse>(
+        'GetProcessMissionImages',
+        getProcessMissionImages_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.MissionIdRequest.fromBuffer(value),
+        ($0.GetProcessMissionImagesResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.RegisterMissionResponse> registerMission_Pre(
@@ -471,6 +494,12 @@ abstract class MissionServiceBase extends $grpc.Service {
     return decidePurchase(call, await request);
   }
 
+  $async.Future<$0.GetProcessMissionImagesResponse> getProcessMissionImages_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.MissionIdRequest> request) async {
+    return getProcessMissionImages(call, await request);
+  }
+
   $async.Future<$0.RegisterMissionResponse> registerMission(
       $grpc.ServiceCall call, $0.RegisterMissionRequest request);
   $async.Future<$0.SearchMissionResponse> searchMission(
@@ -506,4 +535,6 @@ abstract class MissionServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $1.Empty request);
   $async.Future<$0.DecidePurchaseResponse> decidePurchase(
       $grpc.ServiceCall call, $0.DecidePurchaseRequest request);
+  $async.Future<$0.GetProcessMissionImagesResponse> getProcessMissionImages(
+      $grpc.ServiceCall call, $0.MissionIdRequest request);
 }

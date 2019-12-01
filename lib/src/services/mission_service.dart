@@ -224,6 +224,66 @@ class MissionService extends BaseService {
     return res;
   }
 
+//  rpc SubmitCollectMissionOutput(SubmitCollectMissionOutputRequest) returns (SubmitCollectMissionOutputResponse);
+//  rpc SubmitProcessMissionOutput(SubmitProcessMissionOutputRequest) returns (SubmitProcessMissionOutputResponse);
+//   rpc GetLabels(MissionIdRequest) returns (GetLabelsResponse);
+  Future<GetLabelsResponse> getLabelByMissionId({String accessToken, int missionId}) async {
+    MissionIdRequest req = MissionIdRequest()..missionId=missionId;
+    GetLabelsResponse res = GetLabelsResponse();
+
+    try {
+      res = await client.getLabels(req, options: CallOptions(metadata: {'ticket': accessToken}));
+    } catch (_) {
+      print(_.toString());
+    }
+
+    return res;
+  }
+
+  //rpc GetProcessMissionImages(MissionIdRequest) returns (GetProcessMissionImagesResponse);
+  Future<GetProcessMissionImagesResponse> fetchImagesByMissionId({String accessToken, int missionId}) async {
+    MissionIdRequest req = MissionIdRequest()..missionId=missionId;
+    GetProcessMissionImagesResponse res = GetProcessMissionImagesResponse();
+
+    try {
+      res = await client.getProcessMissionImages(req, options: CallOptions(metadata: {'ticket': accessToken}));
+    } catch (_) {
+      print(_.toString());
+    }
+
+    return res;
+  }
+
+  Future<SubmitProcessMissionOutputResponse> submitProcessMissionOutput({String accessToken, int missionId, List<Map<String, String>> result}) async {
+    SubmitProcessMissionOutputRequest req = SubmitProcessMissionOutputRequest()..missionId=missionId;
+    SubmitProcessMissionOutputResponse res = SubmitProcessMissionOutputResponse();
+
+    try {
+      req.datas.addAll(result.map((pair)=>ProcessedImageData()..labelingResult=pair.values.first..data=(Data()..url=pair.keys.first)).toList());
+      res = await client.submitProcessMissionOutput(req, options: CallOptions(metadata: {'ticket': accessToken}));
+    } catch (_) {
+      print(_.toString());
+    }
+
+    return res;
+
+  }
+
+  Future<SubmitCollectMissionOutputResponse> submitCollectMission({String accessToken, int missionId, List<String> urls}) async {
+    SubmitCollectMissionOutputRequest req = SubmitCollectMissionOutputRequest()..missionId=missionId;
+    SubmitCollectMissionOutputResponse res = SubmitCollectMissionOutputResponse();
+
+    try {
+      req.datas.addAll(urls.map((url)=>Data()..url=url).toList());
+      res = await client.submitCollectMissionOutput(req, options: CallOptions(metadata: {'ticket': accessToken}));
+    } catch (_) {
+      print(_.toString());
+    }
+
+    return res;
+
+  }
+
 //  rpc GetAssignedMission(MissionIdRequest) returns (GetAssignedMissionResponse);
 
 

@@ -101,7 +101,7 @@ class UploadProcessImageState extends State<UploadProcessImage> {
                         child: Padding(
                             padding: EdgeInsets.all(5),
                             child: Text(
-                                "'+' 버튼을 누른 후, 사진을 업로드 해주세요.",
+                                "'+' 버튼을 눌러, 사진을 업로드 해주세요.",
                                 style: TextStyle(color: Colors.black, height: 1.5, fontSize: 14)
                             )
                         )

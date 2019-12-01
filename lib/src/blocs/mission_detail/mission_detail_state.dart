@@ -1,6 +1,7 @@
 import 'package:deal/src/protos/Data.pb.dart';
 import 'package:deal/src/protos/MissionService.pbenum.dart';
 import 'package:deal/src/protos/Profile.pb.dart';
+import 'package:deal/src/screens/agreements/agreements.dart';
 import 'package:meta/meta.dart';
 
 @immutable
@@ -31,6 +32,9 @@ class MissionDetailState {
   final Profile owner;
   final ConductMissionState conductMissionState;
 
+  final List<String> datas;
+  final List<String> labels;
+
   final bool isSuccess;
   final bool isFailure;
 
@@ -60,6 +64,9 @@ class MissionDetailState {
     @required this.owner,
     @required this.conductMissionState,
 
+    @required this.datas,
+    @required this.labels,
+
     @required this.isSuccess,
     @required this.isFailure,
   });
@@ -79,6 +86,8 @@ class MissionDetailState {
       endDate: DateTime.now(),
       owner: Profile(),
       conductMissionState: ConductMissionState.UNKNOWN_CONDUCT_MISSION_STATE,
+      datas: [],
+      labels: [],
       missionSummary: "\n",
       missionInstruction: "\n",
       missionTerms: "\n",
@@ -92,6 +101,7 @@ class MissionDetailState {
       String title, String subTitle, DateTime s, DateTime e, Profile owner,
       String missionSummary, String missionInstruction, String missionTerms,
       int point, int unit, int totalCnt, String thumbnailUri,
+      List<String> datas, List<String> labels,
       MissionType missionType, DataType dataType, MissionState missionState, ConductMissionState conductMissionState
       ) {
     return MissionDetailState(
@@ -115,6 +125,9 @@ class MissionDetailState {
       missionSummary: missionSummary,
       missionInstruction: missionInstruction,
       missionTerms: missionTerms,
+
+      datas: datas,
+      labels: labels,
 
       missionState: missionState,
       conductMissionState: conductMissionState,
@@ -129,6 +142,7 @@ class MissionDetailState {
       String title, String subTitle, DateTime s, DateTime e, Profile owner,
       String missionSummary, String missionInstruction, String missionTerms,
       int point, int unit, int totalCnt, String thumbnailUri,
+      List<String> datas, List<String> labels,
       MissionType missionType, DataType dataType, MissionState missionState, ConductMissionState conductMissionState
       ) {
     return MissionDetailState(
@@ -155,6 +169,9 @@ class MissionDetailState {
       missionState: missionState,
       conductMissionState: conductMissionState,
 
+      datas: datas,
+      labels: labels,
+
       isAgreeWithTerms: false,
       isSuccess: false,
       isFailure: true,
@@ -165,6 +182,7 @@ class MissionDetailState {
       String title, String subTitle, DateTime s, DateTime e, Profile owner,
       String missionSummary, String missionInstruction, String missionTerms,
       int point, int unit, int totalCnt, String thumbnailUri,
+      List<String> datas, List<String> labels,
       MissionType missionType, DataType dataType,
       MissionState missionState, ConductMissionState conductMissionState
       ) {
@@ -188,6 +206,9 @@ class MissionDetailState {
       missionSummary: missionSummary,
       missionInstruction: missionInstruction,
       missionTerms: missionTerms,
+
+      datas: datas,
+      labels: labels,
 
       missionState: missionState,
       conductMissionState: conductMissionState,
@@ -217,6 +238,9 @@ class MissionDetailState {
     DateTime startDate,
     DateTime endDate,
 
+    List<String> datas,
+    List<String> labels,
+
     String missionSummary,
     String missionInst,
     String missionTerm,
@@ -238,6 +262,9 @@ class MissionDetailState {
       conductMissionState: conductMissionState,
 
       owner: owner,
+
+      datas: datas,
+      labels: labels,
 
       startDate: startDate,
       endDate: endDate,
@@ -267,6 +294,9 @@ class MissionDetailState {
     MissionState missionState,
     ConductMissionState conductMissionState,
 
+    List<String> datas,
+    List<String> labels,
+
     Profile owner,
 
     DateTime startDate,
@@ -292,6 +322,9 @@ class MissionDetailState {
       missionType: missionType ?? this.missionType,
       dataType: dataType ?? this.dataType,
       owner: owner ?? this.owner,
+
+      datas: datas ?? this.datas,
+      labels: labels ?? this.labels,
 
       missionState: missionState ?? this.missionState,
       conductMissionState: conductMissionState ?? this.conductMissionState,

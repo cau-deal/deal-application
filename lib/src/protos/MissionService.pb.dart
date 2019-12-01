@@ -1496,3 +1496,40 @@ class DecidePurchaseResponse extends $pb.GeneratedMessage {
   $4.CommonResult ensureResult() => $_ensure(0);
 }
 
+class GetProcessMissionImagesResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetProcessMissionImagesResponse', createEmptyInstance: create)
+    ..aOM<$4.CommonResult>(1, 'result', subBuilder: $4.CommonResult.create)
+    ..pPS(2, 'urls')
+    ..hasRequiredFields = false
+  ;
+
+  GetProcessMissionImagesResponse._() : super();
+  factory GetProcessMissionImagesResponse() => create();
+  factory GetProcessMissionImagesResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetProcessMissionImagesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetProcessMissionImagesResponse clone() => GetProcessMissionImagesResponse()..mergeFromMessage(this);
+  GetProcessMissionImagesResponse copyWith(void Function(GetProcessMissionImagesResponse) updates) => super.copyWith((message) => updates(message as GetProcessMissionImagesResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetProcessMissionImagesResponse create() => GetProcessMissionImagesResponse._();
+  GetProcessMissionImagesResponse createEmptyInstance() => create();
+  static $pb.PbList<GetProcessMissionImagesResponse> createRepeated() => $pb.PbList<GetProcessMissionImagesResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetProcessMissionImagesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetProcessMissionImagesResponse>(create);
+  static GetProcessMissionImagesResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $4.CommonResult get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result($4.CommonResult v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  $4.CommonResult ensureResult() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.List<$core.String> get urls => $_getList(1);
+}
+

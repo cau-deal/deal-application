@@ -83,4 +83,12 @@ class MissionRepository {
     return await _missionService.fetchConductMissionStateByMissionId(accessToken: accessToken, missionId: missionId);
   }
 
+  Future<SubmitCollectMissionOutputResponse> submitCollectMissionByMissionId({String accessToken, int missionId, List<String> urls}) async {
+    return await _missionService.submitCollectMission(accessToken: accessToken, missionId: missionId, urls: urls);
+  }
+
+  Future<GetProcessMissionImagesResponse> fetchProcessImagesByMissionId({String accessToken, int missionId}) async {
+    return await _missionService.fetchImagesByMissionId(accessToken: accessToken, missionId: missionId);
+  }
+
 }
