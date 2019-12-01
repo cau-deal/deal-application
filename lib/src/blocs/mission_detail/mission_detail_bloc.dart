@@ -58,9 +58,9 @@ class MissionDetailBloc extends Bloc<MissionDetailEvent, MissionDetailState> {
 
         if (isValid) {
           final result = res.mission;
-          final missionThumbnail = result.missionExplanationImages
+          final missionThumbnail = (result.missionExplanationImages.length > 0)? result.missionExplanationImages
               .where((img) => (img.type == MissionExplanationImageType.THUMBNAIL_MISSION_EXPLANATION_IMAGE_TYPE))
-              .first;
+              .first : null;
           
           yield state.update(
             title: result.title,
@@ -96,18 +96,39 @@ class MissionDetailBloc extends Bloc<MissionDetailEvent, MissionDetailState> {
 
     try {
 
-      if (await userRepository.hasToken()) {
-        GetAssignedMissionResponse res = await missionRepository.assignMissionById(
-            accessToken: await userRepository.getAccessToken(),
-            missionId: evt.missionId
-        );
+      switch(state.conductMissionState){
+        case ConductMissionState.INIT_CONDUCT_MISSION_STATE: {
+          if (await userRepository.hasToken()) {
+            GetAssignedMissionResponse res = await missionRepository.assignMissionById(
+                accessToken: await userRepository.getAccessToken(),
+                missionId: evt.missionId
+            );
 
-        if (res.result.resultCode == ResultCode.SUCCESS
-            && res.assignMissionResult == AssignMissionResult.SUCCESS_ASSIGN_MISSION_RESULT) {
+            if (res.result.resultCode == ResultCode.SUCCESS
+                && res.assignMissionResult == AssignMissionResult.SUCCESS_ASSIGN_MISSION_RESULT) {
 
-          yield state.update(
-            missionState: MissionState.DURING_MISSION
-          );
+              yield state.update(
+                  conductMissionState: ConductMissionState.DURING_MISSION_CONDUCT_MISSION_STATE
+              );
+            }
+          }
+          break;
+        }
+        case ConductMissionState.DURING_MISSION_CONDUCT_MISSION_STATE: {
+          switch(state.missionType){
+            case MissionType.COLLECT_MISSION_TYPE:
+              switch(state.dataType){
+                case DataType.IMAGE:
+                  break;
+                case DataType.SURVEY:
+                  break;
+                case DataType.SOUND:
+                  break;
+              }
+              break;
+            case MissionType.PROCESS_MISSION_TYPE:
+              break;
+          }
         }
       }
 

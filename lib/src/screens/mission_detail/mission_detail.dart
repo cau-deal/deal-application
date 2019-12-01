@@ -1,9 +1,12 @@
 import 'package:deal/src/blocs/mission_detail/bloc.dart';
 import 'package:deal/src/custom/widgets/white_round_button.dart';
+import 'package:deal/src/protos/Data.pbenum.dart';
 import 'package:deal/src/protos/MissionService.pbenum.dart';
+import 'package:deal/src/screens/mission_act/mission_collect_picture.dart';
 import 'package:deal/src/screens/mission_detail/widget/mission_detail_header.dart';
 import 'package:deal/src/screens/mission_detail/widget/mission_detail_list.dart';
 import 'package:deal/src/screens/mission_detail/widget/mission_detail_tab_container.dart';
+import 'package:deal/src/screens/point_credit/payments/kakaopay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -50,14 +53,14 @@ class MissionDetailPageState extends State<MissionDetailPage> {
       case MissionState.SOLD_OUT:
         return "할당완료";
       case MissionState.COMPLETE_MISSION:
-        return "미션 완료";
+        return "미션완료";
     }
 
     switch(cms){
       case ConductMissionState.INIT_CONDUCT_MISSION_STATE:
-        return "참여하기";
+        return "의뢰 참여";
       case ConductMissionState.DURING_MISSION_CONDUCT_MISSION_STATE:
-        return "진행중";
+        return "의뢰 수행";
       case ConductMissionState.WAITING_VERIFICATION_CONDUCT_MISSION_STATE:
         return "검수 대기중";
       case ConductMissionState.DURING_VERIFICATION_CONDUCT_MISSION_STATE:
@@ -66,10 +69,70 @@ class MissionDetailPageState extends State<MissionDetailPage> {
         return "미션 완료";
       case ConductMissionState.RETURN_VERIFICATION_CONDUCT_MISSION_STATE:
         return "미션 반려";
-      case ConductMissionState.UNKNOWN_CONDUCT_MISSION_STATE:
+        // 테스트용으로 만듦.
+    case ConductMissionState.UNKNOWN_CONDUCT_MISSION_STATE:
       default: {
-        return "완료됨";
+        return "진행중";
       }
+    }
+  }
+
+  Widget getRoutePage(MissionDetailState state){
+
+//    1. DURING_MISSION (진행 중)
+//    2. WAITING_VERIFICATION(검수 대기중)
+//    3. DURING_VERIFICATION(검수 진행중)
+//    4. COMPLETE_MISSION (완료)
+//    5. RETURN_VERIFICATION (반려)
+//    6. FAIL_MISSION (미션 실패, ex> 시간 초과)
+
+    switch(state.missionState){
+      case MissionState.WAITING_REGISTER:
+      case MissionState.SOLD_OUT:
+      case MissionState.COMPLETE_MISSION:
+        return null;
+    }
+
+    switch(state.conductMissionState){
+      case ConductMissionState.DURING_MISSION_CONDUCT_MISSION_STATE:
+        {
+          switch (state.missionType) {
+            case MissionType.COLLECT_MISSION_TYPE:
+              {
+                switch (state.dataType) {
+                  case DataType.IMAGE:
+                    return CollectPictureScreen();
+                }
+
+                break;
+              }
+            case MissionType.PROCESS_MISSION_TYPE:
+              break;
+          }
+          break;
+        }
+      default: return null;
+    }
+
+  }
+
+  void buttonClickHandler(MissionDetailState state) async {
+
+    switch(state.conductMissionState){
+      case ConductMissionState.INIT_CONDUCT_MISSION_STATE: {
+        this._missionDetailBloc.add(ButtonPressed(widget.missionId));
+      } break;
+
+      case ConductMissionState.DURING_MISSION_CONDUCT_MISSION_STATE: {
+        await Navigator.push(context, MaterialPageRoute(
+            builder: (ctx) => CollectPictureScreen(
+              amount: 10000,
+            ),
+            fullscreenDialog: true
+        ));
+        break;
+      }
+
     }
   }
 
@@ -101,9 +164,8 @@ class MissionDetailPageState extends State<MissionDetailPage> {
                             buttonColor: Color(0xFF5f75ac),
                             textColor: Colors.white,
                             text: this._buttonText,
-                            onPressed:(state.conductMissionState != ConductMissionState.INIT_CONDUCT_MISSION_STATE)? null : () {
-                              this._missionDetailBloc.add(ButtonPressed(widget.missionId));
-                            }
+                            onPressed: (state.conductMissionState != ConductMissionState.UNKNOWN_CONDUCT_MISSION_STATE)?
+                                (){ buttonClickHandler(state); } : null
                         )
                     );
                   }

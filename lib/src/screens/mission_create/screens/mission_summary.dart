@@ -5,6 +5,9 @@ import 'package:deal/src/custom/widgets/badge.dart';
 import 'package:deal/src/protos/Data.pbenum.dart';
 import 'package:deal/src/protos/MissionService.pbenum.dart';
 import 'package:deal/src/screens/mission_create/widget/mission_create_textform_field.dart';
+import 'package:deal/src/screens/mission_data_upload/mission_upload_collect_sound.dart';
+import 'package:deal/src/screens/mission_data_upload/mission_upload_collect_survey.dart';
+import 'package:deal/src/screens/mission_data_upload/mission_upload_process_image.dart';
 import 'package:deal/src/screens/mission_detail/modules/custom_image_delegate.dart';
 import 'package:deal/src/screens/mission_detail/widget/content_header.dart';
 import 'package:flutter/material.dart';
@@ -98,6 +101,51 @@ class MissionSummaryPageState extends State<MissionSummaryPage> with AutomaticKe
     }
 
     return result;
+  }
+
+  void uploadDataHandler(MissionCreateState state, DataType dataType) async {
+    bool isDataUploaded = false;
+    switch(state.missionType){
+      case MissionType.COLLECT_MISSION_TYPE: {
+        switch(dataType){
+          case DataType.SURVEY:
+            isDataUploaded = await Navigator.push(
+                context,
+                MaterialPageRoute(builder: (ctx) => UploadCollectSurvey(), fullscreenDialog: true)
+            );
+            break;
+          case DataType.SOUND:
+            isDataUploaded = await Navigator.push(
+                context,
+                MaterialPageRoute(builder: (ctx) => UploadCollectSound(), fullscreenDialog: true)
+            );
+            break;
+          case DataType.IMAGE:
+            isDataUploaded = true;
+            break;
+        }
+        break;
+      }
+      case MissionType.PROCESS_MISSION_TYPE: {
+        switch(dataType){
+          case DataType.IMAGE: {
+            var result = await Navigator.push(
+                context,
+                MaterialPageRoute(builder: (ctx) => UploadProcessImage(
+                  images: state.images, labels: state.labels
+                ), fullscreenDialog: true)
+            );
+            print(result);
+            isDataUploaded = result['images'].length > 0 && result['labels'].length > 0;
+            _missionCreateBloc.add(MissionDataChanged(images: result['images'], labels: result['labels']));
+            print(_missionCreateBloc.toString());
+            break;
+          }
+        }
+        break;
+      }
+    }
+    _missionCreateBloc.add(MissionDataUploadedChanged(isDataUploaded: isDataUploaded));
   }
 
   @override
@@ -229,11 +277,30 @@ class MissionSummaryPageState extends State<MissionSummaryPage> with AutomaticKe
                                               ));
                                           if(_result != null) {
                                             _missionCreateBloc.add(DataTypeChanged(dataType: _result));
+                                            this.uploadDataHandler(mcs, _result);
                                           }
                                         },
                                         child: Badge(
                                           color: (mcs.dataType != DataType.UNKNOWN_DATA_TYPE)? Color(0xFF5f75ac) : Colors.black45,
                                           text: (mcs.dataType == DataType.UNKNOWN_DATA_TYPE)? "데이터 종류" : "${_convertDataTypeToString(mcs.dataType)}",
+                                          fontSize: 14,
+                                        )
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+
+                                    GestureDetector(
+                                        onTap: () async {
+                                          if(mcs.dataType == DataType.UNKNOWN_DATA_TYPE){
+                                            // do NOTHING
+                                          } else {
+                                            uploadDataHandler(mcs, mcs.dataType);
+                                          }
+                                        },
+                                        child: Badge(
+                                          color: (mcs.isDataUploaded)? Color(0xFF5f75ac) : Colors.black45,
+                                          text: (mcs.isDataUploaded)? "데이터 등록 완료": "의뢰 데이터 등록",
                                           fontSize: 14,
                                         )
                                     )

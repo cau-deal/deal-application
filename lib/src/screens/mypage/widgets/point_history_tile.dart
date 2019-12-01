@@ -49,7 +49,7 @@ class PointHistoryTileState extends State<PointHistoryTile> {
           child: Row(
             children: <Widget>[
               Expanded(
-                child: Text(reasonMap[widget.pointHistory.pointAlterReason], style: TextStyle(color: Colors.black)),
+                child: Text(reasonMap[widget.pointHistory.pointAlterReason] ?? "기록 없음 (문의요망)", style: TextStyle(color: Colors.black)),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,

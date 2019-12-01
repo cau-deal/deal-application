@@ -128,6 +128,26 @@ class MissionThumbnailChanged extends MissionCreateEvent {
   String toString() => 'subtitle : $asset';
 }
 
+class MissionDataUploadedChanged extends MissionCreateEvent {
+  final bool isDataUploaded;
+
+  MissionDataUploadedChanged({@required this.isDataUploaded}) : super([isDataUploaded]);
+
+  @override
+  String toString() => 'isDataUploaded : $isDataUploaded';
+}
+
+class MissionDataChanged extends MissionCreateEvent {
+  final List<String> images;
+  final List<String> labels;
+
+  MissionDataChanged({@required this.images, this.labels}) : super([images, labels]);
+
+  @override
+  String toString() => 'isDataUploaded : $images, $labels';
+}
+
+
 class SubmitPressed extends MissionCreateEvent {
   final String title;
   final String subtitle;

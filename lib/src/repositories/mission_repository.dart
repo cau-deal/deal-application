@@ -20,12 +20,14 @@ class MissionRepository {
     String instruction,
     String terms,
     String thumbnailUri,
-    List<String> imageUris
+    List<String> imageUris,
+
+    List<String> images, List<String> labels
   }) async {
     return await _missionService.createMission(
       accessToken: accessToken, title: title, subtitle: subtitle, point: point, unit: unit, totalCnt: totalCnt,
       start: start, end: end, missionType: missionType, dataType: dataType, summary: summary, instruction: instruction,
-      terms: terms, thumbnailUri: thumbnailUri, imageUris: imageUris
+      terms: terms, thumbnailUri: thumbnailUri, imageUris: imageUris, datas: images, labels: labels
     );
   }
 

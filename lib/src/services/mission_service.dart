@@ -32,7 +32,10 @@ class MissionService extends BaseService {
     String instruction,
     String terms,
     String thumbnailUri,
-    List<String> imageUris
+    List<String> imageUris,
+
+    List<String> datas,
+    List<String> labels,
   }) async {
     RegisterMissionRequest req = RegisterMissionRequest();
     RegisterMissionResponse res = RegisterMissionResponse();
@@ -68,6 +71,9 @@ class MissionService extends BaseService {
       mission.deadline = to;
 
       req.mission = mission;
+
+      req.datas.addAll(datas.map((url) => Data()..url=url).toList());
+      req.labels.addAll(labels);
 
       res = await client.registerMission(req,  options: CallOptions(metadata: {'ticket': accessToken}));
 

@@ -53,6 +53,10 @@ class MissionCreateBloc extends Bloc<MissionCreateEvent, MissionCreateState> {
       yield* _mapMissionThumbnailChangedToState(event);
     } else if (event is SubmitPressed){
       yield* _mapSubmitPressedToState(event);
+    } else if (event is MissionDataUploadedChanged){
+      yield* _mapMissionDataUploadedToState(event);
+    } else if (event is MissionDataChanged){
+      yield* _mapMissionDataToState(event);
     }
   }
 
@@ -85,7 +89,7 @@ class MissionCreateBloc extends Bloc<MissionCreateEvent, MissionCreateState> {
   }
 
   Stream<MissionCreateState> _mapDataTypeChangedToState(DataTypeChanged evt) async* {
-    yield state.update(dataType: evt.dataType);
+    yield state.update(dataType: evt.dataType, isDataUploaded: false);
   }
 
   Stream<MissionCreateState> _mapMissionSummaryChangedToState(MissionSummaryChanged evt) async* {
@@ -102,6 +106,14 @@ class MissionCreateBloc extends Bloc<MissionCreateEvent, MissionCreateState> {
 
   Stream<MissionCreateState> _mapAgreementChangedToState(AgreementChanged evt) async* {
     yield state.update(isAgreeWithTerms: evt.agreeWithTerms);
+  }
+
+  Stream<MissionCreateState> _mapMissionDataUploadedToState(MissionDataUploadedChanged evt) async* {
+    yield state.update(isDataUploaded: evt.isDataUploaded);
+  }
+
+  Stream<MissionCreateState> _mapMissionDataToState(MissionDataChanged evt) async* {
+    yield state.update(labels: evt.labels, images: evt.images);
   }
 
   Stream<MissionCreateState> _mapMissionThumbnailChangedToState(MissionThumbnailChanged evt) async* {
@@ -144,9 +156,10 @@ class MissionCreateBloc extends Bloc<MissionCreateEvent, MissionCreateState> {
         yield MissionCreateState.loading(
             state.title, state.subTitle,
             state.startDate, state.endDate,
+            state.images, state.labels,
             state.missionSummary, state.missionInstruction, state.missionTerms,
             state.point, state.unit, state.totalCount, state.thumbnailUri,
-            state.missionType, state.dataType
+            state.missionType, state.dataType,
         );
 
         RegisterMissionResponse res = await missionRepository.createMission(
@@ -163,13 +176,16 @@ class MissionCreateBloc extends Bloc<MissionCreateEvent, MissionCreateState> {
             summary: evt.summary,
             instruction: evt.instruction,
             terms: evt.terms,
-            thumbnailUri: evt.thumbnailUri
+            thumbnailUri: evt.thumbnailUri,
+            images: state.images,
+            labels: state.labels
         );
 
         if(res.result.resultCode == ResultCode.SUCCESS) {
           yield MissionCreateState.success(
               state.title, state.subTitle,
               state.startDate, state.endDate,
+              state.images, state.labels,
               state.missionSummary, state.missionInstruction, state.missionTerms,
               state.point, state.unit, state.totalCount, state.thumbnailUri,
               state.missionType, state.dataType
@@ -179,6 +195,7 @@ class MissionCreateBloc extends Bloc<MissionCreateEvent, MissionCreateState> {
           yield MissionCreateState.failure(
               state.title, state.subTitle,
               state.startDate, state.endDate,
+              state.images, state.labels,
               state.missionSummary, state.missionInstruction, state.missionTerms,
               state.point, state.unit, state.totalCount, state.thumbnailUri,
               state.missionType, state.dataType
@@ -189,6 +206,7 @@ class MissionCreateBloc extends Bloc<MissionCreateEvent, MissionCreateState> {
         yield MissionCreateState.failure(
             state.title, state.subTitle,
             state.startDate, state.endDate,
+            state.images, state.labels,
             state.missionSummary, state.missionInstruction, state.missionTerms,
             state.point, state.unit, state.totalCount, state.thumbnailUri,
             state.missionType, state.dataType
@@ -199,6 +217,7 @@ class MissionCreateBloc extends Bloc<MissionCreateEvent, MissionCreateState> {
       yield MissionCreateState.failure(
           state.title, state.subTitle,
           state.startDate, state.endDate,
+          state.images, state.labels,
           state.missionSummary, state.missionInstruction, state.missionTerms,
           state.point, state.unit, state.totalCount, state.thumbnailUri,
           state.missionType, state.dataType

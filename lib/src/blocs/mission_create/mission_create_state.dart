@@ -23,12 +23,16 @@ class MissionCreateState {
   final int unit;
   final int totalCount;
 
+  final List<String> labels;
+  final List<String> images;
+
   final bool isThumbnailValid;
   final String thumbnailUri;
   final double uploadPercentage;
 
   final MissionType missionType;
   final DataType dataType;
+  final bool isDataUploaded;
 
   final bool isThumbnailUploading;
   final bool isSubmitting;
@@ -40,7 +44,7 @@ class MissionCreateState {
       && missionType != MissionType.UNKNOWN_MISSION_TYPE && dataType != DataType.UNKNOWN_DATA_TYPE
       && isThumbnailValid && startDate != null && endDate != null
       && missionInstruction.isNotEmpty && missionSummary.isNotEmpty && missionTerms.isNotEmpty
-      && isAgreeWithTerms && thumbnailUri.isNotEmpty && isCountValid;
+      && isAgreeWithTerms && thumbnailUri.isNotEmpty && isCountValid && isDataUploaded;
 
   MissionCreateState({
     @required this.title,
@@ -65,6 +69,10 @@ class MissionCreateState {
 
     @required this.missionType,
     @required this.dataType,
+    @required this.isDataUploaded,
+
+    @required this.images,
+    @required this.labels,
 
     @required this.isThumbnailUploading,
     @required this.isSubmitting,
@@ -89,6 +97,11 @@ class MissionCreateState {
       missionSummary: "",
       missionInstruction: "",
       missionTerms: "",
+
+      isDataUploaded: false,
+      images: [],
+      labels: [],
+
       isAgreeWithTerms: false,
       isThumbnailUploading: false,
       isSubmitting: false,
@@ -99,6 +112,7 @@ class MissionCreateState {
 
   factory MissionCreateState.loading(
       String title, String subTitle, DateTime s, DateTime e,
+      List<String> images, List<String> labels,
       String missionSummary, String missionInstruction, String missionTerms,
       int point, int unit, int totalCnt, String thumbnailUri,
       MissionType missionType, DataType dataType
@@ -124,8 +138,12 @@ class MissionCreateState {
       missionInstruction: missionInstruction,
       missionTerms: missionTerms,
 
+      images: images,
+      labels: labels,
+
       isThumbnailValid: true,
       isAgreeWithTerms: true,
+      isDataUploaded: true,
       isThumbnailUploading: false,
       isSubmitting: true,
       isSuccess: false,
@@ -135,6 +153,7 @@ class MissionCreateState {
 
   factory MissionCreateState.failure(
       String title, String subTitle, DateTime s, DateTime e,
+      List<String> images, List<String> labels,
       String missionSummary, String missionInstruction, String missionTerms,
       int point, int unit, int totalCnt, String thumbnailUri,
       MissionType missionType, DataType dataType
@@ -156,12 +175,16 @@ class MissionCreateState {
       thumbnailUri: thumbnailUri,
       uploadPercentage: 100.0,
 
+      images: images,
+      labels: labels,
+
       missionSummary: missionSummary,
       missionInstruction: missionInstruction,
       missionTerms: missionTerms,
 
       isThumbnailValid: true,
       isAgreeWithTerms: true,
+      isDataUploaded: true,
       isThumbnailUploading: false,
       isSubmitting: false,
       isSuccess: false,
@@ -171,6 +194,7 @@ class MissionCreateState {
 
   factory MissionCreateState.success(
       String title, String subTitle, DateTime s, DateTime e,
+      List<String> images, List<String> labels,
       String missionSummary, String missionInstruction, String missionTerms,
       int point, int unit, int totalCnt, String thumbnailUri,
       MissionType missionType, DataType dataType
@@ -186,6 +210,9 @@ class MissionCreateState {
       startDate: s,
       endDate: e,
 
+      images: images,
+      labels: labels,
+
       missionType: missionType,
       dataType: dataType,
 
@@ -198,6 +225,7 @@ class MissionCreateState {
 
       isThumbnailValid: true,
       isAgreeWithTerms: true,
+      isDataUploaded: true,
       isThumbnailUploading: false,
       isSubmitting: false,
       isSuccess: true,
@@ -223,6 +251,10 @@ class MissionCreateState {
     String missionInst,
     String missionTerm,
 
+    List<String> labels,
+    List<String> images,
+
+    bool isDataUploaded,
     bool isThumbnailValid,
     bool isAgreeWithTerms,
     bool isThumbnailUploading
@@ -250,6 +282,10 @@ class MissionCreateState {
       isAgreeWithTerms: isAgreeWithTerms,
       isThumbnailUploading: isThumbnailUploading,
 
+      isDataUploaded: isDataUploaded,
+      images: images,
+      labels: labels,
+
       isSubmitting: false,
       isSuccess: false,
       isFailure: false,
@@ -275,6 +311,10 @@ class MissionCreateState {
     String missionTerm,
 
     bool isAgreeWithTerms,
+    bool isDataUploaded,
+
+    List<String> labels,
+    List<String> images,
 
     bool isThumbnailValid,
     bool isThumbnailUploading,
@@ -296,6 +336,9 @@ class MissionCreateState {
       startDate: startDate ?? this.startDate,
       endDate: endDate ?? this.endDate,
 
+      labels: labels ?? this.labels,
+      images: images ?? this.images,
+
       missionSummary: missionSummary ?? this.missionSummary,
       missionInstruction: missionInst ?? this.missionInstruction,
       missionTerms: missionTerm ?? this.missionTerms,
@@ -303,6 +346,8 @@ class MissionCreateState {
       isThumbnailValid: isThumbnailValid ?? this.isThumbnailValid,
       isAgreeWithTerms: isAgreeWithTerms ?? this.isAgreeWithTerms,
       isThumbnailUploading: isThumbnailUploading ?? this.isThumbnailUploading,
+
+      isDataUploaded: isDataUploaded ?? this.isDataUploaded,
 
       isSubmitting: isSubmitting ?? this.isSubmitting,
       isSuccess: isSuccess ?? this.isSuccess,
