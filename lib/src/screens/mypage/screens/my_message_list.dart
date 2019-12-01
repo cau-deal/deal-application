@@ -1,6 +1,9 @@
+import 'package:deal/src/repositories/user_repository.dart';
+import 'package:deal/src/screens/mypage/screens/my_message_history_page.dart';
 import 'package:deal/src/screens/mypage/widgets/message_list_tile.dart';
 import 'package:deal/src/blocs/messsage_history/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyMessageListView extends StatelessWidget {
   final TabController tabController;
@@ -9,66 +12,28 @@ class MyMessageListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var list = [
-      {"title": "새로운 공지사항d이 등록되었습니다", "date": "2019-10-14"},
-    ];
-
-    var list2 = [
-      {"title": "dddddddd등록되었습니다", "date": "2019-10-14"},
-      {"title": "dddddddd등록되었습니다", "date": "2019-10-14"}
-    ];
-
-    var list3 = [
-      {"title": "dddddddd등록되었습니다", "date": "2019-10-14"},
-      {"title": "dddddddd등록되었습니다", "date": "2019-10-14"},
-      {"title": "dddddddd등록되었습니다", "date": "2019-10-14"}
-    ];
 
     return TabBarView(
-      controller: tabController,
+      controller: this.tabController,
       children: <Widget>[
-        Center(
-            child: Container(
-                padding: EdgeInsets.only(top: 10),
-                color: Colors.white,
-                child: MediaQuery.removePadding(
-                    context: context,
-                    removeTop: true,
-                    child: ListView.builder(
-                      itemCount: list.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final data = list[index];
-                        return MessageListTile(idx: index, title: data['title'], date: data['date']);
-                      },
-                    )))),
-        Center(
-            child: Container(
-                padding: EdgeInsets.only(top: 10),
-                color: Colors.white,
-                child: MediaQuery.removePadding(
-                    context: context,
-                    removeTop: true,
-                    child: ListView.builder(
-                      itemCount: list2.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final data = list2[index];
-                        return MessageListTile(idx: index, title: data['title'], date: data['date']);
-                      },
-                    )))),
-        Center(
-            child: Container(
-                padding: EdgeInsets.only(top: 10),
-                color: Colors.white,
-                child: MediaQuery.removePadding(
-                    context: context,
-                    removeTop: true,
-                    child: ListView.builder(
-                      itemCount: list3.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final data = list3[index];
-                        return MessageListTile(idx: index, title: data['title'], date: data['date']);
-                      },
-                    )))),
+        BlocProvider<MessageHistoryBloc>(
+          builder: (ctx) => MessageHistoryBloc(
+              userRepository: RepositoryProvider.of<UserRepository>(context),
+          ),
+          child: MyMessageHistoryPage(type: 1),
+        ),
+        BlocProvider<MessageHistoryBloc>(
+          builder: (ctx) => MessageHistoryBloc(
+              userRepository: RepositoryProvider.of<UserRepository>(context),
+          ),
+          child: MyMessageHistoryPage(type: 2),
+        ),
+        BlocProvider<MessageHistoryBloc>(
+          builder: (ctx) => MessageHistoryBloc(
+            userRepository: RepositoryProvider.of<UserRepository>(context),
+          ),
+          child: MyMessageHistoryPage(type: 0),
+        ),
       ],
     );
   }

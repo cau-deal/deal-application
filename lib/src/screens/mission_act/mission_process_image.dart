@@ -9,6 +9,7 @@ import 'package:deal/src/custom/widgets/common_app_bar_container.dart';
 import 'package:deal/src/custom/widgets/custom_indicator.dart';
 import 'package:deal/src/custom/widgets/white_round_button.dart';
 import 'package:deal/src/screens/mission_create/modules/custom_image_delegate.dart';
+import 'package:deal/src/screens/mission_create/widget/content_header.dart';
 import 'package:deal/src/services/file_service.dart';
 import 'package:deal/src/services/point_service.dart';
 import 'package:dio/dio.dart';
@@ -56,8 +57,6 @@ class ProcessPictureScreenState extends State<ProcessPictureScreen> {
 
     this._missionActBloc = BlocProvider.of<MissionActBloc>(context)..add(FetchProcessPicture(widget.missionId));
     this._missionDetailBloc = BlocProvider.of<MissionDetailBloc>(context);
-
-    this._images.add("+");
   }
 
   @override
@@ -75,64 +74,75 @@ class ProcessPictureScreenState extends State<ProcessPictureScreen> {
 
   List<Widget> generatePages(MissionActState state){
     var list = List.generate(state.images.length, (index){
-      return Container(child:Column(
-        children: <Widget>[
-          Image.network(state.images[index]),
-          GridView.count(
-              crossAxisCount: 4,
-              shrinkWrap: true,
-              primary: false,
-              crossAxisSpacing: 10.0,
-              mainAxisSpacing: 10.0,
-              childAspectRatio: 1.0,
-              children: this._images.map((file){
-                return GridTile(
-                    child: GestureDetector(
-                      onTap: (file == '+')? () async {
-
-                      } : () { setState(() { }); },
-                      child: Container(
-                          decoration: (file != '+')? BoxDecoration(
-                            image: DecorationImage(
-                              image: CachedNetworkImageProvider(file),
-                              fit: BoxFit.cover,
-                            ),
-                          ) : BoxDecoration(color: Colors.black54),
-                          child: Center(
-                            child: (file == '+')? Text('+', style: TextStyle(fontSize: 30),) : null,
-                          )
-                      ),
-                    ));
-              }).toList()
-          ),
-          SizedBox(height: 50),
-          BlocListener<MissionActBloc, MissionActState>(
-            listener: (ctx, state){
-              if (state.isFailure) {
-                Fluttertoast.showToast(msg: "제출에 실패하였습니다!");
-              }
-              if (state.isSuccess) {
-                _missionDetailBloc.add(Fetch(widget.missionId));
-                Fluttertoast.showToast(msg: "의뢰를 성공하였습니다!");
-                Navigator.pop(ctx);
-              }
-            },
-            child: Container(
-              height: 40,
-              child: WhiteRoundButton(
-                  buttonColor: Color(0xFF5f75ac),
-                  textColor: Colors.white,
-                  text: '제출하기 (${this._images.length-1}/${widget.state.unit})',
-                  onPressed: (this._images.length > 1 && (this._images.length-1) == widget.state.unit)? (){
-//                                      Navigator.pop(context, { 'images': _images.sublist(1) });
-                    this._missionActBloc.add(SubmitCollectPicture(
-                        widget.missionId, this._images.sublist(1)
-                    ));
-                  } : null
+      return Container(
+          child:Column(
+            children: <Widget>[
+              GestureDetector(
+                child: Image.network(state.images[index]),
+                onTap: (){
+                  throw Exception();
+                },
               ),
-            ),
-          )
-        ],
+              SizedBox(height: 30),
+
+              Container(
+                alignment: Alignment.centerLeft,
+                child: ContentHeader(label:"아이템")
+              ),
+              GridView.count(
+                  crossAxisCount: 4,
+                  shrinkWrap: true,
+                  primary: false,
+                  crossAxisSpacing: 10.0,
+                  mainAxisSpacing: 10.0,
+                  childAspectRatio: 1.0,
+                  children: this._images.map((file){
+                    return GridTile(
+                        child: GestureDetector(
+                          onTap: () { },
+                          child: Container(
+                              decoration: (file != '+')? BoxDecoration(
+                                image: DecorationImage(
+                                  image: CachedNetworkImageProvider(file),
+                                  fit: BoxFit.cover,
+                                ),
+                              ) : BoxDecoration(color: Colors.black54),
+                              child: Center(
+                                child: (file == '+')? Text('+', style: TextStyle(fontSize: 30),) : null,
+                              )
+                          ),
+                        ));
+                  }).toList()
+              ),
+
+              SizedBox(height: 50),
+              BlocListener<MissionActBloc, MissionActState>(
+                listener: (ctx, state){
+                  if (state.isFailure) {
+                    Fluttertoast.showToast(msg: "제출에 실패하였습니다!");
+                  }
+                  if (state.isSuccess) {
+                    _missionDetailBloc.add(Fetch(widget.missionId));
+                    Fluttertoast.showToast(msg: "의뢰를 성공하였습니다!");
+                    Navigator.pop(ctx);
+                  }
+                },
+                child: Container(
+                  height: 40,
+                  child: WhiteRoundButton(
+                      buttonColor: Color(0xFF5f75ac),
+                      textColor: Colors.white,
+                      text: '제출하기 (${this._images.length-1}/${widget.state.unit})',
+                      onPressed: (this._images.length > 1 && (this._images.length-1) == widget.state.unit)? (){
+    //                                      Navigator.pop(context, { 'images': _images.sublist(1) });
+                        this._missionActBloc.add(SubmitCollectPicture(
+                            widget.missionId, this._images.sublist(1)
+                        ));
+                      } : null
+                  ),
+                ),
+              )
+            ],
       ));
     });
 

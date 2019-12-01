@@ -1,6 +1,7 @@
 import 'package:deal/src/blocs/auth/auth_bloc.dart';
 import 'package:deal/src/blocs/auth/auth_state.dart';
 import 'package:deal/src/screens/point_credit/point_credit.dart';
+import 'package:deal/src/screens/point_withdraw/point_withdraw.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -62,7 +63,9 @@ class PointExtraHeaderState extends State<PointExtraHeader> {
                     highlightElevation: 0,
                     onPressed: (){
                       if(state is Authenticated && state.isAccountAuth){
-
+                        Navigator.push(context, MaterialPageRoute(builder: (ctx) {
+                          return PointWithDrawPage();
+                        }));
                       } else {
                         Fluttertoast.showToast(msg: "계좌 인증이 필요합니다.");
                       }

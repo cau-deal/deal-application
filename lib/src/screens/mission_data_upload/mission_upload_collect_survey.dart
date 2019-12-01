@@ -28,6 +28,7 @@ class UploadCollectSurvey extends StatefulWidget {
 class UploadCollectSurveyState extends State<UploadCollectSurvey> {
 
   num isLoadingState = 0;
+  WebViewController _webController;
 
   @override
   void initState() {
@@ -39,13 +40,48 @@ class UploadCollectSurveyState extends State<UploadCollectSurvey> {
     super.dispose();
   }
 
+  void _onPageFinished(String value) {
+    setState(() {
+//      isLoadingState = 1;
+    });
+  }
+
+  //https://grpc.snhyun.me/react-survey/#/
   @override
   Widget build(BuildContext ctx) {
     return CommonAppBarContainer(
         text: "의뢰등록 (설문수집)",
-        child: Container(
-
+        child: IndexedStack(
+          index: this.isLoadingState,
+          children: <Widget>[
+            Container(
+                color: Colors.white,
+                child: SpinKitThreeBounce(
+                  color: Color(0xffF7CF00),
+                  size: 20.0,
+                )
+            ),
+            Container(
+                child: SizedBox.expand(
+                    child: WebView(
+                      initialUrl: "https://grpc.snhyun.me/react-survey/#/",
+                      javascriptMode: JavascriptMode.unrestricted,
+                      javascriptChannels: Set.from([
+                        JavascriptChannel(
+                            name: 'Flutter',
+                            onMessageReceived: (JavascriptMessage message) {
+                            })
+                      ]),
+                      onPageFinished: _onPageFinished,
+                      onWebViewCreated: (WebViewController _tmpWebController) {
+                        this._webController = _tmpWebController;
+                      },
+                    ))
+            )
+          ],
         )
+
+
     );
   }
 }

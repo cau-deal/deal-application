@@ -77,6 +77,23 @@ class PointService extends BaseService {
     return res;
   }
 
+  Future<WithdrawResponse> withdraw({String accessToken, int amount}) async {
+    WithdrawRequest req = WithdrawRequest();
+    WithdrawResponse res = WithdrawResponse();
+
+    try {
+      Withdraw w = Withdraw();
+      w.val = Int64.parseInt("$amount");
+
+      req.withdraw = w;
+      res = await client.withdraw(req, options: CallOptions(metadata: {'ticket': accessToken}));
+    } catch (e) {
+      print(e.toString());
+    }
+
+    return res;
+  }
+
 //    rpc Deposit(DepositRequest) returns (DepositResponse);
 
 //  rpc LookUpPlusPointHistory(LookUpPointHistoryRequest) returns (LookUpPointHistoryResponse);

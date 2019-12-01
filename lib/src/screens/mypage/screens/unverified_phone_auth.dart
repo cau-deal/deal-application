@@ -91,7 +91,8 @@ class UnverifiedPhoneAuthPageState extends State<UnverifiedPhoneAuthPage> {
                           onWebViewCreated: (WebViewController _tmpWebController) {
                             this._webController = _tmpWebController;
                           },
-                        )))
+                        ))
+                )
               ],
             )
         ));

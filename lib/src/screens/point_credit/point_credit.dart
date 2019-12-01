@@ -32,6 +32,7 @@ class PointCreditPageState extends State<PointCreditPage> {
   void initState() {
     super.initState();
     this.priceController = TextEditingController();
+    this.priceController.text = "0";
     isKakaoPay = false;
     isNaverPay = false;
     isCreditCard = false;
@@ -156,29 +157,13 @@ class PointCreditPageState extends State<PointCreditPage> {
                             return Container(
                                 color: Color(0xffeeeeee),
                                 child: RaisedButton(
+                                  elevation: 0,
                                   child: new Text('$label',style: TextStyle(color: Colors.white, fontSize: 15)),
                                   textColor: Colors.white,
-                                  shape: new RoundedRectangleBorder(
-                                    borderRadius: new BorderRadius.circular(3.0),
-                                  ),
                                   color: (isKakaoPay && ('$label' == "카카오페이")) ? Color(0xFF5f75ac) : Colors.grey,
                                   onPressed: () => {setState(() => ('$label' == "카카오페이")?(isKakaoPay = !isKakaoPay):(isKakaoPay))}
                                 )
                             );
-
-                            /*
-                            return Container(
-                              color: Color(0xffeeeeee),
-                              child: GestureDetector(
-                                  onTap: (){
-                                    this.isKakaoPay = !this.isKakaoPay;
-                                    print(isKakaoPay);
-                                  },
-                                  child: Center(
-                                      child: Text('$label', style: TextStyle(color: Colors.black, fontSize: 15))
-                                  )
-                              ),
-                            );*/
                           }).toList()
 
                       )
@@ -216,7 +201,7 @@ class PointCreditPageState extends State<PointCreditPage> {
                     buttonColor: isKakaoPay&&(priceController.text.length > 0) ? Color(0xFF5f75ac):Colors.white,
                     textColor: isKakaoPay && (priceController.text.length > 0)? Colors.white:Colors.black87,
                     text: '동의 및 결제요청',
-                    onPressed: (isKakaoPay && int.parse(priceController.text) > 0)? (){
+                    onPressed: (isKakaoPay && priceController.text.isNotEmpty)? (){
                       test();
                     } : null,
                   )

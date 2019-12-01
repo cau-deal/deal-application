@@ -101,13 +101,6 @@ class MissionDetailPageState extends State<MissionDetailPage> {
 //    5. RETURN_VERIFICATION (반려)
 //    6. FAIL_MISSION (미션 실패, ex> 시간 초과)
 
-    switch(state.missionState){
-      case MissionState.WAITING_REGISTER:
-      case MissionState.SOLD_OUT:
-      case MissionState.COMPLETE_MISSION:
-        return null;
-    }
-
     switch(state.conductMissionState){
       case ConductMissionState.DURING_MISSION_CONDUCT_MISSION_STATE:
         {

@@ -42,14 +42,14 @@ class MissionRepository {
     );
   }
 
-  Future<SearchMissionResponse> fetchMissionList({String accessToken, MissionType type}) async {
+  Future<SearchMissionResponse> fetchMissionList({String accessToken, MissionType type, int amount = 100}) async {
     return await _missionService.fetchMission(
       accessToken: accessToken,
       type: type,
       keyword: "",
       mode: MissionPageMode.INITIALIZE_MISSION_PAGE,
       offset: 0,
-      amount: 100
+      amount: amount
     );
   }
 
@@ -89,6 +89,10 @@ class MissionRepository {
 
   Future<GetProcessMissionImagesResponse> fetchProcessImagesByMissionId({String accessToken, int missionId}) async {
     return await _missionService.fetchImagesByMissionId(accessToken: accessToken, missionId: missionId);
+  }
+
+  Future<GetRecommendMissionImagesResponse> fetchRecommendMissionImages({String accessToken}) async {
+    return await _missionService.fetchRecommendMissionImages(accessToken: accessToken);
   }
 
 }

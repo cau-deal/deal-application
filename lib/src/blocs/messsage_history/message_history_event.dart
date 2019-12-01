@@ -4,4 +4,9 @@ abstract class MessageHistoryEvent extends Equatable {
   MessageHistoryEvent([List props = const []]) : super(props);
 }
 
-class Fetch extends MessageHistoryEvent {}
+class UnRead extends MessageHistoryEvent {}
+
+class Read extends MessageHistoryEvent {}
+
+class All extends MessageHistoryEvent {}
+

@@ -284,6 +284,20 @@ class MissionService extends BaseService {
 
   }
 
+  //  rpc GetRecommendMissionImages(Empty) returns (GetRecommendMissionImagesResponse);
+  Future<GetRecommendMissionImagesResponse> fetchRecommendMissionImages({String accessToken}) async {
+    Empty req = Empty();
+    GetRecommendMissionImagesResponse res = GetRecommendMissionImagesResponse();
+
+    try {
+      res = await client.getRecommendMissionImages(req, options: CallOptions(metadata: {'ticket': accessToken}));
+    } catch (_) {
+      print(_.toString());
+    }
+
+    return res;
+  }
+
 //  rpc GetAssignedMission(MissionIdRequest) returns (GetAssignedMissionResponse);
 
 

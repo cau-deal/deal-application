@@ -46,9 +46,12 @@ class KakaopayProcessState extends State<KakaopayProcessScreen> {
     String token = preferences.getString('ticket') ?? "";
     var res = await ps.deposit(accessToken: token, amount: widget.amount);
 
+    this.pg_url = res.kakaopayUrl;
+
     setState(() {
       this.pg_url = res.kakaopayUrl;
-      this._webController.loadUrl(this.pg_url);
+      this._webController.loadUrl(res.kakaopayUrl);
+      print(res.kakaopayUrl);
     });
   }
 
@@ -106,7 +109,8 @@ class KakaopayProcessState extends State<KakaopayProcessScreen> {
                             _launchIntent(request.url);
                             return NavigationDecision.prevent;
                           }
-                          print(request.url);
+                          _launchURL(request.url);
+//                          print(request.url);
                           return NavigationDecision.navigate;
                         } catch(e) {
                           Fluttertoast.showToast(msg: "결제 오류 발생!");

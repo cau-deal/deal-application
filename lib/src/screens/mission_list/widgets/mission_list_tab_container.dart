@@ -35,10 +35,8 @@ class MissionListTabContainer extends StatelessWidget {
                     brightness: Brightness.light,
                     title: Container(
                         padding: EdgeInsets.only(top: 10.0),
-                        child: AnimatedCount(
-                          count: 3000,
-                          duration: Duration(microseconds: 1000),
-                        )),
+                        child: Text("0 / today", style: TextStyle(letterSpacing: -0.5, fontSize: 15, fontFamily: "NanumSquare"),)
+                    ),
                     titleSpacing: 0,
                     bottom: PreferredSize(preferredSize: Size.fromHeight(40.0), child: UnderCircleTabBar(items: ["전체 의뢰", "수집하기", "가공하기"])),
                     leading: SizedBox(

@@ -35,21 +35,15 @@ class MessageHistoryBloc extends Bloc<MessageHistoryEvent, MessageHistoryState> 
 
   @override
   Stream<MessageHistoryState> mapEventToState(MessageHistoryEvent event) async* {
-    if (event is Fetch && !_hasReachedMax(state)) {
+    if (!_hasReachedMax(state)) {
       try {
         if (state is MessageHistoryUninitialized) {
-          IsReadPushType pType = IsReadPushType.NOT_READ_IS_READ_PUSH_TYPE;
+          IsReadPushType pType = (event is UnRead)? IsReadPushType.NOT_READ_IS_READ_PUSH_TYPE
+              : (event is Read)? IsReadPushType.READ_IS_READ_PUSH_TYPE
+              : IsReadPushType.ALL_IS_READ_PUSH_TYPE;
           final histories = await _fetchHistory(pType);
           yield MessageHistoryLoaded(histories: histories, hasReachedMax: true);
         }
-
-        /*if (currentState is InquiryLoaded) {
-          final state = (currentState as InquiryLoaded);
-          final posts = await _fetchHistory(state.inquiries.length, 20);
-          yield posts.isEmpty
-              ? state.copyWith(hasReachedMax: true)
-              : InquiryLoaded(inquiries: state.inquiries + posts, hasReachedMax: false);
-        }*/
 
       } catch (_) {
         yield MessageHistoryError();

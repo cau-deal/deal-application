@@ -1,4 +1,5 @@
 import 'package:deal/src/blocs/fetch_mission_list/bloc.dart';
+import 'package:deal/src/blocs/main_screen/bloc.dart';
 import 'package:deal/src/custom/widgets/double_back_to_close_app.dart';
 import 'package:deal/src/protos/MissionService.pbenum.dart';
 import 'package:deal/src/repositories/mission_repository.dart';
@@ -24,15 +25,14 @@ class MissionListPageState extends State<MissionListPage> with AutomaticKeepAliv
         body: DoubleBackToCloseApp(
             child: MissionListTabContainer(
                 children: <Widget>[
-                  BlocProvider<FetchMissionBloc>(
-                    builder: (ctx) => FetchMissionBloc(
+                  BlocProvider<MainScreenBloc>(
+                    builder: (ctx) => MainScreenBloc(
                         userRepository: RepositoryProvider.of<UserRepository>(ctx),
                         missionRepository: RepositoryProvider.of<MissionRepository>(ctx),
-                        missionType: MissionType.ALL_MISSION_TYPE
                     ),
                     child: Container(
                       color: Colors.white,
-                      child: MainScreen()
+                      child: MainScreenPage()
                     ),
                   ),
 
