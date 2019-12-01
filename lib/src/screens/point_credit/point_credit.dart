@@ -23,10 +23,19 @@ class PointCreditPageState extends State<PointCreditPage> {
   List<String> payments = ['무통장입금', '카드결제', '네이버페이', '카카오페이'];
   TextEditingController priceController;
 
+  bool isKakaoPay = false;
+  bool isNaverPay = false;
+  bool isCreditCard = false;
+  bool isNoAccount = false;
+
   @override
   void initState() {
     super.initState();
     this.priceController = TextEditingController();
+    isKakaoPay = false;
+    isNaverPay = false;
+    isCreditCard = false;
+    isNoAccount = false;
   }
 
   @override
@@ -74,28 +83,28 @@ class PointCreditPageState extends State<PointCreditPage> {
                               Image.asset("res/images/logo@210.png"),
                               Expanded(
                                 child: Padding(
-                                  padding: EdgeInsets.all(5),
-                                  child: TextFormField(
-                                    keyboardType: TextInputType.number,
-                                    inputFormatters: <TextInputFormatter>[
-                                      LengthLimitingTextInputFormatter(10),
-                                      WhitelistingTextInputFormatter.digitsOnly,
-                                      BlacklistingTextInputFormatter.singleLineFormatter,
-                                    ],
-                                    textAlign: TextAlign.right,
-                                    controller: priceController,
-                                    decoration: InputDecoration.collapsed(
-                                      fillColor: Colors.white,
-                                      hasFloatingPlaceholder: false,
-                                      hintText: ""
-                                    ),
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                        textBaseline: TextBaseline.alphabetic
-                                    ),
-                                  )
+                                    padding: EdgeInsets.all(5),
+                                    child: TextFormField(
+                                      keyboardType: TextInputType.number,
+                                      inputFormatters: <TextInputFormatter>[
+                                        LengthLimitingTextInputFormatter(10),
+                                        WhitelistingTextInputFormatter.digitsOnly,
+                                        BlacklistingTextInputFormatter.singleLineFormatter,
+                                      ],
+                                      textAlign: TextAlign.right,
+                                      controller: priceController,
+                                      decoration: InputDecoration.collapsed(
+                                          fillColor: Colors.white,
+                                          hasFloatingPlaceholder: false,
+                                          hintText: ""
+                                      ),
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600,
+                                          textBaseline: TextBaseline.alphabetic
+                                      ),
+                                    )
                                 ),
                               ),
                               Text("원", style: TextStyle(
@@ -145,15 +154,33 @@ class PointCreditPageState extends State<PointCreditPage> {
                           childAspectRatio: 4.0,
                           children: this.payments.map((label){
                             return Container(
+                                color: Color(0xffeeeeee),
+                                child: RaisedButton(
+                                  child: new Text('$label',style: TextStyle(color: Colors.white, fontSize: 15)),
+                                  textColor: Colors.white,
+                                  shape: new RoundedRectangleBorder(
+                                    borderRadius: new BorderRadius.circular(3.0),
+                                  ),
+                                  color: (isKakaoPay && ('$label' == "카카오페이")) ? Color(0xFF5f75ac) : Colors.grey,
+                                  onPressed: () => {setState(() => ('$label' == "카카오페이")?(isKakaoPay = !isKakaoPay):(isKakaoPay))}
+                                )
+                            );
+
+                            /*
+                            return Container(
                               color: Color(0xffeeeeee),
                               child: GestureDetector(
-                                onTap: (){ test(); },
-                                child: Center(
-                                    child: Text('$label', style: TextStyle(color: Colors.black, fontSize: 15))
-                                )
+                                  onTap: (){
+                                    this.isKakaoPay = !this.isKakaoPay;
+                                    print(isKakaoPay);
+                                  },
+                                  child: Center(
+                                      child: Text('$label', style: TextStyle(color: Colors.black, fontSize: 15))
+                                  )
                               ),
-                            );
+                            );*/
                           }).toList()
+
                       )
                   )
               ),
@@ -173,7 +200,7 @@ class PointCreditPageState extends State<PointCreditPage> {
                             height: 300,
                             child: Text(
                                 "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in trud exercitation ullamco laboris nisi ut aliquip ex ea commod",
-                              style: TextStyle(fontSize: 14, color: Colors.black87, decoration: TextDecoration.none, fontFamily: "NanumSquare", fontWeight: FontWeight.w500, height: 1.5)
+                                style: TextStyle(fontSize: 14, color: Colors.black87, decoration: TextDecoration.none, fontFamily: "NanumSquare", fontWeight: FontWeight.w500, height: 1.5)
                             ),
                           )
                         ],
@@ -186,10 +213,19 @@ class PointCreditPageState extends State<PointCreditPage> {
                   height: 70,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                   child: WhiteRoundButton(
-                    buttonColor: Color(0xFF5f75ac),
-                    textColor: Colors.white,
+                    buttonColor: isKakaoPay&&(priceController.text.length > 0) ? Color(0xFF5f75ac):Colors.white,
+                    textColor: isKakaoPay && (priceController.text.length > 0)? Colors.white:Colors.black87,
                     text: '동의 및 결제요청',
-                    onPressed: (){},
+                    onPressed: (){
+                      if(priceController.text.length != 0) {
+                        if (isKakaoPay && int.parse(priceController.text) > 0) {
+                          test();
+                        }
+                      }
+                      else{
+
+                      }
+                    },
                   )
               ),
             ],
