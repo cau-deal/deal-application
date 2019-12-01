@@ -21,6 +21,11 @@ class PointClicked extends MyPageEvent {
   String toString() => 'PasswordChanged { password: }';
 }
 
+class PointWithdrawClicked extends MyPageEvent{
+  @override
+  String toString() => 'PointWithdrawClicked { password: }';
+}
+
 class MessageClicked extends MyPageEvent {
   @override
   String toString() => 'PasswordChanged { password: }';

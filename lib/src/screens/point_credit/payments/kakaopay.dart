@@ -103,6 +103,7 @@ class KakaopayProcessState extends State<KakaopayProcessScreen> {
                       {
                         try {
                           if(request.url.startsWith("intent://")){
+                            print(request.url);
                             _launchIntent(request.url);
                             return NavigationDecision.prevent;
                           }

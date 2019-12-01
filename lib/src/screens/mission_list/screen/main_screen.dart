@@ -5,6 +5,20 @@ import 'package:deal/src/blocs/fetch_mission_list/bloc.dart';
 import 'package:deal/src/custom/widgets/custom_indicator.dart';
 import 'package:deal/src/screens/exception/no_result.dart';
 import 'package:deal/src/screens/mission_list/widgets/mission_list_tile.dart';
+
+import 'package:deal/src/protos/MissionService.pb.dart';
+import 'package:deal/src/protos/CommonResult.pb.dart';
+import 'package:deal/src/custom/modules/grpc_singleton.dart';
+import 'package:deal/src/protos/Data.pb.dart';
+import 'package:deal/src/protos/Datetime.pb.dart';
+import 'package:deal/src/protos/Empty.pb.dart';
+import 'package:deal/src/protos/MissionService.pbgrpc.dart';
+import 'package:deal/src/services/mission_service.dart';
+import 'package:grpc/grpc.dart';
+import 'package:meta/meta.dart';
+
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -17,6 +31,7 @@ class MainScreen extends StatefulWidget {
 
 class MainScreenState extends State<MainScreen> {
   int _current = 0;
+  List<MissionRecommendImage> recimgs;
 
   @override
   void initState() {
@@ -54,7 +69,10 @@ class MainScreenState extends State<MainScreen> {
                       return Container(
                           width: MediaQuery.of(context).size.width,
                           margin: EdgeInsets.symmetric(horizontal: 0.0),
-                          decoration: BoxDecoration(color: Colors.amber),
+                          decoration: BoxDecoration(
+                              image: new DecorationImage(image: new NetworkImage(""),
+                                  fit: BoxFit.cover),
+                              color: Colors.amber),
                           child: Text(
                             'text $i',
                             style: TextStyle(fontSize: 16.0),

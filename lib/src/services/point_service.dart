@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:deal/src/custom/modules/grpc_singleton.dart';
 import 'package:deal/src/protos/Empty.pb.dart';
 import 'package:deal/src/protos/PointService.pbgrpc.dart';
+import 'package:deal/src/protos/PointService.pb.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
 import 'package:meta/meta.dart';
@@ -70,6 +71,23 @@ class PointService extends BaseService {
 
       req.deposit = d;
       res = await client.deposit(req, options: CallOptions(metadata: {'ticket': accessToken}));
+    } catch (e) {
+      print(e.toString());
+    }
+
+    return res;
+  }
+
+  Future<WithdrawResponse> withdraw({String accessToken, int amount}) async {
+    WithdrawRequest req = WithdrawRequest();
+    WithdrawResponse res = WithdrawResponse();
+
+    try {
+      Withdraw w = Withdraw();
+      w.val = Int64.parseInt("$amount");
+
+      req.withdraw = w;
+      res = await client.withdraw(req, options: CallOptions(metadata: {'ticket': accessToken}));
     } catch (e) {
       print(e.toString());
     }

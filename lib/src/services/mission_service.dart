@@ -131,6 +131,19 @@ class MissionService extends BaseService {
     return res;
   }
 
+  Future<GetRecommendMissionImagesResponse> getRecommendMissionImages({String accessToken}) async{
+    Empty req = Empty();
+    GetRecommendMissionImagesResponse res = GetRecommendMissionImagesResponse();
+
+    try{
+      res = await client.getRecommendMissionImages(req, options: CallOptions(metadata: {'ticket': accessToken}));
+    } catch(e){
+      print(e.toString());
+    }
+
+    return res;
+  }
+
   Future<CountFetchMissionResponse> fetchCurrentMissionCount({String accessToken}) async {
     Empty req = Empty();
     CountFetchMissionResponse res = CountFetchMissionResponse();
