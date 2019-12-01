@@ -16,6 +16,7 @@ class MissionState extends $pb.ProtobufEnum {
   static const MissionState WATING_CONFIRM_PURCHASE = MissionState._(3, 'WATING_CONFIRM_PURCHASE');
   static const MissionState COMPLETE_MISSION = MissionState._(4, 'COMPLETE_MISSION');
   static const MissionState WAITING_REGISTER = MissionState._(5, 'WAITING_REGISTER');
+  static const MissionState RETURNED_MISSION = MissionState._(6, 'RETURNED_MISSION');
 
   static const $core.List<MissionState> values = <MissionState> [
     UNKNOWN_MISSION_STATE,
@@ -24,6 +25,7 @@ class MissionState extends $pb.ProtobufEnum {
     WATING_CONFIRM_PURCHASE,
     COMPLETE_MISSION,
     WAITING_REGISTER,
+    RETURNED_MISSION,
   ];
 
   static final $core.Map<$core.int, MissionState> _byValue = $pb.ProtobufEnum.initByValue(values);
@@ -41,6 +43,7 @@ class ConductMissionState extends $pb.ProtobufEnum {
   static const ConductMissionState RETURN_VERIFICATION_CONDUCT_MISSION_STATE = ConductMissionState._(5, 'RETURN_VERIFICATION_CONDUCT_MISSION_STATE');
   static const ConductMissionState FAIL_MISSION_CONDUCT_MISSION_STATE = ConductMissionState._(6, 'FAIL_MISSION_CONDUCT_MISSION_STATE');
   static const ConductMissionState INIT_CONDUCT_MISSION_STATE = ConductMissionState._(7, 'INIT_CONDUCT_MISSION_STATE');
+  static const ConductMissionState TRY_SELF_CONDUCT_MISSION_STATE = ConductMissionState._(8, 'TRY_SELF_CONDUCT_MISSION_STATE');
 
   static const $core.List<ConductMissionState> values = <ConductMissionState> [
     UNKNOWN_CONDUCT_MISSION_STATE,
@@ -51,6 +54,7 @@ class ConductMissionState extends $pb.ProtobufEnum {
     RETURN_VERIFICATION_CONDUCT_MISSION_STATE,
     FAIL_MISSION_CONDUCT_MISSION_STATE,
     INIT_CONDUCT_MISSION_STATE,
+    TRY_SELF_CONDUCT_MISSION_STATE,
   ];
 
   static final $core.Map<$core.int, ConductMissionState> _byValue = $pb.ProtobufEnum.initByValue(values);
@@ -161,5 +165,22 @@ class MissionPageMode extends $pb.ProtobufEnum {
   static MissionPageMode valueOf($core.int value) => _byValue[value];
 
   const MissionPageMode._($core.int v, $core.String n) : super(v, n);
+}
+
+class DecidePurchaseDistractor extends $pb.ProtobufEnum {
+  static const DecidePurchaseDistractor UNKNOWN_DECIDE_PURCHASE_DISTRACTOR = DecidePurchaseDistractor._(0, 'UNKNOWN_DECIDE_PURCHASE_DISTRACTOR');
+  static const DecidePurchaseDistractor DECIDE_OK = DecidePurchaseDistractor._(1, 'DECIDE_OK');
+  static const DecidePurchaseDistractor DECIDE_RETURN = DecidePurchaseDistractor._(2, 'DECIDE_RETURN');
+
+  static const $core.List<DecidePurchaseDistractor> values = <DecidePurchaseDistractor> [
+    UNKNOWN_DECIDE_PURCHASE_DISTRACTOR,
+    DECIDE_OK,
+    DECIDE_RETURN,
+  ];
+
+  static final $core.Map<$core.int, DecidePurchaseDistractor> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static DecidePurchaseDistractor valueOf($core.int value) => _byValue[value];
+
+  const DecidePurchaseDistractor._($core.int v, $core.String n) : super(v, n);
 }
 

@@ -216,16 +216,9 @@ class PointCreditPageState extends State<PointCreditPage> {
                     buttonColor: isKakaoPay&&(priceController.text.length > 0) ? Color(0xFF5f75ac):Colors.white,
                     textColor: isKakaoPay && (priceController.text.length > 0)? Colors.white:Colors.black87,
                     text: '동의 및 결제요청',
-                    onPressed: (){
-                      if(priceController.text.length != 0) {
-                        if (isKakaoPay && int.parse(priceController.text) > 0) {
-                          test();
-                        }
-                      }
-                      else{
-
-                      }
-                    },
+                    onPressed: (isKakaoPay && int.parse(priceController.text) > 0)? (){
+                      test();
+                    } : null,
                   )
               ),
             ],

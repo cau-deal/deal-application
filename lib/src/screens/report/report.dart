@@ -91,6 +91,8 @@ class ReportPageState extends State<ReportPage> {
                           Navigator.pop(ctx);
                         }))
               ],
-            )));
+            )
+        )
+    );
   }
 }

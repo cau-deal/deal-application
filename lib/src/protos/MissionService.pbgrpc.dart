@@ -97,6 +97,18 @@ class MissionServiceClient extends $grpc.Client {
           ($0.UrlRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.GetLabelingResultResponse.fromBuffer(value));
+  static final _$getRecommendMissionImages =
+      $grpc.ClientMethod<$1.Empty, $0.GetRecommendMissionImagesResponse>(
+          '/MissionService/GetRecommendMissionImages',
+          ($1.Empty value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.GetRecommendMissionImagesResponse.fromBuffer(value));
+  static final _$decidePurchase =
+      $grpc.ClientMethod<$0.DecidePurchaseRequest, $0.DecidePurchaseResponse>(
+          '/MissionService/DecidePurchase',
+          ($0.DecidePurchaseRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.DecidePurchaseResponse.fromBuffer(value));
 
   MissionServiceClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
@@ -213,6 +225,23 @@ class MissionServiceClient extends $grpc.Client {
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$getLabelingResult, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.GetRecommendMissionImagesResponse>
+      getRecommendMissionImages($1.Empty request, {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$getRecommendMissionImages, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.DecidePurchaseResponse> decidePurchase(
+      $0.DecidePurchaseRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$decidePurchase, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -335,6 +364,24 @@ abstract class MissionServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.UrlRequest.fromBuffer(value),
         ($0.GetLabelingResultResponse value) => value.writeToBuffer()));
+    $addMethod(
+        $grpc.ServiceMethod<$1.Empty, $0.GetRecommendMissionImagesResponse>(
+            'GetRecommendMissionImages',
+            getRecommendMissionImages_Pre,
+            false,
+            false,
+            ($core.List<$core.int> value) => $1.Empty.fromBuffer(value),
+            ($0.GetRecommendMissionImagesResponse value) =>
+                value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.DecidePurchaseRequest,
+            $0.DecidePurchaseResponse>(
+        'DecidePurchase',
+        decidePurchase_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.DecidePurchaseRequest.fromBuffer(value),
+        ($0.DecidePurchaseResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.RegisterMissionResponse> registerMission_Pre(
@@ -412,6 +459,18 @@ abstract class MissionServiceBase extends $grpc.Service {
     return getLabelingResult(call, await request);
   }
 
+  $async.Future<$0.GetRecommendMissionImagesResponse>
+      getRecommendMissionImages_Pre(
+          $grpc.ServiceCall call, $async.Future<$1.Empty> request) async {
+    return getRecommendMissionImages(call, await request);
+  }
+
+  $async.Future<$0.DecidePurchaseResponse> decidePurchase_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.DecidePurchaseRequest> request) async {
+    return decidePurchase(call, await request);
+  }
+
   $async.Future<$0.RegisterMissionResponse> registerMission(
       $grpc.ServiceCall call, $0.RegisterMissionRequest request);
   $async.Future<$0.SearchMissionResponse> searchMission(
@@ -443,4 +502,8 @@ abstract class MissionServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.MissionIdRequest request);
   $async.Future<$0.GetLabelingResultResponse> getLabelingResult(
       $grpc.ServiceCall call, $0.UrlRequest request);
+  $async.Future<$0.GetRecommendMissionImagesResponse> getRecommendMissionImages(
+      $grpc.ServiceCall call, $1.Empty request);
+  $async.Future<$0.DecidePurchaseResponse> decidePurchase(
+      $grpc.ServiceCall call, $0.DecidePurchaseRequest request);
 }

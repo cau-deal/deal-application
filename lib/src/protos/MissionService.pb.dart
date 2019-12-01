@@ -279,6 +279,47 @@ class UrlRequest extends $pb.GeneratedMessage {
   void clearUrl() => clearField(1);
 }
 
+class DecidePurchaseRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DecidePurchaseRequest', createEmptyInstance: create)
+    ..a<$core.int>(1, 'missionId', $pb.PbFieldType.O3)
+    ..e<DecidePurchaseDistractor>(2, 'decidePurchaseDistractor', $pb.PbFieldType.OE, defaultOrMaker: DecidePurchaseDistractor.UNKNOWN_DECIDE_PURCHASE_DISTRACTOR, valueOf: DecidePurchaseDistractor.valueOf, enumValues: DecidePurchaseDistractor.values)
+    ..hasRequiredFields = false
+  ;
+
+  DecidePurchaseRequest._() : super();
+  factory DecidePurchaseRequest() => create();
+  factory DecidePurchaseRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DecidePurchaseRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  DecidePurchaseRequest clone() => DecidePurchaseRequest()..mergeFromMessage(this);
+  DecidePurchaseRequest copyWith(void Function(DecidePurchaseRequest) updates) => super.copyWith((message) => updates(message as DecidePurchaseRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static DecidePurchaseRequest create() => DecidePurchaseRequest._();
+  DecidePurchaseRequest createEmptyInstance() => create();
+  static $pb.PbList<DecidePurchaseRequest> createRepeated() => $pb.PbList<DecidePurchaseRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DecidePurchaseRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DecidePurchaseRequest>(create);
+  static DecidePurchaseRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get missionId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set missionId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMissionId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMissionId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  DecidePurchaseDistractor get decidePurchaseDistractor => $_getN(1);
+  @$pb.TagNumber(2)
+  set decidePurchaseDistractor(DecidePurchaseDistractor v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasDecidePurchaseDistractor() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDecidePurchaseDistractor() => clearField(2);
+}
+
 class Mission extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('Mission', createEmptyInstance: create)
     ..a<$core.int>(1, 'missionId', $pb.PbFieldType.O3)
@@ -712,6 +753,47 @@ class ConductMissionProto extends $pb.GeneratedMessage {
   $core.bool hasConductMissionState() => $_has(9);
   @$pb.TagNumber(18)
   void clearConductMissionState() => clearField(18);
+}
+
+class MissionRecommendImage extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('MissionRecommendImage', createEmptyInstance: create)
+    ..a<$core.int>(1, 'missionId', $pb.PbFieldType.O3)
+    ..aOS(2, 'recommendImageUrl')
+    ..hasRequiredFields = false
+  ;
+
+  MissionRecommendImage._() : super();
+  factory MissionRecommendImage() => create();
+  factory MissionRecommendImage.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MissionRecommendImage.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  MissionRecommendImage clone() => MissionRecommendImage()..mergeFromMessage(this);
+  MissionRecommendImage copyWith(void Function(MissionRecommendImage) updates) => super.copyWith((message) => updates(message as MissionRecommendImage));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static MissionRecommendImage create() => MissionRecommendImage._();
+  MissionRecommendImage createEmptyInstance() => create();
+  static $pb.PbList<MissionRecommendImage> createRepeated() => $pb.PbList<MissionRecommendImage>();
+  @$core.pragma('dart2js:noInline')
+  static MissionRecommendImage getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MissionRecommendImage>(create);
+  static MissionRecommendImage _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get missionId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set missionId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMissionId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMissionId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get recommendImageUrl => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set recommendImageUrl($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasRecommendImageUrl() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRecommendImageUrl() => clearField(2);
 }
 
 class MissionPage extends $pb.GeneratedMessage {
@@ -1342,5 +1424,75 @@ class GetLabelingResultResponse extends $pb.GeneratedMessage {
   $core.bool hasLabelResult() => $_has(1);
   @$pb.TagNumber(2)
   void clearLabelResult() => clearField(2);
+}
+
+class GetRecommendMissionImagesResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetRecommendMissionImagesResponse', createEmptyInstance: create)
+    ..aOM<$4.CommonResult>(1, 'result', subBuilder: $4.CommonResult.create)
+    ..pc<MissionRecommendImage>(2, 'missionRecommendImages', $pb.PbFieldType.PM, subBuilder: MissionRecommendImage.create)
+    ..hasRequiredFields = false
+  ;
+
+  GetRecommendMissionImagesResponse._() : super();
+  factory GetRecommendMissionImagesResponse() => create();
+  factory GetRecommendMissionImagesResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetRecommendMissionImagesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetRecommendMissionImagesResponse clone() => GetRecommendMissionImagesResponse()..mergeFromMessage(this);
+  GetRecommendMissionImagesResponse copyWith(void Function(GetRecommendMissionImagesResponse) updates) => super.copyWith((message) => updates(message as GetRecommendMissionImagesResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetRecommendMissionImagesResponse create() => GetRecommendMissionImagesResponse._();
+  GetRecommendMissionImagesResponse createEmptyInstance() => create();
+  static $pb.PbList<GetRecommendMissionImagesResponse> createRepeated() => $pb.PbList<GetRecommendMissionImagesResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetRecommendMissionImagesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetRecommendMissionImagesResponse>(create);
+  static GetRecommendMissionImagesResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $4.CommonResult get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result($4.CommonResult v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  $4.CommonResult ensureResult() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.List<MissionRecommendImage> get missionRecommendImages => $_getList(1);
+}
+
+class DecidePurchaseResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DecidePurchaseResponse', createEmptyInstance: create)
+    ..aOM<$4.CommonResult>(1, 'result', subBuilder: $4.CommonResult.create)
+    ..hasRequiredFields = false
+  ;
+
+  DecidePurchaseResponse._() : super();
+  factory DecidePurchaseResponse() => create();
+  factory DecidePurchaseResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DecidePurchaseResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  DecidePurchaseResponse clone() => DecidePurchaseResponse()..mergeFromMessage(this);
+  DecidePurchaseResponse copyWith(void Function(DecidePurchaseResponse) updates) => super.copyWith((message) => updates(message as DecidePurchaseResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static DecidePurchaseResponse create() => DecidePurchaseResponse._();
+  DecidePurchaseResponse createEmptyInstance() => create();
+  static $pb.PbList<DecidePurchaseResponse> createRepeated() => $pb.PbList<DecidePurchaseResponse>();
+  @$core.pragma('dart2js:noInline')
+  static DecidePurchaseResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DecidePurchaseResponse>(create);
+  static DecidePurchaseResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $4.CommonResult get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result($4.CommonResult v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  $4.CommonResult ensureResult() => $_ensure(0);
 }
 

@@ -191,6 +191,7 @@ class PointHistory extends $pb.GeneratedMessage {
     ..aInt64(1, 'val')
     ..e<PointAlterReason>(2, 'pointAlterReason', $pb.PbFieldType.OE, defaultOrMaker: PointAlterReason.UNKNOWN_POINT_ALTER_REASON, valueOf: PointAlterReason.valueOf, enumValues: PointAlterReason.values)
     ..aOM<$2.Datetime>(3, 'createdAt', subBuilder: $2.Datetime.create)
+    ..aOS(4, 'reasonDetail')
     ..hasRequiredFields = false
   ;
 
@@ -237,6 +238,15 @@ class PointHistory extends $pb.GeneratedMessage {
   void clearCreatedAt() => clearField(3);
   @$pb.TagNumber(3)
   $2.Datetime ensureCreatedAt() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $core.String get reasonDetail => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set reasonDetail($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasReasonDetail() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearReasonDetail() => clearField(4);
 }
 
 class LookUpBalanceResponse extends $pb.GeneratedMessage {

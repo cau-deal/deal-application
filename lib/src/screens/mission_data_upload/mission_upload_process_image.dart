@@ -63,7 +63,7 @@ class UploadProcessImageState extends State<UploadProcessImage> {
     setState(() {
       final List<String> lst = _items.where((l) => l == label).toList();
       if (lst.isNotEmpty) { Fluttertoast.showToast(msg: "레이블이 존재합니다."); return; }
-      else { _items.add(label); }
+      else { _items.add(label); _controller.text = ""; }
     });
   }
 
@@ -83,7 +83,7 @@ class UploadProcessImageState extends State<UploadProcessImage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              ContentHeader(label: "의뢰할 이미지"),
+              ContentHeader(label: "의뢰 할 이미지"),
               SizedBox(height: 10),
               Container(
                 color: Color(0xffeeeeee),
@@ -160,6 +160,7 @@ class UploadProcessImageState extends State<UploadProcessImage> {
                 children: <Widget>[
                   Expanded(
                     child: Container(
+                      height: 30,
                       padding: EdgeInsets.all(5),
                       margin: EdgeInsets.only(right: 10),
                       color: Color(0xffeeeeee),
@@ -178,7 +179,7 @@ class UploadProcessImageState extends State<UploadProcessImage> {
                               fontSize: 16,
                               color: Colors.black54,
                               height: 1.0,
-                              textBaseline: TextBaseline.ideographic
+                              textBaseline: TextBaseline.alphabetic
                           ),
                         ),
                         onSubmitted: (str){ this.addNewLabel(str); },
@@ -239,7 +240,7 @@ class UploadProcessImageState extends State<UploadProcessImage> {
                     buttonColor: Color(0xFF5f75ac),
                     textColor: Colors.white,
                     text: '등록하기',
-                    onPressed: (this._images.length > 0 && this._items.length > 0)? (){
+                    onPressed: (this._images.length > 1 && this._items.length > 0)? (){
                       Navigator.pop(context, { 'images': _images.sublist(1), 'labels': _items });
                     } : null
                 ),

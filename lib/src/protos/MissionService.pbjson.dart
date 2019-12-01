@@ -14,6 +14,7 @@ const MissionState$json = const {
     const {'1': 'WATING_CONFIRM_PURCHASE', '2': 3},
     const {'1': 'COMPLETE_MISSION', '2': 4},
     const {'1': 'WAITING_REGISTER', '2': 5},
+    const {'1': 'RETURNED_MISSION', '2': 6},
   ],
 };
 
@@ -28,6 +29,7 @@ const ConductMissionState$json = const {
     const {'1': 'RETURN_VERIFICATION_CONDUCT_MISSION_STATE', '2': 5},
     const {'1': 'FAIL_MISSION_CONDUCT_MISSION_STATE', '2': 6},
     const {'1': 'INIT_CONDUCT_MISSION_STATE', '2': 7},
+    const {'1': 'TRY_SELF_CONDUCT_MISSION_STATE', '2': 8},
   ],
 };
 
@@ -86,6 +88,15 @@ const MissionPageMode$json = const {
   ],
 };
 
+const DecidePurchaseDistractor$json = const {
+  '1': 'DecidePurchaseDistractor',
+  '2': const [
+    const {'1': 'UNKNOWN_DECIDE_PURCHASE_DISTRACTOR', '2': 0},
+    const {'1': 'DECIDE_OK', '2': 1},
+    const {'1': 'DECIDE_RETURN', '2': 2},
+  ],
+};
+
 const RegisterMissionRequest$json = const {
   '1': 'RegisterMissionRequest',
   '2': const [
@@ -141,6 +152,14 @@ const UrlRequest$json = const {
   ],
 };
 
+const DecidePurchaseRequest$json = const {
+  '1': 'DecidePurchaseRequest',
+  '2': const [
+    const {'1': 'mission_id', '3': 1, '4': 1, '5': 5, '10': 'missionId'},
+    const {'1': 'decide_purchase_distractor', '3': 2, '4': 1, '5': 14, '6': '.DecidePurchaseDistractor', '10': 'decidePurchaseDistractor'},
+  ],
+};
+
 const Mission$json = const {
   '1': 'Mission',
   '2': const [
@@ -192,6 +211,14 @@ const ConductMissionProto$json = const {
     const {'1': 'created_at', '3': 15, '4': 1, '5': 11, '6': '.Datetime', '10': 'createdAt'},
     const {'1': 'thumbnail_url', '3': 16, '4': 1, '5': 9, '10': 'thumbnailUrl'},
     const {'1': 'beginning', '3': 17, '4': 1, '5': 11, '6': '.Datetime', '10': 'beginning'},
+  ],
+};
+
+const MissionRecommendImage$json = const {
+  '1': 'MissionRecommendImage',
+  '2': const [
+    const {'1': 'mission_id', '3': 1, '4': 1, '5': 5, '10': 'missionId'},
+    const {'1': 'recommend_image_url', '3': 2, '4': 1, '5': 9, '10': 'recommendImageUrl'},
   ],
 };
 
@@ -309,6 +336,21 @@ const GetLabelingResultResponse$json = const {
   '2': const [
     const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
     const {'1': 'label_result', '3': 2, '4': 1, '5': 9, '10': 'labelResult'},
+  ],
+};
+
+const GetRecommendMissionImagesResponse$json = const {
+  '1': 'GetRecommendMissionImagesResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
+    const {'1': 'mission_recommend_images', '3': 2, '4': 3, '5': 11, '6': '.MissionRecommendImage', '10': 'missionRecommendImages'},
+  ],
+};
+
+const DecidePurchaseResponse$json = const {
+  '1': 'DecidePurchaseResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
   ],
 };
 

@@ -87,6 +87,7 @@ const PointHistory$json = const {
     const {'1': 'val', '3': 1, '4': 1, '5': 3, '10': 'val'},
     const {'1': 'point_alter_reason', '3': 2, '4': 1, '5': 14, '6': '.PointAlterReason', '10': 'pointAlterReason'},
     const {'1': 'created_at', '3': 3, '4': 1, '5': 11, '6': '.Datetime', '10': 'createdAt'},
+    const {'1': 'reason_detail', '3': 4, '4': 1, '5': 9, '10': 'reasonDetail'},
   ],
 };
 
