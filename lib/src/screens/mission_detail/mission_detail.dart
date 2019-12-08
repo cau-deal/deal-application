@@ -112,7 +112,7 @@ class MissionDetailPageState extends State<MissionDetailPage> {
                 switch (state.dataType) {
                   case DataType.IMAGE: return CollectPictureScreen(state: state, missionId: widget.missionId);
                   case DataType.SURVEY: return CollectSurveyScreen(missionId: widget.missionId);
-                  case DataType.SOUND: return CollectSoundScreen(missionId: widget.missionId);
+                  case DataType.SOUND: return CollectSoundScreen(missionId: widget.missionId, state: state);
                 }
 
                 break;

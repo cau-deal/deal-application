@@ -25,6 +25,8 @@ class MissionActBloc extends Bloc<MissionActEvent, MissionActState> {
       yield* _mapFetchProcessPictureToState(event);
     } else if(event is SubmitCollectSurvey){
       yield* _mapSubmitCollectSurveyToState(event);
+    } else if(event is SubmitCollectSound){
+      yield* _mapSubmitCollectSoundToState(event);
     }
   }
 
@@ -108,5 +110,30 @@ class MissionActBloc extends Bloc<MissionActEvent, MissionActState> {
 
   }
 
+
+  Stream<MissionActState> _mapSubmitCollectSoundToState(SubmitCollectSound evt) async* {
+
+    try {
+      if (await userRepository.hasToken()) {
+        SubmitCollectMissionOutputResponse res = await missionRepository.submitCollectMissionByMissionId(
+            accessToken: await userRepository.getAccessToken(),
+            missionId: evt.missionId,
+            urls: [""]
+        );
+
+        bool isValid = (res.result.resultCode == ResultCode.SUCCESS);
+
+        if (isValid) {
+          yield MissionActState.success([], []);
+        } else {
+          yield MissionActState.failure();
+        }
+      }
+
+    } catch(_) {
+      print(_.toString());
+    }
+
+  }
 
 }
