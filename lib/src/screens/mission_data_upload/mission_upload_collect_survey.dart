@@ -42,7 +42,7 @@ class UploadCollectSurveyState extends State<UploadCollectSurvey> {
 
   void _onPageFinished(String value) {
     setState(() {
-//      isLoadingState = 1;
+      isLoadingState = 1;
     });
   }
 
@@ -64,7 +64,7 @@ class UploadCollectSurveyState extends State<UploadCollectSurvey> {
             Container(
                 child: SizedBox.expand(
                     child: WebView(
-                      initialUrl: "https://grpc.snhyun.me/react-survey/#/",
+                      initialUrl: "http://grpc.snhyun.me:4000/#/user/surveys",
                       javascriptMode: JavascriptMode.unrestricted,
                       javascriptChannels: Set.from([
                         JavascriptChannel(

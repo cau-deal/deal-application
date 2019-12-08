@@ -28,6 +28,7 @@ class CollectPictureScreen extends StatefulWidget {
 class CollectPictureScreenState extends State<CollectPictureScreen> {
 
   num isLoadingState = 0;
+  WebViewController _webController;
 
   @override
   void initState() {
@@ -39,12 +40,50 @@ class CollectPictureScreenState extends State<CollectPictureScreen> {
     super.dispose();
   }
 
+
+  void _onPageFinished(String value) {
+    setState(() {
+      isLoadingState = 1;
+    });
+  }
+
+
   @override
   Widget build(BuildContext ctx) {
     return CommonAppBarContainer(
         text: "의뢰수행 (이미지 수집)",
-        child: Container(
-
+        child: IndexedStack(
+          index: this.isLoadingState,
+          children: <Widget>[
+            Container(
+                color: Colors.white,
+                child: SpinKitThreeBounce(
+                  color: Color(0xffF7CF00),
+                  size: 20.0,
+                )
+            ),
+            Container(
+                child: SizedBox.expand(
+                    child: WebView(
+                      initialUrl: "https://naver.com",
+                      javascriptMode: JavascriptMode.unrestricted,
+                      javascriptChannels: Set.from([
+                        JavascriptChannel(
+                            name: 'Flutter',
+                            onMessageReceived: (JavascriptMessage message) {
+                              final String msg = message.message;
+                              final List<String> tokens = msg.split(" ");
+                              if (tokens[0] == "COMPLETE") {
+                              }
+                            })
+                      ]),
+                      onPageFinished: _onPageFinished,
+                      onWebViewCreated: (WebViewController _tmpWebController) {
+                        this._webController = _tmpWebController;
+                      },
+                    ))
+            )
+          ],
         )
     );
   }
