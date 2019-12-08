@@ -15,9 +15,9 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class UploadCollectSurvey extends StatefulWidget {
 
-  final int amount;
+  final int sid;
 
-  const UploadCollectSurvey({Key key, this.amount}) : super(key: key);
+  const UploadCollectSurvey({Key key, this.sid}) : super(key: key);
 
   @override
   UploadCollectSurveyState createState() {
@@ -51,6 +51,9 @@ class UploadCollectSurveyState extends State<UploadCollectSurvey> {
   Widget build(BuildContext ctx) {
     return CommonAppBarContainer(
         text: "의뢰등록 (설문수집)",
+        onBackPressed: (){
+          Navigator.pop(context, {'sid': -1});
+        },
         child: IndexedStack(
           index: this.isLoadingState,
           children: <Widget>[
@@ -64,12 +67,19 @@ class UploadCollectSurveyState extends State<UploadCollectSurvey> {
             Container(
                 child: SizedBox.expand(
                     child: WebView(
-                      initialUrl: "http://grpc.snhyun.me:4000/#/user/surveys",
+                      initialUrl: (widget.sid != -1)
+                          ? "http://grpc.snhyun.me:4000/#/user/surveys/${widget.sid}/edit"
+                          : "http://grpc.snhyun.me:4000/#/user/surveys",
                       javascriptMode: JavascriptMode.unrestricted,
                       javascriptChannels: Set.from([
                         JavascriptChannel(
                             name: 'Flutter',
                             onMessageReceived: (JavascriptMessage message) {
+                              final String msg = message.message;
+                              final List<String> tokens = msg.split(" ");
+                              if(tokens[0] == "UPDATED"){
+                                Navigator.pop(context, { 'sid': int.parse(tokens[1]) });
+                              }
                             })
                       ]),
                       onPageFinished: _onPageFinished,

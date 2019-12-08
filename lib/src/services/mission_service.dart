@@ -25,7 +25,7 @@ class MissionService extends BaseService {
     String accessToken,
     String title,
     String subtitle,
-    int point, int unit, int totalCnt,
+    int point, int unit, int totalCnt, int sid,
     DateTime start, DateTime end,
     MissionType missionType, DataType dataType,
     String summary,
@@ -69,13 +69,23 @@ class MissionService extends BaseService {
 
       mission.beginning = from;
       mission.deadline = to;
+      mission.surveyId = -1;
 
       req.mission = mission;
 
       req.datas.addAll(datas.map((url) => Data()..url=url).toList());
       req.labels.addAll(labels);
 
-      res = await client.registerMission(req,  options: CallOptions(metadata: {'ticket': accessToken}));
+      if( mission.dataType == DataType.SURVEY ){
+        RegisterSurveyMissionRequest req = RegisterSurveyMissionRequest();
+        mission.surveyId = sid;
+        req.mission = mission;
+        RegisterSurveyMissionResponse r = await client.registerSurveyMission(req, options: CallOptions(metadata: {'ticket': accessToken}));
+        res.result = r.result;
+      } else {
+        res = await client.registerMission(req,  options: CallOptions(metadata: {'ticket': accessToken}));
+      }
+
 
     } catch (e) {
       print(e.toString());
@@ -297,6 +307,24 @@ class MissionService extends BaseService {
 
     return res;
   }
+
+  Future<GetSurveyIdResponse> fetchSurveyId({String accessToken, int missionId}) async {
+    MissionIdRequest req = MissionIdRequest();
+    GetSurveyIdResponse res = GetSurveyIdResponse();
+
+    try {
+      req.missionId = missionId;
+      res = await client.getSurveyId(req, options: CallOptions(metadata: {'ticket': accessToken}));
+    } catch (_) {
+      print(_.toString());
+    }
+
+    return res;
+  }
+
+  //  rpc RegisterSurveyMission(RegisterSurveyMissionRequest) returns (RegisterSurveyMissionResponse);
+//  rpc GetSurveyId(MissionIdRequest) returns (GetSurveyIdResponse);
+
 
 //  rpc GetAssignedMission(MissionIdRequest) returns (GetAssignedMissionResponse);
 

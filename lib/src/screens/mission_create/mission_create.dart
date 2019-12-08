@@ -69,6 +69,7 @@ class MissionCreatePageState extends State<MissionCreatePage> {
                                             point: state.point,
                                             unit: state.unit,
                                             totalCnt: state.totalCount,
+                                            surveyId: state.surveyId,
                                             start: state.startDate,
                                             end: state.endDate,
                                             missionType: state.missionType,

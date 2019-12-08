@@ -67,6 +67,8 @@ dependencies:
   flutter_stetho: ^0.5.0
   permission_handler: ^3.3.0
 
+  flutter_sound: ^1.0.6
+
 
 #  firebase_dynamic_links: ^0.5.0+1
 

@@ -119,6 +119,15 @@ class AgreementChanged extends MissionCreateEvent {
   String toString() => 'subtitle : $agreeWithTerms';
 }
 
+class MissionSidChanged extends MissionCreateEvent {
+  final int sid;
+
+  MissionSidChanged(this.sid);
+
+  @override
+  String toString() => 'subtitle ';
+}
+
 class MissionThumbnailChanged extends MissionCreateEvent {
   final File asset;
 
@@ -154,6 +163,7 @@ class SubmitPressed extends MissionCreateEvent {
   final int point;
   final int unit;
   final int totalCnt;
+  final int surveyId;
   final DateTime start;
   final DateTime end;
   final MissionType missionType;
@@ -169,6 +179,7 @@ class SubmitPressed extends MissionCreateEvent {
       this.point,
       this.unit,
       this.totalCnt,
+      this.surveyId,
       this.start,
       this.end,
       this.missionType,

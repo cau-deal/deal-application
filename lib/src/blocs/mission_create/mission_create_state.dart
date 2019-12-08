@@ -23,6 +23,8 @@ class MissionCreateState {
   final int unit;
   final int totalCount;
 
+  final int surveyId;
+
   final List<String> labels;
   final List<String> images;
 
@@ -53,6 +55,7 @@ class MissionCreateState {
     @required this.point,
     @required this.unit,
     @required this.totalCount,
+    @required this.surveyId,
 
     @required this.startDate,
     @required this.endDate,
@@ -88,6 +91,8 @@ class MissionCreateState {
       unit: 1,
       totalCount: 0,
       uploadPercentage: 0.0,
+      surveyId: -1,
+
       thumbnailUri: "",
       missionType: MissionType.UNKNOWN_MISSION_TYPE,
       dataType: DataType.UNKNOWN_DATA_TYPE,
@@ -114,7 +119,7 @@ class MissionCreateState {
       String title, String subTitle, DateTime s, DateTime e,
       List<String> images, List<String> labels,
       String missionSummary, String missionInstruction, String missionTerms,
-      int point, int unit, int totalCnt, String thumbnailUri,
+      int point, int unit, int totalCnt, int surveyId, String thumbnailUri,
       MissionType missionType, DataType dataType
       ) {
     return MissionCreateState(
@@ -124,6 +129,7 @@ class MissionCreateState {
       point: point,
       unit: unit,
       totalCount: totalCnt,
+      surveyId: surveyId,
 
       startDate: s,
       endDate: e,
@@ -155,7 +161,7 @@ class MissionCreateState {
       String title, String subTitle, DateTime s, DateTime e,
       List<String> images, List<String> labels,
       String missionSummary, String missionInstruction, String missionTerms,
-      int point, int unit, int totalCnt, String thumbnailUri,
+      int point, int unit, int totalCnt, int surveyId, String thumbnailUri,
       MissionType missionType, DataType dataType
       ) {
     return MissionCreateState(
@@ -165,6 +171,7 @@ class MissionCreateState {
       point: point,
       unit: unit,
       totalCount: totalCnt,
+      surveyId: surveyId,
 
       startDate: s,
       endDate: e,
@@ -196,7 +203,7 @@ class MissionCreateState {
       String title, String subTitle, DateTime s, DateTime e,
       List<String> images, List<String> labels,
       String missionSummary, String missionInstruction, String missionTerms,
-      int point, int unit, int totalCnt, String thumbnailUri,
+      int point, int unit, int totalCnt, int surveyId, String thumbnailUri,
       MissionType missionType, DataType dataType
       ) {
     return MissionCreateState(
@@ -206,6 +213,7 @@ class MissionCreateState {
       point: point,
       unit: unit,
       totalCount: totalCnt,
+      surveyId: surveyId,
 
       startDate: s,
       endDate: e,
@@ -239,6 +247,8 @@ class MissionCreateState {
     int point,
     int unit,
     int totalCnt,
+    int surveyId,
+
     double uploadPercentage,
     String thumbnailUri,
     MissionType missionType,
@@ -266,6 +276,8 @@ class MissionCreateState {
       point: point,
       unit: unit,
       totalCnt: totalCnt,
+      surveyId: surveyId,
+
       uploadPercentage: uploadPercentage,
       thumbnailUri: thumbnailUri,
       missionType: missionType,
@@ -298,6 +310,8 @@ class MissionCreateState {
     int point,
     int unit,
     int totalCnt,
+    int surveyId,
+
     double uploadPercentage,
     String thumbnailUri,
     MissionType missionType,
@@ -328,6 +342,8 @@ class MissionCreateState {
       point: point ?? this.point,
       unit: unit ?? this.unit,
       totalCount: totalCnt ?? this.totalCount,
+      surveyId: surveyId ?? this.surveyId,
+
       uploadPercentage: uploadPercentage ?? this.uploadPercentage,
       thumbnailUri: thumbnailUri ?? this.thumbnailUri,
       missionType: missionType ?? this.missionType,

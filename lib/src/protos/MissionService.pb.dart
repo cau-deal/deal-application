@@ -320,6 +320,213 @@ class DecidePurchaseRequest extends $pb.GeneratedMessage {
   void clearDecidePurchaseDistractor() => clearField(2);
 }
 
+class GetDatasToValidRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetDatasToValidRequest', createEmptyInstance: create)
+    ..e<MissionType>(1, 'missionType', $pb.PbFieldType.OE, defaultOrMaker: MissionType.UNKNOWN_MISSION_TYPE, valueOf: MissionType.valueOf, enumValues: MissionType.values)
+    ..e<$2.DataType>(2, 'dataType', $pb.PbFieldType.OE, defaultOrMaker: $2.DataType.UNKNOWN_DATA_TYPE, valueOf: $2.DataType.valueOf, enumValues: $2.DataType.values)
+    ..hasRequiredFields = false
+  ;
+
+  GetDatasToValidRequest._() : super();
+  factory GetDatasToValidRequest() => create();
+  factory GetDatasToValidRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetDatasToValidRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetDatasToValidRequest clone() => GetDatasToValidRequest()..mergeFromMessage(this);
+  GetDatasToValidRequest copyWith(void Function(GetDatasToValidRequest) updates) => super.copyWith((message) => updates(message as GetDatasToValidRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetDatasToValidRequest create() => GetDatasToValidRequest._();
+  GetDatasToValidRequest createEmptyInstance() => create();
+  static $pb.PbList<GetDatasToValidRequest> createRepeated() => $pb.PbList<GetDatasToValidRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetDatasToValidRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetDatasToValidRequest>(create);
+  static GetDatasToValidRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  MissionType get missionType => $_getN(0);
+  @$pb.TagNumber(1)
+  set missionType(MissionType v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMissionType() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMissionType() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $2.DataType get dataType => $_getN(1);
+  @$pb.TagNumber(2)
+  set dataType($2.DataType v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasDataType() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDataType() => clearField(2);
+}
+
+class SetDatasToValidRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('SetDatasToValidRequest', createEmptyInstance: create)
+    ..e<MissionType>(1, 'missionType', $pb.PbFieldType.OE, defaultOrMaker: MissionType.UNKNOWN_MISSION_TYPE, valueOf: MissionType.valueOf, enumValues: MissionType.values)
+    ..e<$2.DataType>(2, 'dataType', $pb.PbFieldType.OE, defaultOrMaker: $2.DataType.UNKNOWN_DATA_TYPE, valueOf: $2.DataType.valueOf, enumValues: $2.DataType.values)
+    ..a<$core.int>(3, 'conductMissionId', $pb.PbFieldType.O3)
+    ..e<DecideValidation>(4, 'decideValidation', $pb.PbFieldType.OE, defaultOrMaker: DecideValidation.UNKNOWN_DECIDE_VALIDATION, valueOf: DecideValidation.valueOf, enumValues: DecideValidation.values)
+    ..hasRequiredFields = false
+  ;
+
+  SetDatasToValidRequest._() : super();
+  factory SetDatasToValidRequest() => create();
+  factory SetDatasToValidRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SetDatasToValidRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  SetDatasToValidRequest clone() => SetDatasToValidRequest()..mergeFromMessage(this);
+  SetDatasToValidRequest copyWith(void Function(SetDatasToValidRequest) updates) => super.copyWith((message) => updates(message as SetDatasToValidRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static SetDatasToValidRequest create() => SetDatasToValidRequest._();
+  SetDatasToValidRequest createEmptyInstance() => create();
+  static $pb.PbList<SetDatasToValidRequest> createRepeated() => $pb.PbList<SetDatasToValidRequest>();
+  @$core.pragma('dart2js:noInline')
+  static SetDatasToValidRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetDatasToValidRequest>(create);
+  static SetDatasToValidRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  MissionType get missionType => $_getN(0);
+  @$pb.TagNumber(1)
+  set missionType(MissionType v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMissionType() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMissionType() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $2.DataType get dataType => $_getN(1);
+  @$pb.TagNumber(2)
+  set dataType($2.DataType v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasDataType() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDataType() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get conductMissionId => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set conductMissionId($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasConductMissionId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearConductMissionId() => clearField(3);
+
+  @$pb.TagNumber(4)
+  DecideValidation get decideValidation => $_getN(3);
+  @$pb.TagNumber(4)
+  set decideValidation(DecideValidation v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasDecideValidation() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearDecideValidation() => clearField(4);
+}
+
+class GetMissionDatasToValidRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetMissionDatasToValidRequest', createEmptyInstance: create)
+    ..a<$core.int>(1, 'missionId', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  GetMissionDatasToValidRequest._() : super();
+  factory GetMissionDatasToValidRequest() => create();
+  factory GetMissionDatasToValidRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetMissionDatasToValidRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetMissionDatasToValidRequest clone() => GetMissionDatasToValidRequest()..mergeFromMessage(this);
+  GetMissionDatasToValidRequest copyWith(void Function(GetMissionDatasToValidRequest) updates) => super.copyWith((message) => updates(message as GetMissionDatasToValidRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetMissionDatasToValidRequest create() => GetMissionDatasToValidRequest._();
+  GetMissionDatasToValidRequest createEmptyInstance() => create();
+  static $pb.PbList<GetMissionDatasToValidRequest> createRepeated() => $pb.PbList<GetMissionDatasToValidRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetMissionDatasToValidRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetMissionDatasToValidRequest>(create);
+  static GetMissionDatasToValidRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get missionId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set missionId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMissionId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMissionId() => clearField(1);
+}
+
+class SetMissionDatasToValidRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('SetMissionDatasToValidRequest', createEmptyInstance: create)
+    ..a<$core.int>(1, 'missionId', $pb.PbFieldType.O3)
+    ..e<DecideValidation>(2, 'decideValidation', $pb.PbFieldType.OE, defaultOrMaker: DecideValidation.UNKNOWN_DECIDE_VALIDATION, valueOf: DecideValidation.valueOf, enumValues: DecideValidation.values)
+    ..hasRequiredFields = false
+  ;
+
+  SetMissionDatasToValidRequest._() : super();
+  factory SetMissionDatasToValidRequest() => create();
+  factory SetMissionDatasToValidRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SetMissionDatasToValidRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  SetMissionDatasToValidRequest clone() => SetMissionDatasToValidRequest()..mergeFromMessage(this);
+  SetMissionDatasToValidRequest copyWith(void Function(SetMissionDatasToValidRequest) updates) => super.copyWith((message) => updates(message as SetMissionDatasToValidRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static SetMissionDatasToValidRequest create() => SetMissionDatasToValidRequest._();
+  SetMissionDatasToValidRequest createEmptyInstance() => create();
+  static $pb.PbList<SetMissionDatasToValidRequest> createRepeated() => $pb.PbList<SetMissionDatasToValidRequest>();
+  @$core.pragma('dart2js:noInline')
+  static SetMissionDatasToValidRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetMissionDatasToValidRequest>(create);
+  static SetMissionDatasToValidRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get missionId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set missionId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMissionId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMissionId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  DecideValidation get decideValidation => $_getN(1);
+  @$pb.TagNumber(2)
+  set decideValidation(DecideValidation v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasDecideValidation() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDecideValidation() => clearField(2);
+}
+
+class RegisterSurveyMissionRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('RegisterSurveyMissionRequest', createEmptyInstance: create)
+    ..aOM<Mission>(1, 'mission', subBuilder: Mission.create)
+    ..hasRequiredFields = false
+  ;
+
+  RegisterSurveyMissionRequest._() : super();
+  factory RegisterSurveyMissionRequest() => create();
+  factory RegisterSurveyMissionRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RegisterSurveyMissionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  RegisterSurveyMissionRequest clone() => RegisterSurveyMissionRequest()..mergeFromMessage(this);
+  RegisterSurveyMissionRequest copyWith(void Function(RegisterSurveyMissionRequest) updates) => super.copyWith((message) => updates(message as RegisterSurveyMissionRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static RegisterSurveyMissionRequest create() => RegisterSurveyMissionRequest._();
+  RegisterSurveyMissionRequest createEmptyInstance() => create();
+  static $pb.PbList<RegisterSurveyMissionRequest> createRepeated() => $pb.PbList<RegisterSurveyMissionRequest>();
+  @$core.pragma('dart2js:noInline')
+  static RegisterSurveyMissionRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RegisterSurveyMissionRequest>(create);
+  static RegisterSurveyMissionRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  Mission get mission => $_getN(0);
+  @$pb.TagNumber(1)
+  set mission(Mission v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMission() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMission() => clearField(1);
+  @$pb.TagNumber(1)
+  Mission ensureMission() => $_ensure(0);
+}
+
 class Mission extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('Mission', createEmptyInstance: create)
     ..a<$core.int>(1, 'missionId', $pb.PbFieldType.O3)
@@ -338,6 +545,7 @@ class Mission extends $pb.GeneratedMessage {
     ..e<MissionState>(14, 'missionState', $pb.PbFieldType.OE, defaultOrMaker: MissionState.UNKNOWN_MISSION_STATE, valueOf: MissionState.valueOf, enumValues: MissionState.values)
     ..aOM<$3.Datetime>(15, 'createdAt', subBuilder: $3.Datetime.create)
     ..aOM<$3.Datetime>(16, 'beginning', subBuilder: $3.Datetime.create)
+    ..a<$core.int>(17, 'surveyId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -499,6 +707,15 @@ class Mission extends $pb.GeneratedMessage {
   void clearBeginning() => clearField(16);
   @$pb.TagNumber(16)
   $3.Datetime ensureBeginning() => $_ensure(15);
+
+  @$pb.TagNumber(17)
+  $core.int get surveyId => $_getIZ(16);
+  @$pb.TagNumber(17)
+  set surveyId($core.int v) { $_setSignedInt32(16, v); }
+  @$pb.TagNumber(17)
+  $core.bool hasSurveyId() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearSurveyId() => clearField(17);
 }
 
 class MissionProto extends $pb.GeneratedMessage {
@@ -1531,5 +1748,249 @@ class GetProcessMissionImagesResponse extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(2)
   $core.List<$core.String> get urls => $_getList(1);
+}
+
+class GetDatasToValidResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetDatasToValidResponse', createEmptyInstance: create)
+    ..aOM<$4.CommonResult>(1, 'result', subBuilder: $4.CommonResult.create)
+    ..a<$core.int>(2, 'conductMissionId', $pb.PbFieldType.O3)
+    ..pPS(3, 'datas')
+    ..pPS(4, 'labels')
+    ..hasRequiredFields = false
+  ;
+
+  GetDatasToValidResponse._() : super();
+  factory GetDatasToValidResponse() => create();
+  factory GetDatasToValidResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetDatasToValidResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetDatasToValidResponse clone() => GetDatasToValidResponse()..mergeFromMessage(this);
+  GetDatasToValidResponse copyWith(void Function(GetDatasToValidResponse) updates) => super.copyWith((message) => updates(message as GetDatasToValidResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetDatasToValidResponse create() => GetDatasToValidResponse._();
+  GetDatasToValidResponse createEmptyInstance() => create();
+  static $pb.PbList<GetDatasToValidResponse> createRepeated() => $pb.PbList<GetDatasToValidResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetDatasToValidResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetDatasToValidResponse>(create);
+  static GetDatasToValidResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $4.CommonResult get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result($4.CommonResult v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  $4.CommonResult ensureResult() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.int get conductMissionId => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set conductMissionId($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasConductMissionId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearConductMissionId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.List<$core.String> get datas => $_getList(2);
+
+  @$pb.TagNumber(4)
+  $core.List<$core.String> get labels => $_getList(3);
+}
+
+class SetDatasToValidResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('SetDatasToValidResponse', createEmptyInstance: create)
+    ..aOM<$4.CommonResult>(1, 'result', subBuilder: $4.CommonResult.create)
+    ..hasRequiredFields = false
+  ;
+
+  SetDatasToValidResponse._() : super();
+  factory SetDatasToValidResponse() => create();
+  factory SetDatasToValidResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SetDatasToValidResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  SetDatasToValidResponse clone() => SetDatasToValidResponse()..mergeFromMessage(this);
+  SetDatasToValidResponse copyWith(void Function(SetDatasToValidResponse) updates) => super.copyWith((message) => updates(message as SetDatasToValidResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static SetDatasToValidResponse create() => SetDatasToValidResponse._();
+  SetDatasToValidResponse createEmptyInstance() => create();
+  static $pb.PbList<SetDatasToValidResponse> createRepeated() => $pb.PbList<SetDatasToValidResponse>();
+  @$core.pragma('dart2js:noInline')
+  static SetDatasToValidResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetDatasToValidResponse>(create);
+  static SetDatasToValidResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $4.CommonResult get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result($4.CommonResult v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  $4.CommonResult ensureResult() => $_ensure(0);
+}
+
+class GetMissionDatasToValidResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetMissionDatasToValidResponse', createEmptyInstance: create)
+    ..aOM<$4.CommonResult>(1, 'result', subBuilder: $4.CommonResult.create)
+    ..a<$core.int>(2, 'missionId', $pb.PbFieldType.O3)
+    ..pPS(3, 'datas')
+    ..pPS(4, 'labels')
+    ..hasRequiredFields = false
+  ;
+
+  GetMissionDatasToValidResponse._() : super();
+  factory GetMissionDatasToValidResponse() => create();
+  factory GetMissionDatasToValidResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetMissionDatasToValidResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetMissionDatasToValidResponse clone() => GetMissionDatasToValidResponse()..mergeFromMessage(this);
+  GetMissionDatasToValidResponse copyWith(void Function(GetMissionDatasToValidResponse) updates) => super.copyWith((message) => updates(message as GetMissionDatasToValidResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetMissionDatasToValidResponse create() => GetMissionDatasToValidResponse._();
+  GetMissionDatasToValidResponse createEmptyInstance() => create();
+  static $pb.PbList<GetMissionDatasToValidResponse> createRepeated() => $pb.PbList<GetMissionDatasToValidResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetMissionDatasToValidResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetMissionDatasToValidResponse>(create);
+  static GetMissionDatasToValidResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $4.CommonResult get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result($4.CommonResult v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  $4.CommonResult ensureResult() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.int get missionId => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set missionId($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasMissionId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMissionId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.List<$core.String> get datas => $_getList(2);
+
+  @$pb.TagNumber(4)
+  $core.List<$core.String> get labels => $_getList(3);
+}
+
+class SetMissionDatasToValidResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('SetMissionDatasToValidResponse', createEmptyInstance: create)
+    ..aOM<$4.CommonResult>(1, 'result', subBuilder: $4.CommonResult.create)
+    ..hasRequiredFields = false
+  ;
+
+  SetMissionDatasToValidResponse._() : super();
+  factory SetMissionDatasToValidResponse() => create();
+  factory SetMissionDatasToValidResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SetMissionDatasToValidResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  SetMissionDatasToValidResponse clone() => SetMissionDatasToValidResponse()..mergeFromMessage(this);
+  SetMissionDatasToValidResponse copyWith(void Function(SetMissionDatasToValidResponse) updates) => super.copyWith((message) => updates(message as SetMissionDatasToValidResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static SetMissionDatasToValidResponse create() => SetMissionDatasToValidResponse._();
+  SetMissionDatasToValidResponse createEmptyInstance() => create();
+  static $pb.PbList<SetMissionDatasToValidResponse> createRepeated() => $pb.PbList<SetMissionDatasToValidResponse>();
+  @$core.pragma('dart2js:noInline')
+  static SetMissionDatasToValidResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetMissionDatasToValidResponse>(create);
+  static SetMissionDatasToValidResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $4.CommonResult get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result($4.CommonResult v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  $4.CommonResult ensureResult() => $_ensure(0);
+}
+
+class RegisterSurveyMissionResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('RegisterSurveyMissionResponse', createEmptyInstance: create)
+    ..aOM<$4.CommonResult>(1, 'result', subBuilder: $4.CommonResult.create)
+    ..hasRequiredFields = false
+  ;
+
+  RegisterSurveyMissionResponse._() : super();
+  factory RegisterSurveyMissionResponse() => create();
+  factory RegisterSurveyMissionResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RegisterSurveyMissionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  RegisterSurveyMissionResponse clone() => RegisterSurveyMissionResponse()..mergeFromMessage(this);
+  RegisterSurveyMissionResponse copyWith(void Function(RegisterSurveyMissionResponse) updates) => super.copyWith((message) => updates(message as RegisterSurveyMissionResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static RegisterSurveyMissionResponse create() => RegisterSurveyMissionResponse._();
+  RegisterSurveyMissionResponse createEmptyInstance() => create();
+  static $pb.PbList<RegisterSurveyMissionResponse> createRepeated() => $pb.PbList<RegisterSurveyMissionResponse>();
+  @$core.pragma('dart2js:noInline')
+  static RegisterSurveyMissionResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RegisterSurveyMissionResponse>(create);
+  static RegisterSurveyMissionResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $4.CommonResult get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result($4.CommonResult v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  $4.CommonResult ensureResult() => $_ensure(0);
+}
+
+class GetSurveyIdResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetSurveyIdResponse', createEmptyInstance: create)
+    ..aOM<$4.CommonResult>(1, 'result', subBuilder: $4.CommonResult.create)
+    ..a<$core.int>(2, 'surveyId', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  GetSurveyIdResponse._() : super();
+  factory GetSurveyIdResponse() => create();
+  factory GetSurveyIdResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetSurveyIdResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetSurveyIdResponse clone() => GetSurveyIdResponse()..mergeFromMessage(this);
+  GetSurveyIdResponse copyWith(void Function(GetSurveyIdResponse) updates) => super.copyWith((message) => updates(message as GetSurveyIdResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetSurveyIdResponse create() => GetSurveyIdResponse._();
+  GetSurveyIdResponse createEmptyInstance() => create();
+  static $pb.PbList<GetSurveyIdResponse> createRepeated() => $pb.PbList<GetSurveyIdResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetSurveyIdResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetSurveyIdResponse>(create);
+  static GetSurveyIdResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $4.CommonResult get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result($4.CommonResult v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  $4.CommonResult ensureResult() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.int get surveyId => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set surveyId($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasSurveyId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSurveyId() => clearField(2);
 }
 

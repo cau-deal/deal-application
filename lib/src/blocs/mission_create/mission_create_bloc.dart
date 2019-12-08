@@ -57,11 +57,17 @@ class MissionCreateBloc extends Bloc<MissionCreateEvent, MissionCreateState> {
       yield* _mapMissionDataUploadedToState(event);
     } else if (event is MissionDataChanged){
       yield* _mapMissionDataToState(event);
+    } else if (event is MissionSidChanged){
+      yield* _mapSidChangedToState(event);
     }
   }
 
   Stream<MissionCreateState> _mapTitleChangedToState(TitleChanged evt) async* {
     yield state.update(title: evt.title);
+  }
+
+  Stream<MissionCreateState> _mapSidChangedToState(MissionSidChanged evt) async* {
+    yield state.update(surveyId: evt.sid);
   }
 
   Stream<MissionCreateState> _mapSubTitleChangedToState(SubTitleChanged evt) async* {
@@ -158,7 +164,7 @@ class MissionCreateBloc extends Bloc<MissionCreateEvent, MissionCreateState> {
             state.startDate, state.endDate,
             state.images, state.labels,
             state.missionSummary, state.missionInstruction, state.missionTerms,
-            state.point, state.unit, state.totalCount, state.thumbnailUri,
+            state.point, state.unit, state.totalCount, state.surveyId, state.thumbnailUri,
             state.missionType, state.dataType,
         );
 
@@ -169,6 +175,7 @@ class MissionCreateBloc extends Bloc<MissionCreateEvent, MissionCreateState> {
             point: evt.point,
             unit: evt.unit,
             totalCnt: evt.totalCnt,
+            sid: evt.surveyId,
             start: evt.start,
             end: evt.end,
             missionType: evt.missionType,
@@ -187,7 +194,7 @@ class MissionCreateBloc extends Bloc<MissionCreateEvent, MissionCreateState> {
               state.startDate, state.endDate,
               state.images, state.labels,
               state.missionSummary, state.missionInstruction, state.missionTerms,
-              state.point, state.unit, state.totalCount, state.thumbnailUri,
+              state.point, state.unit, state.totalCount, state.surveyId, state.thumbnailUri,
               state.missionType, state.dataType
           );
         } else {
@@ -197,7 +204,7 @@ class MissionCreateBloc extends Bloc<MissionCreateEvent, MissionCreateState> {
               state.startDate, state.endDate,
               state.images, state.labels,
               state.missionSummary, state.missionInstruction, state.missionTerms,
-              state.point, state.unit, state.totalCount, state.thumbnailUri,
+              state.point, state.unit, state.totalCount, state.surveyId, state.thumbnailUri,
               state.missionType, state.dataType
           );
         }
@@ -208,7 +215,7 @@ class MissionCreateBloc extends Bloc<MissionCreateEvent, MissionCreateState> {
             state.startDate, state.endDate,
             state.images, state.labels,
             state.missionSummary, state.missionInstruction, state.missionTerms,
-            state.point, state.unit, state.totalCount, state.thumbnailUri,
+            state.point, state.unit, state.totalCount, state.surveyId, state.thumbnailUri,
             state.missionType, state.dataType
         );
       }
@@ -219,7 +226,7 @@ class MissionCreateBloc extends Bloc<MissionCreateEvent, MissionCreateState> {
           state.startDate, state.endDate,
           state.images, state.labels,
           state.missionSummary, state.missionInstruction, state.missionTerms,
-          state.point, state.unit, state.totalCount, state.thumbnailUri,
+          state.point, state.unit, state.totalCount, state.surveyId, state.thumbnailUri,
           state.missionType, state.dataType
       );
     }

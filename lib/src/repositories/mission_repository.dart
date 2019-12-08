@@ -13,7 +13,7 @@ class MissionRepository {
     String accessToken,
     String title,
     String subtitle,
-    int point, int unit, int totalCnt,
+    int point, int unit, int totalCnt, int sid,
     DateTime start, DateTime end,
     MissionType missionType, DataType dataType,
     String summary,
@@ -27,7 +27,7 @@ class MissionRepository {
     return await _missionService.createMission(
       accessToken: accessToken, title: title, subtitle: subtitle, point: point, unit: unit, totalCnt: totalCnt,
       start: start, end: end, missionType: missionType, dataType: dataType, summary: summary, instruction: instruction,
-      terms: terms, thumbnailUri: thumbnailUri, imageUris: imageUris, datas: images, labels: labels
+      terms: terms, thumbnailUri: thumbnailUri, imageUris: imageUris, datas: images, labels: labels, sid: sid
     );
   }
 
@@ -93,6 +93,10 @@ class MissionRepository {
 
   Future<GetRecommendMissionImagesResponse> fetchRecommendMissionImages({String accessToken}) async {
     return await _missionService.fetchRecommendMissionImages(accessToken: accessToken);
+  }
+
+  Future<GetSurveyIdResponse> fetchSurveyId({String accessToken, int missionId}) async {
+    return await _missionService.fetchSurveyId(accessToken: accessToken, missionId: missionId);
   }
 
 }

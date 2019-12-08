@@ -184,3 +184,20 @@ class DecidePurchaseDistractor extends $pb.ProtobufEnum {
   const DecidePurchaseDistractor._($core.int v, $core.String n) : super(v, n);
 }
 
+class DecideValidation extends $pb.ProtobufEnum {
+  static const DecideValidation UNKNOWN_DECIDE_VALIDATION = DecideValidation._(0, 'UNKNOWN_DECIDE_VALIDATION');
+  static const DecideValidation DECIDE_VALIDATION_OK = DecideValidation._(1, 'DECIDE_VALIDATION_OK');
+  static const DecideValidation DECIDE_VALIDATION_RETURN = DecideValidation._(2, 'DECIDE_VALIDATION_RETURN');
+
+  static const $core.List<DecideValidation> values = <DecideValidation> [
+    UNKNOWN_DECIDE_VALIDATION,
+    DECIDE_VALIDATION_OK,
+    DECIDE_VALIDATION_RETURN,
+  ];
+
+  static final $core.Map<$core.int, DecideValidation> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static DecideValidation valueOf($core.int value) => _byValue[value];
+
+  const DecideValidation._($core.int v, $core.String n) : super(v, n);
+}
+

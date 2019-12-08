@@ -11,9 +11,16 @@ class SubmitCollectPicture extends MissionActEvent {
   SubmitCollectPicture(this.missionId, this.images);
 }
 
+class SubmitCollectSurvey extends MissionActEvent {
+  final int missionId;
+
+  SubmitCollectSurvey(this.missionId);
+}
+
 class FetchProcessPicture extends MissionActEvent {
   final int missionId;
 
   FetchProcessPicture(this.missionId);
 }
+
 

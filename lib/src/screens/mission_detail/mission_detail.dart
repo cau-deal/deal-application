@@ -6,6 +6,8 @@ import 'package:deal/src/protos/MissionService.pbenum.dart';
 import 'package:deal/src/repositories/mission_repository.dart';
 import 'package:deal/src/repositories/user_repository.dart';
 import 'package:deal/src/screens/mission_act/mission_collect_picture.dart';
+import 'package:deal/src/screens/mission_act/mission_collect_sound.dart';
+import 'package:deal/src/screens/mission_act/mission_collect_survey.dart';
 import 'package:deal/src/screens/mission_act/mission_process_image.dart';
 import 'package:deal/src/screens/mission_detail/widget/mission_detail_header.dart';
 import 'package:deal/src/screens/mission_detail/widget/mission_detail_list.dart';
@@ -109,6 +111,8 @@ class MissionDetailPageState extends State<MissionDetailPage> {
               {
                 switch (state.dataType) {
                   case DataType.IMAGE: return CollectPictureScreen(state: state, missionId: widget.missionId);
+                  case DataType.SURVEY: return CollectSurveyScreen(missionId: widget.missionId);
+                  case DataType.SOUND: return CollectSoundScreen(missionId: widget.missionId);
                 }
 
                 break;

@@ -97,6 +97,15 @@ const DecidePurchaseDistractor$json = const {
   ],
 };
 
+const DecideValidation$json = const {
+  '1': 'DecideValidation',
+  '2': const [
+    const {'1': 'UNKNOWN_DECIDE_VALIDATION', '2': 0},
+    const {'1': 'DECIDE_VALIDATION_OK', '2': 1},
+    const {'1': 'DECIDE_VALIDATION_RETURN', '2': 2},
+  ],
+};
+
 const RegisterMissionRequest$json = const {
   '1': 'RegisterMissionRequest',
   '2': const [
@@ -160,6 +169,46 @@ const DecidePurchaseRequest$json = const {
   ],
 };
 
+const GetDatasToValidRequest$json = const {
+  '1': 'GetDatasToValidRequest',
+  '2': const [
+    const {'1': 'mission_type', '3': 1, '4': 1, '5': 14, '6': '.MissionType', '10': 'missionType'},
+    const {'1': 'data_type', '3': 2, '4': 1, '5': 14, '6': '.DataType', '10': 'dataType'},
+  ],
+};
+
+const SetDatasToValidRequest$json = const {
+  '1': 'SetDatasToValidRequest',
+  '2': const [
+    const {'1': 'mission_type', '3': 1, '4': 1, '5': 14, '6': '.MissionType', '10': 'missionType'},
+    const {'1': 'data_type', '3': 2, '4': 1, '5': 14, '6': '.DataType', '10': 'dataType'},
+    const {'1': 'conduct_mission_id', '3': 3, '4': 1, '5': 5, '10': 'conductMissionId'},
+    const {'1': 'decide_validation', '3': 4, '4': 1, '5': 14, '6': '.DecideValidation', '10': 'decideValidation'},
+  ],
+};
+
+const GetMissionDatasToValidRequest$json = const {
+  '1': 'GetMissionDatasToValidRequest',
+  '2': const [
+    const {'1': 'mission_id', '3': 1, '4': 1, '5': 5, '10': 'missionId'},
+  ],
+};
+
+const SetMissionDatasToValidRequest$json = const {
+  '1': 'SetMissionDatasToValidRequest',
+  '2': const [
+    const {'1': 'mission_id', '3': 1, '4': 1, '5': 5, '10': 'missionId'},
+    const {'1': 'decide_validation', '3': 2, '4': 1, '5': 14, '6': '.DecideValidation', '10': 'decideValidation'},
+  ],
+};
+
+const RegisterSurveyMissionRequest$json = const {
+  '1': 'RegisterSurveyMissionRequest',
+  '2': const [
+    const {'1': 'mission', '3': 1, '4': 1, '5': 11, '6': '.Mission', '10': 'mission'},
+  ],
+};
+
 const Mission$json = const {
   '1': 'Mission',
   '2': const [
@@ -179,6 +228,7 @@ const Mission$json = const {
     const {'1': 'mission_state', '3': 14, '4': 1, '5': 14, '6': '.MissionState', '10': 'missionState'},
     const {'1': 'created_at', '3': 15, '4': 1, '5': 11, '6': '.Datetime', '10': 'createdAt'},
     const {'1': 'beginning', '3': 16, '4': 1, '5': 11, '6': '.Datetime', '10': 'beginning'},
+    const {'1': 'survey_id', '3': 17, '4': 1, '5': 5, '10': 'surveyId'},
   ],
 };
 
@@ -359,6 +409,55 @@ const GetProcessMissionImagesResponse$json = const {
   '2': const [
     const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
     const {'1': 'urls', '3': 2, '4': 3, '5': 9, '10': 'urls'},
+  ],
+};
+
+const GetDatasToValidResponse$json = const {
+  '1': 'GetDatasToValidResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
+    const {'1': 'conduct_mission_id', '3': 2, '4': 1, '5': 5, '10': 'conductMissionId'},
+    const {'1': 'datas', '3': 3, '4': 3, '5': 9, '10': 'datas'},
+    const {'1': 'labels', '3': 4, '4': 3, '5': 9, '10': 'labels'},
+  ],
+};
+
+const SetDatasToValidResponse$json = const {
+  '1': 'SetDatasToValidResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
+  ],
+};
+
+const GetMissionDatasToValidResponse$json = const {
+  '1': 'GetMissionDatasToValidResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
+    const {'1': 'mission_id', '3': 2, '4': 1, '5': 5, '10': 'missionId'},
+    const {'1': 'datas', '3': 3, '4': 3, '5': 9, '10': 'datas'},
+    const {'1': 'labels', '3': 4, '4': 3, '5': 9, '10': 'labels'},
+  ],
+};
+
+const SetMissionDatasToValidResponse$json = const {
+  '1': 'SetMissionDatasToValidResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
+  ],
+};
+
+const RegisterSurveyMissionResponse$json = const {
+  '1': 'RegisterSurveyMissionResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
+  ],
+};
+
+const GetSurveyIdResponse$json = const {
+  '1': 'GetSurveyIdResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.CommonResult', '10': 'result'},
+    const {'1': 'survey_id', '3': 2, '4': 1, '5': 5, '10': 'surveyId'},
   ],
 };
 

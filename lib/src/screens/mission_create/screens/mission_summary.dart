@@ -24,11 +24,12 @@ class MissionSummaryPage extends StatefulWidget {
 class MissionSummaryPageState extends State<MissionSummaryPage> with AutomaticKeepAliveClientMixin<MissionSummaryPage> {
 
   MissionCreateBloc _missionCreateBloc;
-
   TextEditingController totalNumController;
 
   NotusDocument doc;
   String koreanUnit;
+
+  int sid = -1;
 
   @override
   void initState() {
@@ -109,16 +110,23 @@ class MissionSummaryPageState extends State<MissionSummaryPage> with AutomaticKe
       case MissionType.COLLECT_MISSION_TYPE: {
         switch(dataType){
           case DataType.SURVEY:
-            isDataUploaded = await Navigator.push(
+            var result = await Navigator.push(
                 context,
-                MaterialPageRoute(builder: (ctx) => UploadCollectSurvey(), fullscreenDialog: true)
+                MaterialPageRoute(builder: (ctx) => UploadCollectSurvey(sid: sid), fullscreenDialog: true)
             );
+            if(result['sid'] != -1){
+              setState(() { this.sid = result['sid']; });
+              _missionCreateBloc.add( MissionSidChanged(result['sid']) );
+            }
+            isDataUploaded = (result['sid'] != -1);
             break;
           case DataType.SOUND:
-            isDataUploaded = await Navigator.push(
+            var result = await Navigator.push(
                 context,
                 MaterialPageRoute(builder: (ctx) => UploadCollectSound(), fullscreenDialog: true)
             );
+            isDataUploaded = result['doc'].isNotEmpty;
+            _missionCreateBloc.add( MissionInstructionChanged(result['doc']) );
             break;
           case DataType.IMAGE:
             isDataUploaded = true;

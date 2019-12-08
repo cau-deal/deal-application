@@ -103,18 +103,54 @@ class MissionServiceClient extends $grpc.Client {
           ($1.Empty value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.GetRecommendMissionImagesResponse.fromBuffer(value));
-  static final _$decidePurchase =
-      $grpc.ClientMethod<$0.DecidePurchaseRequest, $0.DecidePurchaseResponse>(
-          '/MissionService/DecidePurchase',
-          ($0.DecidePurchaseRequest value) => value.writeToBuffer(),
-          ($core.List<$core.int> value) =>
-              $0.DecidePurchaseResponse.fromBuffer(value));
   static final _$getProcessMissionImages = $grpc.ClientMethod<
           $0.MissionIdRequest, $0.GetProcessMissionImagesResponse>(
       '/MissionService/GetProcessMissionImages',
       ($0.MissionIdRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $0.GetProcessMissionImagesResponse.fromBuffer(value));
+  static final _$decidePurchase =
+      $grpc.ClientMethod<$0.DecidePurchaseRequest, $0.DecidePurchaseResponse>(
+          '/MissionService/DecidePurchase',
+          ($0.DecidePurchaseRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.DecidePurchaseResponse.fromBuffer(value));
+  static final _$getDatasToValid =
+      $grpc.ClientMethod<$0.GetDatasToValidRequest, $0.GetDatasToValidResponse>(
+          '/MissionService/GetDatasToValid',
+          ($0.GetDatasToValidRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.GetDatasToValidResponse.fromBuffer(value));
+  static final _$setDatasToValid =
+      $grpc.ClientMethod<$0.SetDatasToValidRequest, $0.SetDatasToValidResponse>(
+          '/MissionService/SetDatasToValid',
+          ($0.SetDatasToValidRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.SetDatasToValidResponse.fromBuffer(value));
+  static final _$getMissionDatasToValid = $grpc.ClientMethod<
+          $0.GetMissionDatasToValidRequest, $0.GetMissionDatasToValidResponse>(
+      '/MissionService/GetMissionDatasToValid',
+      ($0.GetMissionDatasToValidRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.GetMissionDatasToValidResponse.fromBuffer(value));
+  static final _$setMissionDatasToValid = $grpc.ClientMethod<
+          $0.SetMissionDatasToValidRequest, $0.SetMissionDatasToValidResponse>(
+      '/MissionService/SetMissionDatasToValid',
+      ($0.SetMissionDatasToValidRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.SetMissionDatasToValidResponse.fromBuffer(value));
+  static final _$registerSurveyMission = $grpc.ClientMethod<
+          $0.RegisterSurveyMissionRequest, $0.RegisterSurveyMissionResponse>(
+      '/MissionService/RegisterSurveyMission',
+      ($0.RegisterSurveyMissionRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.RegisterSurveyMissionResponse.fromBuffer(value));
+  static final _$getSurveyId =
+      $grpc.ClientMethod<$0.MissionIdRequest, $0.GetSurveyIdResponse>(
+          '/MissionService/GetSurveyId',
+          ($0.MissionIdRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.GetSurveyIdResponse.fromBuffer(value));
 
   MissionServiceClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
@@ -243,6 +279,15 @@ class MissionServiceClient extends $grpc.Client {
     return $grpc.ResponseFuture(call);
   }
 
+  $grpc.ResponseFuture<$0.GetProcessMissionImagesResponse>
+      getProcessMissionImages($0.MissionIdRequest request,
+          {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$getProcessMissionImages, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
   $grpc.ResponseFuture<$0.DecidePurchaseResponse> decidePurchase(
       $0.DecidePurchaseRequest request,
       {$grpc.CallOptions options}) {
@@ -252,11 +297,56 @@ class MissionServiceClient extends $grpc.Client {
     return $grpc.ResponseFuture(call);
   }
 
-  $grpc.ResponseFuture<$0.GetProcessMissionImagesResponse>
-      getProcessMissionImages($0.MissionIdRequest request,
+  $grpc.ResponseFuture<$0.GetDatasToValidResponse> getDatasToValid(
+      $0.GetDatasToValidRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$getDatasToValid, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.SetDatasToValidResponse> setDatasToValid(
+      $0.SetDatasToValidRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$setDatasToValid, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.GetMissionDatasToValidResponse>
+      getMissionDatasToValid($0.GetMissionDatasToValidRequest request,
           {$grpc.CallOptions options}) {
     final call = $createCall(
-        _$getProcessMissionImages, $async.Stream.fromIterable([request]),
+        _$getMissionDatasToValid, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.SetMissionDatasToValidResponse>
+      setMissionDatasToValid($0.SetMissionDatasToValidRequest request,
+          {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$setMissionDatasToValid, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.RegisterSurveyMissionResponse> registerSurveyMission(
+      $0.RegisterSurveyMissionRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$registerSurveyMission, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.GetSurveyIdResponse> getSurveyId(
+      $0.MissionIdRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$getSurveyId, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -388,6 +478,14 @@ abstract class MissionServiceBase extends $grpc.Service {
             ($core.List<$core.int> value) => $1.Empty.fromBuffer(value),
             ($0.GetRecommendMissionImagesResponse value) =>
                 value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.MissionIdRequest,
+            $0.GetProcessMissionImagesResponse>(
+        'GetProcessMissionImages',
+        getProcessMissionImages_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.MissionIdRequest.fromBuffer(value),
+        ($0.GetProcessMissionImagesResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.DecidePurchaseRequest,
             $0.DecidePurchaseResponse>(
         'DecidePurchase',
@@ -397,14 +495,58 @@ abstract class MissionServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $0.DecidePurchaseRequest.fromBuffer(value),
         ($0.DecidePurchaseResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.MissionIdRequest,
-            $0.GetProcessMissionImagesResponse>(
-        'GetProcessMissionImages',
-        getProcessMissionImages_Pre,
+    $addMethod($grpc.ServiceMethod<$0.GetDatasToValidRequest,
+            $0.GetDatasToValidResponse>(
+        'GetDatasToValid',
+        getDatasToValid_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.GetDatasToValidRequest.fromBuffer(value),
+        ($0.GetDatasToValidResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.SetDatasToValidRequest,
+            $0.SetDatasToValidResponse>(
+        'SetDatasToValid',
+        setDatasToValid_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.SetDatasToValidRequest.fromBuffer(value),
+        ($0.SetDatasToValidResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetMissionDatasToValidRequest,
+            $0.GetMissionDatasToValidResponse>(
+        'GetMissionDatasToValid',
+        getMissionDatasToValid_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.GetMissionDatasToValidRequest.fromBuffer(value),
+        ($0.GetMissionDatasToValidResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.SetMissionDatasToValidRequest,
+            $0.SetMissionDatasToValidResponse>(
+        'SetMissionDatasToValid',
+        setMissionDatasToValid_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.SetMissionDatasToValidRequest.fromBuffer(value),
+        ($0.SetMissionDatasToValidResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.RegisterSurveyMissionRequest,
+            $0.RegisterSurveyMissionResponse>(
+        'RegisterSurveyMission',
+        registerSurveyMission_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.RegisterSurveyMissionRequest.fromBuffer(value),
+        ($0.RegisterSurveyMissionResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.MissionIdRequest, $0.GetSurveyIdResponse>(
+        'GetSurveyId',
+        getSurveyId_Pre,
         false,
         false,
         ($core.List<$core.int> value) => $0.MissionIdRequest.fromBuffer(value),
-        ($0.GetProcessMissionImagesResponse value) => value.writeToBuffer()));
+        ($0.GetSurveyIdResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.RegisterMissionResponse> registerMission_Pre(
@@ -488,16 +630,51 @@ abstract class MissionServiceBase extends $grpc.Service {
     return getRecommendMissionImages(call, await request);
   }
 
+  $async.Future<$0.GetProcessMissionImagesResponse> getProcessMissionImages_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.MissionIdRequest> request) async {
+    return getProcessMissionImages(call, await request);
+  }
+
   $async.Future<$0.DecidePurchaseResponse> decidePurchase_Pre(
       $grpc.ServiceCall call,
       $async.Future<$0.DecidePurchaseRequest> request) async {
     return decidePurchase(call, await request);
   }
 
-  $async.Future<$0.GetProcessMissionImagesResponse> getProcessMissionImages_Pre(
+  $async.Future<$0.GetDatasToValidResponse> getDatasToValid_Pre(
       $grpc.ServiceCall call,
+      $async.Future<$0.GetDatasToValidRequest> request) async {
+    return getDatasToValid(call, await request);
+  }
+
+  $async.Future<$0.SetDatasToValidResponse> setDatasToValid_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.SetDatasToValidRequest> request) async {
+    return setDatasToValid(call, await request);
+  }
+
+  $async.Future<$0.GetMissionDatasToValidResponse> getMissionDatasToValid_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.GetMissionDatasToValidRequest> request) async {
+    return getMissionDatasToValid(call, await request);
+  }
+
+  $async.Future<$0.SetMissionDatasToValidResponse> setMissionDatasToValid_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.SetMissionDatasToValidRequest> request) async {
+    return setMissionDatasToValid(call, await request);
+  }
+
+  $async.Future<$0.RegisterSurveyMissionResponse> registerSurveyMission_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.RegisterSurveyMissionRequest> request) async {
+    return registerSurveyMission(call, await request);
+  }
+
+  $async.Future<$0.GetSurveyIdResponse> getSurveyId_Pre($grpc.ServiceCall call,
       $async.Future<$0.MissionIdRequest> request) async {
-    return getProcessMissionImages(call, await request);
+    return getSurveyId(call, await request);
   }
 
   $async.Future<$0.RegisterMissionResponse> registerMission(
@@ -533,8 +710,20 @@ abstract class MissionServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.UrlRequest request);
   $async.Future<$0.GetRecommendMissionImagesResponse> getRecommendMissionImages(
       $grpc.ServiceCall call, $1.Empty request);
+  $async.Future<$0.GetProcessMissionImagesResponse> getProcessMissionImages(
+      $grpc.ServiceCall call, $0.MissionIdRequest request);
   $async.Future<$0.DecidePurchaseResponse> decidePurchase(
       $grpc.ServiceCall call, $0.DecidePurchaseRequest request);
-  $async.Future<$0.GetProcessMissionImagesResponse> getProcessMissionImages(
+  $async.Future<$0.GetDatasToValidResponse> getDatasToValid(
+      $grpc.ServiceCall call, $0.GetDatasToValidRequest request);
+  $async.Future<$0.SetDatasToValidResponse> setDatasToValid(
+      $grpc.ServiceCall call, $0.SetDatasToValidRequest request);
+  $async.Future<$0.GetMissionDatasToValidResponse> getMissionDatasToValid(
+      $grpc.ServiceCall call, $0.GetMissionDatasToValidRequest request);
+  $async.Future<$0.SetMissionDatasToValidResponse> setMissionDatasToValid(
+      $grpc.ServiceCall call, $0.SetMissionDatasToValidRequest request);
+  $async.Future<$0.RegisterSurveyMissionResponse> registerSurveyMission(
+      $grpc.ServiceCall call, $0.RegisterSurveyMissionRequest request);
+  $async.Future<$0.GetSurveyIdResponse> getSurveyId(
       $grpc.ServiceCall call, $0.MissionIdRequest request);
 }
