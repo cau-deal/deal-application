@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>844732770884-0sv8j2sk9n1f8q5cb6n92sj9n9af0bt8.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.844732770884-0sv8j2sk9n1f8q5cb6n92sj9n9af0bt8</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>844732770884-d85pdqqh4j6l0v4kr0j6iqar7h28f3tn.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBM5HXvtRml4_0Sw5x2jjVKhwI15UNG7EA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>844732770884</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>kr.ac.cau.capstone.deal</string>
+	<key>PROJECT_ID</key>
+	<string>cau-deal</string>
+	<key>STORAGE_BUCKET</key>
+	<string>cau-deal.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:844732770884:ios:d6ba3da5b75067170f2a11</string>
+	<key>DATABASE_URL</key>
+	<string>https://cau-deal.firebaseio.com</string>
+</dict>
+</plist>
